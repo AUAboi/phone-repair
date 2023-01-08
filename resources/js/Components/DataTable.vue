@@ -16,6 +16,17 @@ const props = defineProps({
     required: true,
   },
 });
+
+const getValue = (obj, prop) => {
+  const parts = prop.split('.');
+  let thisObj = obj;
+  let part = 0;
+  while (thisObj = thisObj?.[parts[part++]]) {
+    if (part >= parts.length) break;
+  }
+  return thisObj;
+}
+
 </script>
 
 <template>
@@ -31,7 +42,7 @@ const props = defineProps({
         <td v-for="(label, index) in labels" :key="index" class="border-t dark:border-gray-600">
           <Link v-if="resourceRoute" class="px-6 py-4 flex items-center "
             :href="route(resourceRoute, data.slug ? data.slug : data.id)">
-          {{ data[label.key] }}
+          {{ getValue(data, label.key) }}
           </Link>
 
           <span v-else`` class="px-6 py-4 flex items-center ">

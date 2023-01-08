@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\BrandController;
+use App\Http\Controllers\DeviceController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -44,6 +45,13 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/brands/{brand}', [BrandController::class, 'edit'])->name('brands.edit');
     Route::put('/brands/{brand}', [BrandController::class, 'update'])->name('brands.update');
     Route::delete('/brands/{brand}/delete', [BrandController::class, 'destroy'])->name('brands.destroy');
+
+    Route::get('/devices', [DeviceController::class, 'index'])->name('devices');
+    Route::get('/devices/create', [DeviceController::class, 'create'])->name('devices.create');
+    Route::post('/devices/create', [DeviceController::class, 'store'])->name('devices.store');
+    Route::get('/devices/{device}', [DeviceController::class, 'edit'])->name('devices.edit');
+    Route::put('/devices/{device}', [DeviceController::class, 'update'])->name('devices.update');
+    Route::delete('/devices/{device}/delete', [DeviceController::class, 'destroy'])->name('devices.destroy');
 });
 
 require __DIR__ . '/auth.php';

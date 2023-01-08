@@ -34,6 +34,11 @@ class Brand extends Model
         return 'slug';
     }
 
+    public function devices()
+    {
+        return $this->hasMany(Device::class);
+    }
+
     public function scopeFilter($query, array $filters)
     {
         $query->when($filters['search'] ?? null, function ($query, $search) {
