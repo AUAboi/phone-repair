@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreBrandRequest;
+use App\Http\Requests\UpdateBrandRequest;
 use App\Http\Resources\BrandResource;
 use App\Models\Brand;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
 
 class BrandController extends Controller
@@ -16,12 +18,7 @@ class BrandController extends Controller
         $brands = Brand::orderBy('name')
             ->filter($filters)
             ->paginate(9)
-            ->withQueryString()
-            ->through(fn ($dish) => [
-                'id' => $dish->id,
-                'name' => $dish->name,
-            ]);
-
+            ->withQueryString();
 
         return  Inertia::render('Auth/Brands/Index', [
             'brands' => BrandResource::collection($brands),
@@ -32,5 +29,37 @@ class BrandController extends Controller
     public function create()
     {
         return Inertia::render('Auth/Brands/Create');
+    }
+
+    public function store(StoreBrandRequest $request)
+    {
+        Brand::create([
+            'name' => $request->name,
+            'image' => 'default.png'
+        ]);
+
+        return Redirect::route('brands')->with('success', 'Brand added succesfully.');
+    }
+
+    public function edit(Brand $brand)
+    {
+        return Inertia::render('Auth/Brands/Edit', [
+            'brand' => new BrandResource($brand)
+        ]);
+    }
+
+    public function update(Brand $brand, UpdateBrandRequest $request)
+    {
+        $brand->update([
+            'name' => $request->name
+        ]);
+
+        return Redirect::route('brands')->with('success', 'Brand updated succesfully.');
+    }
+
+    public function destroy(Brand $brand)
+    {
+        $brand->delete();
+        return Redirect::route('brands')->with('success', 'Brand deleted successfully.');
     }
 }

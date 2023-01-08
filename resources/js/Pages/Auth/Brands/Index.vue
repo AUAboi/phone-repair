@@ -5,7 +5,10 @@ import Paginator from '@/Components/Paginator.vue';
 import PageHeader from '@/Components/PageHeader.vue';
 import { Head, Link } from '@inertiajs/inertia-vue3';
 import { reactive } from '@vue/reactivity';
-import PrimaryButton from '@/Components/PrimaryButton.vue';
+import throttle from "lodash/throttle";
+import pickBy from "lodash/pickBy";
+import { watch } from 'vue';
+import { Inertia } from '@inertiajs/inertia';
 
 const props = defineProps({
   brands: {
@@ -18,12 +21,15 @@ const props = defineProps({
     type: Object
   }
 })
+
 const labels = [
   {
     key: 'name',
     value: 'Name'
   }
 ]
+
+
 const form = reactive({
   search: props.filters.search,
 })
@@ -31,6 +37,19 @@ const form = reactive({
 const reset = () => {
   form.search = null;
 }
+
+watch(
+  form,
+
+  throttle(() => {
+    Inertia.get(route("brands"), pickBy(form), {
+      preserveState: true,
+      preserveScroll: true,
+    });
+  }, 200),
+  { deep: true }
+);
+
 </script>
 <template>
 
@@ -47,7 +66,7 @@ const reset = () => {
 
       <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
         <div class=" text-gray-900 dark:text-gray-100">
-          <DataTable :table-data="brands.data" :labels="labels" />
+          <DataTable :table-data="brands.data" :labels="labels" resource-route="brands.edit" />
         </div>
         <Paginator :links="brands.links" />
       </div>

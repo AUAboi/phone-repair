@@ -1,57 +1,35 @@
 <script setup>
-import DataTable from '@/Components/DataTable.vue';
-import SearchBox from '@/Components/SearchBox.vue';
-import Paginator from '@/Components/Paginator.vue';
-import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
-import { Head } from '@inertiajs/inertia-vue3';
-import { reactive } from '@vue/reactivity';
+import { Head, useForm } from '@inertiajs/inertia-vue3';
+import PageHeader from '@/Components/PageHeader.vue';
+import FormInput from "@/Components/FormInput.vue"
+import PrimaryButton from '@/Components/PrimaryButton.vue';
 
-const props = defineProps({
-  brands: {
-    required: true,
-    type: Object
-
-  },
-  filters: {
-    required: true,
-    type: Object
-  }
-})
-const labels = [
-  {
-    key: 'name',
-    value: 'Name'
-  }
-]
-const form = reactive({
-  search: props.filters.search,
+const form = useForm({
+  name: "",
 })
 
-const reset = () => {
-  form.search = null;
+const submit = () => {
+  form.post(route('brands.store'))
 }
+
 </script>
 <template>
 
-  <Head title="Brands" />
-  <AuthenticatedLayout>
-    <template #header>
-      <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">Brands</h2>
-    </template>
-    <div class="py-12">
-      <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-        <div class="flex flex-col md:flex-row items-center">
-          <SearchBox class="w-full max-w-md my-4" v-model="form.search" @reset="reset" />
+  <Head title="Create Brand" />
+  <PageHeader>Create Brand</PageHeader>
 
-        </div>
-
-        <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
-          <div class=" text-gray-900 dark:text-gray-100">
-            <DataTable :table-data="brands.data" :labels="labels" />
+  <div class="py-12">
+    <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+      <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
+        <form class="max-w-md mx-auto mt-10" @submit.prevent="submit">
+          <div class="flex">
+            <FormInput label="Name" v-model="form.name" :error="form.errors.name" />
           </div>
-          <Paginator :links="brands.links" />
-        </div>
+          <PrimaryButton class="mb-4 px-10" type="submit">
+            Add
+          </PrimaryButton>
+        </form>
       </div>
     </div>
-  </AuthenticatedLayout>
+  </div>
 </template>
