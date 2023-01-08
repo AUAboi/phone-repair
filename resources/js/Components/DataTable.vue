@@ -25,7 +25,8 @@ const props = defineProps({
           {{ label.value }}
         </th>
       </tr>
-      <tr v-for="(data, index) in tableData" :key="index" class="hover:bg-gray-100 focus-within:bg-gray-100 capitalize">
+      <tr v-for="(data, index) in tableData" :key="index"
+        class="hover:bg-gray-100 dark:hover:bg-gray-900 focus-within::bg-gray-100 dark:focus-within:bg-gray-900 capitalize">
         <td v-for="(label, index) in labels" :key="index" class="border-t">
           <Link v-if="resourceRoute" class="px-6 py-4 flex items-center focus:text-green-500"
             :href="route(resourceRoute, data.slug ? data.slug : data.id)">

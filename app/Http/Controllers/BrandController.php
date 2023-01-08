@@ -9,6 +9,6 @@ class BrandController extends Controller
 {
     public function index()
     {
-        Inertia::render();
+        return  Inertia::render('Brands/Index', []);
     }
 }
