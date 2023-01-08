@@ -23,9 +23,14 @@ class BrandController extends Controller
             ]);
 
 
-        return  Inertia::render('Brands/Index', [
+        return  Inertia::render('Auth/Brands/Index', [
             'brands' => BrandResource::collection($brands),
             'filters' => $filters
         ]);
+    }
+
+    public function create()
+    {
+        return Inertia::render('Auth/Brands/Create');
     }
 }
