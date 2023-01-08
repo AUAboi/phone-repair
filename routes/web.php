@@ -39,6 +39,8 @@ Route::middleware('auth')->group(function () {
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/brands', [BrandController::class, 'index'])->name('brands');
+    Route::get('/brands/create', [BrandController::class, 'create'])->name('brands.create');
+    Route::get('/brands/{brand}', [BrandController::class, 'edit'])->name('brands.edit');
 });
 
 require __DIR__ . '/auth.php';
