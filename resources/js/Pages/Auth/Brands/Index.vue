@@ -68,7 +68,7 @@ watch(
         <div class=" text-gray-900 dark:text-gray-100">
           <DataTable :table-data="brands.data" :labels="labels" resource-route="brands.edit" />
         </div>
-        <Paginator :links="brands.links" />
+        <Paginator :links="brands.meta.links" />
       </div>
     </div>
   </div>

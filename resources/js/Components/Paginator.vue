@@ -2,7 +2,7 @@
 import { Link } from '@inertiajs/inertia-vue3';
 const props = defineProps({
   links: {
-    type: Object
+    type: Array
   }
 })
 </script>
@@ -14,8 +14,8 @@ const props = defineProps({
         <div :key="key" v-if="link.url === null"
           class="mr-1 mb-1 px-4 py-3 text-sm leading-4 text-gray-400 border rounded" v-html="link.label" />
         <Link :key="key + 1" v-else
-          class="mr-1 mb-1 px-4 py-3 text-sm leading-4 border rounded hover:bg-white focus:border-indigo-500 focus:text-indigo-500"
-          :class="{ 'bg-white border-indigo-500 ': link.active }" :href="link.url" v-html="link.label" />
+          class="mr-1 mb-1 px-4 py-3 text-sm leading-4 border rounded hover:bg-white dark:text-white dark:hover:bg-gray-900"
+          :class="{ 'bg-white dark:bg-gray-900': link.active }" :href="link.url" v-html="link.label" />
       </template>
     </div>
   </div>

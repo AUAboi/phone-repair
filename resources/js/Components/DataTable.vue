@@ -1,5 +1,6 @@
 <script setup>
 import { Link } from "@inertiajs/inertia-vue3";
+import IconChevronRight from "~icons/mdi/chevron-right"
 
 const props = defineProps({
   resourceRoute: {
@@ -40,7 +41,8 @@ const props = defineProps({
         <td class="border-t dark:border-gray-600 w-px">
           <Link v-if="resourceRoute" class="px-4 flex items-center"
             :href="route(resourceRoute, data.slug ? data.slug : data.id)" tabindex="-1">
-          <i class="fas fa-angle-right text-gray-600"></i></Link>
+          <IconChevronRight class="text-gray-600 text-3xl" />
+          </Link>
         </td>
       </tr>
       <tr v-if="tableData.length === 0">

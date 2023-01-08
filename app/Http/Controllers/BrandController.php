@@ -17,7 +17,7 @@ class BrandController extends Controller
         $filters = $request->all('search');
         $brands = Brand::orderBy('name')
             ->filter($filters)
-            ->paginate(9)
+            ->paginate(10)
             ->withQueryString();
 
         return  Inertia::render('Auth/Brands/Index', [
