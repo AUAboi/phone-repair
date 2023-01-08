@@ -31,11 +31,14 @@ const showingNavigationDropdown = ref(false);
                                 <NavLink :href="route('dashboard')" :active="route().current('dashboard')">
                                     Dashboard
                                 </NavLink>
-                                <NavLink :href="route('brands')" :active="route().current('brands')">
+                                <NavLink :href="route('brands.index')" :active="route().current('brands.*')">
                                     Brands
                                 </NavLink>
-                                <NavLink :href="route('devices')" :active="route().current('devices')">
+                                <NavLink :href="route('devices.index')" :active="route().current('devices.*')">
                                     Devices
+                                </NavLink>
+                                <NavLink :href="route('repairs.index')" :active="route().current('repairs.*')">
+                                    Repairs
                                 </NavLink>
                             </div>
                         </div>
@@ -98,11 +101,14 @@ const showingNavigationDropdown = ref(false);
                         <ResponsiveNavLink :href="route('dashboard')" :active="route().current('dashboard')">
                             Dashboard
                         </ResponsiveNavLink>
-                        <ResponsiveNavLink :href="route('brands')" :active="route().current('brands')">
+                        <ResponsiveNavLink :href="route('brands.index')" :active="route().current('brands.*')">
                             Brands
                         </ResponsiveNavLink>
-                        <ResponsiveNavLink :href="route('devices')" :active="route().current('devices')">
+                        <ResponsiveNavLink :href="route('devices.index')" :active="route().current('devices.*')">
                             Devices
+                        </ResponsiveNavLink>
+                        <ResponsiveNavLink :href="route('repairs.index')" :active="route().current('repairs.*')">
+                            Repairs
                         </ResponsiveNavLink>
                     </div>
 

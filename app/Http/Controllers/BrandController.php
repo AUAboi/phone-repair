@@ -38,7 +38,7 @@ class BrandController extends Controller
             'image' => 'default.png'
         ]);
 
-        return Redirect::route('brands')->with('success', 'Brand added succesfully.');
+        return Redirect::route('brands.index')->with('success', 'Brand added succesfully.');
     }
 
     public function edit(Brand $brand)
@@ -54,12 +54,12 @@ class BrandController extends Controller
             'name' => $request->name
         ]);
 
-        return Redirect::route('brands')->with('success', 'Brand updated succesfully.');
+        return Redirect::route('brands.index')->with('success', 'Brand updated succesfully.');
     }
 
     public function destroy(Brand $brand)
     {
         $brand->delete();
-        return Redirect::route('brands')->with('success', 'Brand deleted successfully.');
+        return Redirect::route('brands.index')->with('success', 'Brand deleted successfully.');
     }
 }

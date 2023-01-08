@@ -45,7 +45,7 @@ const reset = () => {
 watch(
   form,
   throttle(() => {
-    Inertia.get(route("devices"), pickBy(form), {
+    Inertia.get(route("devices.index"), pickBy(form), {
       preserveState: true,
       preserveScroll: true,
     });

@@ -44,7 +44,7 @@ class DeviceController extends Controller
             'image' => 'default.png'
         ]);
 
-        return Redirect::route('devices')->with('success', 'Device added succesfully.');
+        return Redirect::route('devices.index')->with('success', 'Device added succesfully.');
     }
 
     public function update(Device $device, UpdateDeviceRequest $request)
@@ -54,7 +54,7 @@ class DeviceController extends Controller
             'brand_id' => $request->brand_id
         ]);
 
-        return Redirect::route('devices')->with('success', 'Device updated succesfully.');
+        return Redirect::route('devices.index')->with('success', 'Device updated succesfully.');
     }
 
     public function edit(Device $device)
@@ -68,6 +68,6 @@ class DeviceController extends Controller
     public function destroy(Device $device)
     {
         $device->delete();
-        return Redirect::route('devices')->with('success', 'Device deleted successfully.');
+        return Redirect::route('devices.index')->with('success', 'Device deleted successfully.');
     }
 }

@@ -11,7 +11,7 @@ import { watch } from 'vue';
 import { Inertia } from '@inertiajs/inertia';
 
 const props = defineProps({
-  brands: {
+  repairs: {
     required: true,
     type: Object
 
@@ -24,8 +24,8 @@ const props = defineProps({
 
 const labels = [
   {
-    key: 'name',
-    value: 'Name'
+    key: 'title',
+    value: 'Title'
   }
 ]
 
@@ -40,9 +40,8 @@ const reset = () => {
 
 watch(
   form,
-
   throttle(() => {
-    Inertia.get(route("brands.index"), pickBy(form), {
+    Inertia.get(route("repairs.index"), pickBy(form), {
       preserveState: true,
       preserveScroll: true,
     });
@@ -53,22 +52,21 @@ watch(
 </script>
 <template>
 
-  <Head title="Brands" />
-
-  <PageHeader>Brands</PageHeader>
+  <Head title="Repair Types" />
+  <PageHeader>Repair Types</PageHeader>
   <div class="py-12">
     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
       <div class="flex items-center gap-4 md:gap-0 justify-between">
         <SearchBox class="w-full max-w-md my-4" v-model="form.search" @reset="reset" />
-        <Link :href="route('brands.create')" as="button" class="btn--primary">Create <span class="hidden md:inline">
-          Brand</span></Link>
+        <Link :href="route('repairs.create')" as="button" class="btn--primary">Add <span class="hidden md:inline">
+          Repair Type</span></Link>
       </div>
 
       <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
         <div class=" text-gray-900 dark:text-gray-100">
-          <DataTable :table-data="brands.data" :labels="labels" resource-route="brands.edit" />
+          <DataTable :table-data="repairs.data" :labels="labels" resource-route="repairs.edit" />
         </div>
-        <Paginator :links="brands.meta.links" />
+        <Paginator :links="repairs.meta.links" />
       </div>
     </div>
   </div>
