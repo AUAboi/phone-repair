@@ -30,4 +30,9 @@ class DeviceRepair extends Model
     {
         return money($this->price, 'EUR', true)->formatWithoutZeroes();
     }
+
+    public function device()
+    {
+        return $this->belongsTo(Device::class);
+    }
 }

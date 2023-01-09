@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\DeviceController;
+use App\Http\Controllers\DeviceRepairController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RepairController;
 use Illuminate\Foundation\Application;
@@ -60,6 +61,12 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/repairs/{repair}', [RepairController::class, 'edit'])->name('repairs.edit');
     Route::put('/repairs/{repair}', [RepairController::class, 'update'])->name('repairs.update');
     Route::delete('/repairs/{repair}/delete', [RepairController::class, 'destroy'])->name('repairs.destroy');
+
+    Route::get('/repairs/{device}/add', [DeviceRepairController::class, 'create'])->name('device.repair.create');
+    Route::post('/repairs/{device}/add', [DeviceRepairController::class, 'store'])->name('device.repair.store');
+    Route::get('/repairs/{deviceRepair}/edit', [DeviceRepairController::class, 'edit'])->name('device.repair.edit');
+    Route::put('/repairs/{deviceRepair}/edit', [DeviceRepairController::class, 'update'])->name('device.repair.update');
+    Route::delete('/repairs/{deviceRepair}/remove', [DeviceRepairController::class, 'destroy'])->name('device.repair.destroy');
 });
 
 require __DIR__ . '/auth.php';

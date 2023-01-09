@@ -32,7 +32,7 @@ const getValue = (obj, prop) => {
 <template>
   <div>
     <table class="w-full whitespace-nowrap">
-      <tr class="text-left font-bold">
+      <tr class="text-left font-bold ">
         <th v-for="(label, index) in labels" :key="index" class="px-6 pt-6 pb-4">
           {{ label.value }}
         </th>

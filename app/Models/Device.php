@@ -42,7 +42,7 @@ class Device extends Model
 
     public function repairs()
     {
-        return $this->belongsToMany(Repair::class, 'device_repairs')->withPivot(['price', 'title', 'body']);
+        return $this->belongsToMany(Repair::class, 'device_repairs')->withPivot(['id', 'price', 'title', 'body']);
     }
 
     public function scopeFilter($query, array $filters)

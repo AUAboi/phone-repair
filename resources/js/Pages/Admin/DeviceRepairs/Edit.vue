@@ -5,25 +5,29 @@ import FormInput from "@/Components/FormInput.vue"
 import FormSelect from "@/Components/FormSelect.vue"
 import PrimaryButton from '@/Components/PrimaryButton.vue';
 import useSweetAlert from '@/Composables/useSweetAlert';
-import DeviceRepairsTable from './Partials/DeviceRepairsTable.vue';
 
 const props = defineProps({
   device: {
     required: true
   },
-  brands: {
+  device_repair: {
+    required: true
+  },
+  repairs: {
     required: true
   }
 })
 
 const form = useForm({
   '_method': 'put',
-  name: props.device.name,
-  brand_id: props.device.brand.id
+  title: props.device_repair.title,
+  repair_id: props.device_repair.repair_id,
+  price: props.device_repair.price,
+  body: props.device_repair.body
 })
 
 const submit = () => {
-  form.post(route('devices.update', props.device.slug))
+  form.post(route('device.repair.update', props.device_repair.id))
 }
 
 const { alertConfirm } = useSweetAlert()
@@ -32,32 +36,33 @@ const destroy = () => {
   alertConfirm(
     result => {
       if (result.isConfirmed) {
-        form.delete(route('devices.destroy', props.device.slug))
+        form.delete(route('device.repair.destroy', props.device_repair.id))
       }
     },
-    { title: `Deleting ${props.device.name} will delete all the fix types. Proceed?` }
+    { title: `Deleting ${props.device_repair.title}. Proceed?` }
   )
 }
 
 </script>
 <template>
 
-  <Head title="Update Device" />
-  <PageHeader>Update Device</PageHeader>
+  <Head title="Update Repair" />
+  <PageHeader>Update Repair for {{ device.name }}</PageHeader>
 
   <div class="py-12">
-    <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
+    <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
       <div class="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
-
-        <form id="update-form" class="max-w-md " @submit.prevent="submit">
+        <form id="update-form" class="max-w-md mr-auto " @submit.prevent="submit">
           <div class="flex">
-            <FormInput label="Name" v-model="form.name" :error="form.errors.name" />
-            <FormSelect label="Brand" v-model="form.brand_id" :error="form.errors.brand_id">
-              <option value="">Select a brand</option>
-              <option v-for="brand in brands" :value="brand.id">{{ brand.name }}</option>
+            <FormInput label="Title" v-model="form.title" :error="form.errors.title" />
+          </div>
+          <div class="flex">
+            <FormInput step=".01" label="Price" type="number" v-model="form.price" :error="form.errors.price" />
+            <FormSelect label="Repair Type" v-model="form.repair_id" :error="form.errors.repair_id">
+              <option value="">Select a repair type</option>
+              <option v-for="repair in repairs" :value="repair.id">{{ repair.title }}</option>
             </FormSelect>
           </div>
-
           <div class="flex justify-between">
             <PrimaryButton form="update-form" class="mb-4 px-10" type="submit">
               Update
@@ -71,10 +76,6 @@ const destroy = () => {
           </div>
         </form>
       </div>
-      <div class="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
-        <DeviceRepairsTable :device="device" />
-      </div>
     </div>
   </div>
-
 </template>

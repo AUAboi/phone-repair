@@ -14,7 +14,9 @@ class DeviceRepairResource extends JsonResource
      */
     public function toArray($request)
     {
+
         return [
+            'id' => $this->pivot->id,
             'title' => $this->pivot->title,
             'body' => $this->pivot->body,
             'price' => money($this->pivot->price, config('constants.currency'))->formatWithoutZeroes(),
