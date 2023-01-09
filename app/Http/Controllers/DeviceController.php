@@ -60,7 +60,7 @@ class DeviceController extends Controller
     public function edit(Device $device)
     {
         return Inertia::render('Admin/Devices/Edit', [
-            'device' => new DeviceResource($device->load('brand')),
+            'device' => new DeviceResource($device->load(['brand', 'repairs'])),
             'brands' => BrandResource::collection(Brand::all())
         ]);
     }

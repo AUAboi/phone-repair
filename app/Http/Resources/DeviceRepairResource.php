@@ -2,10 +2,9 @@
 
 namespace App\Http\Resources;
 
-use App\Models\DeviceRepair;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class DeviceResource extends JsonResource
+class DeviceRepairResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -16,11 +15,9 @@ class DeviceResource extends JsonResource
     public function toArray($request)
     {
         return [
-            'name' => $this->name,
-            'image' => $this->image,
-            'slug' => $this->slug,
-            'brand' => new BrandResource($this->whenLoaded('brand')),
-            'repairs' => DeviceRepairResource::collection($this->whenLoaded('repairs'))
-        ];
+            'title' => $this->pivot->title,
+            'body' => $this->pivot->body,
+            'price' => money($this->pivot->price, config('constants.currency'))->formatWithoutZeroes(),
+        ];;
     }
 }

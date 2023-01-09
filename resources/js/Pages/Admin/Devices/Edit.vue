@@ -47,8 +47,9 @@ const destroy = () => {
 
   <div class="py-12">
     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
-      <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
-        <form id="update-form" class="max-w-md mx-auto mt-10" @submit.prevent="submit">
+      <div class="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
+
+        <form id="update-form" class="max-w-md " @submit.prevent="submit">
           <div class="flex">
             <FormInput label="Name" v-model="form.name" :error="form.errors.name" />
             <FormSelect label="Brand" v-model="form.brand_id" :error="form.errors.brand_id">
@@ -71,7 +72,7 @@ const destroy = () => {
         </form>
       </div>
       <div class="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
-        <DeviceRepairsTable />
+        <DeviceRepairsTable :repairs="device.repairs" />
       </div>
     </div>
   </div>

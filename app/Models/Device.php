@@ -40,6 +40,11 @@ class Device extends Model
         return $this->belongsTo(Brand::class);
     }
 
+    public function repairs()
+    {
+        return $this->belongsToMany(Repair::class, 'device_repairs')->withPivot(['price', 'title', 'body']);
+    }
+
     public function scopeFilter($query, array $filters)
     {
         $query->when($filters['search'] ?? null, function ($query, $search) {

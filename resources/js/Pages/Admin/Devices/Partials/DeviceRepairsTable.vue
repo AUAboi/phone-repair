@@ -3,7 +3,7 @@ import DataTable from '@/Components/DataTable.vue';
 import { Link } from '@inertiajs/inertia-vue3';
 
 const props = defineProps({
-  phone_repairs: {
+  repairs: {
     required: true,
     type: Object
 
@@ -12,12 +12,12 @@ const props = defineProps({
 
 const labels = [
   {
-    key: 'name',
-    value: 'Name'
+    key: 'title',
+    value: 'Title'
   },
   {
-    key: 'brand.name',
-    value: 'Brand'
+    key: 'price',
+    value: 'Price'
   }
 ]
 
@@ -28,15 +28,16 @@ const labels = [
   <header>
     <h2 class="text-lg font-medium text-gray-900 dark:text-gray-100">Phone Repairs</h2>
     <p class="mt-1 text-sm text-gray-600 dark:text-gray-400"> Available Repairs for phone</p>
-    <div class="flex items-center gap-4 md:gap-0 justify-between">
-      <Link :href="route('devices.create')" as="button" class="btn--primary">Create <span class="hidden md:inline">
-        Device</span></Link>
-    </div>
-
-    <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
-      <div class=" text-gray-900 dark:text-gray-100">
-        <DataTable :table-data="phone_repairs.data" :labels="labels" resource-route="devices.edit" />
-      </div>
-    </div>
   </header>
+
+  <div class="flex items-center gap-4 md:gap-0 justify-between mt-4">
+    <Link :href="route('devices.create')" as="button" class="btn--primary ml-auto">Add <span class="hidden md:inline">
+      Device</span></Link>
+  </div>
+
+  <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
+    <div class=" text-gray-900 dark:text-gray-100">
+      <DataTable :table-data="repairs" :labels="labels" />
+    </div>
+  </div>
 </template>
