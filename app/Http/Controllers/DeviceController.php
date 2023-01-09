@@ -23,7 +23,7 @@ class DeviceController extends Controller
             ->paginate(10)
             ->withQueryString();
 
-        return Inertia::render('Auth/Devices/Index', [
+        return Inertia::render('Admin/Devices/Index', [
             'devices' => DeviceResource::collection($devices),
             'filters' => $filters
         ]);
@@ -31,7 +31,7 @@ class DeviceController extends Controller
 
     public function create()
     {
-        return Inertia::render('Auth/Devices/Create', [
+        return Inertia::render('Admin/Devices/Create', [
             'brands' => BrandResource::collection(Brand::all())
         ]);
     }
@@ -59,7 +59,7 @@ class DeviceController extends Controller
 
     public function edit(Device $device)
     {
-        return Inertia::render('Auth/Devices/Edit', [
+        return Inertia::render('Admin/Devices/Edit', [
             'device' => new DeviceResource($device->load('brand')),
             'brands' => BrandResource::collection(Brand::all())
         ]);

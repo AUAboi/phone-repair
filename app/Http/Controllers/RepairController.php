@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreRepairRequest;
+use App\Http\Requests\UpdateRepairRequest;
 use App\Http\Resources\RepairResource;
 use App\Models\Repair;
 use Illuminate\Http\Request;
@@ -19,7 +20,7 @@ class RepairController extends Controller
             ->paginate(10)
             ->withQueryString();
 
-        return Inertia::render('Auth/Repairs/Index', [
+        return Inertia::render('Admin/Repairs/Index', [
             'repairs' => RepairResource::collection($repairs),
             'filters' => $filters
         ]);
@@ -27,7 +28,7 @@ class RepairController extends Controller
 
     public function create()
     {
-        return Inertia::render('Auth/Repairs/Create');
+        return Inertia::render('Admin/Repairs/Create');
     }
 
     public function store(StoreRepairRequest $request)
@@ -38,5 +39,27 @@ class RepairController extends Controller
         ]);
 
         return Redirect::route('repairs.index')->with('success', 'Repair added succesfully.');
+    }
+
+    public function edit(Repair $repair)
+    {
+        return Inertia::render('Admin/Repairs/Edit', [
+            'repair' => new RepairResource($repair)
+        ]);
+    }
+
+    public function update(Repair $repair, UpdateRepairRequest $request)
+    {
+        $repair->update([
+            'title' => $request->title
+        ]);
+
+        return Redirect::route('repairs.index')->with('success', 'Brand updated succesfully.');
+    }
+
+    public function destroy(Repair $repair)
+    {
+        $repair->delete();
+        return Redirect::route('repairs.index')->with('success', 'Repair type deleted successfully.');
     }
 }

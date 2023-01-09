@@ -20,7 +20,7 @@ class BrandController extends Controller
             ->paginate(10)
             ->withQueryString();
 
-        return  Inertia::render('Auth/Brands/Index', [
+        return  Inertia::render('Admin/Brands/Index', [
             'brands' => BrandResource::collection($brands),
             'filters' => $filters
         ]);
@@ -28,7 +28,7 @@ class BrandController extends Controller
 
     public function create()
     {
-        return Inertia::render('Auth/Brands/Create');
+        return Inertia::render('Admin/Brands/Create');
     }
 
     public function store(StoreBrandRequest $request)
@@ -43,7 +43,7 @@ class BrandController extends Controller
 
     public function edit(Brand $brand)
     {
-        return Inertia::render('Auth/Brands/Edit', [
+        return Inertia::render('Admin/Brands/Edit', [
             'brand' => new BrandResource($brand)
         ]);
     }
