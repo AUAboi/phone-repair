@@ -5,6 +5,7 @@ import FormInput from "@/Components/FormInput.vue"
 import FormSelect from "@/Components/FormSelect.vue"
 import PrimaryButton from '@/Components/PrimaryButton.vue';
 import useSweetAlert from '@/Composables/useSweetAlert';
+import DeviceRepairsTable from './Partials/DeviceRepairsTable.vue';
 
 const props = defineProps({
   device: {
@@ -45,7 +46,7 @@ const destroy = () => {
   <PageHeader>Update Device</PageHeader>
 
   <div class="py-12">
-    <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+    <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
       <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
         <form id="update-form" class="max-w-md mx-auto mt-10" @submit.prevent="submit">
           <div class="flex">
@@ -69,6 +70,10 @@ const destroy = () => {
           </div>
         </form>
       </div>
+      <div class="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
+        <DeviceRepairsTable />
+      </div>
     </div>
   </div>
+
 </template>
