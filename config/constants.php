@@ -1,4 +1,5 @@
 <?php
 return [
-  'currency' => 'EUR'
+  'currency' => 'EUR',
+  'phone_number' => ':PK'
 ];
