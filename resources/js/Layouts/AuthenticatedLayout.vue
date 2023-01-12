@@ -33,7 +33,7 @@ const showingNavigationDropdown = ref(false);
                                 </NavLink>
                                 <NavLink :href="route('appointments.index')"
                                     :active="route().current('appointments.*')">
-                                    Appointment
+                                    Appointments
                                 </NavLink>
                                 <NavLink :href="route('brands.index')" :active="route().current('brands.*')">
                                     Brands
@@ -107,7 +107,7 @@ const showingNavigationDropdown = ref(false);
                         </ResponsiveNavLink>
                         <ResponsiveNavLink :href="route('appointments.index')"
                             :active="route().current('appointments.*')">
-                            Appointment
+                            Appointments
                         </ResponsiveNavLink>
                         <ResponsiveNavLink :href="route('brands.index')" :active="route().current('brands.*')">
                             Brands

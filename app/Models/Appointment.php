@@ -33,6 +33,20 @@ class Appointment extends Model
         );
     }
 
+    protected function total(): Attribute
+    {
+        return Attribute::make(
+            get: fn ($price) => $price / 100,
+            set: fn ($price) => $price * 100,
+        );
+    }
+
+    public function getFormattedTotalAttribute()
+    {
+        return money($this->total, config('constants.currency'), true)->formatWithoutZeroes();
+    }
+
+
     /**
      * The attributes that should be cast.
      *
@@ -50,6 +64,11 @@ class Appointment extends Model
     public function device()
     {
         return $this->belongsTo(Device::class);
+    }
+
+    public function deviceRepair()
+    {
+        return $this->belongsTo(DeviceRepair::class);
     }
 
     public function getFullNameAttribute()

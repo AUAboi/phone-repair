@@ -18,9 +18,19 @@ class AppointmentController extends Controller
             ->paginate(10)
             ->withQueryString();
 
+
+
         return Inertia::render('Admin/Appointments/Index', [
             'appointments' => AppointmentResource::collection($appointments),
             'filters' => $filters
+        ]);
+    }
+
+    public function show(Appointment $appointment)
+    {
+        // return new AppointmentResource($appointment->load(['device', 'device.brand', 'user', 'deviceRepair', 'deviceRepair.repair']));
+        return Inertia::render('Admin/Appointments/Show', [
+            'appointment' => new AppointmentResource($appointment->load(['device', 'device.brand', 'user', 'deviceRepair', 'deviceRepair.repair'])),
         ]);
     }
 }

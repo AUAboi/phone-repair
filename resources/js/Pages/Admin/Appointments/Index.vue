@@ -87,7 +87,7 @@ watch(
 
       <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg mx-2 md:mx-0">
         <div class=" text-gray-900 dark:text-gray-100">
-          <DataTable :table-data="appointments.data" :labels="labels" resource-route="appointments.index" />
+          <DataTable :table-data="appointments.data" :labels="labels" resource-route="appointments.show" />
         </div>
         <Paginator :links="appointments.meta.links" />
       </div>

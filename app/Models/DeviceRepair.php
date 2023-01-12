@@ -28,11 +28,16 @@ class DeviceRepair extends Model
 
     public function getFormattedPriceAttribute()
     {
-        return money($this->price, 'EUR', true)->formatWithoutZeroes();
+        return money($this->price, config('constants.currency'), true)->formatWithoutZeroes();
     }
 
     public function device()
     {
         return $this->belongsTo(Device::class);
+    }
+
+    public function repair()
+    {
+        return $this->belongsTo(Repair::class);
     }
 }

@@ -70,6 +70,7 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('/repairs/{deviceRepair}/remove', [DeviceRepairController::class, 'destroy'])->name('device.repair.destroy');
 
     Route::get('/appointments', [AppointmentController::class, 'index'])->name('appointments.index');
+    Route::get('/appointments/{appointment}', [AppointmentController::class, 'show'])->name('appointments.show');
 });
 
 require __DIR__ . '/auth.php';

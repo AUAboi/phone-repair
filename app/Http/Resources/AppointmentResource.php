@@ -17,6 +17,10 @@ class AppointmentResource extends JsonResource
     {
         return [
             'id' => $this->id,
+            'first_name' => $this->first_name,
+            'zip_code' => $this->zip_code,
+            'city' => $this->city,
+            'address' => $this->address,
             'full_name' => $this->full_name,
             'email' => $this->email,
             'phone' => $this->phone,
