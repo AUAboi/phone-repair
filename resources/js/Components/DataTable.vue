@@ -30,7 +30,7 @@ const getValue = (obj, prop) => {
 </script>
 
 <template>
-  <div>
+  <div class="overflow-x-auto">
     <table class="w-full whitespace-nowrap">
       <tr class="text-left font-bold ">
         <th v-for="(label, index) in labels" :key="index" class="px-6 pt-6 pb-4">
@@ -45,8 +45,8 @@ const getValue = (obj, prop) => {
           {{ getValue(data, label.key) }}
           </Link>
 
-          <span v-else`` class="px-6 py-4 flex items-center ">
-            {{ data[label.key] }}
+          <span v-else class="px-6 py-4 flex items-center ">
+            {{ getValue(data, label.key) }}
           </span>
         </td>
         <td class="border-t dark:border-gray-600 w-px">

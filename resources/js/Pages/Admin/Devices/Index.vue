@@ -61,17 +61,19 @@ watch(
   <div class="py-12">
     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
       <div class="flex items-center gap-4 md:gap-0 justify-between">
-        <SearchBox class="w-full max-w-md my-4" v-model="form.search" @reset="reset" />
+        <SearchBox class="w-full max-w-md my-4 mx-2 md:mx-0" v-model="form.search" @reset="reset" />
         <Link :href="route('devices.create')" as="button" class="btn--primary">Create <span class="hidden md:inline">
           Device</span></Link>
       </div>
 
-      <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
-        <div class=" text-gray-900 dark:text-gray-100">
-          <DataTable :table-data="devices.data" :labels="labels" resource-route="devices.edit" />
+      <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg mx-2 md:mx-0">
+        <div class=" text-gray-900 dark:text-gray-100 overflow-x-auto">
+          <DataTable :table-data="devices.data" :labels="labels" />
         </div>
         <Paginator :links="devices.meta.links" />
       </div>
     </div>
   </div>
+
+
 </template>

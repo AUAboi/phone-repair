@@ -11,7 +11,7 @@ import { watch } from 'vue';
 import { Inertia } from '@inertiajs/inertia';
 
 const props = defineProps({
-  repairs: {
+  appointments: {
     required: true,
     type: Object
 
@@ -24,8 +24,32 @@ const props = defineProps({
 
 const labels = [
   {
-    key: 'title',
-    value: 'Title'
+    key: 'id',
+    value: 'ID'
+  },
+  {
+    key: 'full_name',
+    value: 'Name'
+  },
+  {
+    key: 'device.name',
+    value: 'Device'
+  },
+  {
+    key: 'phone',
+    value: 'Phone'
+  },
+  {
+    key: 'email',
+    value: 'Email'
+  },
+  {
+    key: 'appointment_date',
+    value: "Appointment Date"
+  },
+  {
+    key: 'appointment_time',
+    value: "Appointment Time"
   }
 ]
 
@@ -41,7 +65,7 @@ const reset = () => {
 watch(
   form,
   throttle(() => {
-    Inertia.get(route("repairs.index"), pickBy(form), {
+    Inertia.get(route("appointments.index"), pickBy(form), {
       preserveState: true,
       preserveScroll: true,
     });
@@ -52,22 +76,24 @@ watch(
 </script>
 <template>
 
-  <Head title="Repair Types" />
-  <PageHeader>Repair Types</PageHeader>
+  <Head title="Appointments" />
+
+  <PageHeader>Appointments</PageHeader>
   <div class="py-12">
     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
       <div class="flex items-center gap-4 md:gap-0 justify-between">
         <SearchBox class="w-full max-w-md my-4 mx-2 md:mx-0" v-model="form.search" @reset="reset" />
-        <Link :href="route('repairs.create')" as="button" class="btn--primary">Add <span class="hidden md:inline">
-          Repair Type</span></Link>
       </div>
 
       <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg mx-2 md:mx-0">
         <div class=" text-gray-900 dark:text-gray-100">
-          <DataTable :table-data="repairs.data" :labels="labels" resource-route="repairs.edit" />
+          <DataTable :table-data="appointments.data" :labels="labels" resource-route="appointments.index" />
         </div>
-        <Paginator :links="repairs.meta.links" />
+        <Paginator :links="appointments.meta.links" />
       </div>
     </div>
   </div>
 </template>
+<style>
+
+</style>

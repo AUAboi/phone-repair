@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AppointmentController;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\DeviceController;
 use App\Http\Controllers\DeviceRepairController;
@@ -67,6 +68,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/repairs/{deviceRepair}/edit', [DeviceRepairController::class, 'edit'])->name('device.repair.edit');
     Route::put('/repairs/{deviceRepair}/edit', [DeviceRepairController::class, 'update'])->name('device.repair.update');
     Route::delete('/repairs/{deviceRepair}/remove', [DeviceRepairController::class, 'destroy'])->name('device.repair.destroy');
+
+    Route::get('/appointments', [AppointmentController::class, 'index'])->name('appointments.index');
 });
 
 require __DIR__ . '/auth.php';

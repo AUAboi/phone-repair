@@ -20,7 +20,7 @@ const submit = () => {
 
   <div class="py-12">
     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-      <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
+      <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg mx-2 md:mx-0">
         <form class="max-w-md mx-auto mt-10" @submit.prevent="submit">
           <div class="flex">
             <FormInput label="Title" v-model="form.title" :error="form.errors.title" />
