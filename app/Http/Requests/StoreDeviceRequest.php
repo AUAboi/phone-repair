@@ -25,7 +25,7 @@ class StoreDeviceRequest extends FormRequest
     {
         return [
             'name' => 'required|unique:devices,name',
-            'image' => 'nullable|file|mimes:png,jpg',
+            'image' => 'required|file|mimes:png,jpg|max:3000',
             'brand_id' => 'required|exists:brands,id'
         ];
     }

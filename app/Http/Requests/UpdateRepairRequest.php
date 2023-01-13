@@ -25,7 +25,7 @@ class UpdateRepairRequest extends FormRequest
     {
         return [
             'title' => 'required|unique:repairs,title,' . $this->route('repair')->id,
-            'image' => 'nullable|file|mimes:png,jpg'
+            'image' => 'required|file|mimes:png,jpg|max:3000'
         ];
     }
 }

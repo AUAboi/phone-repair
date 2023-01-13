@@ -25,7 +25,7 @@ class UpdateBrandRequest extends FormRequest
     {
         return [
             'name' => 'required|unique:brands,name,' . $this->route('brand')->id,
-            'image' => 'nullable|file|mimes:png,jpg'
+            'image' => 'required|file|mimes:png,jpg|max:3000'
         ];
     }
 }

@@ -22,7 +22,7 @@ class DatabaseSeeder extends Seeder
             'password' => Hash::make("password"),
         ]);
 
-        $this->run(DeviceSeeder::class);
+        // $this->run(DeviceSeeder::class);
 
         // \App\Models\User::factory(10)->create();
 

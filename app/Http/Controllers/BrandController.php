@@ -6,6 +6,7 @@ use App\Http\Requests\StoreBrandRequest;
 use App\Http\Requests\UpdateBrandRequest;
 use App\Http\Resources\BrandResource;
 use App\Models\Brand;
+use App\Services\BrandService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
@@ -31,11 +32,13 @@ class BrandController extends Controller
         return Inertia::render('Admin/Brands/Create');
     }
 
-    public function store(StoreBrandRequest $request)
+    public function store(StoreBrandRequest $request, BrandService $brandService)
     {
-        Brand::create([
-            'name' => $request->name,
-        ]);
+        try {
+            $brandService->createBrand($request->validated());
+        } catch (\Throwable $th) {
+            return Redirect::route('brands.index')->with('error', 'Error: ' . $th->getMessage());
+        }
 
         return Redirect::route('brands.index')->with('success', 'Brand added succesfully.');
     }
