@@ -35,7 +35,6 @@ class RepairController extends Controller
     {
         Repair::create([
             'title' => $request->title,
-            'image' => 'default.png'
         ]);
 
         return Redirect::route('repairs.index')->with('success', 'Repair added succesfully.');

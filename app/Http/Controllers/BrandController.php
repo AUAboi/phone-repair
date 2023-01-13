@@ -35,7 +35,6 @@ class BrandController extends Controller
     {
         Brand::create([
             'name' => $request->name,
-            'image' => 'default.png'
         ]);
 
         return Redirect::route('brands.index')->with('success', 'Brand added succesfully.');

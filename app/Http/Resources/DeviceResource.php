@@ -17,7 +17,6 @@ class DeviceResource extends JsonResource
     {
         return [
             'name' => $this->name,
-            'image' => $this->image,
             'slug' => $this->slug,
             'brand' => new BrandResource($this->whenLoaded('brand')),
             'repairs' => DeviceRepairResource::collection($this->whenLoaded('repairs'))

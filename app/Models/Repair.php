@@ -11,7 +11,6 @@ class Repair extends Model
 
     protected $fillable = [
         'title',
-        'image'
     ];
 
     public function scopeFilter($query, array $filters)

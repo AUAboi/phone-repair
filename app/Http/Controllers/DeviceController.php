@@ -41,7 +41,6 @@ class DeviceController extends Controller
         Device::create([
             'name' => $request->name,
             'brand_id' => $request->brand_id,
-            'image' => 'default.png'
         ]);
 
         return Redirect::route('devices.index')->with('success', 'Device added succesfully.');

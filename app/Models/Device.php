@@ -14,7 +14,6 @@ class Device extends Model
     protected $fillable = [
         'brand_id',
         'name',
-        'image',
         'slug'
     ];
 
