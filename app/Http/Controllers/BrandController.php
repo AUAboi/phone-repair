@@ -8,6 +8,7 @@ use App\Http\Resources\BrandResource;
 use App\Models\Brand;
 use App\Services\BrandService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
 
@@ -37,7 +38,7 @@ class BrandController extends Controller
         try {
             $brandService->createBrand($request->validated());
         } catch (\Throwable $th) {
-            return Redirect::route('brands.index')->with('error', 'Error: ' . $th->getMessage());
+            return Redirect::route('brands.create')->with('error', 'Error cant create: ' . $th->getMessage());
         }
 
         return Redirect::route('brands.index')->with('success', 'Brand added succesfully.');
@@ -50,23 +51,24 @@ class BrandController extends Controller
         ]);
     }
 
-    public function update(Brand $brand, UpdateBrandRequest $request)
+    public function update(Brand $brand, BrandService $brandService, UpdateBrandRequest $request)
     {
-        $brand->update([
-            'name' => $request->name
-        ]);
-
+        try {
+            $brandService->updateBrand($brand, $request->validated());
+        } catch (\Throwable $th) {
+            return Redirect::route('brands.index')->with('error', 'Error cant update: ' . $th->getMessage());
+        }
         return Redirect::route('brands.index')->with('success', 'Brand updated succesfully.');
     }
 
     public function destroy(Brand $brand)
     {
-        if ($brand->media) {
-            $brand->media->delete();
-        }
-        $brand->delete();
-
-
+        DB::transaction(function () use ($brand) {
+            if ($brand->media) {
+                $brand->media->delete();
+            }
+            $brand->delete();
+        });
         return Redirect::route('brands.index')->with('success', 'Brand deleted successfully.');
     }
 }

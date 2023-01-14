@@ -60,7 +60,8 @@ const destroy = () => {
       <div class="mx-2 md:mx-0 max-w-md">
         <ImagePreview :src="form.image" />
       </div>
-      <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm rounded-lg mx-2 md:mx-0 px-4 py-2">
+      <div
+        class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm rounded-lg mx-2 md:mx-0 px-2 py-2 sm:px-4px-4 py-2">
         <form class="max-w-md mt-5" id="update-form" @submit.prevent="submit">
           <div class="flex">
             <FormInput label="Name" v-model="form.name" :error="form.errors.name" />

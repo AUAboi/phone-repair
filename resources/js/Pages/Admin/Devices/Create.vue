@@ -4,6 +4,7 @@ import PageHeader from '@/Components/PageHeader.vue';
 import FormInput from "@/Components/FormInput.vue"
 import FormSelect from "@/Components/FormSelect.vue"
 import PrimaryButton from '@/Components/PrimaryButton.vue';
+import FormInputImage from '@/Components/FormInputImage.vue';
 
 const props = defineProps({
   brands: {
@@ -13,8 +14,13 @@ const props = defineProps({
 
 const form = useForm({
   name: "",
-  brand_id: ""
+  brand_id: "",
+  image: ""
 })
+
+const handleSelectedMedia = (files) => {
+  form.image = files
+}
 
 const submit = () => {
   form.post(route('devices.store'))
@@ -36,6 +42,9 @@ const submit = () => {
               <option value="">Select a brand</option>
               <option v-for="brand in brands" :value="brand.id">{{ brand.name }}</option>
             </FormSelect>
+          </div>
+          <div class="flex">
+            <FormInputImage label="Image" @selected="handleSelectedMedia" :error="form.errors.image" />
           </div>
           <PrimaryButton class="mb-4 px-10" type="submit">
             Add

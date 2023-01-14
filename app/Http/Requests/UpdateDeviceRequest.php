@@ -24,7 +24,9 @@ class UpdateDeviceRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|unique:devices,name,' . $this->route('device')->id
+            'name' => 'required|unique:devices,name,' . $this->route('device')->id,
+            'image' => 'required|file|mimes:png,jpg,webp|max:3000',
+            'brand_id' => 'required|exists:brands,id'
         ];
     }
 }

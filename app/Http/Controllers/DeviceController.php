@@ -8,7 +8,9 @@ use App\Http\Resources\BrandResource;
 use App\Http\Resources\DeviceResource;
 use App\Models\Brand;
 use App\Models\Device;
+use App\Services\DeviceService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
 
@@ -36,22 +38,24 @@ class DeviceController extends Controller
         ]);
     }
 
-    public function store(StoreDeviceRequest $request)
+    public function store(DeviceService $deviceService, StoreDeviceRequest $request)
     {
-        Device::create([
-            'name' => $request->name,
-            'brand_id' => $request->brand_id,
-        ]);
+        try {
+            $deviceService->createDevice($request->validated());
+        } catch (\Throwable $th) {
+            return Redirect::route('devices.create')->with('error', 'Error cant create: ' . $th->getMessage());
+        }
 
         return Redirect::route('devices.index')->with('success', 'Device added succesfully.');
     }
 
-    public function update(Device $device, UpdateDeviceRequest $request)
+    public function update(Device $device, UpdateDeviceRequest $request, DeviceService $deviceService)
     {
-        $device->update([
-            'name' => $request->name,
-            'brand_id' => $request->brand_id
-        ]);
+        try {
+            $deviceService->updateDevice($device, $request->validated());
+        } catch (\Throwable $th) {
+            return Redirect::route('devices.index')->with('error', 'Error cant update: ' . $th->getMessage());
+        }
 
         return Redirect::route('devices.index')->with('success', 'Device updated succesfully.');
     }
@@ -66,7 +70,13 @@ class DeviceController extends Controller
 
     public function destroy(Device $device)
     {
-        $device->delete();
+        DB::transaction(function () use ($device) {
+            if ($device->media) {
+                $device->media->delete();
+            }
+            $device->delete();
+        });
+
         return Redirect::route('devices.index')->with('success', 'Device deleted successfully.');
     }
 }

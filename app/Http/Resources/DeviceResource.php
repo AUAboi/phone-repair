@@ -18,6 +18,7 @@ class DeviceResource extends JsonResource
         return [
             'name' => $this->name,
             'slug' => $this->slug,
+            'image' =>  $this->media ? $this->media->baseMedia->getUrl() : null,
             'brand' => new BrandResource($this->whenLoaded('brand')),
             'repairs' => DeviceRepairResource::collection($this->whenLoaded('repairs'))
         ];

@@ -44,6 +44,11 @@ class Device extends Model
         return $this->belongsToMany(Repair::class, 'device_repairs')->withPivot(['id', 'price', 'title', 'body']);
     }
 
+    public function media()
+    {
+        return $this->hasOne(DeviceMedia::class);
+    }
+
     public function scopeFilter($query, array $filters)
     {
         $query->when($filters['search'] ?? null, function ($query, $search) {
