@@ -5,6 +5,7 @@ import PageHeader from '@/Components/PageHeader.vue';
 import FormInput from "@/Components/FormInput.vue"
 import PrimaryButton from '@/Components/PrimaryButton.vue';
 import useSweetAlert from '@/Composables/useSweetAlert.js'
+import ImagePreview from '@/Components/ImagePreview.vue';
 
 const props = defineProps({
   brand: {
@@ -43,8 +44,9 @@ const destroy = () => {
 
   <div class="py-12">
     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-      <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg mx-2 md:mx-0">
-        <form class="max-w-md mx-auto mt-10" id="update-form" @submit.prevent="submit">
+      <ImagePreview :src="brand.image" />
+      <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm rounded-lg mx-2 md:mx-0 px-4 py-2">
+        <form class="max-w-md mt-10" id="update-form" @submit.prevent="submit">
           <div class="flex">
             <FormInput label="Name" v-model="form.name" :error="form.errors.name" />
           </div>

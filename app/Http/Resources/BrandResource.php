@@ -14,6 +14,12 @@ class BrandResource extends JsonResource
      */
     public function toArray($request)
     {
-        return parent::toArray($request);
+        return [
+            'id' => $this->id,
+            'name' => $this->name,
+            'image' =>  $this->media ? $this->media->baseMedia->getUrl() : null,
+            'slug' => $this->slug,
+            'devices' => DeviceResource::collection($this->whenLoaded('devices'))
+        ];
     }
 }

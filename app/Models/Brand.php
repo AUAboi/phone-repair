@@ -38,6 +38,11 @@ class Brand extends Model
         return $this->hasMany(Device::class);
     }
 
+    public function media()
+    {
+        return $this->hasOne(BrandMedia::class);
+    }
+
     public function scopeFilter($query, array $filters)
     {
         $query->when($filters['search'] ?? null, function ($query, $search) {

@@ -66,7 +66,7 @@ watch(
           Device</span></Link>
       </div>
 
-      <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg mx-2 md:mx-0">
+      <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm rounded-lg mx-2 md:mx-0 px-2 py-2 sm:px-4">
         <div class=" text-gray-900 dark:text-gray-100 overflow-x-auto">
           <DataTable :table-data="devices.data" :labels="labels" resource-route="devices.edit" />
         </div>
