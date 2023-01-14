@@ -61,7 +61,12 @@ class BrandController extends Controller
 
     public function destroy(Brand $brand)
     {
+        if ($brand->media) {
+            $brand->media->delete();
+        }
         $brand->delete();
+
+
         return Redirect::route('brands.index')->with('success', 'Brand deleted successfully.');
     }
 }

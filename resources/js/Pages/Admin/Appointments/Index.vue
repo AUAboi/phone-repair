@@ -85,7 +85,7 @@ watch(
         <SearchBox class="w-full max-w-md my-4 mx-2 md:mx-0" v-model="form.search" @reset="reset" />
       </div>
 
-      <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm rounded-lg mx-2 md:mx-0 px-2 py-2 sm:px-4">
+      <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm rounded-lg mx-2 md:mx-0 ">
         <div class=" text-gray-900 dark:text-gray-100">
           <DataTable :table-data="appointments.data" :labels="labels" resource-route="appointments.show" />
         </div>

@@ -62,7 +62,7 @@ watch(
           Repair Type</span></Link>
       </div>
 
-      <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm rounded-lg mx-2 md:mx-0 px-2 py-2 sm:px-4">
+      <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm rounded-lg mx-2 md:mx-0 ">
         <div class=" text-gray-900 dark:text-gray-100">
           <DataTable :table-data="repairs.data" :labels="labels" resource-route="repairs.edit" />
         </div>

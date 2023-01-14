@@ -6,6 +6,9 @@ import FormInput from "@/Components/FormInput.vue"
 import PrimaryButton from '@/Components/PrimaryButton.vue';
 import useSweetAlert from '@/Composables/useSweetAlert.js'
 import ImagePreview from '@/Components/ImagePreview.vue';
+import FormInputImage from '@/Components/FormInputImage.vue';
+import { urlToImageFile } from '@/utils.js'
+import { onMounted } from 'vue';
 
 const props = defineProps({
   brand: {
@@ -17,7 +20,17 @@ const props = defineProps({
 const form = useForm({
   '_method': 'put',
   name: props.brand.name,
+  image: props.brand.image
 })
+
+
+const handleSelectedMedia = (files) => {
+  form.image = files
+}
+const setFormValues = async () => {
+  form.image = await urlToImageFile(props.brand.image)
+}
+onMounted(setFormValues)
 
 const submit = () => {
   form.post(route('brands.update', props.brand.slug))
@@ -44,11 +57,17 @@ const destroy = () => {
 
   <div class="py-12">
     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-      <ImagePreview :src="brand.image" />
+      <div class="mx-2 md:mx-0 max-w-md">
+        <ImagePreview :src="form.image" />
+      </div>
       <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm rounded-lg mx-2 md:mx-0 px-4 py-2">
-        <form class="max-w-md mt-10" id="update-form" @submit.prevent="submit">
+        <form class="max-w-md mt-5" id="update-form" @submit.prevent="submit">
           <div class="flex">
             <FormInput label="Name" v-model="form.name" :error="form.errors.name" />
+          </div>
+          <div class="flex">
+            <FormInputImage @selected="handleSelectedMedia" label="Image" v-model="form.image"
+              :error="form.errors.image" />
           </div>
           <div class="flex justify-between">
             <PrimaryButton form="update-form" class="mb-4 px-10" type="submit">
