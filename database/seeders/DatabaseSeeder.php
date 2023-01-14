@@ -17,9 +17,11 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         User::create([
-            'name' => 'admin',
+            'first_name' => 'admin',
+            'last_name' => 'admin',
             'email' => 'admin@mail.com',
             'password' => Hash::make("password"),
+            'is_admin' => true
         ]);
 
         // $this->run(DeviceSeeder::class);

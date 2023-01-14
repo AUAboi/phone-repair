@@ -23,6 +23,7 @@
         "vue": "^3.2.41"
     },
     "dependencies": {
+        "@vueuse/core": "^9.10.0",
         "sweetalert2": "^11.6.16"
     }
 }

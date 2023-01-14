@@ -5,7 +5,6 @@ const props = defineProps({
     required: false,
   },
   error: String,
-
 });
 
 const emit = defineEmits(['selected'])
