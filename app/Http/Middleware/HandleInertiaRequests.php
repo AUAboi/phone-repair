@@ -31,6 +31,10 @@ class HandleInertiaRequests extends Middleware
      */
     public function share(Request $request): array
     {
+        $user = [];
+        if ($request->user()) {
+            $user = new UserResource($request->user());
+        }
         return array_merge(parent::share($request), [
             'flash' => function () use ($request) {
                 return [
@@ -38,8 +42,9 @@ class HandleInertiaRequests extends Middleware
                     'error' => $request->session()->get('error'),
                 ];
             },
+
             'auth' => [
-                'user' => new UserResource($request->user()),
+                'user' => $user,
             ],
             'ziggy' => function () use ($request) {
                 return array_merge((new Ziggy)->toArray(), [

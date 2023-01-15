@@ -1,6 +1,6 @@
 <script setup>
 import DataTable from '@/Components/DataTable.vue';
-import { Link } from '@inertiajs/inertia-vue3';
+import { Link } from '@inertiajs/vue3';
 
 const props = defineProps({
   device: {

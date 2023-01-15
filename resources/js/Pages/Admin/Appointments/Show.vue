@@ -3,7 +3,7 @@
 import PageHeader from '@/Components/PageHeader.vue';
 import CustomerDetails from './Partials/CustomerDetails.vue';
 import DeviceDetails from './Partials/DeviceDetails.vue';
-import { Head, } from '@inertiajs/inertia-vue3';
+import { Head, } from '@inertiajs/vue3';
 
 const props = defineProps({
   appointment: {

@@ -1,6 +1,6 @@
 
 <script setup>
-import { Head, useForm } from '@inertiajs/inertia-vue3';
+import { Head, useForm } from '@inertiajs/vue3';
 import PageHeader from '@/Components/PageHeader.vue';
 import FormInput from "@/Components/FormInput.vue"
 import PrimaryButton from '@/Components/PrimaryButton.vue';

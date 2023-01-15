@@ -3,12 +3,12 @@ import DataTable from '@/Components/DataTable.vue';
 import SearchBox from '@/Components/SearchBox.vue';
 import Paginator from '@/Components/Paginator.vue';
 import PageHeader from '@/Components/PageHeader.vue';
-import { Head, Link } from '@inertiajs/inertia-vue3';
+import { Head, Link } from '@inertiajs/vue3';
 import { reactive } from '@vue/reactivity';
 import throttle from "lodash/throttle";
 import pickBy from "lodash/pickBy";
 import { watch } from 'vue';
-import { Inertia } from '@inertiajs/inertia';
+import { router } from '@inertiajs/vue3';
 
 const props = defineProps({
   repairs: {

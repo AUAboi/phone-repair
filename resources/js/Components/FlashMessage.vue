@@ -1,5 +1,5 @@
 <script setup>
-import { usePage } from "@inertiajs/inertia-vue3";
+import { usePage } from '@inertiajs/vue3'
 import { ref, watch } from "vue";
 import CloseCircleOutline from "~icons/mdi/close-circle-outline";
 
@@ -8,11 +8,11 @@ const show = ref(false);
 let page = usePage();
 
 watch(
-  () => page.props.value.flash,
+  () => page.props.flash,
   () => {
-    show.value = true;
+    show = true;
     setTimeout(() => {
-      show.value = false
+      show = false
     }, 4000)
   },
   { deep: true }

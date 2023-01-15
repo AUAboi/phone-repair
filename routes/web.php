@@ -23,10 +23,6 @@ use Inertia\Inertia;
 */
 
 Route::get('/test', function () {
-    return view('welcome');
-});
-
-Route::get('/', function () {
     return Inertia::render('Welcome', [
         'canLogin' => Route::has('login'),
         'canRegister' => Route::has('register'),
@@ -34,6 +30,7 @@ Route::get('/', function () {
         'phpVersion' => PHP_VERSION,
     ]);
 });
+
 
 Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/dashboard', function () {
@@ -75,6 +72,10 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/appointments/{appointment}', [AppointmentController::class, 'show'])->name('appointments.show');
 
     Route::get('/users', [UserController::class, 'index'])->name('users.index');
+});
+
+Route::get('/', function () {
+    return Inertia::render('Public/Home');
 });
 
 require __DIR__ . '/auth.php';
