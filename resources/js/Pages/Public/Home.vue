@@ -1,7 +1,11 @@
-<template>
-  <header class="text-gray-600 body-font shadow-md">
+<script setup >
+import { Head } from '@inertiajs/vue3';
 
-  </header>
+</script>
+
+<template>
+
+  <Head title="Welcome" />
 </template>
 
 <style scoped>
