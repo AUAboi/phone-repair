@@ -2,7 +2,9 @@
 
 namespace App\Http\Middleware;
 
+use App\Http\Resources\DeviceResource;
 use App\Http\Resources\UserResource;
+use App\Models\Device;
 use Illuminate\Http\Request;
 use Inertia\Middleware;
 use Tightenco\Ziggy\Ziggy;
@@ -42,9 +44,11 @@ class HandleInertiaRequests extends Middleware
                     'error' => $request->session()->get('error'),
                 ];
             },
-
             'auth' => [
                 'user' => $user,
+            ],
+            'navigation' => [
+                'devices' => DeviceResource::collection(Device::all())
             ],
             'ziggy' => function () use ($request) {
                 return array_merge((new Ziggy)->toArray(), [
