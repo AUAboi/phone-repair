@@ -35,3 +35,16 @@ const props = defineProps({
   </nav>
 
 </template>
+
+<style scoped>
+@media screen and (max-width: 639px) {
+  .navbar {
+    transform: translateX(-100%);
+    transition: all 500ms ease;
+  }
+
+  .navbar.show {
+    transform: translateX(0);
+  }
+}
+</style>

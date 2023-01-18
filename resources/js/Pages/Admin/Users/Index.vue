@@ -41,7 +41,7 @@ watch(
   form,
 
   throttle(() => {
-    Inertia.get(route("users.index"), pickBy(form), {
+    router.get(route("users.index"), pickBy(form), {
       preserveState: true,
       preserveScroll: true,
     });

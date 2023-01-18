@@ -5,21 +5,21 @@ import CloseCircleOutline from "~icons/mdi/close-circle-outline";
 
 const show = ref(false);
 
-let page = usePage();
-
 watch(
-  () => page.props.flash,
+  () => usePage().props.flash,
   () => {
-    show = true;
+    show.value = true;
     setTimeout(() => {
-      show = false
+      show.value = false
     }, 4000)
   },
   { deep: true }
 )
 
 </script>
+
 <template>
+
   <div class="text-white absolute top-10 right-0 mx-2">
     <div v-if="$page.props.flash.success && show"
       class="mb-8 flex items-center justify-between bg-green-500 rounded max-w-3xl">
