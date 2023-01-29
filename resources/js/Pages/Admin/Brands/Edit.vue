@@ -52,8 +52,8 @@ const destroy = () => {
 </script>
 <template>
 
-  <Head title="Create Brand" />
-  <PageHeader>Create Brand</PageHeader>
+  <Head title="Edit Brand" />
+  <PageHeader>Edit Brand</PageHeader>
 
   <div class="py-12">
     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">

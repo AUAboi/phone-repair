@@ -1,8 +1,6 @@
 <script setup>
 import ApplicationLogo from '@/Components/ApplicationLogo.vue';
-
 import PublicNavigation from './partials/PublicNavigation.vue';
-
 
 const props = defineProps(['navigation'])
 
@@ -29,7 +27,7 @@ const menuItems = [
 
 </script>
 <template>
-  <header class="text-gray-600 body-font">
+  <header class="text-gray-600 pb-6 body-font sm:shadow-md ">
     <div
       class="container mx-auto flex sm:p-5 flex-col sm:flex-row sm:justify-between md:items-center bg-white bg-opacity-70 z-50">
       <div class="flex sm:block justify-center mt-8 sm:mt-0">
