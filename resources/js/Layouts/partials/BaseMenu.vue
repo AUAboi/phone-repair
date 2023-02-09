@@ -18,9 +18,9 @@ const props = defineProps({
             </svg></span>
 
         </a>
-        <ul class="animated-menu absolute hidden text-gray-700 pt-1 bg-white shadow-md group-hover:block">
+        <ul class="animated-menu absolute hidden text-gray-700 pt-1 bg-white shadow-md group-hover:grid">
           <li v-for="(child, index) in item.children" :key="index">
-            <a class="rounded-t  hover:bg-gray-400 hover:text-white py-2 px-4 block whitespace-nowrap"
+            <a class="rounded-t hover:bg-gray-400 hover:text-white py-2 px-4 block whitespace-nowrap"
               :href="child.href">{{
                 child.text
               }}</a>
@@ -40,6 +40,9 @@ const props = defineProps({
   -webkit-animation-duration: .3s;
   -webkit-animation-fill-mode: both;
   -webkit-animation-name: slideInUp-30;
+
+  grid-template-rows: repeat(3, 1fr);
+  grid-auto-flow: column;
 }
 
 

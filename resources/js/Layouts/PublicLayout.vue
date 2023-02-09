@@ -1,5 +1,6 @@
 <script setup>
 import ApplicationLogo from '@/Components/ApplicationLogo.vue';
+import PublicFooter from './partials/PublicFooter.vue';
 import PublicNavigation from './partials/PublicNavigation.vue';
 
 const props = defineProps(['navigation'])
@@ -8,12 +9,13 @@ const menuItems = [
   {
     text: "Repair",
     href: "https://google.com",
-    children: props.navigation.devices.map(d => {
-      return {
-        text: d.name,
-        href: d.image
-      }
-    })
+    children:
+      props.navigation.devices.map(d => {
+        return {
+          text: d.name,
+          href: d.image
+        }
+      })
   },
   {
     text: "About",
@@ -39,6 +41,7 @@ const menuItems = [
   <main>
     <slot />
   </main>
+  <PublicFooter />
 </template>
 
 <style scoped>

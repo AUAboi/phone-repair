@@ -6,6 +6,7 @@ use App\Http\Controllers\BrandController;
 use App\Http\Controllers\DeviceController;
 use App\Http\Controllers\DeviceRepairController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\PublicController;
 use App\Http\Controllers\RepairController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -30,6 +31,10 @@ Route::get('/test', function () {
         'phpVersion' => PHP_VERSION,
     ]);
 });
+
+
+Route::get('/', [PublicController::class, 'home'])->name('public.home');
+Route::get('/phone/repairs', [PublicController::class, 'repairs'])->name('public.repairs');
 
 
 Route::middleware(['auth', 'admin'])->group(function () {
@@ -74,8 +79,5 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/users', [UserController::class, 'index'])->name('users.index');
 });
 
-Route::get('/', function () {
-    return Inertia::render('Public/Home');
-});
 
 require __DIR__ . '/auth.php';
