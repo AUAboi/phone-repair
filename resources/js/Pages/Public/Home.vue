@@ -36,7 +36,7 @@ const props = defineProps(['brands'])
   </section>
   <section class="bg-blue-200 py-12 px-2">
     <div class="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-4 justify-items-center ">
-      <div class="w-2/3 ">
+      <div class=" ">
         <div class="bg-white text-center h-64 w-64 pt-12 text-5xl rounded-md shadow-2xl mx-auto">
           <img class="w-24 mx-auto" src="images/CROSS.avif" alt="">
           <p class="font-bold">
@@ -49,7 +49,7 @@ const props = defineProps(['brands'])
           </div>
         </div>
       </div>
-      <div class="w-2/3">
+      <div class="">
         <div class="bg-fuchsia-200 text-center h-64 w-64 pt-12 text-5xl rounded-md shadow-2xl mx-auto">
           <img class="w-24 mx-auto" src="images/multi_cross.avif" alt="">
           <p class="font-bold">
@@ -62,7 +62,7 @@ const props = defineProps(['brands'])
           </div>
         </div>
       </div>
-      <div class="w-2/3">
+      <div class="">
         <div style="background-color: #290A38;"
           class="text-center h-64 w-64 pt-12 text-5xl rounded-md shadow-2xl mx-auto">
           <img class="w-24 mx-auto" src="images/cross_bg.avif" alt="">
@@ -84,7 +84,7 @@ const props = defineProps(['brands'])
       <div class="flex flex-col gap-4 items-center" v-for="brand in brands" :key="brand.id">
         <img width="300" height="400" class="w-64" :src="brand.image" :alt="brand.name">
         <h4 class="text-4xl text-fuchsia-900">{{ brand.name }}</h4>
-        <ActionButton :href="route('public.repairs')">
+        <ActionButton :href="route('public.repairs.brand', brand.slug)">
           Book Now
         </ActionButton>
 

@@ -1,5 +1,6 @@
 <script setup>
 import ApplicationLogo from '@/Components/ApplicationLogo.vue';
+import { Link } from '@inertiajs/vue3';
 import PublicFooter from './partials/PublicFooter.vue';
 import PublicNavigation from './partials/PublicNavigation.vue';
 
@@ -8,7 +9,7 @@ const props = defineProps(['navigation'])
 const menuItems = [
   {
     text: "Repair",
-    href: "https://google.com",
+    href: route("public.repairs"),
     children:
       props.navigation.devices.map(d => {
         return {
@@ -29,11 +30,13 @@ const menuItems = [
 
 </script>
 <template>
-  <header class="text-gray-600 pb-6 body-font sm:shadow-md ">
+  <header class="text-gray-600 pb-6 md:p-0 body-font sm:shadow-2xl ">
     <div
-      class="container mx-auto flex sm:p-5 flex-col sm:flex-row sm:justify-between md:items-center bg-white bg-opacity-70 z-50">
+      class="container mx-auto flex sm:p-5 lg:p-0 flex-col sm:flex-row sm:justify-between md:items-center bg-white bg-opacity-70 z-50">
       <div class="flex sm:block justify-center mt-8 sm:mt-0">
+        <Link :href="route('public.home')">
         <ApplicationLogo class="max-h-7" />
+        </Link>
       </div>
       <PublicNavigation :menu-items="menuItems" />
     </div>

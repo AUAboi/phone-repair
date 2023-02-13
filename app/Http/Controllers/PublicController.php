@@ -20,4 +20,11 @@ class PublicController extends Controller
     {
         return Inertia::render('Public/Repairs');
     }
+
+    public function repairBrand(Brand $brand)
+    {
+        return Inertia::render('Public/Brand', [
+            'brand' => new BrandResource($brand->load('devices'))
+        ]);
+    }
 }
