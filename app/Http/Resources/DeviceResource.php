@@ -28,7 +28,15 @@ class DeviceResource extends JsonResource
                     'repair_type' => $repair->title,
                     'image' =>  $repair->media ? $repair->media->baseMedia->getUrl() : null,
 
-                    'repairs' => DeviceRepair::where('device_id', $this->id)->where('repair_id', $repair->id)->get()
+                    'repairs' => DeviceRepair::where('device_id', $this->id)
+                        ->where('repair_id', $repair->id)
+                        ->get()->transform(fn ($r) => [
+                            'id' => $r->id,
+                            'title' => $r->title,
+                            'body' => $r->body,
+                            'price' => $r->formatted_price,
+                        ])
+
                 ])->filter(function ($repair) {
                     return $repair['repairs']->count();
                 });
