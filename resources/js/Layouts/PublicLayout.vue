@@ -14,7 +14,7 @@ const menuItems = [
       props.navigation.devices.map(d => {
         return {
           text: d.name,
-          href: d.image
+          href: route('public.appointments.create', d.slug)
         }
       })
   },

@@ -40,6 +40,7 @@ class AppointmentController extends Controller
 
     public function create(Device $device, DeviceService $deviceService)
     {
+
         return Inertia::render('Public/Appointments/Create', [
             'device' => new DeviceResource($device->load(['brand', 'repairs'])),
         ]);

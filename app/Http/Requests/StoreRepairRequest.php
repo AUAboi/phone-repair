@@ -25,6 +25,7 @@ class StoreRepairRequest extends FormRequest
     {
         return [
             'title' => 'required|unique:repairs,title',
+            'image' => 'required|file|mimes:png,jpg,webp|max:3000',
         ];
     }
 }

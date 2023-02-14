@@ -3,10 +3,16 @@ import { Head, useForm } from '@inertiajs/vue3';
 import PageHeader from '@/Components/PageHeader.vue';
 import FormInput from "@/Components/FormInput.vue"
 import PrimaryButton from '@/Components/PrimaryButton.vue';
+import FormInputImage from '@/Components/FormInputImage.vue';
 
 const form = useForm({
   title: "",
+  image: "",
 })
+
+const handleSelectedMedia = (files) => {
+  form.image = files
+}
 
 const submit = () => {
   form.post(route('repairs.store'))
@@ -24,6 +30,9 @@ const submit = () => {
         <form class="max-w-md mt-5" @submit.prevent="submit">
           <div class="flex">
             <FormInput label="Title" v-model="form.title" :error="form.errors.title" />
+          </div>
+          <div class="flex">
+            <FormInputImage label="Image" @selected="handleSelectedMedia" :error="form.errors.image" />
           </div>
           <PrimaryButton class="mb-4 px-10" type="submit">
             Add

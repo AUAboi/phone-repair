@@ -14,6 +14,11 @@ class RepairResource extends JsonResource
      */
     public function toArray($request)
     {
-        return parent::toArray($request);
+        return [
+            'id' => $this->id,
+            'title' => $this->title,
+            'image' =>  $this->media ? $this->media->baseMedia->getUrl() : null,
+
+        ];
     }
 }

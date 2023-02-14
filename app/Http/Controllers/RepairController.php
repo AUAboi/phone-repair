@@ -7,6 +7,7 @@ use App\Http\Requests\UpdateRepairRequest;
 use App\Http\Resources\RepairResource;
 use App\Models\Repair;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
 
@@ -33,9 +34,19 @@ class RepairController extends Controller
 
     public function store(StoreRepairRequest $request)
     {
-        Repair::create([
-            'title' => $request->title,
-        ]);
+        try {
+            DB::transaction(function () use ($request) {
+                $repair = Repair::create([
+                    'title' => $request->title,
+                ]);
+                $repairMedia = $repair->media()->create([]);
+                $repairMedia->baseMedia()->associate(
+                    $repairMedia->addMedia($request->image)->toMediaCollection()
+                )->save();
+            });
+        } catch (\Throwable $th) {
+            return Redirect::route('repairs.create')->with('error', 'Error cant create: ' . $th->getMessage());
+        }
 
         return Redirect::route('repairs.index')->with('success', 'Repair added succesfully.');
     }
@@ -43,17 +54,32 @@ class RepairController extends Controller
     public function edit(Repair $repair)
     {
         return Inertia::render('Admin/Repairs/Edit', [
-            'repair' => new RepairResource($repair)
+            'repair' => new RepairResource($repair->load('media'))
         ]);
     }
 
     public function update(Repair $repair, UpdateRepairRequest $request)
     {
-        $repair->update([
-            'title' => $request->title
-        ]);
+        try {
+            DB::transaction(function () use ($request, $repair) {
+                $repair->update([
+                    'title' => $request->title
+                ]);
 
-        return Redirect::route('repairs.index')->with('success', 'Brand updated succesfully.');
+                if ($repair->media) {
+                    $repair->media->delete();
+                }
+                $repairMedia = $repair->media()->create([]);
+                $repairMedia->baseMedia()->associate(
+                    $repairMedia->addMedia($request->image)->toMediaCollection()
+                )->save();
+            });
+        } catch (\Throwable $th) {
+            return Redirect::route('repairs.index')->with('error', 'Error cant update: ' . $th->getMessage());
+        }
+
+
+        return Redirect::route('repairs.index')->with('success', 'Repair updated succesfully.');
     }
 
     public function destroy(Repair $repair)

@@ -25,10 +25,12 @@ class DeviceResource extends JsonResource
             'device_repairs' => $this->whenLoaded('repairs', function () {
                 return Repair::all()->transform(fn ($repair) => [
                     'id' => $repair->id,
-                    'repair' => $repair->title,
-                    'device_repairs' => DeviceRepair::where('device_id', $this->id)->where('repair_id', $repair->id)->get()
+                    'repair_type' => $repair->title,
+                    'image' =>  $repair->media ? $repair->media->baseMedia->getUrl() : null,
+
+                    'repairs' => DeviceRepair::where('device_id', $this->id)->where('repair_id', $repair->id)->get()
                 ])->filter(function ($repair) {
-                    return $repair['device_repairs']->count();
+                    return $repair['repairs']->count();
                 });
             })
         ];

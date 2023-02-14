@@ -13,6 +13,11 @@ class Repair extends Model
         'title',
     ];
 
+    public function media()
+    {
+        return $this->hasOne(RepairMedia::class);
+    }
+
     public function scopeFilter($query, array $filters)
     {
         $query->when($filters['search'] ?? null, function ($query, $search) {
