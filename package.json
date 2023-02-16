@@ -22,6 +22,7 @@
     "dependencies": {
         "@inertiajs/vue3": "^1.0.0",
         "@vueuse/core": "^9.10.0",
+        "pinia": "^2.0.30",
         "sweetalert2": "^11.6.16"
     }
 }

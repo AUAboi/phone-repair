@@ -38,7 +38,7 @@ class AppointmentController extends Controller
         ]);
     }
 
-    public function create(Device $device, DeviceService $deviceService)
+    public function create(Device $device)
     {
 
         return Inertia::render('Public/Appointments/Create', [
