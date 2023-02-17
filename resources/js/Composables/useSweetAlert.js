@@ -17,7 +17,9 @@ const useSweetAlert = () => {
     alert.value = Swal.fire({
       title: title,
       text: text,
-      type: 'error'
+      type: 'error',
+      icon: 'error',
+      confirmButtonColor: '#ea7473'
     })
   }
 

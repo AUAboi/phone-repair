@@ -1,6 +1,7 @@
 <script setup>
 import { useStepFormStore } from '@/store/stepForm';
 import { Head } from '@inertiajs/vue3';
+import AddPersonalInformation from './CreateForm/AddPersonalInformation.vue';
 import ChooseAppointment from './CreateForm/ChooseAppointment.vue';
 import ChooseRepairTypeStep from './CreateForm/ChooseRepairTypeStep.vue'
 import FormPaginator from './CreateForm/FormPaginator.vue'
@@ -15,13 +16,14 @@ stepForm.form.repair_type = props.device.device_repairs[0].repair_type
 <template>
   <Head :title="`Book ${props.device.name} repair`" />
   <FormPaginator :device="device" />
+  {{ stepForm.form }}
   <div class="py-8 px-2 min-h-screen flex items-center">
     <transition class="w-full" :name="`slide-${stepForm.transition}`" mode="out-in">
       <ChooseRepairTypeStep v-if="stepForm.currentStep === 1" :device="device" />
       <ChooseAppointment v-else-if="stepForm.currentStep === 2" />
-      <ChooseAppointment v-else-if="stepForm.currentStep === 3" />
+      <AddPersonalInformation v-else-if="stepForm.currentStep === 3" />
     </transition>
-</div>
+  </div>
 </template>
 
 <style scoped>
