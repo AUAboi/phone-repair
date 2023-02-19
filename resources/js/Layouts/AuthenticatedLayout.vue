@@ -22,8 +22,7 @@ const showingNavigationDropdown = ref(false);
                             <!-- Logo -->
                             <div class="shrink-0 flex items-center">
                                 <Link :href="route('dashboard')">
-                                <ApplicationLogo
-                                    class="block h-9 w-auto fill-current text-gray-800 dark:text-gray-200" />
+                                <ApplicationLogo class="block h-9 w-auto fill-current text-gray-800 dark:text-gray-200" />
                                 </Link>
                             </div>
 
@@ -32,8 +31,7 @@ const showingNavigationDropdown = ref(false);
                                 <NavLink :href="route('dashboard')" :active="route().current('dashboard')">
                                     Dashboard
                                 </NavLink>
-                                <NavLink :href="route('appointments.index')"
-                                    :active="route().current('appointments.*')">
+                                <NavLink :href="route('appointments.index')" :active="route().current('appointments.*')">
                                     Appointments
                                 </NavLink>
                                 <NavLink :href="route('brands.index')" :active="route().current('brands.*')">
@@ -103,14 +101,12 @@ const showingNavigationDropdown = ref(false);
                 </div>
 
                 <!-- Responsive Navigation Menu -->
-                <div :class="{ block: showingNavigationDropdown, hidden: !showingNavigationDropdown }"
-                    class="sm:hidden">
+                <div :class="{ block: showingNavigationDropdown, hidden: !showingNavigationDropdown }" class="sm:hidden">
                     <div class="pt-2 pb-3 space-y-1">
                         <ResponsiveNavLink :href="route('dashboard')" :active="route().current('dashboard')">
                             Dashboard
                         </ResponsiveNavLink>
-                        <ResponsiveNavLink :href="route('appointments.index')"
-                            :active="route().current('appointments.*')">
+                        <ResponsiveNavLink :href="route('appointments.index')" :active="route().current('appointments.*')">
                             Appointments
                         </ResponsiveNavLink>
                         <ResponsiveNavLink :href="route('brands.index')" :active="route().current('brands.*')">

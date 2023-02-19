@@ -29,13 +29,17 @@ export const useStepFormStore = defineStore('stepForm', () => {
   const currentStep = ref(1)
 
   const stepForward = () => {
-    transition.value = "next"
-    currentStep.value++
+    if (currentStep.value < 3) {
+      transition.value = "next"
+      currentStep.value++
+    }
   }
 
   const stepBackward = () => {
-    transition.value = "previous"
-    currentStep.value--
+    if (currentStep.value >= 1) {
+      transition.value = "previous"
+      currentStep.value--
+    }
   }
 
   const setStep = (step) => {

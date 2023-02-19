@@ -2,18 +2,31 @@
 import { useStepFormStore } from '@/store/stepForm';
 import IconArrowForward from "~icons/mdi/arrow-right"
 import StepFormInput from "@/Components/StepFormInput.vue"
+import { onMounted } from 'vue';
+import { usePage } from '@inertiajs/vue3';
 
 const stepForm = useStepFormStore()
+
+const page = usePage()
+onMounted(() => {
+  if (page.props.auth.user) {
+    let user = page.props.auth.user
+
+    stepForm.form.first_name = user.first_name
+    stepForm.form.last_name = user.last_name
+    stepForm.form.email = user.email
+  }
+})
 </script>
 
 <template>
   <div class="max-w-5xl mx-auto">
     <div class="text-center my-12">
-      <h2 class="text-4xl text-pink-600 ">Almost There</h2>
+      <h2 class="text-4xl text-pink-600">Almost There</h2>
       <h2 class="text-5xl text-pink-600 font-semibold ">Add Your Personal Information</h2>
     </div>
 
-    <div class="flex flex-col md:flex-row justify-between   gap-6">
+    <div class="flex flex-col md:flex-row justify-between gap-6">
       <div class="flex flex-wrap flex-grow">
         <div class="p-2 w-1/2">
           <div class="relative">
