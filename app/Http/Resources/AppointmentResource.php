@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use App\Models\DeviceRepair;
 use Carbon\Carbon;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -18,17 +19,20 @@ class AppointmentResource extends JsonResource
         return [
             'id' => $this->id,
             'first_name' => $this->first_name,
+            'last_name' => $this->last_name,
+            'appointment_number' => $this->appointment_number,
             'zip_code' => $this->zip_code,
             'city' => $this->city,
             'address' => $this->address,
             'full_name' => $this->full_name,
             'email' => $this->email,
+            'total' => $this->formatted_total,
             'phone' => $this->phone,
+            'appointment_date' => Carbon::parse($this->appointment_date)->format('d F Y'),
+            'appointment_time' => Carbon::parse($this->appointment_time)->format('g:i A'),
             'user' => new UserResource($this->whenLoaded('user')),
             'device' => new DeviceResource($this->whenLoaded('device')),
-            'appointment_date' => Carbon::parse($this->appointment_date)->format('d F Y'),
-            'appointment_time' => Carbon::parse($this->appointment_time)->format('g:i A')
-
+            'device_repair' => $this->whenLoaded('deviceRepair')
         ];
     }
 }

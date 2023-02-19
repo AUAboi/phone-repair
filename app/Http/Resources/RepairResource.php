@@ -18,7 +18,6 @@ class RepairResource extends JsonResource
             'id' => $this->id,
             'title' => $this->title,
             'image' =>  $this->media ? $this->media->baseMedia->getUrl() : null,
-
         ];
     }
 }

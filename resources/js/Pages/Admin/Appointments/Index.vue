@@ -16,6 +16,9 @@ const props = defineProps({
     type: Object
 
   },
+  statuses: {
+    required: true
+  },
   filters: {
     required: true,
     type: Object
@@ -24,8 +27,8 @@ const props = defineProps({
 
 const labels = [
   {
-    key: 'id',
-    value: 'ID'
+    key: 'appointment_number',
+    value: 'Appointment Number'
   },
   {
     key: 'full_name',
@@ -56,10 +59,12 @@ const labels = [
 
 const form = reactive({
   search: props.filters.search,
+  status: props.filters.status
 })
 
 const reset = () => {
   form.search = null;
+  form.status = null;
 }
 
 watch(
@@ -75,14 +80,18 @@ watch(
 
 </script>
 <template>
-
   <Head title="Appointments" />
 
   <PageHeader>Appointments</PageHeader>
   <div class="py-12">
     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
       <div class="flex items-center gap-4 md:gap-0 justify-between">
-        <SearchBox class="w-full max-w-md my-4 mx-2 md:mx-0" v-model="form.search" @reset="reset" />
+        <SearchBox filterable class="w-full max-w-md my-4 mx-2 md:mx-0" v-model="form.search" @reset="reset">
+          <div class="flex flex-col gap-4 text-center dark:text-white">
+            <p v-for="(status, index) in statuses" :key="index" class="cursor-pointer capitalize"
+              @click.prevent="form.status = status">{{ status }}</p>
+          </div>
+        </SearchBox>
       </div>
 
       <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm rounded-lg mx-2 md:mx-0">
@@ -94,6 +103,4 @@ watch(
     </div>
   </div>
 </template>
-<style>
-
-</style>
+<style></style>

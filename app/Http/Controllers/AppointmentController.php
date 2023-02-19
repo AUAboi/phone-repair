@@ -16,7 +16,7 @@ class AppointmentController extends Controller
 {
     public function index(Request $request)
     {
-        $filters = $request->all('search');
+        $filters = $request->all('search', 'status');
         $appointments = Appointment::orderBy('appointment_date', 'DESC')
             ->with(['device'])
             ->filter($filters)
@@ -25,6 +25,7 @@ class AppointmentController extends Controller
 
         return Inertia::render('Admin/Appointments/Index', [
             'appointments' => AppointmentResource::collection($appointments),
+            'statuses' => config('constants.statuses'),
             'filters' => $filters
         ]);
     }

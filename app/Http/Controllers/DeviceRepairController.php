@@ -10,7 +10,6 @@ use App\Http\Resources\RepairResource;
 use Illuminate\Support\Facades\Redirect;
 use App\Http\Requests\StoreDeviceRepairRequest;
 use App\Http\Requests\UpdateDeviceRepairRequest;
-use App\Http\Resources\DeviceRepairResource;
 use App\Http\Resources\DeviceResource;
 use App\Models\DeviceRepair;
 
