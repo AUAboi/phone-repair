@@ -1,5 +1,6 @@
 <script setup>
 import ApplicationLogo from '@/Components/ApplicationLogo.vue';
+import FlashMessage from '@/Components/FlashMessage.vue';
 import { Link } from '@inertiajs/vue3';
 import PublicFooter from './partials/PublicFooter.vue';
 import PublicNavigation from './partials/PublicNavigation.vue';
@@ -28,6 +29,8 @@ const menuItems = [
   }
 ]
 
+
+
 </script>
 <template>
   <header class="text-gray-600 pb-6 md:p-0 body-font sm:shadow-md ">
@@ -42,6 +45,7 @@ const menuItems = [
     </div>
   </header>
   <main>
+    <FlashMessage />
     <slot />
   </main>
   <PublicFooter />

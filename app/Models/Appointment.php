@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Services\AppointmentService;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -23,8 +25,17 @@ class Appointment extends Model
         'city',
         'address',
         'appointment_date',
-        'appointment_time'
+        'appointment_time',
+        'total',
+        'status'
     ];
+
+    protected function appointmentTime(): Attribute
+    {
+        return Attribute::make(
+            get: fn ($value) => Carbon::createFromFormat('H:i:s', $value)->format('g:i A'),
+        );
+    }
 
     protected function phone(): Attribute
     {
@@ -41,11 +52,16 @@ class Appointment extends Model
         );
     }
 
+    protected function getIdentifierAttribute()
+    {
+        $appointmentService = new AppointmentService();
+        return  $appointmentService->generateIdentifier($this);
+    }
+
     public function getFormattedTotalAttribute()
     {
         return money($this->total, config('constants.currency'), true)->formatWithoutZeroes();
     }
-
 
     /**
      * The attributes that should be cast.
@@ -53,7 +69,7 @@ class Appointment extends Model
      * @var array
      */
     protected $casts = [
-        'phone' => E164PhoneNumberCast::class . ':PK'
+        'phone' => E164PhoneNumberCast::class . ':PK',
     ];
 
     public function user()

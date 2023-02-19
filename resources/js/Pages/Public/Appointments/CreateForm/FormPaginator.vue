@@ -4,13 +4,12 @@ import { Link } from "@inertiajs/vue3";
 import IconChevronRight from "~icons/mdi/chevron-right"
 
 
-const props = defineProps(["device"])
 const store = useStepFormStore()
 </script>
 <template>
   <div class="flex bg-blue-100 shadow-inner py-4">
     <div class="flex flex-col sm:flex-row gap-2 max-w-3xl mx-auto font-semibold">
-      <Link as="button" :href="route('public.repairs.brand', device.brand.slug)"
+      <Link as="button" :href="route('public.repairs.brand', store.device.brand.slug)"
         class="flex items-center cursor-pointer justify-between">
       <p>
         Select Device
@@ -36,7 +35,6 @@ const store = useStepFormStore()
         <p>
           Add Personal Information
         </p>
-        <IconChevronRight />
       </button>
     </div>
 

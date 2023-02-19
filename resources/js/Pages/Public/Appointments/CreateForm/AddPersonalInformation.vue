@@ -1,6 +1,7 @@
 <script setup>
 import { useStepFormStore } from '@/store/stepForm';
 import IconArrowForward from "~icons/mdi/arrow-right"
+import StepFormInput from "@/Components/StepFormInput.vue"
 
 const stepForm = useStepFormStore()
 </script>
@@ -16,36 +17,29 @@ const stepForm = useStepFormStore()
       <div class="flex flex-wrap flex-grow">
         <div class="p-2 w-1/2">
           <div class="relative">
-            <label for="name" class="leading-7 text-sm text-gray-600">First Name</label>
-            <input type="text" v-model="stepForm.form.first_name"
-              class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-pink-500 focus:bg-white focus:ring-2 focus:ring-pink-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
+            <StepFormInput label="First Name" v-model="stepForm.form.first_name"
+              :error="stepForm.form.errors.first_name" />
           </div>
         </div>
         <div class="p-2 w-1/2">
           <div class="relative">
-            <label for="name" class="leading-7 text-sm text-gray-600">Last Name</label>
-            <input type="text" v-model="stepForm.form.last_name"
-              class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-pink-500 focus:bg-white focus:ring-2 focus:ring-pink-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
+            <StepFormInput label="Last Name" v-model="stepForm.form.last_name" :error="stepForm.form.errors.last_name" />
           </div>
         </div>
         <div class="p-2 w-1/2">
           <div class="relative">
-            <label for="email" class="leading-7 text-sm text-gray-600">Email</label>
-            <input type="email" v-model="stepForm.form.email"
-              class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-pink-500 focus:bg-white focus:ring-2 focus:ring-pink-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
+            <StepFormInput label="Email" v-model="stepForm.form.email" :error="stepForm.form.errors.email" />
           </div>
         </div>
         <div class="p-2 w-1/2">
           <div class="relative">
-            <label for="phone" class="leading-7 text-sm text-gray-600">Phone</label>
-            <input type="text" v-model="stepForm.form.phone"
-              class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-pink-500 focus:bg-white focus:ring-2 focus:ring-pink-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
+            <StepFormInput label="Phone" v-model="stepForm.form.phone" :error="stepForm.form.errors.phone" />
           </div>
         </div>
         <div class="p-2 w-full">
           <div class="relative">
             <label for="message" class="leading-7 text-sm text-gray-600">Message</label>
-            <textarea id="message" name="message"
+            <textarea v-model="stepForm.form.message" id="message" name="message"
               class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 h-32 text-base outline-none text-gray-700 py-1 px-3 resize-none leading-6 transition-colors duration-200 ease-in-out"></textarea>
           </div>
         </div>
@@ -53,31 +47,24 @@ const stepForm = useStepFormStore()
       <div class="flex flex-col bg-white shadow-lg rounded-md px-4 py-2 max-w-fit md:max-w-none mx-auto">
         <div class="p-2">
           <div class="relative">
-            <label for="address" class="leading-7 text-sm text-gray-600">Address</label>
-            <input type="text" v-model="stepForm.form.address"
-              class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-pink-500 focus:bg-white focus:ring-2 focus:ring-pink-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
+            <StepFormInput label="Address" v-model="stepForm.form.address" :error="stepForm.form.errors.address" />
           </div>
         </div>
         <div class="p-2">
           <div class="relative">
-            <label for="city" class="leading-7 text-sm text-gray-600">City</label>
-            <input type="text" v-model="stepForm.form.city"
-              class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-pink-500 focus:bg-white focus:ring-2 focus:ring-pink-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
-          </div>
-        </div>
-        <div class="p-2">
-          <div class="relative">
-            <label for="city" class="leading-7 text-sm text-gray-600">Zip Code</label>
-            <input type="text" v-model="stepForm.form.zip"
-              class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-pink-500 focus:bg-white focus:ring-2 focus:ring-pink-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
-          </div>
-        </div>
+            <StepFormInput label="City" v-model="stepForm.form.city" :error="stepForm.form.errors.city" />
 
+          </div>
+        </div>
+        <div class="p-2">
+          <div class="relative">
+            <StepFormInput label="Zip Code" v-model="stepForm.form.zip_code" :error="stepForm.form.errors.zip_code" />
+          </div>
+        </div>
       </div>
-
     </div>
     <div class="mt-8">
-      <button class="btn--cta mx-auto md:mx-0 px-9 py-1 flex-grow flex items-center" @click.prevent="">Book
+      <button class="btn--cta mx-auto md:mx-0 px-9 py-1 flex-grow flex items-center" @click.prevent="stepForm.submit">Book
         <IconArrowForward />
       </button>
     </div>

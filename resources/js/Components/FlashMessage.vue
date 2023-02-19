@@ -9,7 +9,9 @@ watch(
   () => usePage().props.flash,
   () => {
     show.value = true;
-
+    setTimeout(() => {
+      show.value = false
+    }, 4000)
   },
   { deep: true }
 )
@@ -17,12 +19,10 @@ watch(
 </script>
 
 <template>
-
   <Transition enter-from-class="translate-x-60" enter-to-class="translate-x-0" leave-to-class="translate-x-60"
-    class="text-white absolute top-10 right-0 mx-2 transition-all ">
+    class="text-white fixed top-10 right-0 mx-2 transition-all ">
     <div v-if="show">
-      <div v-if="$page.props.flash.success"
-        class="mb-8 flex items-center justify-between bg-green-500 rounded max-w-3xl">
+      <div v-if="$page.props.flash.success" class="mb-8 flex items-center justify-between bg-green-500 rounded max-w-3xl">
         <div class="flex items-center">
           <i class="fas fa-check mx-2"></i>
           <div class="py-4 text-sm font-medium">

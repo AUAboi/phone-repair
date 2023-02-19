@@ -20,7 +20,6 @@ const submit = () => {
 }
 </script>
 <template>
-
   <Head title="Create Brand" />
   <PageHeader>Create Brand</PageHeader>
   <div class="py-12">

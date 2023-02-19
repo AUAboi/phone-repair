@@ -27,7 +27,7 @@ const startTime = ref({ hours: now.getHours(), minutes: 0 });
       <Datepicker required inline v-model="stepForm.form.appointment_time" auto-apply :is24="false" time-picker
         no-minutes-overlay :minutes-increment="30" :start-time="startTime">
         <template #am-pm-button="{ toggle, value }">
-          <button @click="toggle">{{ value }}</button>
+          <button @click.prevent="toggle">{{ value }}</button>
         </template>
       </Datepicker>
     </div>

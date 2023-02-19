@@ -2,15 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreAppointmentRequest;
 use App\Http\Resources\AppointmentResource;
-use App\Http\Resources\DeviceRepairResource;
 use App\Http\Resources\DeviceResource;
 use App\Models\Appointment;
 use App\Models\Device;
-use App\Models\DeviceRepair;
-use App\Models\Repair;
-use App\Services\DeviceService;
+use App\Services\AppointmentService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
 
 class AppointmentController extends Controller
@@ -46,5 +45,16 @@ class AppointmentController extends Controller
         return Inertia::render('Public/Appointments/Create', [
             'device' => new DeviceResource($device->load(['brand', 'repairs'])),
         ]);
+    }
+
+    public function store(Device $device,  StoreAppointmentRequest $request, AppointmentService $appointmentService)
+    {
+        try {
+            $appointmentService->createAppointment($device, $request->validated(), $request->user() ?? null);
+        } catch (\Throwable $th) {
+            return redirect()->back()->with('error', $th->getMessage());
+        }
+
+        return Redirect::route('public.home')->with('success', 'Appointment registered successfully');
     }
 }

@@ -1,14 +1,13 @@
 import useSweetAlert from "@/Composables/useSweetAlert"
 import { useForm } from "@inertiajs/vue3"
 import { defineStore } from "pinia"
-import { reactive, ref } from "vue"
+import { computed, ref } from "vue"
 
 export const useStepFormStore = defineStore('stepForm', () => {
   const { alertError } = useSweetAlert()
 
 
   const form = useForm({
-    device_id: null,
     repair_type: null,
     device_repair_id: null,
     appointment_date: null,
@@ -18,14 +17,14 @@ export const useStepFormStore = defineStore('stepForm', () => {
     email: null,
     city: null,
     phone: null,
-    zip: null,
+    zip_code: null,
     address: null,
     message: null
   })
 
   const transition = ref("next")
 
-  const device = reactive({})
+  const device = ref()
 
   const currentStep = ref(1)
 
@@ -59,7 +58,6 @@ export const useStepFormStore = defineStore('stepForm', () => {
   }
 
   const canGoToStep = (step) => {
-    return true
     if (step >= 2) {
       if (!form.device_repair_id) return false
     }
@@ -70,5 +68,20 @@ export const useStepFormStore = defineStore('stepForm', () => {
     return true
   }
 
-  return { form, device, currentStep, transition, stepForward, stepBackward, setStep, canGoToStep }
+
+  const submit = () => {
+    form.post(route('public.appointments.store', device.value.slug), {
+      preserveState: true
+    })
+  }
+
+  const errors = computed(() => {
+    let err = []
+    Object.keys(form.errors).forEach((key) => {
+      err.push(form.errors[key])
+    })
+    return err
+  })
+
+  return { form, device, currentStep, transition, errors, stepForward, stepBackward, setStep, canGoToStep, submit }
 })

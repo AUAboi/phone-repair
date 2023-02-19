@@ -3,12 +3,11 @@ import { useStepFormStore } from '@/store/stepForm';
 import { computed } from 'vue';
 
 
-const props = defineProps(["device"])
 
 const stepForm = useStepFormStore()
 
 const selectedRepair = computed(() => {
-  return props.device.device_repairs.filter((repair) => {
+  return stepForm.device.device_repairs.filter((repair) => {
     return repair.repair_type === stepForm.form.repair_type
   })[0].repairs
 });
@@ -22,13 +21,14 @@ const selectOption = (repair) => {
 <template>
   <div>
     <div class="text-center">
-      <h2 class="text-5xl text-pink-600 font-semibold">{{ device.brand.name }} {{ device.name }} Repair</h2>
+      <h2 class="text-5xl text-pink-600 font-semibold">{{ stepForm.device.brand.name }} {{ stepForm.device.name }} Repair
+      </h2>
     </div>
     <div class="my-6 flex gap-8 flex-wrap justify-center max-w-2xl mx-auto">
       <label :for="repair.repair_type"
-        class="flex flex-col justify-center items-center py-2 bg-blue-50 border-2 border-blue-300 rounded-md transition-colors duration-300 hover:border-fuchsia-700 w-32 drop-shadow-md shadow-gray-400 cursor-pointer"
-        v-for="repair in device.device_repairs" :key="repair.id"
-        :class="stepForm.form.repair_type === repair.repair_type ? 'border-fuchsia-700' : ''">
+        class="flex flex-col justify-center items-center py-2 bg-blue-50 border-2 border-blue-300 rounded-md transition-colors duration-300 hover:border-fuchsia-600 w-32 drop-shadow-md shadow-gray-400 cursor-pointer"
+        v-for="repair in stepForm.device.device_repairs" :key="repair.id"
+        :class="stepForm.form.repair_type === repair.repair_type ? 'border-fuchsia-600' : ''">
         <img class="w-5/6 mx-auto" :src="repair.image" :alt="repair.title">
         <p class="text-center">
           {{ repair.repair_type }}
@@ -61,5 +61,5 @@ const selectOption = (repair) => {
 
     </div>
 
-</div>
+  </div>
 </template>
