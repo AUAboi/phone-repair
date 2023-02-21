@@ -75,7 +75,9 @@ export const useStepFormStore = defineStore('stepForm', () => {
 
   const submit = () => {
     form.post(route('public.appointments.store', device.value.slug), {
-      preserveState: true
+      preserveState: true,
+      onSuccess: () => $reset(),
+
     })
   }
 
@@ -86,6 +88,12 @@ export const useStepFormStore = defineStore('stepForm', () => {
     })
     return err
   })
+
+
+  function $reset() {
+    form.reset()
+    currentStep.value = 1
+  }
 
   return { form, device, currentStep, transition, errors, stepForward, stepBackward, setStep, canGoToStep, submit }
 })

@@ -41,7 +41,7 @@ const selectOption = (repair) => {
     <div class="border-pink-500 border-2 py-8 px-6 max-w-4xl rounded-md mx-auto">
       <div class="flex flex-col sm:flex-row text-center">
         <div class="w-full space-y-4 px-2 py-8"
-          :class="(!index && selectedRepair.length - 1) ? 'border-pink-600 border-b-2 sm:border-r-2 sm:border-b-0' : ''"
+          :class="(index !== selectedRepair.length - 1) ? 'border-pink-600 border-b-2 sm:border-r-2 sm:border-b-0' : ''"
           v-for="(repair, index) in selectedRepair" :key="index">
           <h3 class="text-pink-600 font-bold text-4xl">
             {{ repair.title }}

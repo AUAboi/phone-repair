@@ -1,7 +1,6 @@
 <script setup>
 import { useStepFormStore } from '@/store/stepForm';
 import { Head } from '@inertiajs/vue3';
-import { computed } from 'vue';
 import AddPersonalInformation from './CreateForm/AddPersonalInformation.vue';
 import ChooseAppointment from './CreateForm/ChooseAppointment.vue';
 import ChooseRepairTypeStep from './CreateForm/ChooseRepairTypeStep.vue'
@@ -27,7 +26,9 @@ stepForm.device = props.device
       <li v-for="error in stepForm.form.errors">{{ error }}</li>
     </ul>
   </div>
+
   <form class="py-8 px-2 min-h-screen flex items-center">
+
     <transition class="w-full" :name="`slide-${stepForm.transition}`" mode="out-in">
       <ChooseRepairTypeStep v-if="stepForm.currentStep === 1" />
       <ChooseAppointment v-else-if="stepForm.currentStep === 2" />

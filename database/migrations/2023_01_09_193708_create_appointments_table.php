@@ -16,8 +16,8 @@ return new class extends Migration
         Schema::create('appointments', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->nullable()->constrained()->cascadeOnDelete();
-            $table->foreignId('device_id')->constrained();
-            $table->foreignId('device_repair_id')->constrained();
+            $table->foreignId('device_id');
+            $table->foreignId('device_repair_id');
             $table->string('first_name');
             $table->string('last_name');
             $table->string('message')->nullable();

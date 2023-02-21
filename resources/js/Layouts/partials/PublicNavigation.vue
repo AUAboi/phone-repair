@@ -3,6 +3,7 @@ import BaseMenu from './BaseMenu.vue';
 import ResponsiveMenu from './ResponsiveMenu.vue';
 import { ref } from 'vue';
 import { onClickOutside } from '@vueuse/core'
+import { router } from '@inertiajs/vue3'
 
 const props = defineProps({
   menuItems: {
@@ -16,6 +17,12 @@ const navButton = ref(null);
 onClickOutside(responsiveMenu, () => showNav.value = false, {
   ignore: [navButton]
 })
+
+
+router.on('success', (event) => {
+  showNav.value = false
+})
+
 
 </script>
 <template>
