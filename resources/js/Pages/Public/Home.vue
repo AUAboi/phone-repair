@@ -6,10 +6,9 @@ const props = defineProps(['brands'])
 </script>
 
 <template>
-
   <Head title="Welcome" />
   <section>
-    <Link href="/cat" class="banner block">
+    <Link :href="route('public.repairs')" class="banner block">
     </Link>
   </section>
   <section class="text-gray-600 body-font">
@@ -35,7 +34,7 @@ const props = defineProps(['brands'])
     </div>
   </section>
   <section class="bg-blue-200 py-12 px-2">
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-4 justify-items-center ">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-4 justify-items-center max-w-7xl mx-auto">
       <div class=" ">
         <div class="bg-white text-center h-64 w-64 pt-12 text-5xl rounded-md shadow-2xl mx-auto">
           <img class="w-24 mx-auto" src="images/CROSS.avif" alt="">
@@ -92,7 +91,6 @@ const props = defineProps(['brands'])
     </div>
 
   </section>
-
 </template>
 
 <style scoped>
@@ -100,7 +98,14 @@ const props = defineProps(['brands'])
   background-image: url("/images/slide_1.webp");
   background-size: cover;
   background-repeat: no-repeat;
-  padding: 10rem 2rem;
+  padding: 16rem 2rem;
+}
+
+@media screen and (max-width: 1380px) {
+  .banner {
+    padding: 10rem 2rem;
+  }
+
 }
 
 @media screen and (max-width: 860px) {

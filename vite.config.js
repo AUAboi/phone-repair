@@ -19,8 +19,8 @@ export default defineConfig({
         }),
         Icons({})
     ],
-    server: {
-        host: true
-    }
+    // server: {
+    //     host: true
+    // }
 
 });

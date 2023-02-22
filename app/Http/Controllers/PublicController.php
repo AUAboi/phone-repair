@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Http\Resources\BrandResource;
+use App\Http\Resources\DeviceResource;
 use App\Models\Brand;
+use App\Models\Device;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
@@ -18,7 +20,13 @@ class PublicController extends Controller
 
     public function repairs()
     {
-        return Inertia::render('Public/Repairs');
+        return Inertia::render(
+            'Public/Repairs',
+            [
+                'brands' => BrandResource::collection(Brand::all()),
+                'devices' => DeviceResource::collection(Device::all())
+            ]
+        );
     }
 
     public function repairBrand(Brand $brand)
