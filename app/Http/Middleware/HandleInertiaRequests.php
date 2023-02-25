@@ -33,7 +33,7 @@ class HandleInertiaRequests extends Middleware
      */
     public function share(Request $request): array
     {
-        $user = [];
+        $user = null;
         if ($request->user()) {
             $user = new UserResource($request->user());
         }

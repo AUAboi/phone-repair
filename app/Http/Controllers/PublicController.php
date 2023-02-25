@@ -6,7 +6,6 @@ use App\Http\Resources\BrandResource;
 use App\Http\Resources\DeviceResource;
 use App\Models\Brand;
 use App\Models\Device;
-use Illuminate\Http\Request;
 use Inertia\Inertia;
 
 class PublicController extends Controller

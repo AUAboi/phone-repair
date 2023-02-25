@@ -41,4 +41,8 @@ const startTime = ref({ hours: now.getHours(), minutes: 0 });
 .dp__select {
   @apply text-pink-500
 }
+
+.dp__overlay {
+  z-index: 99;
+}
 </style>

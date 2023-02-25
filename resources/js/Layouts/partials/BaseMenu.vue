@@ -1,4 +1,7 @@
 <script setup>
+import ActionButton from '@/Components/ActionButton.vue';
+import { Link } from '@inertiajs/vue3';
+
 
 const props = defineProps({
   menuItems: {
@@ -7,27 +10,39 @@ const props = defineProps({
 })
 </script>
 <template>
-  <nav
-    class="hidden sm:flex md:flex-wrap md:items-center text-base md:justify-center z-40 md:p-5 lg:px-1 font-semibold gap-4">
-    <div v-for="(item, index) in menuItems" :key="index">
-      <div v-if="item.children" class="group inline-block relative">
-        <a class=" hover:text-gray-900" :href="item.href">
-          <span class="flex items-center">{{ item.text }}
-            <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-              <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
-            </svg></span>
+  <nav class="hidden sm:flex items-center gap-10">
+    <div class="sm:flex md:flex-wrap md:items-center text-base md:justify-center z-40 md:p-5 lg:px-1 font-semibold gap-4">
 
-        </a>
-        <ul class="animated-menu absolute hidden text-gray-700 pt-1 bg-white shadow-md group-hover:grid">
-          <li v-for="(child, index) in item.children" :key="index">
-            <a class="rounded-t hover:bg-gray-400 hover:text-white py-2 px-4 block whitespace-nowrap"
-              :href="child.href">{{
-                child.text
-              }}</a>
-          </li>
-        </ul>
+      <div v-for="(item, index) in menuItems" :key="index">
+        <div v-if="item.children" class="group inline-block relative">
+          <a class=" hover:text-gray-900" :href="item.href">
+            <span class="flex items-center">{{ item.text }}
+              <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
+              </svg></span>
+
+          </a>
+          <ul class="animated-menu absolute hidden text-gray-700 pt-1 bg-white shadow-md group-hover:grid">
+            <li v-for="(child, index) in item.children" :key="index">
+              <a class="rounded-t hover:bg-gray-400 hover:text-white py-2 px-4 block whitespace-nowrap"
+                :href="child.href">{{
+                  child.text
+                }}</a>
+            </li>
+          </ul>
+        </div>
+        <a v-else class="hover:text-gray-900" :href="item.href">{{ item.text }}</a>
       </div>
-      <a v-else class="hover:text-gray-900" :href="item.href">{{ item.text }}</a>
+
+    </div>
+    <div v-if="$page.props.auth.user" class="space-x-2 mt-auto">
+      <Link as="button" method="post" class="btn--cta px-4 py-1" :href="route('logout')">Logout</Link>
+    </div>
+    <div v-else class="space-x-2 ">
+      <Link class="btn--cta px-4 py-1" :href="route('register')">Register</Link>
+      <Link
+        class="bg-transparent border-pink-500 border px-4 py-1 text-pink-500 hover:bg-pink-600 text-xl rounded-md transition ease-in-out duration-150"
+        :href="route('login')">Login</Link>
     </div>
   </nav>
 </template>
