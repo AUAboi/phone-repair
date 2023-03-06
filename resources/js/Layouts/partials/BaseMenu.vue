@@ -35,13 +35,13 @@ const props = defineProps({
       </div>
 
     </div>
-    <div v-if="$page.props.auth.user" class="space-x-2 mt-auto">
+    <div v-if="$page.props.auth.user" class="space-x-2">
       <Link as="button" method="post" class="btn--cta px-4 py-1" :href="route('logout')">Logout</Link>
     </div>
     <div v-else class="space-x-2 ">
       <Link class="btn--cta px-4 py-1" :href="route('register')">Register</Link>
       <Link
-        class="bg-transparent border-pink-500 border px-4 py-1 text-pink-500 hover:bg-pink-600 text-xl rounded-md transition ease-in-out duration-150"
+        class="bg-transparent border-pink-500 border px-4 py-1 text-pink-500 hover:bg-pink-600 hover:text-white text-xl rounded-md transition ease-in-out duration-150"
         :href="route('login')">Login</Link>
     </div>
   </nav>
