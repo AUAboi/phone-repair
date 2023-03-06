@@ -14,7 +14,7 @@ const props = defineProps({
     <div class="sm:flex md:flex-wrap md:items-center text-base md:justify-center z-40 md:p-5 lg:px-1 font-semibold gap-4">
 
       <div v-for="(item, index) in menuItems" :key="index">
-        <div v-if="item.children" class="group inline-block relative">
+        <div v-if="item.children && item.children.length" class="group inline-block relative">
           <a class=" hover:text-gray-900" :href="item.href">
             <span class="flex items-center">{{ item.text }}
               <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
