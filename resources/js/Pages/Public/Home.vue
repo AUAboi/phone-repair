@@ -79,9 +79,9 @@ const props = defineProps(['brands'])
   </section>
   <section class="my-14">
     <h2 class="text-pink-500 text-center text-4xl font-bold">Brands we offer</h2>
-    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3  gap-6 max-w-3xl mx-auto">
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 max-w-3xl mx-auto my-8">
       <div class="flex flex-col gap-4 items-center" v-for="brand in brands" :key="brand.id">
-        <img width="300" height="400" class="w-64" :src="brand.image" :alt="brand.name">
+        <img width="300" height="400" class="w-64 h-54" :src="brand.image" :alt="brand.name">
         <h4 class="text-4xl text-fuchsia-900">{{ brand.name }}</h4>
         <ActionButton :href="route('public.repairs.brand', brand.slug)">
           Book Now
