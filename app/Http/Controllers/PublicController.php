@@ -13,7 +13,7 @@ class PublicController extends Controller
     public function home()
     {
         return Inertia::render('Public/Home', [
-            'brands' => BrandResource::collection(Brand::all())
+            'brands' => BrandResource::collection(Brand::all()->load('devices'))
         ]);
     }
 
