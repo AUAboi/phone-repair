@@ -11,7 +11,7 @@ const props = defineProps({
 </script>
 <template>
   <nav class="hidden sm:flex items-center gap-10">
-    <div class="sm:flex md:flex-wrap md:items-center text-base md:justify-center z-40 md:p-5 lg:px-1 font-semibold gap-4">
+    <div class="sm:flex md:flex-wrap md:items-center text-xl md:justify-center z-40 md:p-5 lg:px-1 font-semibold gap-4">
 
       <div v-for="(item, index) in menuItems" :key="index">
         <div v-if="item.children && item.children.length" class="group inline-block relative">
@@ -36,13 +36,17 @@ const props = defineProps({
 
     </div>
     <div v-if="$page.props.auth.user" class="space-x-2">
-      <Link as="button" method="post" class="btn--cta px-4 py-1" :href="route('logout')">Logout</Link>
+      <Link as="button" method="post" class="btn-action text-white text-xl bg-red-500 hover:bg-red-700 px-4 py-1"
+        :href="route('logout')">Logout</Link>
     </div>
     <div v-else class="space-x-2 ">
-      <Link class="btn--cta px-4 py-1" :href="route('register')">Register</Link>
+      <Link class="btn-action text-white text-xl bg-red-500 hover:bg-red-700 px-4 py-1" :href="route('register')">Register
+      </Link>
       <Link
-        class="bg-transparent border-pink-500 border px-4 py-1 text-pink-500 hover:bg-pink-600 hover:text-white text-xl rounded-md transition ease-in-out duration-150"
-        :href="route('login')">Login</Link>
+        class="btn-action px-4 py-1 text-red-500 hover:text-white text-xl bg-transparent border border-red-500  before:bg-red-500"
+        :href="route('login')">
+      Login
+      </Link>
     </div>
   </nav>
 </template>

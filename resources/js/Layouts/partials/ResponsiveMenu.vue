@@ -38,9 +38,9 @@ const props = defineProps({
         <Link as="button" method="post" class="btn--cta px-4 py-1" :href="route('logout')">Logout</Link>
       </div>
       <div v-else class="space-x-2 mt-auto">
-        <Link class="btn--cta px-4 py-1" :href="route('register')">Register</Link>
+        <Link class="text-xl bg-red-500  px-4 py-1" :href="route('register')">Register</Link>
         <Link
-          class="bg-transparent border-pink-500 border px-4 py-1  hover:bg-pink-600 text-xl text-white rounded-md transition ease-in-out duration-150"
+          class="bg-transparent border-red-500 border px-4 py-1 hover:bg-red-600 text-xl text-white transition ease-in-out duration-150"
           :href="route('login')">Login</Link>
       </div>
     </nav>

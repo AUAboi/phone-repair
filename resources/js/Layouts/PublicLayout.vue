@@ -33,15 +33,19 @@ const menuItems = [
 
 </script>
 <template>
-  <header class="text-gray-600 pb-6 md:p-0 body-font sm:shadow-md ">
+  <header class="text-gray-600 pb-6 md:p-0 sm:shadow-md absolute w-full">
     <div
-      class="container mx-auto flex sm:p-5 lg:p-0 flex-col sm:flex-row sm:justify-between md:items-center bg-white bg-opacity-70 z-50">
-      <div class="flex sm:block justify-center mt-8 sm:mt-0">
-        <Link :href="route('public.home')">
-        <ApplicationLogo class="max-h-7" />
-        </Link>
+      class="sm:p-5 lg:p-0  bg-transparent h-full w-full md:bg-gray-200 md:rounded-md md:bg-clip-padding md:backdrop-filter md:backdrop-blur-sm md:bg-opacity-10 z-50">
+      <div class="container mx-auto flex flex-col sm:flex-row sm:justify-between md:items-center">
+
+        <div class="flex sm:block justify-center mt-8 sm:mt-0">
+          <Link :href="route('public.home')">
+          <ApplicationLogo class="max-h-7" />
+          </Link>
+        </div>
+        <PublicNavigation :menu-items="menuItems" />
       </div>
-      <PublicNavigation :menu-items="menuItems" />
+
     </div>
   </header>
   <main>

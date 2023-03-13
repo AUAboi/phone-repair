@@ -3,6 +3,7 @@
 @tailwind utilities;
 
 body {
+    font-family: "Jost", sans-serif;
     overflow-x: hidden;
 }
 
@@ -16,4 +17,38 @@ body {
 
 .btn--cta {
     @apply bg-pink-500 hover:bg-pink-600 text-xl text-white rounded-md transition ease-in-out duration-150;
+}
+
+.btn-action {
+    z-index: 1;
+    position: relative;
+    align-items: center;
+    display: inline-flex;
+    justify-content: center;
+}
+
+.btn-action:before {
+    background: #2e2e2e;
+}
+
+.btn-action:hover:before {
+    left: 0px;
+    width: 100%;
+    right: auto;
+}
+
+.btn-action:hover {
+    color: #ffffff;
+}
+
+.btn-action:before {
+    top: 0px;
+    width: 0px;
+    left: auto;
+    right: 0px;
+    z-index: -1;
+    bottom: 0px;
+    content: "";
+    position: absolute;
+    transition: all 0.3s ease-in-out;
 }

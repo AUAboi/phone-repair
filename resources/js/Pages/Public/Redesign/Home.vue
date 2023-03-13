@@ -1,6 +1,11 @@
 <script setup >
 import ActionButton from '@/Components/ActionButton.vue';
+import SectionHeading from '@/Components/SectionHeading.vue';
 import { Head, Link } from '@inertiajs/vue3';
+import IconEmail from "~icons/mdi/email"
+import 'vue3-carousel/dist/carousel.css'
+import { Carousel, Slide, Pagination, Navigation } from 'vue3-carousel'
+
 
 const props = defineProps(['brands'])
 </script>
@@ -77,45 +82,65 @@ const props = defineProps(['brands'])
       </div>
     </div>
   </section>
-  <section class="my-14">
-    <h2 class="text-pink-500 text-center text-4xl font-bold">Brands we offer</h2>
-    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 max-w-3xl mx-auto my-8">
-      <div class="flex flex-col gap-4 items-center" v-for="brand in brands" :key="brand.id">
-        <img width="300" height="400" class="w-64 h-56" :src="brand.image" :alt="brand.name">
-        <h4 class="text-4xl text-fuchsia-900">{{ brand.name }}</h4>
-        <ActionButton :href="route('public.repairs.brand', brand.slug)">
-          Book Now
-        </ActionButton>
+  <section class="max-w-7xl mx-auto mt-16">
+    <SectionHeading>
+      <template #heading>
+        Brands
+      </template>
+      <template #subheading>
+        List of the brands
+      </template>
+    </SectionHeading>
+    <Carousel :items-to-show="3">
+      <Slide class="w-80" v-for="brand in brands" :key="brand.id">
+        <div class="flex flex-col bg-gray-200 card">
+          <div class="h-80">
+            <img class="h-full w-full" :src="brand.image" :alt="brand.name">
+          </div>
+          <div class="px-2 py-1 text-start">
+            <h4 class="text-3xl uppercase font-semibold">{{ brand.name }}</h4>
+            <Link as="button" :href="route('public.repairs.brand', brand.slug)">
+            Book Now
+            </Link>
+          </div>
 
+        </div>
+      </Slide>
+      <template #addons>
+        <Navigation />
+        <Pagination />
+      </template>
+    </Carousel>
+  </section>
+  <section class="bg-gray-300 py-28">
+    <div class="container mx-auto">
+      <div class="flex justify-between items-center">
+        <div class="text-6xl font-semibold flex flex-shrink-0 flex-grow-0 basis-5/12">
+          <IconEmail />
+          <h2 class="">Join Our Newsletter Now
+          </h2>
+        </div>
+        <div class="h-full">
+          <input class="border-none w-64 h-14" type="text">
+          <ActionButton class="px-10 text-2xl ">SUBSCRIBE</ActionButton>
+        </div>
       </div>
     </div>
 
   </section>
 </template>
 
+
 <style scoped>
-.banner {
-  background-image: url("/images/slide_1.webp");
-  background-size: cover;
-  background-repeat: no-repeat;
-  padding: 16rem 2rem;
+.card:hover {
+  @apply cursor-pointer;
 }
 
-@media screen and (max-width: 1380px) {
-  .banner {
-    padding: 10rem 2rem;
-  }
-
+.card h4 {
+  @apply transition-colors duration-500;
 }
 
-@media screen and (max-width: 860px) {
-  .banner {
-    background-image: url("/images/slide_mobile_1.webp");
-    height: 400px;
-    background-position: 50% 50%;
-    padding: 0;
-    background-size: cover;
-
-  }
+.card:hover h4 {
+  @apply text-red-500;
 }
 </style>

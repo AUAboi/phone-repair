@@ -1,3 +1,3 @@
 <template>
-    <img src="/images/logo.avif" alt="">
+    <img src="/images/logo_10_1x.png" alt="">
 </template>
