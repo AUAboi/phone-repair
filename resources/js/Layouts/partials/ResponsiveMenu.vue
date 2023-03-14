@@ -35,10 +35,11 @@ const props = defineProps({
         <PublicNavLink v-else :href="item.href">{{ item.text }}</PublicNavLink>
       </div>
       <div v-if="$page.props.auth.user" class="space-x-2 mt-auto">
-        <Link as="button" method="post" class="btn--cta px-4 py-1" :href="route('logout')">Logout</Link>
+        <Link as="button" method="post" class="text-xl bg-red-500 hover:bg-red-600 px-4 py-1" :href="route('logout')">
+        Logout</Link>
       </div>
       <div v-else class="space-x-2 mt-auto">
-        <Link class="text-xl bg-red-500  px-4 py-1" :href="route('register')">Register</Link>
+        <Link class="text-xl bg-red-500 hover:bg-red-600 px-4 py-1" :href="route('register')">Register</Link>
         <Link
           class="bg-transparent border-red-500 border px-4 py-1 hover:bg-red-600 text-xl text-white transition ease-in-out duration-150"
           :href="route('login')">Login</Link>
