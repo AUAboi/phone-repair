@@ -13,50 +13,29 @@ const props = defineProps(['brands'])
     </Link>
   </section>
   <DeviceSection :brands="brands" />
-  <section class="bg-blue-200 py-12 px-2">
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-4 justify-items-center max-w-7xl mx-auto">
-      <div class=" ">
-        <div class="bg-white text-center h-64 w-64 pt-12 text-5xl rounded-md shadow-2xl mx-auto">
-          <img class="w-24 mx-auto" src="images/CROSS.avif" alt="">
-          <p class="font-bold">
-            Repair
+  <section class="bg-cover bg-no-repeat bg-center py-28" style="background-image: url('images/bg_06.jpg');">
+    <div class="container mx-auto">
+      <div class="grid grid-cols-1 md:grid-cols-2 items-center">
+        <div class="p-4">
+          <img src="images/img_01.png" alt="">
+        </div>
+        <div class="text-center md:text-start pl-8">
+          <h2 class="font-semibold text-4xl sm:text-6xl">Some featured text can come here</h2>
+          <p class="text-lg">
+            The main thing about dad jeans is that they come in a trendy wider straight leg, have a total slouchier fit
+            and
+            a high rise. Whereas the mom jean is a more fitted style with baggier and tapered legs.
           </p>
-          <div class="mt-7">
-            <ActionButton :href="route('public.repairs')">
-              Learn More
-            </ActionButton>
-          </div>
+          <Link class="btn-action text-white text-xl bg-red-600 px-8 py-4 mt-6" href="/somelink">
+          Some button
+          text
+          </Link>
         </div>
       </div>
-      <div class="">
-        <div class="bg-fuchsia-200 text-center h-64 w-64 pt-12 text-5xl rounded-md shadow-2xl mx-auto">
-          <img class="w-24 mx-auto" src="images/multi_cross.avif" alt="">
-          <p class="font-bold">
-            Replace
-          </p>
-          <div class="mt-7">
-            <ActionButton>
-              Learn More
-            </ActionButton>
-          </div>
-        </div>
-      </div>
-      <div class="">
-        <div style="background-color: #290A38;"
-          class="text-center h-64 w-64 pt-12 text-5xl rounded-md shadow-2xl mx-auto">
-          <img class="w-24 mx-auto" src="images/cross_bg.avif" alt="">
-          <p class="text-white font-bold">
-            Protect
-          </p>
-          <div class="mt-7">
-            <ActionButton>
-              Learn More
-            </ActionButton>
-          </div>
-        </div>
-      </div>
+
     </div>
   </section>
+
   <section class="my-14">
     <h2 class="text-pink-500 text-center text-4xl font-bold">Brands we offer</h2>
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 max-w-3xl mx-auto my-8">

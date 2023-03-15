@@ -28,6 +28,11 @@ class PublicController extends Controller
         );
     }
 
+    public function contact()
+    {
+        return Inertia::render('Public/Contact');
+    }
+
     public function repairBrand(Brand $brand)
     {
         return Inertia::render('Public/Brand', [

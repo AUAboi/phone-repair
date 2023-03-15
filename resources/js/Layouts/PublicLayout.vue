@@ -25,7 +25,7 @@ const menuItems = [
   },
   {
     text: "Contact",
-    href: route('dashboard')
+    href: route('public.contact')
   }
 ]
 

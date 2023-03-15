@@ -22,12 +22,11 @@ const props = defineProps({
               </svg></span>
 
           </a>
-          <ul class="animated-menu absolute hidden text-gray-700 pt-1 bg-white shadow-md group-hover:grid">
+          <ul class="animated-menu absolute hidden text-gray-700 bg-white shadow-md group-hover:grid text-lg">
             <li v-for="(child, index) in item.children" :key="index">
-              <a class="rounded-t hover:bg-gray-400 hover:text-white py-2 px-4 block whitespace-nowrap"
-                :href="child.href">{{
-                  child.text
-                }}</a>
+              <a class="hover:bg-gray-400 hover:text-white py-2 px-4 block whitespace-nowrap" :href="child.href">{{
+                child.text
+              }}</a>
             </li>
           </ul>
         </div>

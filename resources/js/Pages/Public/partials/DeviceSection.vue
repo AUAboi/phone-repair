@@ -1,8 +1,8 @@
 <script setup>
-import ActionButton from '@/Components/ActionButton.vue';
 import Modal from '@/Components/Modal.vue';
 import { Link } from '@inertiajs/vue3';
 import { ref, computed } from 'vue';
+import CloseCircle from "~icons/mdi/close-circle";
 
 const props = defineProps(["brands"])
 
@@ -53,6 +53,10 @@ const openDevice = (index) => {
     </div>
     <Modal max-width="7xl" :show="modalToggle" @close="modalToggle = false">
       <div class="flex flex-col md:flex-row justify-between relative">
+        <div @click="modalToggle = false"
+          class="text-red-400 cursor-pointer hover:text-red-500 text-3xl absolute top-2 right-2">
+          <CloseCircle />
+        </div>
         <div class="basis-4/5 flex-grow w-full h-full">
           <img class="mx-auto md:mx-0 max-h-96" :src="toggledDevice.image" :alt="toggledDevice.name">
         </div>

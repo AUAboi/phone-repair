@@ -34,6 +34,7 @@ Route::get('/test', function () {
 
 
 Route::get('/', [PublicController::class, 'home'])->name('public.home');
+Route::get('/contact-us', [PublicController::class, 'contact'])->name('public.contact');
 Route::get('/phone/repairs', [PublicController::class, 'repairs'])->name('public.repairs');
 Route::get('/all-repairs/{brand}', [PublicController::class, 'repairBrand'])->name('public.repairs.brand');
 
