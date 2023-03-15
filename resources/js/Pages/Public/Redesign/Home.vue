@@ -28,7 +28,7 @@ const props = defineProps(['brands'])
           tumeric truffaut hexagon try-hard chambray.</p>
         <div class="flex justify-center">
           <button
-            class="inline-flex text-white bg-pink-500 border-0 py-2 px-6 focus:outline-none hover:bg-pink-600 rounded text-lg">Button</button>
+            class="inline-flex text-white bg-red-600 border-0 py-2 px-6 focus:outline-none hover:bg-red-600 rounded text-lg">Button</button>
           <button
             class="ml-4 inline-flex text-gray-700 bg-gray-100 border-0 py-2 px-6 focus:outline-none hover:bg-gray-200 rounded text-lg">Button</button>
         </div>

@@ -86,7 +86,7 @@ watch(
   <div class="py-12">
     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
       <div class="flex items-center gap-4 md:gap-0 justify-between">
-        <SearchBox filterable class="w-full max-w-md my-4 mx-2 md:mx-0" v-model="form.search" @reset="reset">
+        <SearchBox class="w-full max-w-md my-4 mx-2 md:mx-0" v-model="form.search" @reset="reset">
           <div class="flex flex-col gap-4 text-center dark:text-white">
             <p v-for="(status, index) in statuses" :key="index" class="cursor-pointer capitalize"
               @click.prevent="form.status = status">{{ status }}</p>

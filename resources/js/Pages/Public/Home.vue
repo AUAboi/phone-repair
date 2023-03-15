@@ -17,7 +17,9 @@ const props = defineProps(['brands'])
     <div class="container mx-auto">
       <div class="grid grid-cols-1 md:grid-cols-2 items-center">
         <div class="p-4">
-          <img src="images/img_01.png" alt="">
+          <img target="_blank" style="height:400px;width:700px;border:solid 1px #000; background: #faaeae;" src=" #"
+            width="700" height="400" />
+
         </div>
         <div class="text-center md:text-start pl-8">
           <h2 class="font-semibold text-4xl sm:text-6xl">Some featured text can come here</h2>
@@ -37,7 +39,7 @@ const props = defineProps(['brands'])
   </section>
 
   <section class="my-14">
-    <h2 class="text-pink-500 text-center text-4xl font-bold">Brands we offer</h2>
+    <h2 class="text-red-600 text-center text-4xl font-bold">Brands we offer</h2>
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 max-w-3xl mx-auto my-8">
       <div class="flex flex-col gap-4 items-center" v-for="brand in brands" :key="brand.id">
         <img width="300" height="400" class="w-64 h-56" :src="brand.image" :alt="brand.name">

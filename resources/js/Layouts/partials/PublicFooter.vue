@@ -1,5 +1,7 @@
 <script setup>
 import ApplicationLogo from '@/Components/ApplicationLogo.vue';
+import { Link } from '@inertiajs/vue3';
+import chunk from "lodash/chunk"
 </script>
 <template>
   <footer class="text-white bg-neutral-900 body-font">
@@ -12,81 +14,23 @@ import ApplicationLogo from '@/Components/ApplicationLogo.vue';
         <p class="mt-2 text-sm text-white">Air plant banjo lyft occupy retro adaptogen indego</p>
       </div>
       <div class="flex-grow flex flex-wrap md:pr-20 -mb-10 md:text-left text-center order-first">
-        <div class="lg:w-1/4 md:w-1/2 w-full px-4">
-          <h2 class="title-font font-medium text-red-500 tracking-widest text-sm mb-3">CATEGORIES</h2>
+        <div class="lg:w-1/4 md:w-1/2 w-full px-4" v-for="(chunk, index) in chunk($page.props.navigation.devices, 4)"
+          :key="index">
+          <h2 class="title-font font-medium text-red-500 tracking-widest text-sm mb-3">DEVICES</h2>
           <nav class="list-none mb-10">
-            <li>
-              <a class="text-white hover:text-white">First Link</a>
-            </li>
-            <li>
-              <a class="text-white hover:text-white">Second Link</a>
-            </li>
-            <li>
-              <a class="text-white hover:text-white">Third Link</a>
-            </li>
-            <li>
-              <a class="text-white hover:text-white">Fourth Link</a>
+            <li v-for="(device, deviceIndex) in chunk" :key="deviceIndex">
+              <Link :href="route('public.appointments.create', device.slug)" class="text-white hover:text-white">{{
+                device.name }}</Link>
             </li>
           </nav>
         </div>
-        <div class="lg:w-1/4 md:w-1/2 w-full px-4">
-          <h2 class="title-font font-medium text-red-500 tracking-widest text-sm mb-3">CATEGORIES</h2>
-          <nav class="list-none mb-10">
-            <li>
-              <a class="text-white hover:text-white">First Link</a>
-            </li>
-            <li>
-              <a class="text-white hover:text-white">Second Link</a>
-            </li>
-            <li>
-              <a class="text-white hover:text-white">Third Link</a>
-            </li>
-            <li>
-              <a class="text-white hover:text-white">Fourth Link</a>
-            </li>
-          </nav>
-        </div>
-        <div class="lg:w-1/4 md:w-1/2 w-full px-4">
-          <h2 class="title-font font-medium text-red-500 tracking-widest text-sm mb-3">CATEGORIES</h2>
-          <nav class="list-none mb-10">
-            <li>
-              <a class="text-white hover:text-white">First Link</a>
-            </li>
-            <li>
-              <a class="text-white hover:text-white">Second Link</a>
-            </li>
-            <li>
-              <a class="text-white hover:text-white">Third Link</a>
-            </li>
-            <li>
-              <a class="text-white hover:text-white">Fourth Link</a>
-            </li>
-          </nav>
-        </div>
-        <div class="lg:w-1/4 md:w-1/2 w-full px-4">
-          <h2 class="title-font font-medium text-red-500 tracking-widest text-sm mb-3">CATEGORIES</h2>
-          <nav class="list-none mb-10">
-            <li>
-              <a class="text-white hover:text-white">First Link</a>
-            </li>
-            <li>
-              <a class="text-white hover:text-white">Second Link</a>
-            </li>
-            <li>
-              <a class="text-white hover:text-white">Third Link</a>
-            </li>
-            <li>
-              <a class="text-white hover:text-white">Fourth Link</a>
-            </li>
-          </nav>
-        </div>
+
       </div>
     </div>
     <div class="bg-black">
       <div class="container mx-auto py-4 px-5 flex flex-wrap flex-col sm:flex-row">
-        <p class="text-gray-500 text-sm text-center sm:text-left">© 2020 Tailblocks —
-          <a href="https://twitter.com/knyttneve" rel="noopener noreferrer" class="text-white ml-1"
-            target="_blank">@knyttneve</a>
+        <p class="text-gray-500 text-sm text-center sm:text-left">© 2023 AUA —
+          <a href="#" rel="noopener noreferrer" class="text-white ml-1" target="_blank">@AUA</a>
         </p>
         <span class="inline-flex sm:ml-auto sm:mt-0 mt-2 justify-center sm:justify-start">
           <a class="text-gray-500">

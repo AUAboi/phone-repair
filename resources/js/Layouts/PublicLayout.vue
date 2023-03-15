@@ -19,10 +19,7 @@ const menuItems = [
         }
       })
   },
-  {
-    text: "About",
-    href: "/about"
-  },
+
   {
     text: "Contact",
     href: route('public.contact')

@@ -21,7 +21,7 @@ body {
 }
 
 .btn--cta {
-    @apply bg-pink-500 hover:bg-pink-600 text-xl text-white rounded-md transition ease-in-out duration-150;
+    @apply bg-red-600 hover:bg-red-600 text-xl text-white rounded-md transition ease-in-out duration-150;
 }
 
 .btn-action {

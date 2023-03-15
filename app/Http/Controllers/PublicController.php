@@ -22,7 +22,7 @@ class PublicController extends Controller
         return Inertia::render(
             'Public/Repairs',
             [
-                'brands' => BrandResource::collection(Brand::all()),
+                'brands' => BrandResource::collection(Brand::all()->load('devices')),
                 'devices' => DeviceResource::collection(Device::all())
             ]
         );

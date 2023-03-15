@@ -43,6 +43,6 @@ const store = useStepFormStore()
 
 <style scoped>
 .active {
-  @apply text-pink-500
+  @apply text-red-600
 }
 </style>

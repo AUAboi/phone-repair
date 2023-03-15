@@ -16,7 +16,7 @@ const startTime = ref({ hours: now.getHours(), minutes: 0 });
 <template>
   <div>
     <div class="text-center my-12">
-      <h2 class="text-5xl text-pink-600 font-semibold py-4">Choose Appointment Time</h2>
+      <h2 class="text-5xl text-red-600 font-semibold py-4">Choose Appointment Time</h2>
       <p class="text-xl font-semibold tracking-wide">
         Visit us in store
       </p>
@@ -32,14 +32,15 @@ const startTime = ref({ hours: now.getHours(), minutes: 0 });
       </Datepicker>
     </div>
     <div class="text-center my-8">
-      <button class="btn--cta px-9 py-1 " @click.prevent="stepForm.setStep(3)">Lets Go</button>
+      <button class="btn-action bg-red-500 text-white before:bg-black px-9 py-1 text-xl font-bold"
+        @click.prevent="stepForm.setStep(3)">Lets Go</button>
     </div>
   </div>
 </template>
 
 <style>
 .dp__select {
-  @apply text-pink-500
+  @apply text-red-600
 }
 
 .dp__overlay {

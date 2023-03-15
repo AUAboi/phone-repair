@@ -10,30 +10,30 @@ defineProps({
 </script>
 
 <template>
-  <Link as="button" :href="href"
-    class="bg-pink-500 hover:bg-pink-600 text-xl text-white px-6 py-1 rounded-md transition ease-in-out duration-150">
+  <Link as="button" :href="href" class="btn-action">
   <slot />
   </Link>
   <!-- <Link as="button" class="btn-action uppercase" :href="href">
-          <slot />
-          </Link> -->
+                          <slot />
+                          </Link> -->
 </template>
 
 <style scoped>
 .btn-action {
   background-color: #e52929;
   z-index: 1;
-  height: 60px;
+  height: 45px;
   line-height: 1;
   color: #ffffff;
   font-size: 14px;
   font-weight: 700;
-  padding: 10px 35px;
+  padding: 10px 20px;
   position: relative;
   align-items: center;
   display: inline-flex;
   letter-spacing: 0.5px;
   justify-content: center;
+  font-size: 1.3rem;
 }
 
 .btn-action:before {

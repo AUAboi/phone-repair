@@ -19,7 +19,7 @@ stepForm.device = props.device
 
 <template>
   <Head :title="`Book ${props.device.name} repair`" />
-  <FormPaginator />
+  <FormPaginator class="pt-40" />
   <div v-if="stepForm.form.hasErrors" class="ml-6 text-red-600 md:max-w-sm md:mx-auto">
     <h4 class="text-lg">There are some errors:</h4>
     <ul class="list-disc ml-8">

@@ -30,7 +30,7 @@ const openDevice = (index) => {
   <section>
     <div class="container mx-auto px-5 py-24">
       <h4 class="text-6xl text-center font-bold">Brands We Offer</h4>
-      <ul class="flex justify-center mt-8 gap-6">
+      <ul class="flex flex-wrap justify-center mt-8 gap-6">
         <li class="font-bold relative text-lg list-click cursor-pointer" v-for="(brand, index) in brands" :key="brand.id"
           :class="{ active: currentActive === index }">
           <a href="#" @click.prevent="currentActive = index">
