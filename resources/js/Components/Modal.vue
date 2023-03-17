@@ -10,6 +10,10 @@ const props = defineProps({
         type: String,
         default: '2xl',
     },
+    maxHeight: {
+        type: String,
+        default: 'full',
+    },
     closeable: {
         type: Boolean,
         default: true,
@@ -58,6 +62,11 @@ const maxWidthClass = computed(() => {
         '7xl': 'sm:max-w-7xl'
     }[props.maxWidth];
 });
+const maxHeightClass = computed(() => {
+    return {
+        full: 'max-h-full'
+    }[props.maxHeight];
+});
 </script>
 
 <template>
@@ -79,7 +88,7 @@ const maxWidthClass = computed(() => {
                     leave-to-class="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95">
                     <div v-show="show"
                         class="mb-6 bg-white  dark:bg-gray-800 rounded-lg overflow-hidden shadow-xl transform transition-all sm:w-full sm:mx-auto"
-                        :class="maxWidthClass">
+                        :class="maxHeightClass">
                         <slot v-if="show" />
                     </div>
                 </transition>

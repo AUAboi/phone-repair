@@ -9,6 +9,7 @@ const props = defineProps(['brands'])
 const settings = {
   itemsToShow: 1,
   snapAlign: 'center',
+
 }
 
 const breakpoints = {
@@ -63,13 +64,13 @@ const breakpoints = {
         <div v-if="brand.devices.length">
           <h3 class="text-4xl text-center md:text-start font-bold pb-6">{{ brand.name }}</h3>
 
-          <Carousel :breakpoints="breakpoints" :settings="settings">
+          <Carousel autoplay :breakpoints="breakpoints" :settings="settings">
 
             <Slide class="w-80" v-for="device in brand.devices" :key="device.id">
               <div class="flex flex-col gap-4 items-center">
                 <img width="300" height="400" class="w-64 h-56" :src="device.image" :alt="device.name">
                 <h4 class="text-4xl text-fuchsia-900">{{ device.name }}</h4>
-                <ActionButton :href="route('public.repairs.brand', device.slug)">
+                <ActionButton :href="route('public.appointments.create', device.slug)">
                   Book Now
                 </ActionButton>
 
@@ -78,7 +79,7 @@ const breakpoints = {
 
             <template #addons>
               <Navigation />
-              <Pagination v-if="brand.devices.length > 3" />
+              <Pagination />
             </template>
           </Carousel>
         </div>
@@ -93,5 +94,9 @@ const breakpoints = {
 .carousel__prev,
 .carousel__next {
   display: none;
+}
+
+.carousel__pagination-button--active::after {
+  @apply bg-red-500;
 }
 </style>

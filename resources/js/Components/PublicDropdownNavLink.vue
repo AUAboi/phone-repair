@@ -1,10 +1,10 @@
 <script setup>
+import { Link } from '@inertiajs/vue3';
 import { onClickOutside } from '@vueuse/core';
 import { ref } from 'vue';
 import IconPlus from '~icons/mdi/plus';
 
 const props = defineProps({
-
   href: String
 })
 
@@ -20,9 +20,9 @@ onClickOutside(dropdown, () => toggle.value = false, {
 
 <template>
   <div ref="dropdown" class="flex justify-between flex-wrap">
-    <a class="flex-grow w-3/4" :href="href">
-      <slot name="link" />
-    </a>
+    <Link class="flex-grow w-3/4" :href="href">
+    <slot name="link" />
+    </Link>
     <button class="flex-grow text-2xl cursor-pointer" ref="toggleButton" @click="toggle = !toggle">
       <IconPlus />
 

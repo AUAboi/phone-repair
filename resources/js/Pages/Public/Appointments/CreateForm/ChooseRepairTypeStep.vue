@@ -26,7 +26,7 @@ const selectOption = (repair) => {
     </div>
     <div class="my-6 flex gap-8 flex-wrap justify-center max-w-2xl mx-auto">
       <label :for="repair.repair_type"
-        class="flex flex-col justify-center items-center py-2 bg-gray-50 border-2 border-blue-300 rounded-md transition-colors duration-300 hover:border-fuchsia-600 w-32 drop-shadow-md shadow-gray-400 cursor-pointer"
+        class="flex flex-col justify-center items-center py-2 bg-gray-50 border-2 border-blue-300 rounded-md transition-colors duration-300 hover:border-4 w-32 drop-shadow-md shadow-gray-400 cursor-pointer"
         v-for="repair in stepForm.device.device_repairs" :key="repair.id"
         :class="stepForm.form.repair_type === repair.repair_type ? 'border-red-600' : ''">
         <img class="w-5/6 mx-auto" :src="repair.image" :alt="repair.title">

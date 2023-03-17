@@ -38,21 +38,20 @@ const openDevice = (index) => {
           </a>
         </li>
       </ul>
-      <div class="flex flex-wrap justify-between mt-9 gap-y-12 max-w-6xl mx-auto">
+      <div class="flex flex-wrap justify-center md:justify-between mt-9 gap-y-12 max-w-6xl mx-auto">
         <div class="flex-shrink-0 flex-grow-0 basis-full sm:basis-1/2 md:basis-1/3 " v-for="(device, index) in devices"
           :key="index">
           <div @click="openDevice(index)" class="flex flex-col justify-between h-full text-center">
             <div>
-              <img class="mx-auto" :src="device.image" alt="">
-
+              <img class="mx-auto max-w-xs" :src="device.image" alt="">
             </div>
             <h4 class="font-semibold text-xl">{{ device.name }}</h4>
           </div>
         </div>
       </div>
     </div>
-    <Modal max-width="7xl" :show="modalToggle" @close="modalToggle = false">
-      <div class="flex flex-col md:flex-row justify-between relative">
+    <Modal class="h-full" max-width="7xl" :show="modalToggle" @close="modalToggle = false">
+      <div class="flex flex-col md:flex-row justify-between relative ">
         <div @click="modalToggle = false"
           class="text-red-400 cursor-pointer hover:text-red-500 text-3xl absolute top-2 right-2">
           <CloseCircle />

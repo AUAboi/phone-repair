@@ -15,22 +15,22 @@ const props = defineProps({
 
       <div v-for="(item, index) in menuItems" :key="index">
         <div v-if="item.children && item.children.length" class="group inline-block relative">
-          <a class=" hover:text-gray-900" :href="item.href">
-            <span class="flex items-center">{{ item.text }}
-              <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
-              </svg></span>
+          <Link class=" hover:text-gray-900" :href="item.href">
+          <span class="flex items-center">{{ item.text }}
+            <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+              <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
+            </svg></span>
 
-          </a>
+          </Link>
           <ul class="animated-menu absolute hidden text-gray-700 bg-white shadow-md group-hover:grid text-lg">
             <li v-for="(child, index) in item.children" :key="index">
-              <a class="hover:bg-gray-400 hover:text-white py-2 px-4 block whitespace-nowrap" :href="child.href">{{
+              <Link class="hover:bg-gray-400 hover:text-white py-2 px-4 block whitespace-nowrap" :href="child.href">{{
                 child.text
-              }}</a>
+              }}</Link>
             </li>
           </ul>
         </div>
-        <a v-else class="hover:text-gray-900" :href="item.href">{{ item.text }}</a>
+        <Link v-else class="hover:text-gray-900" :href="item.href">{{ item.text }}</Link>
       </div>
 
     </div>

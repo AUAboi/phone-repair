@@ -22,7 +22,7 @@ const props = defineProps({
     <nav v-if="show"
       class="sm:hidden px-6 py-16 fixed h-full w-80 text-white text-lg bg-gray-800 flex flex-col gap-4 transition-all duration-500">
       <div v-for="(item, index) in menuItems" :key="index">
-        <PublicDropdownNavLink v-if="item.children && item.children.length">
+        <PublicDropdownNavLink :href="item.href" v-if="item.children && item.children.length">
           <template #link>
             {{ item.text }}
           </template>
