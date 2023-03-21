@@ -20,6 +20,7 @@
         "vue": "^3.2.41"
     },
     "dependencies": {
+        "@fontsource/jost": "^4.5.13",
         "@inertiajs/vue3": "^1.0.0",
         "@vuepic/vue-datepicker": "^3.6.8",
         "@vueuse/core": "^9.10.0",

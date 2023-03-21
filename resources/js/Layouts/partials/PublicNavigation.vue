@@ -28,8 +28,8 @@ router.on('success', (event) => {
 <template>
   <BaseMenu :menu-items="menuItems" />
   <ResponsiveMenu :menu-items="menuItems" ref="responsiveMenu" :show="showNav" />
-  <div ref="navButton" @click="showNav = !showNav"
-    class="nav-button fixed sm:hidden rounded-md right-4 top-8 md:right-10 md:top-6 cursor-pointer transition-all ease-in-out duration-500 ">
+  <div ref="navButton" @click="showNav = !showNav" :class="{ show: showNav }"
+    class="nav-button fixed sm:hidden rounded-md right-3 top-10 md:right-10 md:top-6 cursor-pointer transition-all ease-in-out duration-500 ">
     <div id="line1" class="bg-red-500 btn-line transition-all ease-out"></div>
     <div id="line2" class="bg-red-500 btn-line transition-all ease-out"></div>
     <div id="line3" class="bg-red-500 btn-line transition-all ease-out"></div>
@@ -41,6 +41,19 @@ router.on('success', (event) => {
   margin: 0.25rem;
   height: 0.25rem;
   width: 1.5rem;
+}
+
+.nav-button.show .btn-line:nth-child(1) {
+  transform: translateY(0.125rem) translateX(0.125rem) rotate(40deg);
+}
+
+.nav-button.show .btn-line:nth-child(2) {
+  display: none;
+}
+
+.nav-button.show .btn-line:nth-child(3) {
+
+  transform: translateY(-0.375rem) translateX(0.125rem) rotate(-40deg);
 }
 
 .nav-button {

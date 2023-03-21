@@ -7,6 +7,12 @@ body {
     overflow-x: hidden;
 }
 
+@supports (font-variation-settings: normal) {
+    body {
+        font-family: "JostVariable";
+    }
+}
+
 ::selection {
     color: #ffffff;
     background-color: #ce0b2b;

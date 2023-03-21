@@ -4,6 +4,7 @@ import { Head, Link } from '@inertiajs/vue3';
 import DeviceSection from './partials/DeviceSection.vue';
 
 const props = defineProps(['brands'])
+
 </script>
 
 <template>
@@ -56,7 +57,7 @@ const props = defineProps(['brands'])
 
 <style scoped>
 .banner {
-  background-image: url("/images/slide_1.webp");
+  background-image: url("/images/cover-web-01.jpg");
   background-size: cover;
   background-repeat: no-repeat;
   padding: 16rem 2rem;
@@ -73,7 +74,7 @@ const props = defineProps(['brands'])
 
 @media screen and (max-width: 860px) {
   .banner {
-    background-image: url("/images/slide_mobile_1.webp");
+    background-image: url("/images/cover-web-01.jpg");
     height: 400px;
     background-position: 50% 50%;
     padding: 0;
