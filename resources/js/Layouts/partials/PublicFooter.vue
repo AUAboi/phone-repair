@@ -4,17 +4,29 @@ import { Link } from '@inertiajs/vue3';
 import chunk from "lodash/chunk"
 </script>
 <template>
-  <footer class="text-white bg-neutral-900 body-font">
+  <footer class="text-gray-400 bg-neutral-900 body-font">
     <div
       class="container px-5 py-24 mx-auto flex md:items-center lg:items-start md:flex-row md:flex-nowrap flex-wrap flex-col">
-      <div class="w-64 flex-shrink-0 md:mx-0 mx-auto text-center md:text-left md:mt-0 mt-10">
-        <Link :href="route('public.home')"
-          class="flex title-font font-medium items-center md:justify-start justify-center text-gray-900">
-        <ApplicationLogo />
-        </Link>
-        <p class="mt-2 text-sm text-white">Air plant banjo lyft occupy retro adaptogen indego</p>
+      <div>
+        <div class="w-64 flex-shrink-0 md:mx-0 mx-auto text-center md:text-left md:mt-0 mt-10">
+          <Link :href="route('public.home')"
+            class="flex title-font font-medium items-center md:justify-start justify-center text-gray-900">
+          <ApplicationLogo />
+          </Link>
+          <p class="mt-2 text-sm text-center uppercase">We buy and sell iphones, ipads, tablets and laptops</p>
+        </div>
+        <div class="mt-4 hidden md:block">
+          <ul>
+            <li>Email: <a href="mailto:info@fonemart.com" class="text-white">info@fonemart.com</a></li>
+            <li>Phone: <a href="tel:+44 1243 862501" class="text-white">+44 1243 862501</a></li>
+            <li>Address <a href="https://goo.gl/maps/uEgWVsT7hMQ7Tipq9" class="text-white" target="_blank"
+                rel="noopener noreferrer">16 The
+                Arcade, Bognor Regis</a></li>
+          </ul>
+        </div>
       </div>
-      <div class="flex-grow flex flex-wrap md:pr-20 -mb-10 md:text-left text-center order-first">
+
+      <div class="flex-grow flex flex-wrap md:pl-20 -mb-10 md:mt-0 mt-10 md:text-left text-center">
         <div class="lg:w-1/4 md:w-1/2 w-full px-4" v-for="(chunk, index) in chunk($page.props.navigation.devices, 4)"
           :key="index">
           <h2 class="title-font font-medium text-red-500 tracking-widest text-sm mb-3">DEVICES</h2>
@@ -25,22 +37,30 @@ import chunk from "lodash/chunk"
             </li>
           </nav>
         </div>
-
       </div>
+
     </div>
-    <div class="bg-black">
+    <div class="mt-4 text-center mb-16 md:hidden">
+      <ul class="space-y-4">
+        <li>Email: <a href="mailto:info@fonemart.com" class="text-white">info@fonemart.com</a></li>
+        <li>Phone: <a href="tel:+44 1243 862501" class="text-white">+44 1243 862501</a></li>
+        <li>Address <a href="https://goo.gl/maps/uEgWVsT7hMQ7Tipq9" class="text-white" target="_blank"
+            rel="noopener noreferrer">16 The
+            Arcade, Bognor Regis</a></li>
+      </ul>
+    </div>
+    <div class="bg-black bg-opacity-75">
       <div class="container mx-auto py-4 px-5 flex flex-wrap flex-col sm:flex-row">
-        <p class="text-gray-500 text-sm text-center sm:text-left">© 2023 AUA —
-          <a href="#" rel="noopener noreferrer" class="text-white ml-1" target="_blank">@AUA</a>
+        <p class="text-gray-400 text-sm text-center sm:text-left">© 2023 Fonemart
         </p>
         <span class="inline-flex sm:ml-auto sm:mt-0 mt-2 justify-center sm:justify-start">
-          <a class="text-gray-500">
+          <a href="https://www.facebook.com/fonemartBR" target="_blank" class="text-gray-400">
             <svg fill="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-5 h-5"
               viewBox="0 0 24 24">
               <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"></path>
             </svg>
           </a>
-          <a class="ml-3 text-gray-500">
+          <a class="ml-3 text-gray-400">
             <svg fill="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-5 h-5"
               viewBox="0 0 24 24">
               <path
@@ -48,14 +68,14 @@ import chunk from "lodash/chunk"
               </path>
             </svg>
           </a>
-          <a class="ml-3 text-gray-500">
+          <a class="ml-3 text-gray-400">
             <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
               class="w-5 h-5" viewBox="0 0 24 24">
               <rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect>
               <path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37zm1.5-4.87h.01"></path>
             </svg>
           </a>
-          <a class="ml-3 text-gray-500">
+          <a class="ml-3 text-gray-400">
             <svg fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="0"
               class="w-5 h-5" viewBox="0 0 24 24">
               <path stroke="none"

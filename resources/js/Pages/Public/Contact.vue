@@ -10,8 +10,10 @@ import EmailOutline from "~icons/mdi/email-outline"
   </section>
   <section class="text-gray-600 body-font">
     <div style="height: 50vh;">
-      <iframe width="100%" height="100%" frameborder="0" marginheight="0" marginwidth="0" title="map" scrolling="no"
-        src="https://maps.google.com/maps?width=100%&amp;height=600&amp;hl=en&amp;q=%C4%B0zmir+(My%20Business%20Name)&amp;ie=UTF8&amp;t=&amp;z=14&amp;iwloc=B&amp;output=embed"></iframe>
+      <iframe
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1881891.6869183437!2d0.5950476238939963!3d49.35176509216799!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4875ac419aa2315b%3A0xb94ad6f3462e8815!2sFONE%20MART!5e0!3m2!1sen!2s!4v1679419445823!5m2!1sen!2s"
+        width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"></iframe>
     </div>
   </section>
   <section class="py-24">
@@ -21,24 +23,25 @@ import EmailOutline from "~icons/mdi/email-outline"
         <p class="text-2xl">
           If you are interested in working with us, please get in touch.
         </p>
-        <div class="text-2xl space-y-8">
+        <div class="text-2xl space-y-2 mt-6">
           <div class="flex items-center gap-4">
             <div class="text-red-600 text-5xl">
               <MapMarkerOutline />
             </div>
-            <p>This is address location</p>
+            <p class="text-lg">16 The
+              Arcade, Bognor Regis</p>
           </div>
           <div class="flex items-center gap-4">
             <div class="text-red-600 text-5xl">
               <PhoneInTalkOutline />
             </div>
-            <p>8 800 567.890.11 - Central Office</p>
+            <p class="text-lg">+44 1243 862501</p>
           </div>
           <div class="flex items-center gap-4">
             <div class="text-red-600 text-5xl">
               <EmailOutline />
             </div>
-            <p>This is address location</p>
+            <p class="text-lg">info@fonemart.com</p>
           </div>
         </div>
       </div>
