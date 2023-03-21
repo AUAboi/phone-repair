@@ -8,12 +8,13 @@ use App\Http\Controllers\DeviceController;
 use App\Http\Controllers\RepairController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\AppointmentController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DeviceRepairController;
 
 Route::middleware(['auth', 'admin'])->group(function () {
-  Route::get('/dashboard', function () {
-    return Inertia::render('Admin/Dashboard');
-  })->name('dashboard');
+  // Route::get('/dashboard', function () {
+  //   return Inertia::render('Admin/Dashboard');
+  // })->name('dashboard');
 
   Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
   Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
@@ -32,6 +33,14 @@ Route::middleware(['auth', 'admin'])->group(function () {
   Route::get('/devices/{device}', [DeviceController::class, 'edit'])->name('devices.edit');
   Route::put('/devices/{device}', [DeviceController::class, 'update'])->name('devices.update');
   Route::delete('/devices/{device}/delete', [DeviceController::class, 'destroy'])->name('devices.destroy');
+
+  Route::get('/categories', [CategoryController::class, 'index'])->name('categories.index');
+  Route::get('/categories/create', [CategoryController::class, 'create'])->name('categories.create');
+  Route::post('/categories/create', [CategoryController::class, 'store'])->name('categories.store');
+  Route::get('/categories/{category}', [CategoryController::class, 'edit'])->name('categories.edit');
+  Route::put('/categories/{category}', [CategoryController::class, 'update'])->name('categories.update');
+
+
 
   Route::get('/repairs', [RepairController::class, 'index'])->name('repairs.index');
   Route::get('/repairs/create', [RepairController::class, 'create'])->name('repairs.create');
