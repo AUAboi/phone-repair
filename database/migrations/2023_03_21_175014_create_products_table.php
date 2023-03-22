@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('name');
             $table->foreignId('category_id')->constrained()->cascadeOnDelete();
             $table->bigInteger('price');
-            $table->text('body');
+            $table->longText('body');
             $table->timestamps();
         });
     }

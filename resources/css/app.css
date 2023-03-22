@@ -3,63 +3,86 @@
 @tailwind utilities;
 
 body {
-    font-family: "Jost", sans-serif;
-    overflow-x: hidden;
+  font-family: "Jost", sans-serif;
+  overflow-x: hidden;
 }
 
 @supports (font-variation-settings: normal) {
-    body {
-        font-family: "JostVariable";
-    }
+  body {
+    font-family: "JostVariable";
+  }
 }
 
 ::selection {
-    color: #ffffff;
-    background-color: #ce0b2b;
+  color: #ffffff;
+  background-color: #ce0b2b;
 }
 
 .swal2-container {
-    z-index: 99999 !important;
+  z-index: 99999 !important;
 }
 
 .btn--primary {
-    @apply px-4 py-2 bg-gray-800 dark:bg-gray-200 border border-transparent rounded-md font-semibold text-xs text-white dark:text-gray-800 uppercase tracking-widest hover:bg-gray-700 dark:hover:bg-white focus:bg-gray-700 dark:focus:bg-white active:bg-gray-900 dark:active:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 transition ease-in-out duration-150;
+  @apply px-4 py-2 bg-gray-800 dark:bg-gray-200 border border-transparent rounded-md font-semibold text-xs text-white dark:text-gray-800 uppercase tracking-widest hover:bg-gray-700 dark:hover:bg-white focus:bg-gray-700 dark:focus:bg-white active:bg-gray-900 dark:active:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 transition ease-in-out duration-150;
 }
 
 .btn--cta {
-    @apply bg-red-600 hover:bg-red-600 text-xl text-white rounded-md transition ease-in-out duration-150;
+  @apply bg-red-600 hover:bg-red-600 text-xl text-white rounded-md transition ease-in-out duration-150;
 }
 
 .btn-action {
-    z-index: 1;
-    position: relative;
-    align-items: center;
-    display: inline-flex;
-    justify-content: center;
+  z-index: 1;
+  position: relative;
+  align-items: center;
+  display: inline-flex;
+  justify-content: center;
 }
 
 .btn-action:before {
-    background: #2e2e2e;
+  background: #2e2e2e;
 }
 
 .btn-action:hover:before {
-    left: 0px;
-    width: 100%;
-    right: auto;
+  left: 0px;
+  width: 100%;
+  right: auto;
 }
 
 .btn-action:hover {
-    color: #ffffff;
+  color: #ffffff;
 }
 
 .btn-action:before {
-    top: 0px;
-    width: 0px;
-    left: auto;
-    right: 0px;
-    z-index: -1;
-    bottom: 0px;
-    content: "";
-    position: absolute;
-    transition: all 0.3s ease-in-out;
+  top: 0px;
+  width: 0px;
+  left: auto;
+  right: 0px;
+  z-index: -1;
+  bottom: 0px;
+  content: "";
+  position: absolute;
+  transition: all 0.3s ease-in-out;
 }
+/* 
+.dark {
+  --ck-color-text: theme(colors.white);
+  --ck-color-base-background: theme(colors.gray.700);
+  --ck-color-toolbar-background: var(--ck-color-base-background);
+  --ck-color-base-border: theme(colors.gray.600);
+  --ck-color-toolbar-border: var(--ck-color-base-border);
+  --ck-color-button-default-background: var(--ck-color-base-background);
+  --ck-color-button-default-hover-background: theme(colors.gray.900);
+  --ck-color-button-on-hover-background: var(
+    --ck-color-button-default-hover-background
+  );
+  --ck-color-list-button-hover-background: theme(colors.gray.900)
+  --ck-color-button-default-hover-background: var(
+    --ck-color-button-default-hover-background
+  );
+  --ck-color-button-default-active-background: theme(colors.gray.900);
+  --ck-color-button-on-color: theme(colors.slate.900);
+  --ck-color-button-on-active-background: theme(colors.gray.200);
+  --ck-color-dropdown-panel-background: theme(colors.gray.600);
+  --ck-color-labeled-field-label-background: theme(colors.gray.600);
+  --ck-color-input-background: var(--ck-color-base-background);
+} */

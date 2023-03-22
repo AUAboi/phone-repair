@@ -10,6 +10,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\AppointmentController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DeviceRepairController;
+use App\Http\Controllers\ProductController;
 
 Route::middleware(['auth', 'admin'])->group(function () {
   // Route::get('/dashboard', function () {
@@ -39,7 +40,14 @@ Route::middleware(['auth', 'admin'])->group(function () {
   Route::post('/categories/create', [CategoryController::class, 'store'])->name('categories.store');
   Route::get('/categories/{category}', [CategoryController::class, 'edit'])->name('categories.edit');
   Route::put('/categories/{category}', [CategoryController::class, 'update'])->name('categories.update');
+  Route::delete('/categories/{category}/delete', [CategoryController::class, 'destroy'])->name('categories.destroy');
 
+  Route::get('/products', [ProductController::class, 'index'])->name('products.index');
+  Route::get('/products/create', [ProductController::class, 'create'])->name('products.create');
+  Route::post('/products/create', [ProductController::class, 'store'])->name('products.store');
+  Route::get('/products/{product}', [ProductController::class, 'edit'])->name('products.edit');
+  Route::put('/products/{product}', [ProductController::class, 'update'])->name('products.update');
+  Route::delete('/products/{product}/delete', [ProductController::class, 'destroy'])->name('products.destroy');
 
 
   Route::get('/repairs', [RepairController::class, 'index'])->name('repairs.index');

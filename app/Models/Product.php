@@ -32,6 +32,19 @@ class Product extends Model
 
     public function category()
     {
-        return $this->belongsTo(Product::class);
+        return $this->belongsTo(Category::class);
+    }
+
+    public function scopeFilter($query, array $filters)
+    {
+        $query->when($filters['search'] ?? null, function ($query, $search) {
+            $query->where('name', 'like', '%' . $search . '%');
+        });
+    }
+
+
+    public function media()
+    {
+        return $this->hasOne(ProductMedia::class);
     }
 }

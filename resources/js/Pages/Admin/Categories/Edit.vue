@@ -44,7 +44,7 @@ const destroy = () => {
         form.delete(route('categories.destroy', props.category.slug))
       }
     },
-    { title: `Deleting ${props.category.name} will delete all the devices for the category. Proceed?` }
+    { title: `Deleting ${props.category.name} will delete all the products for the category. Proceed?` }
   )
 }
 

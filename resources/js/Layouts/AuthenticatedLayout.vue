@@ -41,6 +41,9 @@ const showingNavigationDropdown = ref(false);
                                 <NavLink :href="route('categories.index')" :active="route().current('categories.*')">
                                     Categories
                                 </NavLink>
+                                <NavLink :href="route('products.index')" :active="route().current('products.*')">
+                                    Products
+                                </NavLink>
                                 <NavLink :href="route('repairs.index')" :active="route().current('repairs.*')">
                                     Repairs
                                 </NavLink>
@@ -104,7 +107,6 @@ const showingNavigationDropdown = ref(false);
                 <!-- Responsive Navigation Menu -->
                 <div :class="{ block: showingNavigationDropdown, hidden: !showingNavigationDropdown }" class="sm:hidden">
                     <div class="pt-2 pb-3 space-y-1">
-
                         <ResponsiveNavLink :href="route('appointments.index')" :active="route().current('appointments.*')">
                             Appointments
                         </ResponsiveNavLink>
@@ -116,6 +118,9 @@ const showingNavigationDropdown = ref(false);
                         </ResponsiveNavLink>
                         <ResponsiveNavLink :href="route('categories.index')" :active="route().current('categories.*')">
                             Categories
+                        </ResponsiveNavLink>
+                        <ResponsiveNavLink :href="route('products.index')" :active="route().current('products.*')">
+                            Products
                         </ResponsiveNavLink>
                         <ResponsiveNavLink :href="route('repairs.index')" :active="route().current('repairs.*')">
                             Repairs

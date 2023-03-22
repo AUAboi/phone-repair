@@ -60,4 +60,11 @@ class CategoryController extends Controller
         }
         return Redirect::route('categories.index')->with('success', 'Category updated succesfully.');
     }
+
+    public function destroy(Category $category)
+    {
+        $category->delete();
+
+        return Redirect::route('categories.index')->with('success', 'Category deleted successfully.');
+    }
 }

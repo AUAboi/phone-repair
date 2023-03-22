@@ -51,14 +51,3 @@ const menuItems = [
   </main>
   <PublicFooter />
 </template>
-
-<style scoped>
-.animated-menu {
-  animation-fill-mode: both;
-  animation-name: slideInUp-30;
-  animation-duration: .3s;
-  -webkit-animation-duration: .3s;
-  -webkit-animation-fill-mode: both;
-  -webkit-animation-name: slideInUp-30;
-}
-</style>
