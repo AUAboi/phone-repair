@@ -1,92 +1,112 @@
 <script setup>
-import Modal from '@/Components/Modal.vue';
-import { Link } from '@inertiajs/vue3';
-import { ref, computed } from 'vue';
+import Modal from "@/Components/Modal.vue";
+import { Link } from "@inertiajs/vue3";
+import { ref, computed } from "vue";
 import CloseCircle from "~icons/mdi/close-circle";
 
-const props = defineProps(["brands"])
+const props = defineProps(["categories"]);
 
-const currentActive = ref(0)
+const currentActive = ref(0);
 
-const currentDevice = ref(0)
+const currentDevice = ref(0);
 
-const modalToggle = ref(false)
+const modalToggle = ref(false);
 
 const devices = computed(() => {
-  return props.brands[currentActive.value].devices
-})
+  return props.categories[currentActive.value].products;
+});
 
 const toggledDevice = computed(() => {
   return devices.value[currentDevice.value];
-})
+});
 
 const openDevice = (index) => {
-  currentDevice.value = index
+  currentDevice.value = index;
   modalToggle.value = true;
-}
-
+};
 </script>
 <template>
   <section>
     <div class="container mx-auto px-5 py-24">
-      <h4 class="text-6xl text-center font-bold">Brands We Offer</h4>
+      <h4 class="text-6xl text-center font-bold">Products We Offer</h4>
       <ul class="flex flex-wrap justify-center mt-8 gap-6">
-        <li class="font-bold relative text-lg list-click cursor-pointer" v-for="(brand, index) in brands" :key="brand.id"
-          :class="{ active: currentActive === index }">
+        <li
+          class="font-bold relative text-lg list-click cursor-pointer"
+          v-for="(category, index) in categories"
+          :key="category.id"
+          :class="{ active: currentActive === index }"
+        >
           <a href="#" @click.prevent="currentActive = index">
-            {{ brand.name }}
+            {{ category.name }}
           </a>
         </li>
       </ul>
-      <div class="flex flex-wrap justify-center md:justify-between mt-9 gap-y-12 max-w-6xl mx-auto">
-        <div class="flex-shrink-0 flex-grow-0 basis-full sm:basis-1/2 md:basis-1/3 " v-for="(device, index) in devices"
-          :key="index">
-          <div @click="openDevice(index)" class="flex flex-col justify-between h-full text-center">
+      <div
+        class="flex flex-wrap justify-center md:justify-between mt-9 gap-y-12 max-w-6xl mx-auto"
+      >
+        <div
+          class="flex-shrink-0 flex-grow-0 basis-full sm:basis-1/2 md:basis-1/3"
+          v-for="(device, index) in devices"
+          :key="index"
+        >
+          <div
+            @click="openDevice(index)"
+            class="flex flex-col justify-between h-full text-center"
+          >
             <div>
-              <img class="mx-auto max-w-xs" :src="device.image" alt="">
+              <img
+                class="mx-auto max-w-xs"
+                :src="device.image"
+                :alt="device.name"
+              />
             </div>
             <h4 class="font-semibold text-xl">{{ device.name }}</h4>
+            <h5 class="text-2xl font-bold">{{ device.formatted_price }}</h5>
           </div>
         </div>
       </div>
     </div>
-    <Modal class="h-full" max-width="7xl" :show="modalToggle" @close="modalToggle = false">
-      <div class="flex flex-col md:flex-row justify-between relative ">
-        <div @click="modalToggle = false"
-          class="text-red-400 cursor-pointer hover:text-red-500 text-3xl absolute top-2 right-2">
+    <Modal
+      class="h-full"
+      max-width="7xl"
+      :show="modalToggle"
+      @close="modalToggle = false"
+    >
+      <div class="flex flex-col md:flex-row justify-between relative">
+        <div
+          @click="modalToggle = false"
+          class="text-red-400 cursor-pointer hover:text-red-500 text-3xl absolute top-2 right-2"
+        >
           <CloseCircle />
         </div>
-        <div class="basis-4/5 flex-grow w-full h-full">
-          <img class="mx-auto md:mx-0 max-h-96" :src="toggledDevice.image" :alt="toggledDevice.name">
+        <div class="h-full">
+          <img
+            class="mx-auto md:mx-0 max-h-96"
+            :src="toggledDevice.image"
+            :alt="toggledDevice.name"
+          />
         </div>
-        <div class="p-6 m-auto">
-          <h1 class="font-medium text-2xl">{{ toggledDevice.name }}</h1>
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur quisquam molestias excepturi, maiores
-            quo, suscipit exercitationem consequuntur atque odio, voluptates ut dolore deleniti explicabo rerum hic
-            perferendis. Dignissimos, iusto. Animi dolore delectus adipisci suscipit ab dolorem ullam excepturi quidem
-            ratione. <br>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur quisquam molestias excepturi, maiores
-            quo, suscipit exercitationem consequuntur atque odio, voluptates ut dolore deleniti explicabo rerum hic
-            perferendis. Dignissimos, iusto. Animi dolore delectus adipisci suscipit ab dolorem ullam excepturi quidem
-            ratione.
+        <div class="p-6 m-auto w-full">
+          <h1 class="font-medium text-4xl">{{ toggledDevice.name }}</h1>
+          <p class="text-3xl font-semibold text-red-500 tracking-wider">
+            {{ toggledDevice.formatted_price }}
           </p>
+          <div v-html="toggledDevice.body"></div>
           <div class="py-6">
-            <Link as="button" :href="route('public.appointments.create', toggledDevice.slug)"
-              class="btn-action px-4 py-1 text-white text-xl bg-red-500 border before:bg-black-500">
-            Buy Now
+            <Link
+              as="button"
+              :href="route('public.appointments.create', toggledDevice.id)"
+              class="btn-action px-4 py-1 text-white text-xl bg-red-500 border before:bg-black-500"
+            >
+              Buy Now
             </Link>
           </div>
         </div>
-
       </div>
-      <div class="absolute">
-        X
-      </div>
+      <div class="absolute">X</div>
     </Modal>
   </section>
 </template>
-
 
 <style scoped>
 .list-click:hover:before,

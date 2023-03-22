@@ -19,7 +19,7 @@ class ProductResource extends JsonResource
             'name' => $this->name,
             'image' =>  $this->media ? $this->media->baseMedia->getUrl() : null,
             'body' => $this->body,
-            'formatted_price' => money($this->price, config('constants.currency'))->formatWithoutZeroes(),
+            'formatted_price' => $this->formatted_price,
             'price' => $this->price,
             'category' => new CategoryResource($this->whenLoaded('category')),
         ];

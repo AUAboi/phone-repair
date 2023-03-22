@@ -49,7 +49,6 @@ Route::middleware(['auth', 'admin'])->group(function () {
   Route::put('/products/{product}', [ProductController::class, 'update'])->name('products.update');
   Route::delete('/products/{product}/delete', [ProductController::class, 'destroy'])->name('products.destroy');
 
-
   Route::get('/repairs', [RepairController::class, 'index'])->name('repairs.index');
   Route::get('/repairs/create', [RepairController::class, 'create'])->name('repairs.create');
   Route::post('/repairs/create', [RepairController::class, 'store'])->name('repairs.store');

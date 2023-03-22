@@ -1,13 +1,7 @@
 <?php
 
-use App\Http\Controllers\UserController;
 use App\Http\Controllers\AppointmentController;
-use App\Http\Controllers\BrandController;
-use App\Http\Controllers\DeviceController;
-use App\Http\Controllers\DeviceRepairController;
-use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PublicController;
-use App\Http\Controllers\RepairController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -37,7 +31,7 @@ Route::get('/', [PublicController::class, 'home'])->name('public.home');
 Route::get('/contact-us', [PublicController::class, 'contact'])->name('public.contact');
 Route::get('/phone/repairs', [PublicController::class, 'repairs'])->name('public.repairs');
 Route::get('/all-repairs/{brand}', [PublicController::class, 'repairBrand'])->name('public.repairs.brand');
-
+Route::get('/all-products', [PublicController::class, 'products'])->name('public.products');
 Route::get('/book-appointment/{device}', [AppointmentController::class, 'create'])->name('public.appointments.create');
 Route::post('/book-appointment/{device}', [AppointmentController::class, 'store'])->name('public.appointments.store');
 
