@@ -32,8 +32,11 @@ Route::get('/contact-us', [PublicController::class, 'contact'])->name('public.co
 Route::get('/phone/repairs', [PublicController::class, 'repairs'])->name('public.repairs');
 Route::get('/all-repairs/{brand}', [PublicController::class, 'repairBrand'])->name('public.repairs.brand');
 Route::get('/all-products', [PublicController::class, 'products'])->name('public.products');
-Route::get('/book-appointment/{device}', [AppointmentController::class, 'create'])->name('public.appointments.create');
-Route::post('/book-appointment/{device}', [AppointmentController::class, 'store'])->name('public.appointments.store');
+Route::get('/book-appointment/repair/{device}', [AppointmentController::class, 'create'])->name('public.appointments.create');
+Route::post('/book-appointment/repair/{device}', [AppointmentController::class, 'store'])->name('public.appointments.store');
+
+Route::get('/book-appointment/product/{product}', [AppointmentController::class, 'createProductAppointment'])->name('public.appointments.product.create');
+Route::get('/book-appointment/product/{product}', [AppointmentController::class, 'storeProductAppointment'])->name('public.appointments.product.store');
 
 require __DIR__ . '/admin.php';
 require __DIR__ . '/auth.php';

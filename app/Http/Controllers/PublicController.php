@@ -18,7 +18,7 @@ class PublicController extends Controller
     {
         return Inertia::render('Public/Home', [
             'brands' => BrandResource::collection(Brand::all()->load('devices')),
-            'categories' => CategoryResource::collection(Category::all()->load('products'))
+            'categories' => CategoryResource::collection(Category::orderBy('name', 'ASC')->get()->load('products'))
         ]);
     }
 

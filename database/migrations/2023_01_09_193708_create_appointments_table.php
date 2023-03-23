@@ -19,7 +19,7 @@ return new class extends Migration
             $table->foreignId('user_id')->nullable()->constrained()->cascadeOnDelete();
             $table->foreignId('device_id')->nullable()->onUpdate('set null')->nullOnDelete();
             $table->string('device_name')->nullable();
-            $table->foreignId('device_repair_id');
+            $table->foreignId('device_repair_id')->nullable();
             $table->string('device_repair_title')->nullable();
             $table->bigInteger('device_repair_price')->nullable();
             $table->string('first_name');

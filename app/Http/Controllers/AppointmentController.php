@@ -3,10 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreAppointmentRequest;
+use App\Http\Requests\StoreProductRequest;
 use App\Http\Resources\AppointmentResource;
 use App\Http\Resources\DeviceResource;
+use App\Http\Resources\ProductResource;
 use App\Models\Appointment;
 use App\Models\Device;
+use App\Models\Product;
 use App\Services\AppointmentService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
@@ -52,6 +55,24 @@ class AppointmentController extends Controller
     {
         try {
             $appointmentService->createAppointment($device, $request->validated(), $request->user() ?? null);
+        } catch (\Throwable $th) {
+            return redirect()->back()->with('error', $th->getMessage());
+        }
+
+        return Redirect::route('public.home')->with('success', 'Appointment registered successfully');
+    }
+
+    public function createProductAppointment(Product $product)
+    {
+        return Inertia::render('Public/Appointments/ProductAppointment', [
+            'product' => new ProductResource($product->load(['category'])),
+        ]);
+    }
+
+    public function storeProductAppointment(Product $product, StoreProductRequest $request,  AppointmentService $appointmentService)
+    {
+        try {
+            $appointmentService->createAppointment($product, $request->validated(), $request->user() ?? null);
         } catch (\Throwable $th) {
             return redirect()->back()->with('error', $th->getMessage());
         }

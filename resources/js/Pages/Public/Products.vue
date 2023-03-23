@@ -34,7 +34,7 @@ const openDevice = (index) => {
           :key="product.id"
           @click="openDevice(index)"
         >
-          <img :src="product.image" :alt="product.name" />
+          <img :src="product.image" class="h-56 mx-auto" :alt="product.name" />
           <div style="background-color: rgb(240, 238, 238)" class="px-5 py-4">
             <h4
               class="uppercase group-hover:text-red-500 transition-colors duration-300 text-2xl font-medium"
@@ -48,30 +48,35 @@ const openDevice = (index) => {
     </div>
     <Modal
       class="h-full"
-      max-width="7xl"
+      max-width="2xl"
       :show="modalToggle"
       @close="modalToggle = false"
     >
-      <div class="flex flex-col md:flex-row justify-between relative">
+      <div class="flex flex-col justify-between relative">
         <div
           @click="modalToggle = false"
           class="text-red-400 cursor-pointer hover:text-red-500 text-3xl absolute top-2 right-2"
         >
           <CloseCircle />
         </div>
-        <div class="h-full">
+        <div class="">
           <img
-            class="mx-auto md:mx-0 max-h-96"
+            class="mx-auto max-h-96"
             :src="toggledDevice.image"
             :alt="toggledDevice.name"
           />
         </div>
         <div class="p-6 m-auto w-full">
           <h1 class="font-medium text-4xl">{{ toggledDevice.name }}</h1>
+
           <p class="text-3xl font-semibold text-red-500 tracking-wider">
             {{ toggledDevice.formatted_price }}
           </p>
-          <div v-html="toggledDevice.body"></div>
+
+          <div class="pt-8">
+            <h4 class="text-2xl font-semibold">Description</h4>
+            <div v-html="toggledDevice.body"></div>
+          </div>
           <div class="py-6">
             <Link
               as="button"
@@ -83,7 +88,6 @@ const openDevice = (index) => {
           </div>
         </div>
       </div>
-      <div class="absolute">X</div>
     </Modal>
   </section>
 </template>

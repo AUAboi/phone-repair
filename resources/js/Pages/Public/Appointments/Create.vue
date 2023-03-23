@@ -1,26 +1,26 @@
 <script setup>
-import { useStepFormStore } from '@/store/stepForm';
-import { Head } from '@inertiajs/vue3';
-import AddPersonalInformation from './CreateForm/AddPersonalInformation.vue';
-import ChooseAppointment from './CreateForm/ChooseAppointment.vue';
-import ChooseRepairTypeStep from './CreateForm/ChooseRepairTypeStep.vue'
-import FormPaginator from './CreateForm/FormPaginator.vue'
+import { useStepFormStore } from "@/store/stepForm";
+import { Head } from "@inertiajs/vue3";
+import AddPersonalInformation from "./CreateForm/AddPersonalInformation.vue";
+import ChooseAppointment from "./CreateForm/ChooseAppointment.vue";
+import ChooseRepairTypeStep from "./CreateForm/ChooseRepairTypeStep.vue";
+import FormPaginator from "./CreateForm/FormPaginator.vue";
 
-const props = defineProps(["device", "repairs"])
+const props = defineProps(["device", "repairs"]);
 
-const stepForm = useStepFormStore()
-stepForm.form.repair_type = props.device.device_repairs[0].repair_type
+const stepForm = useStepFormStore();
+stepForm.form.repair_type = props.device.device_repairs[0].repair_type;
 
-stepForm.device = props.device
-
-
-
+stepForm.device = props.device;
 </script>
 
 <template>
   <Head :title="`Book ${props.device.name} repair`" />
   <FormPaginator class="pt-40" />
-  <div v-if="stepForm.form.hasErrors" class="ml-6 text-red-600 md:max-w-sm md:mx-auto">
+  <div
+    v-if="stepForm.form.hasErrors"
+    class="ml-6 text-red-600 md:max-w-sm md:mx-auto"
+  >
     <h4 class="text-lg">There are some errors:</h4>
     <ul class="list-disc ml-8">
       <li v-for="error in stepForm.form.errors">{{ error }}</li>
@@ -28,8 +28,11 @@ stepForm.device = props.device
   </div>
 
   <form class="py-8 px-2 min-h-screen flex items-center">
-
-    <transition class="w-full" :name="`slide-${stepForm.transition}`" mode="out-in">
+    <transition
+      class="w-full"
+      :name="`slide-${stepForm.transition}`"
+      mode="out-in"
+    >
       <ChooseRepairTypeStep v-if="stepForm.currentStep === 1" />
       <ChooseAppointment v-else-if="stepForm.currentStep === 2" />
       <AddPersonalInformation v-else-if="stepForm.currentStep === 3" />
