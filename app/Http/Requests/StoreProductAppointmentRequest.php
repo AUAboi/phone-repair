@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreAppointmentRequest extends FormRequest
+class StoreProductAppointmentRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,11 +24,9 @@ class StoreAppointmentRequest extends FormRequest
     public function rules()
     {
         return [
-            'device_repair_id' => 'required|exists:device_repairs,id',
-            'first_name' => 'required|string|max:255',
-            'last_name' => 'required|string|max:255',
+            'first_name' => 'required|string',
+            'last_name' => 'required|string',
             'email' => 'required|email',
-            'message' => 'nullable|string|max:255',
             'phone' => 'required|phone:' . config('constants.phone_number'),
             'zip_code' => 'required|string',
             'city' => 'required|string',
@@ -46,7 +44,6 @@ class StoreAppointmentRequest extends FormRequest
     public function messages()
     {
         return [
-            'device_repair_id.required' => 'Please select a repair.',
             'phone' => 'Please enter a valid phone number'
         ];
     }

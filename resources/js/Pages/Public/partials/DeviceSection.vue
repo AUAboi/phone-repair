@@ -1,5 +1,6 @@
 <script setup>
 import Modal from "@/Components/Modal.vue";
+import ProductModal from "@/Components/ProductModal.vue";
 import { Link } from "@inertiajs/vue3";
 import { ref, computed } from "vue";
 import CloseCircle from "~icons/mdi/close-circle";
@@ -66,49 +67,11 @@ const openDevice = (index) => {
         </div>
       </div>
     </div>
-    <Modal
-      class="h-full"
-      max-width="2xl"
-      :show="modalToggle"
+    <ProductModal
       @close="modalToggle = false"
-    >
-      <div class="flex flex-col justify-between relative">
-        <div
-          @click="modalToggle = false"
-          class="text-red-400 cursor-pointer hover:text-red-500 text-3xl absolute top-2 right-2"
-        >
-          <CloseCircle />
-        </div>
-        <div class="">
-          <img
-            class="mx-auto max-h-96"
-            :src="toggledDevice.image"
-            :alt="toggledDevice.name"
-          />
-        </div>
-        <div class="p-6 m-auto w-full">
-          <h1 class="font-medium text-4xl">{{ toggledDevice.name }}</h1>
-
-          <p class="text-3xl font-semibold text-red-500 tracking-wider">
-            {{ toggledDevice.formatted_price }}
-          </p>
-
-          <div class="pt-8">
-            <h4 class="text-2xl font-semibold">Description</h4>
-            <div v-html="toggledDevice.body"></div>
-          </div>
-          <div class="py-6">
-            <Link
-              as="button"
-              :href="route('public.appointments.create', toggledDevice.id)"
-              class="btn-action px-4 py-1 text-white text-xl bg-red-500 border before:bg-black-500"
-            >
-              Buy Now
-            </Link>
-          </div>
-        </div>
-      </div>
-    </Modal>
+      :modal-toggle="modalToggle"
+      :product="toggledDevice"
+    />
   </section>
 </template>
 

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreAppointmentRequest;
-use App\Http\Requests\StoreProductRequest;
+use App\Http\Requests\StoreProductAppointmentRequest;
 use App\Http\Resources\AppointmentResource;
 use App\Http\Resources\DeviceResource;
 use App\Http\Resources\ProductResource;
@@ -69,10 +69,10 @@ class AppointmentController extends Controller
         ]);
     }
 
-    public function storeProductAppointment(Product $product, StoreProductRequest $request,  AppointmentService $appointmentService)
+    public function storeProductAppointment(Product $product, StoreProductAppointmentRequest  $request,  AppointmentService $appointmentService)
     {
         try {
-            $appointmentService->createAppointment($product, $request->validated(), $request->user() ?? null);
+            $appointmentService->createProductAppointment($product, $request->validated(), $request->user() ?? null);
         } catch (\Throwable $th) {
             return redirect()->back()->with('error', $th->getMessage());
         }

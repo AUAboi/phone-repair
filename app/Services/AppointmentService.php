@@ -23,7 +23,7 @@ class AppointmentService
       $appointment = Appointment::create([
         'user_id' => $user ? $user->id : null,
         'device_id' => $device->id,
-        'device_name' => $device->name,
+        'device_name' => 'Repair ' . $device->name,
         'device_repair_id' => $data['device_repair_id'],
         'first_name' => $data['first_name'],
         'last_name' => $data['last_name'],
@@ -31,6 +31,7 @@ class AppointmentService
         'phone' => $data['phone'],
         'zip_code' => $data['zip_code'],
         'city' => $data['city'],
+        'message' => $data['message'],
         'address' => $data['address'],
         'appointment_date' => Carbon::parse($data['appointment_date'])->toDate(),
         'appointment_time' => Carbon::parse($timestamp)->toTimeString(),
@@ -61,6 +62,7 @@ class AppointmentService
         'zip_code' => $data['zip_code'],
         'city' => $data['city'],
         'address' => $data['address'],
+        'message' => $data['message'],
         'appointment_date' => Carbon::parse($data['appointment_date'])->toDate(),
         'appointment_time' => Carbon::parse($timestamp)->toTimeString(),
         'total' => $product->price

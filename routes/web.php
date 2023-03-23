@@ -36,7 +36,7 @@ Route::get('/book-appointment/repair/{device}', [AppointmentController::class, '
 Route::post('/book-appointment/repair/{device}', [AppointmentController::class, 'store'])->name('public.appointments.store');
 
 Route::get('/book-appointment/product/{product}', [AppointmentController::class, 'createProductAppointment'])->name('public.appointments.product.create');
-Route::get('/book-appointment/product/{product}', [AppointmentController::class, 'storeProductAppointment'])->name('public.appointments.product.store');
+Route::post('/book-appointment/product/{product}', [AppointmentController::class, 'storeProductAppointment'])->name('public.appointments.product.store');
 
 require __DIR__ . '/admin.php';
 require __DIR__ . '/auth.php';

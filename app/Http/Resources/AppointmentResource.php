@@ -27,9 +27,11 @@ class AppointmentResource extends JsonResource
             'full_name' => $this->full_name,
             'email' => $this->email,
             'total' => $this->formatted_total,
+            'message' => $this->message,
             'phone' => $this->phone,
             'appointment_date' => Carbon::parse($this->appointment_date)->format('d F Y'),
             'appointment_time' => Carbon::parse($this->appointment_time)->format('g:i A'),
+            'device_name' => $this->device_name,
             'user' => new UserResource($this->whenLoaded('user')),
             'device' => new DeviceResource($this->whenLoaded('device')),
             'device_repair' => $this->whenLoaded('deviceRepair')

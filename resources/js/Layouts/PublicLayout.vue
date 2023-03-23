@@ -11,6 +11,12 @@ const menuItems = [
   {
     text: "Products",
     href: route("public.products"),
+    children: props.navigation.products.map((p) => {
+      return {
+        text: p.name,
+        href: route("public.appointments.product.create", p.id),
+      };
+    }),
   },
   {
     text: "Repair",

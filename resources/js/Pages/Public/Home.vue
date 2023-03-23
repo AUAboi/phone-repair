@@ -19,27 +19,17 @@ const props = defineProps(["brands", "categories"]);
     <div class="container mx-auto">
       <div class="grid grid-cols-1 md:grid-cols-2 items-center">
         <div class="p-4">
-          <img
-            target="_blank"
-            style="
-              height: 400px;
-              width: 700px;
-              border: solid 1px #000;
-              background: #faaeae;
-            "
-            src=" #"
-            width="700"
-            height="400"
-          />
+          <img src="images/featured.jpg" width="700" height="400" />
         </div>
-        <div class="text-center md:text-start pl-8">
-          <h2 class="font-semibold text-4xl sm:text-6xl">
-            Some featured text can come here
-          </h2>
+        <div class="text-center md:text-start md:pl-8">
+          <h2 class="font-semibold text-4xl sm:text-6xl">Why us?</h2>
           <p class="text-lg">
-            The main thing about dad jeans is that they come in a trendy wider
-            straight leg, have a total slouchier fit and a high rise. Whereas
-            the mom jean is a more fitted style with baggier and tapered legs.
+            Fonemart is where you can find telephones experts. With our long
+            periods of involvement with fixing telephones, you can rely upon us.
+            We never let our clients down since telephone, tablet and fix is our
+            specialty. When the client comprehends what we bring to the table in
+            the entirety of our maintenance administrations, you can relax
+            realizing that you settled on the ideal decision.
           </p>
           <Link
             class="btn-action text-white text-xl bg-red-600 px-8 py-4 mt-6"
@@ -76,6 +66,7 @@ const props = defineProps(["brands", "categories"]);
       </div>
     </div>
   </section>
+  <section class="mb-14"></section>
 </template>
 
 <style scoped>
