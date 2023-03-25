@@ -12,11 +12,13 @@ const props = defineProps(["brands", "categories"]);
     <Link :href="route('public.repairs')" class="banner block"> </Link>
   </section>
   <DeviceSection :categories="categories" />
+
   <section
-    class="bg-cover bg-no-repeat bg-center py-28"
     style="background-image: url('images/bg_06.jpg')"
+    class="bg-cover bg-fixed bg-no-repeat bg-center relative"
   >
-    <div class="container mx-auto">
+    <div class="bg-[#f2f2f2] bg-opacity-50 absolute w-full h-full top-0"></div>
+    <div class="container mx-auto py-28 relative z-50">
       <div class="grid grid-cols-1 md:grid-cols-2 items-center">
         <div class="p-4">
           <img src="images/featured.jpg" width="700" height="400" />
@@ -33,9 +35,9 @@ const props = defineProps(["brands", "categories"]);
           </p>
           <Link
             class="btn-action text-white text-xl bg-red-600 px-8 py-4 mt-6"
-            href="/somelink"
+            :href="route('public.products')"
           >
-            Some button text
+            Book Repair
           </Link>
         </div>
       </div>

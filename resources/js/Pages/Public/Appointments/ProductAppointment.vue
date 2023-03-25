@@ -1,7 +1,7 @@
 <script setup>
 import StepFormInput from "@/Components/StepFormInput.vue";
-import { Head, useForm } from "@inertiajs/vue3";
-import { ref } from "vue";
+import { Head, useForm, usePage } from "@inertiajs/vue3";
+import { onMounted, ref } from "vue";
 import IconArrowForward from "~icons/mdi/arrow-right";
 import Datepicker from "@vuepic/vue-datepicker";
 import "@vuepic/vue-datepicker/dist/main.css";
@@ -31,6 +31,16 @@ const submit = () => {
     preserveState: true,
   });
 };
+
+const page = usePage();
+onMounted(() => {
+  if (page.props.auth.user) {
+    let user = page.props.auth.user;
+    form.first_name = user.first_name;
+    form.last_name = user.last_name;
+    form.email = user.email;
+  }
+});
 </script>
 <template>
   <Head :title="`Book ${props.product.name}`" />
@@ -131,8 +141,7 @@ const submit = () => {
                 >
                 <textarea
                   v-model="form.message"
-                  id="message"
-                  name="message"
+                  :error="form.errors.address"
                   class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-red-600 focus:bg-white focus:ring-2 focus:ring-red-200 h-32 text-base outline-none text-gray-700 py-1 px-3 resize-none leading-6 transition-colors duration-200 ease-in-out"
                 ></textarea>
               </div>

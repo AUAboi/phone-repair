@@ -23,10 +23,12 @@ class StoreProductAppointmentRequest extends FormRequest
      */
     public function rules()
     {
+        dd($this->request);
         return [
-            'first_name' => 'required|string',
-            'last_name' => 'required|string',
+            'first_name' => 'required|string|max:255',
+            'last_name' => 'required|string|max:255',
             'email' => 'required|email',
+            'message' => 'nullable|string|max:255',
             'phone' => 'required|phone:' . config('constants.phone_number'),
             'zip_code' => 'required|string',
             'city' => 'required|string',

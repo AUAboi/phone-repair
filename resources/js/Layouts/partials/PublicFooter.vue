@@ -4,6 +4,64 @@ import { Link } from "@inertiajs/vue3";
 import chunk from "lodash/chunk";
 </script>
 <template>
+  <footer class="bg-neutral-900">
+    <div class="container px-5 py-24 mx-auto">
+      <div class="w-72 flex mx-auto">
+        <img src="/images/white.png" alt="Site Logo" />
+      </div>
+      <div
+        class="flex md:justify-evenly md:items-center md:flex-row md:flex-nowrap flex-wrap text-center pt-20 flex-col"
+      >
+        <div class="text-white flex-grow">
+          <h6 class="text-orange-500 font-semibold text-2xl pb-6">
+            Fix Devices
+          </h6>
+          <div
+            class="border-white md:border-r-2 overflow-y-auto md:h-[150px] max-h-[150px] flex flex-col space-y-4"
+          >
+            <Link
+              :href="route('public.appointments.create', device.slug)"
+              v-for="(device, index) in $page.props.navigation.devices"
+              :key="index"
+            >
+              {{ device.name }}
+            </Link>
+          </div>
+        </div>
+        <div class="text-white flex-grow">
+          <h6 class="text-orange-500 font-semibold text-2xl pb-6">
+            Fix Devices
+          </h6>
+          <div
+            class="border-white md:border-r-2 overflow-y-auto md:h-[150px] max-h-[150px] flex flex-col space-y-4"
+          >
+            <Link
+              :href="route('public.appointments.product.create', device.id)"
+              v-for="(device, index) in $page.props.navigation.products"
+              :key="index"
+            >
+              {{ device.name }}
+            </Link>
+          </div>
+        </div>
+        <div class="text-white flex-grow">
+          <h6 class="text-orange-500 font-semibold text-2xl pb-6">
+            Fix Devices
+          </h6>
+          <div
+            class="border-white md:border-r-2 overflow-y-auto md:h-[150px] max-h-[150px] flex flex-col space-y-4"
+          >
+            <p
+              v-for="(device, index) in $page.props.navigation.products"
+              :key="index"
+            >
+              {{ device.name }}
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
   <footer class="text-gray-400 bg-neutral-900 body-font">
     <div
       class="container px-5 py-24 mx-auto flex md:items-center lg:items-start md:flex-row md:flex-nowrap flex-wrap flex-col"
@@ -86,7 +144,7 @@ import chunk from "lodash/chunk";
           <nav class="list-none mb-10">
             <li v-for="(device, deviceIndex) in chunk" :key="deviceIndex">
               <Link
-                :href="route('public.appointments.create', device.id)"
+                :href="route('public.appointments.product.create', device.id)"
                 class="text-white hover:text-white"
                 >{{ device.name }}</Link
               >
@@ -199,3 +257,30 @@ import chunk from "lodash/chunk";
     </div>
   </footer>
 </template>
+
+<style scoped>
+footer ::-webkit-scrollbar-corner {
+  background: rgba(0, 0, 0, 0.5);
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--scroll-bar-color) var(--scroll-bar-bg-color);
+}
+
+/* Works on Chrome, Edge, and Safari */
+*::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+}
+
+*::-webkit-scrollbar-track {
+  background: var(--scroll-bar-bg-color);
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: var(--scroll-bar-color);
+  border-radius: 20px;
+  border: 3px solid var(--scroll-bar-bg-color);
+}
+</style>

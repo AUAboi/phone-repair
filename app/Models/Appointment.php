@@ -24,6 +24,7 @@ class Appointment extends Model
         'phone',
         'zip_code',
         'city',
+        'message',
         'address',
         'appointment_date',
         'appointment_time',
