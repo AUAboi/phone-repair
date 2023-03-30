@@ -1,5 +1,4 @@
 <script setup>
-import ApplicationLogo from "@/Components/ApplicationLogo.vue";
 import { Link } from "@inertiajs/vue3";
 import chunk from "lodash/chunk";
 </script>
@@ -17,7 +16,7 @@ import chunk from "lodash/chunk";
             Fix Devices
           </h6>
           <div
-            class="border-white md:border-r-2 overflow-y-auto md:h-[150px] max-h-[150px] flex flex-col space-y-4"
+            class="border-white md:border-r-2 overflow-y-auto md:h-36 max-h-[150px] flex flex-col space-y-4"
           >
             <Link
               :href="route('public.appointments.create', device.slug)"
@@ -30,10 +29,10 @@ import chunk from "lodash/chunk";
         </div>
         <div class="text-white flex-grow">
           <h6 class="text-orange-500 font-semibold text-2xl pb-6">
-            Fix Devices
+            Fix Products
           </h6>
           <div
-            class="border-white md:border-r-2 overflow-y-auto md:h-[150px] max-h-[150px] flex flex-col space-y-4"
+            class="border-white md:border-r-2 overflow-y-auto md:h-36 max-h-[150px] flex flex-col space-y-4"
           >
             <Link
               :href="route('public.appointments.product.create', device.id)"
@@ -49,43 +48,16 @@ import chunk from "lodash/chunk";
             Fix Devices
           </h6>
           <div
-            class="border-white md:border-r-2 overflow-y-auto md:h-[150px] max-h-[150px] flex flex-col space-y-4"
+            class="border-white md:border-r-2 overflow-y-auto md:h-36 max-h-[150px] flex flex-col space-y-4"
           >
-            <p
-              v-for="(device, index) in $page.props.navigation.products"
-              :key="index"
-            >
-              {{ device.name }}
-            </p>
+            <Link :href="route('public.repairs')">View all repairs </Link>
+            <Link :href="route('public.products')">View all products </Link>
+            <Link :href="route('public.contact')">Contact Us </Link>
           </div>
         </div>
       </div>
     </div>
 
-    <div class="mt-4 text-center mb-16 md:hidden">
-      <ul class="space-y-4">
-        <li>
-          Email:
-          <a href="mailto:info@fonemart.com" class="text-white"
-            >info@fonemart.com</a
-          >
-        </li>
-        <li>
-          Phone:
-          <a href="tel:+44 1243 862501" class="text-white">+44 1243 862501</a>
-        </li>
-        <li>
-          Address
-          <a
-            href="https://goo.gl/maps/uEgWVsT7hMQ7Tipq9"
-            class="text-white"
-            target="_blank"
-            rel="noopener noreferrer"
-            >16 The Arcade, Bognor Regis</a
-          >
-        </li>
-      </ul>
-    </div>
     <div class="bg-black bg-opacity-75">
       <div
         class="container mx-auto py-4 px-5 flex flex-wrap flex-col sm:flex-row"

@@ -1,18 +1,16 @@
 <script setup>
 import ActionButton from "@/Components/ActionButton.vue";
 import { Head, Link } from "@inertiajs/vue3";
-import DeviceSection from "./partials/DeviceSection.vue";
+import BannerSlideshow from "./partials/BannerSlideshow.vue";
+import ProductsSection from "./partials/ProductsSection.vue";
 
 const props = defineProps(["brands", "categories"]);
 </script>
 
 <template>
   <Head title="Welcome" />
-  <section>
-    <Link :href="route('public.repairs')" class="banner block"> </Link>
-  </section>
-  <DeviceSection :categories="categories" />
-
+  <BannerSlideshow />
+  <ProductsSection :categories="categories" />
   <section
     style="background-image: url('images/bg_06.jpg')"
     class="bg-cover bg-fixed bg-no-repeat bg-center relative"
@@ -70,28 +68,3 @@ const props = defineProps(["brands", "categories"]);
   </section>
   <section class="mb-14"></section>
 </template>
-
-<style scoped>
-.banner {
-  background-image: url("/images/cover-web-01.jpg");
-  background-size: cover;
-  background-repeat: no-repeat;
-  padding: 16rem 2rem;
-}
-
-@media screen and (max-width: 1380px) {
-  .banner {
-    padding: 10rem 2rem;
-  }
-}
-
-@media screen and (max-width: 860px) {
-  .banner {
-    background-image: url("/images/cover-web-01.jpg");
-    height: 400px;
-    background-position: 50% 50%;
-    padding: 0;
-    background-size: cover;
-  }
-}
-</style>

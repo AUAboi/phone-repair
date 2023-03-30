@@ -2,7 +2,7 @@
 import MapMarkerOutline from "~icons/mdi/map-marker-outline";
 import PhoneInTalkOutline from "~icons/mdi/phone-in-talk-outline";
 import EmailOutline from "~icons/mdi/email-outline";
-import { Head } from "@inertiajs/vue3";
+import { Head, usePage } from "@inertiajs/vue3";
 </script>
 <template>
   <Head title="Contact Us" />

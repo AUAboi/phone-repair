@@ -1,7 +1,7 @@
 <script setup>
 import ApplicationLogo from "@/Components/ApplicationLogo.vue";
 import FlashMessage from "@/Components/FlashMessage.vue";
-import { Link } from "@inertiajs/vue3";
+import { Link, usePage } from "@inertiajs/vue3";
 import PublicFooter from "./partials/PublicFooter.vue";
 import PublicNavigation from "./partials/PublicNavigation.vue";
 
@@ -34,12 +34,11 @@ const menuItems = [
     href: route("public.contact"),
   },
 ];
+
 </script>
 <template>
-  <header class="text-black pb-6 md:p-0 sm:shadow-md md:absolute w-full">
-    <div
-      class="sm:p-5 lg:p-0 bg-transparent h-full w-full md:bg-gray-200 md:rounded-md md:bg-clip-padding md:backdrop-filter md:backdrop-blur-sm md:bg-opacity-10 z-50"
-    >
+  <header class="text-black pb-6 md:p-4 md absolute w-full z-50" :class="route().current('public.contact') ? 'dark': ''">
+    <div class="sm:p-5 lg:px-0 bg-transparent h-full w-full md:rounded-md z-50">
       <div
         class="container mx-auto flex flex-col sm:flex-row sm:justify-between md:items-center"
       >

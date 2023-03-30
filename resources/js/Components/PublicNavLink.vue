@@ -1,14 +1,13 @@
 <script setup>
-import { Link } from '@inertiajs/vue3';
+import { Link } from "@inertiajs/vue3";
 
-const props = defineProps(['href',]);
-
+const props = defineProps(["href"]);
 </script>
 
 <template>
   <div>
     <Link :href="href">
-    <slot />
+      <slot />
     </Link>
   </div>
 </template>
