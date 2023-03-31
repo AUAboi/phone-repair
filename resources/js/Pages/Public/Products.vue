@@ -1,11 +1,9 @@
 <script setup>
-import Modal from "@/Components/Modal.vue";
-import ProductModal from "@/Components/ProductModal.vue";
 import { Head, Link } from "@inertiajs/vue3";
 import { ref, computed } from "vue";
-import CloseCircle from "~icons/mdi/close-circle";
+import ProductsSection from "./partials/ProductsSection.vue";
 
-const props = defineProps(["products"]);
+const props = defineProps(["categories"]);
 
 const currentDevice = ref(0);
 
@@ -27,39 +25,7 @@ const openDevice = (index) => {
     <Link :href="route('public.repairs')" class="banner block"> </Link>
   </section>
 
-  <section class="text-gray-600 body-font pt-9 pb-6">
-    <div class="container px-5 py-24 mx-auto">
-      <div class="flex flex-wrap -m-4">
-        <div
-          class="lg:w-1/4 md:w-1/2 p-4 w-full"
-          v-for="(product, index) in products"
-          @click="openDevice(index)"
-        >
-          <a class="block relative h-48 rounded overflow-hidden">
-            <img
-              :alt="product.name"
-              class="object-cover object-center w-full h-full block transition-all duration-500 hover:scale-75 hover:object-contain"
-              :src="product.image"
-            />
-          </a>
-          <div class="mt-4">
-            <h3 class="text-gray-500 text-xs tracking-widest title-font mb-1">
-              {{ product.category.name }}
-            </h3>
-            <h2 class="text-gray-900 title-font text-lg font-medium">
-              {{ product.name }}
-            </h2>
-            <p class="mt-1">$16.00</p>
-          </div>
-        </div>
-      </div>
-    </div>
-    <ProductModal
-      @close="modalToggle = false"
-      :modal-toggle="modalToggle"
-      :product="toggledDevice"
-    />
-  </section>
+  <ProductsSection :categories="categories" />
 </template>
 
 <style scoped>

@@ -79,7 +79,7 @@ const breakpoints = {
       <h4 class="text-6xl text-center font-bold pb-6">Devices available</h4>
       <div class="mb-12" v-for="brand in brands" :key="brand.id">
         <div v-if="brand.devices.length">
-          <h3 class="text-4xl text-center md:text-start font-bold pb-6">
+          <h3 class="text-4xl text-center font-bold pb-6 text-red-500">
             {{ brand.name }}
           </h3>
 

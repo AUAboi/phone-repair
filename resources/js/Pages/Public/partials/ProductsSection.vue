@@ -1,10 +1,9 @@
 <script setup>
 import "vue3-carousel/dist/carousel.css";
 import ProductModal from "@/Components/ProductModal.vue";
-import { Link } from "@inertiajs/vue3";
 import { ref, computed } from "vue";
 import { Carousel, Navigation, Pagination, Slide } from "vue3-carousel";
-import CloseCircle from "~icons/mdi/close-circle";
+import { useArrayFind } from "@vueuse/shared";
 
 const props = defineProps(["categories"]);
 
@@ -22,8 +21,9 @@ const toggledDevice = computed(() => {
   return devices.value[currentDevice.value];
 });
 
-const openDevice = (index) => {
-  currentDevice.value = index;
+const openDevice = (i, j) => {
+  currentActive.value = i;
+  currentDevice.value = j;
   modalToggle.value = true;
 };
 
@@ -52,9 +52,13 @@ const breakpoints = {
           {{ category.name }}
         </h3>
         <div>
-          <Carousel autoplay :breakpoints="breakpoints" :settings="settings">
+          <Carousel
+            :autoplay="2000"
+            :breakpoints="breakpoints"
+            :settings="settings"
+          >
             <Slide v-for="(product, j) in category.products" :key="product.id">
-              <div @click="openDevice(j)">
+              <div class="cursor-pointer" @click="openDevice(i, j)">
                 <div>
                   <img
                     class="h-64 w-52 rounded-2xl"

@@ -7,7 +7,7 @@ import { Head, usePage } from "@inertiajs/vue3";
 <template>
   <Head title="Contact Us" />
   <section
-    style="background-image: url('images/contact-banner.jpg')"
+    style="background-image: url('images/contact-banner.webp')"
     class="bg-cover bg-center bg-no-repeat py-96 px-6"
   ></section>
   <section class="text-gray-600 body-font">

@@ -8,13 +8,12 @@ import chunk from "lodash/chunk";
       <div class="w-72 flex mx-auto">
         <img src="/images/white.png" alt="Site Logo" />
       </div>
+
       <div
-        class="flex md:justify-evenly md:items-center md:flex-row md:flex-nowrap flex-wrap text-center pt-20 flex-col"
+        class="flex pt-10 md:justify-evenly md:items-center md:flex-row md:flex-nowrap flex-wrap text-center flex-col"
       >
         <div class="text-white flex-grow">
-          <h6 class="text-orange-500 font-semibold text-2xl pb-6">
-            Fix Devices
-          </h6>
+          <h6 class="text-red-500 font-semibold text-2xl pb-6">Fix Devices</h6>
           <div
             class="border-white md:border-r-2 overflow-y-auto md:h-36 max-h-[150px] flex flex-col space-y-4"
           >
@@ -28,9 +27,7 @@ import chunk from "lodash/chunk";
           </div>
         </div>
         <div class="text-white flex-grow">
-          <h6 class="text-orange-500 font-semibold text-2xl pb-6">
-            Fix Products
-          </h6>
+          <h6 class="text-red-500 font-semibold text-2xl pb-6">Fix Products</h6>
           <div
             class="border-white md:border-r-2 overflow-y-auto md:h-36 max-h-[150px] flex flex-col space-y-4"
           >
@@ -44,9 +41,7 @@ import chunk from "lodash/chunk";
           </div>
         </div>
         <div class="text-white flex-grow">
-          <h6 class="text-orange-500 font-semibold text-2xl pb-6">
-            Fix Devices
-          </h6>
+          <h6 class="text-red-500 font-semibold text-2xl pb-6">Fix Devices</h6>
           <div
             class="border-white md:border-r-2 overflow-y-auto md:h-36 max-h-[150px] flex flex-col space-y-4"
           >

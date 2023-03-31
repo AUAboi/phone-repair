@@ -11,7 +11,7 @@ const props = defineProps({
 <template>
   <nav class="hidden sm:flex items-center gap-10 flex-grow">
     <div
-      class="sm:flex md:flex-wrap md:items-center text-lg md:justify-center z-40 md:p-5 lg:px-1 flex-grow gap-12 font-medium dark:text-white text-neutral-700"
+      class="sm:flex md:flex-wrap md:items-center text-lg md:justify-end z-40 md:p-5 lg:px-1 flex-grow gap-12 font-medium dark:text-white text-neutral-700"
     >
       <div v-for="(item, index) in menuItems" :key="index">
         <div

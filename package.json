@@ -26,6 +26,7 @@
         "@inertiajs/vue3": "^1.0.0",
         "@vuepic/vue-datepicker": "^3.6.8",
         "@vueuse/core": "^9.10.0",
+        "nprogress": "^0.2.0",
         "pinia": "^2.0.30",
         "sweetalert2": "^11.6.16",
         "vue3-carousel": "^0.2.12"

@@ -48,7 +48,7 @@ class PublicController extends Controller
     public function products()
     {
         return Inertia::render('Public/Products', [
-            'products' => ProductResource::collection(Product::all()->load('category'))
+            'categories' => CategoryResource::collection(Category::orderBy('name', 'ASC')->get()->load('products', 'products.category'))
         ]);
     }
 }
