@@ -63,6 +63,7 @@ body {
   position: absolute;
   transition: all 0.3s ease-in-out;
 }
+
 /* 
 .dark {
   --ck-color-text: theme(colors.white);

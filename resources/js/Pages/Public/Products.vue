@@ -1,22 +1,8 @@
 <script setup>
 import { Head, Link } from "@inertiajs/vue3";
-import { ref, computed } from "vue";
 import ProductsSection from "./partials/ProductsSection.vue";
 
 const props = defineProps(["categories"]);
-
-const currentDevice = ref(0);
-
-const modalToggle = ref(false);
-
-const toggledDevice = computed(() => {
-  return props.products[currentDevice.value];
-});
-
-const openDevice = (index) => {
-  currentDevice.value = index;
-  modalToggle.value = true;
-};
 </script>
 
 <template>

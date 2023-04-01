@@ -3,7 +3,6 @@ import "vue3-carousel/dist/carousel.css";
 import ProductModal from "@/Components/ProductModal.vue";
 import { ref, computed } from "vue";
 import { Carousel, Navigation, Pagination, Slide } from "vue3-carousel";
-import { useArrayFind } from "@vueuse/shared";
 
 const props = defineProps(["categories"]);
 
@@ -53,7 +52,7 @@ const breakpoints = {
         </h3>
         <div>
           <Carousel
-            :autoplay="2000"
+            :wrap-around="true"
             :breakpoints="breakpoints"
             :settings="settings"
           >

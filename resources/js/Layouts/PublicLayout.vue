@@ -34,10 +34,12 @@ const menuItems = [
     href: route("public.contact"),
   },
 ];
-
 </script>
 <template>
-  <header class="text-black pb-6 md:p-4 md absolute w-full z-50" :class="route().current('public.contact') ? 'dark': ''">
+  <header
+    class="text-black pb-6 md:p-4 md absolute w-full z-50"
+    :class="route().current('public.contact') ? 'dark' : ''"
+  >
     <div class="sm:p-5 lg:px-0 bg-transparent h-full w-full md:rounded-md z-50">
       <div
         class="container mx-auto flex flex-col sm:flex-row sm:justify-between md:items-center"
@@ -57,3 +59,14 @@ const menuItems = [
   </main>
   <PublicFooter />
 </template>
+
+<style>
+.carousel__prev,
+.carousel__next {
+  display: none !important;
+}
+
+button.carousel__pagination-button--active::after {
+  @apply bg-red-500;
+}
+</style>

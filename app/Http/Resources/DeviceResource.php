@@ -39,7 +39,7 @@ class DeviceResource extends JsonResource
 
                 ])->filter(function ($repair) {
                     return $repair['repairs']->count();
-                });
+                })->values();
             })
         ];
     }
