@@ -1,6 +1,6 @@
 <?php
 return [
-  'currency' => 'EUR',
+  'currency' => 'GBP',
   'phone_number' => 'PK',
   'statuses' => [
     'pending',
