@@ -28,6 +28,7 @@
         "@vueuse/core": "^9.10.0",
         "nprogress": "^0.2.0",
         "pinia": "^2.0.30",
+        "sass": "^1.60.0",
         "sweetalert2": "^11.6.16",
         "vue3-carousel": "^0.2.12"
     }

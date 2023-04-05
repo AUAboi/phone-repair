@@ -1,6 +1,8 @@
 <script setup>
 import ActionButton from "@/Components/ActionButton.vue";
 import { Link } from "@inertiajs/vue3";
+import LogoutIcon from "~icons/mdi/logout";
+import AccountIcon from "~icons/mdi/account";
 
 const props = defineProps({
   menuItems: {
@@ -59,22 +61,14 @@ const props = defineProps({
       <Link
         as="button"
         method="post"
-        class="btn-action text-white text-xl bg-red-500 hover:bg-red-700 px-4 py-1"
+        class="text-red-500 text-3xl"
         :href="route('logout')"
-        >Logout</Link
-      >
+        ><LogoutIcon />
+      </Link>
     </div>
     <div v-else class="space-x-2 flex-grow text-end">
-      <Link
-        class="btn-action text-white text-xl bg-red-500 hover:bg-red-700 px-4 py-1"
-        :href="route('register')"
-        >Register
-      </Link>
-      <Link
-        class="btn-action px-4 py-1 text-red-500 hover:text-white text-xl bg-transparent border border-red-500 before:bg-red-500"
-        :href="route('login')"
-      >
-        Login
+      <Link as="button" class="text-red-500 text-3xl" :href="route('register')"
+        ><AccountIcon />
       </Link>
     </div>
   </nav>

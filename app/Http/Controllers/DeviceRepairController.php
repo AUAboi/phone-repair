@@ -53,6 +53,8 @@ class DeviceRepairController extends Controller
             'price' => $request->price,
             'repair_id' => $request->repair_id
         ]);
+
+        return Redirect::route('devices.edit', $deviceRepair->device->slug)->with('success', 'Device updated succesfully.');
     }
 
     public function destroy(DeviceRepair $deviceRepair)

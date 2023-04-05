@@ -59,7 +59,7 @@ const props = defineProps(["brands", "categories"]);
           :src="brand.image"
           :alt="brand.name"
         />
-        <h4 class="text-4xl text-fuchsia-900">{{ brand.name }}</h4>
+        <h4 class="text-4xl text-fuchsia-900 text-center">{{ brand.name }}</h4>
         <ActionButton :href="route('public.repairs.brand', brand.slug)">
           Book Now
         </ActionButton>

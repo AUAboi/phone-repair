@@ -25,7 +25,7 @@ class StoreDeviceRepairRequest extends FormRequest
     {
         return [
             'title' => 'required|string',
-            'body' => 'nullable',
+            'body' => 'nullable|string',
             'price' => 'required|numeric',
             'repair_id' => 'required|exists:repairs,id'
         ];

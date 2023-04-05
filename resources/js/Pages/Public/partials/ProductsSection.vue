@@ -47,33 +47,34 @@ const breakpoints = {
     <div class="container mx-auto px-5 py-24">
       <h4 class="text-6xl text-center font-bold">Products We Offer</h4>
       <div v-for="(category, i) in categories" :key="category.id" class="mt-16">
-        <h3 class="text-xl text-red-600 font-semibold text-center pb-8">
-          {{ category.name }}
-        </h3>
-        <div>
-          <Carousel
-            :wrap-around="true"
-            :breakpoints="breakpoints"
-            :settings="settings"
-          >
-            <Slide v-for="(product, j) in category.products" :key="product.id">
-              <div class="cursor-pointer" @click="openDevice(i, j)">
-                <div>
-                  <img
-                    class="h-64 w-52 rounded-2xl"
-                    :src="product.image"
-                    alt=""
-                  />
+        <div v-if="category.products.length">
+          <h3 class="text-xl text-red-600 font-semibold text-center pb-8">
+            {{ category.name }}
+          </h3>
+          <div>
+            <Carousel :breakpoints="breakpoints" :settings="settings">
+              <Slide
+                v-for="(product, j) in category.products"
+                :key="product.id"
+              >
+                <div class="cursor-pointer" @click="openDevice(i, j)">
+                  <div>
+                    <img
+                      class="h-64 w-52 rounded-2xl"
+                      :src="product.image"
+                      alt=""
+                    />
+                  </div>
+                  <h4 class="text-lg font-semibold pt-4">{{ product.name }}</h4>
                 </div>
-                <h4 class="text-lg font-semibold pt-4">{{ product.name }}</h4>
-              </div>
-            </Slide>
+              </Slide>
 
-            <template #addons>
-              <Navigation />
-              <Pagination />
-            </template>
-          </Carousel>
+              <template #addons>
+                <Navigation />
+                <Pagination />
+              </template>
+            </Carousel>
+          </div>
         </div>
       </div>
     </div>

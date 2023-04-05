@@ -66,6 +66,7 @@ const selectOption = (repair) => {
           <h2 class="text-2xl text-gray-800 font-bold">
             {{ repair.price }}
           </h2>
+          <div v-html="repair.body"></div>
           <button
             @click.prevent="selectOption(repair.id)"
             class="btn-action px-9 py-1 bg-red-600 text-white font-bold text-xl before:bg-black"

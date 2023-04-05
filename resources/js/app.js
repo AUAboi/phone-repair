@@ -1,5 +1,6 @@
 import './bootstrap';
-import '../css/app.css';
+import '../css/app.scss';
+import "../css/unreset.scss"
 import "@fontsource/jost/300.css"
 import "@fontsource/jost/400.css"
 import "@fontsource/jost/500.css"
@@ -18,6 +19,7 @@ import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue"
 import PublicLayout from "@/Layouts/PublicLayout.vue"
 
 const appName = window.document.getElementsByTagName('title')[0]?.innerText || 'Laravel';
+
 
 const pinia = createPinia()
 
