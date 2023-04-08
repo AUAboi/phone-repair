@@ -30,7 +30,7 @@ const menuItems = [
   },
 
   {
-    text: "Contact",
+    text: "Contact Us",
     href: route("public.contact"),
   },
 ];

@@ -19,7 +19,7 @@ const props = defineProps(["brands", "categories"]);
     <div class="container mx-auto py-28 relative z-50">
       <div class="grid grid-cols-1 md:grid-cols-2 items-center">
         <div class="p-4">
-          <img src="images/featured.jpg" width="700" height="400" />
+          <img src="images/featured.webp" width="700" height="400" />
         </div>
         <div class="text-center md:text-start md:pl-8">
           <h2 class="font-semibold text-4xl sm:text-6xl">Why us?</h2>
@@ -66,5 +66,4 @@ const props = defineProps(["brands", "categories"]);
       </div>
     </div>
   </section>
-  <section class="mb-14"></section>
 </template>

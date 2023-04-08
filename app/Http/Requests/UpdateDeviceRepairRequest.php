@@ -25,8 +25,8 @@ class UpdateDeviceRepairRequest extends FormRequest
     {
         return [
             'title' => 'required|string',
-            'body' => 'nullable',
-            'price' => 'required|numeric',
+            'body' => 'nullable|string',
+            'price' => 'required|numeripc',
             'repair_id' => 'required|exists:repairs,id'
         ];
     }

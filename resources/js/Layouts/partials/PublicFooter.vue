@@ -1,58 +1,128 @@
 <script setup>
+import ApplicationLogo from "@/Components/ApplicationLogo.vue";
 import { Link } from "@inertiajs/vue3";
 import chunk from "lodash/chunk";
 </script>
 <template>
-  <footer class="bg-neutral-900">
-    <div class="container px-5 py-24 mx-auto">
-      <div class="w-72 flex mx-auto">
-        <img src="/images/white.png" alt="Site Logo" />
+  <footer class="text-gray-400 bg-neutral-900 body-font">
+    <div
+      class="container px-5 py-24 mx-auto flex md:items-center lg:items-start md:flex-row md:flex-nowrap flex-wrap flex-col"
+    >
+      <div>
+        <div
+          class="w-64 flex-shrink-0 md:mx-0 mx-auto text-center md:text-left md:mt-0 mt-10"
+        >
+          <Link
+            :href="route('public.home')"
+            class="flex title-font font-medium items-center md:justify-start justify-center text-gray-900"
+          >
+            <ApplicationLogo />
+          </Link>
+          <p class="mt-2 text-sm text-center uppercase">
+            We buy and sell iphones, ipads, tablets and laptops
+          </p>
+        </div>
+        <div class="mt-4 hidden md:block">
+          <ul>
+            <li>
+              Email:
+              <a href="mailto:info@fonemart.com" class="text-white"
+                >info@fonemart.com</a
+              >
+            </li>
+            <li>
+              Phone:
+              <a href="tel:+44 1243 862501" class="text-white"
+                >+44 1243 862501</a
+              >
+            </li>
+            <li>
+              Address
+              <a
+                href="https://goo.gl/maps/uEgWVsT7hMQ7Tipq9"
+                class="text-white"
+                target="_blank"
+                rel="noopener noreferrer"
+                >16 The Arcade, Bognor Regis</a
+              >
+            </li>
+          </ul>
+        </div>
       </div>
 
       <div
-        class="flex pt-10 md:justify-evenly md:items-center md:flex-row md:flex-nowrap flex-wrap text-center flex-col"
+        class="flex-grow flex flex-wrap md:pl-20 -mb-10 md:mt-0 mt-10 md:text-left text-center"
       >
-        <div class="text-white flex-grow">
-          <h6 class="text-red-500 font-semibold text-2xl pb-6">Fix Devices</h6>
-          <div
-            class="border-white md:border-r-2 overflow-y-auto md:h-36 max-h-[150px] flex flex-col space-y-4"
+        <div class="lg:w-1/4 md:w-1/2 w-full px-4 flex-grow mb-4 sm:mb-0">
+          <h2
+            class="title-font text-white font-medium tracking-widest text-lg mb-3 uppercase"
           >
-            <Link
-              :href="route('public.appointments.create', device.slug)"
-              v-for="(device, index) in $page.props.navigation.devices"
-              :key="index"
-            >
-              {{ device.name }}
-            </Link>
-          </div>
+            Quick Links
+          </h2>
+          <nav>
+            <ul>
+              <li>
+                <Link
+                  class="hover:text-red-500 transition-colors duration-300"
+                  :href="route('public.home')"
+                  >Home</Link
+                >
+              </li>
+              <li>
+                <Link
+                  class="hover:text-red-500 transition-colors duration-300"
+                  :href="route('public.repairs')"
+                  >Repairs</Link
+                >
+              </li>
+              <li>
+                <Link
+                  class="hover:text-red-500 transition-colors duration-300"
+                  :href="route('public.products')"
+                  >Products</Link
+                >
+              </li>
+              <li>
+                <Link
+                  class="hover:text-red-500 transition-colors duration-300"
+                  :href="route('public.contact')"
+                  >Contact Us</Link
+                >
+              </li>
+            </ul>
+          </nav>
         </div>
-        <div class="text-white flex-grow">
-          <h6 class="text-red-500 font-semibold text-2xl pb-6">Fix Products</h6>
-          <div
-            class="border-white md:border-r-2 overflow-y-auto md:h-36 max-h-[150px] flex flex-col space-y-4"
+
+        <div class="lg:w-1/4 md:w-1/2 w-full px-4 flex-grow">
+          <h2
+            class="title-font font-medium text-white tracking-widest text-sm mb-3"
           >
-            <Link
-              :href="route('public.appointments.product.create', device.id)"
-              v-for="(device, index) in $page.props.navigation.products"
-              :key="index"
+            SUBSCRIBE TO OUR NEWSLETTER
+          </h2>
+          <div
+            class="flex xl:flex-nowrap md:flex-nowrap lg:flex-wrap flex-wrap justify-center items-end md:justify-start"
+          >
+            <div class="relative w-40 sm:w-auto xl:mr-4 lg:mr-0 sm:mr-4 mr-2">
+              <label for="footer-field" class="leading-7 text-sm text-gray-400"
+                >Email</label
+              >
+              <input
+                type="text"
+                id="footer-field"
+                name="footer-field"
+                placeholder="example@mail.com"
+                class="w-full bg-gray-800 rounded border bg-opacity-40 border-gray-700 focus:bg-transparent focus:ring-2 focus:ring-red-900 focus:border-red-500 text-base outline-none text-gray-100 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+              />
+            </div>
+            <button
+              class="mt-2 sm:mt-0 lg:mt-2 xl:mt-0 flex-shrink-0 inline-flex text-white bg-red-500 border-0 py-2 px-6 focus:outline-none hover:bg-red-600 rounded"
             >
-              {{ device.name }}
-            </Link>
-          </div>
-        </div>
-        <div class="text-white flex-grow">
-          <h6 class="text-red-500 font-semibold text-2xl pb-6">Fix Devices</h6>
-          <div
-            class="border-white md:border-r-2 overflow-y-auto md:h-36 max-h-[150px] flex flex-col space-y-4"
-          >
-            <Link :href="route('public.repairs')">View all repairs </Link>
-            <Link :href="route('public.products')">View all products </Link>
-            <Link :href="route('public.contact')">Contact Us </Link>
+              Submit
+            </button>
           </div>
         </div>
       </div>
     </div>
-
     <div class="bg-black bg-opacity-75">
       <div
         class="container mx-auto py-4 px-5 flex flex-wrap flex-col sm:flex-row"

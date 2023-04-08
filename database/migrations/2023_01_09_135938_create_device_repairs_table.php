@@ -19,7 +19,7 @@ return new class extends Migration
             $table->foreignId('repair_id')->constrained()->onDelete('cascade');
             $table->bigInteger('price');
             $table->string('title');
-            $table->text('body')->nullable();
+            $table->longText('body')->nullable();
             $table->timestamps();
         });
     }
