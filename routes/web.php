@@ -38,5 +38,7 @@ Route::post('/book-appointment/repair/{device}', [AppointmentController::class, 
 Route::get('/book-appointment/product/{product}', [AppointmentController::class, 'createProductAppointment'])->name('public.appointments.product.create');
 Route::post('/book-appointment/product/{product}', [AppointmentController::class, 'storeProductAppointment'])->name('public.appointments.product.store');
 
+
+Route::get('/{deviceCategory}/brands', [PublicController::class, 'categoryBrands'])->name('public.categoryBrands');
 require __DIR__ . '/admin.php';
 require __DIR__ . '/auth.php';

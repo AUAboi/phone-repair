@@ -6,5 +6,10 @@ return [
     'pending',
     'cancelled',
     'completed'
+  ],
+  'deviceCategories' => [
+    'mobile',
+    'laptop',
+    'tablet',
   ]
 ];

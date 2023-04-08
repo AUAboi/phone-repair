@@ -17,6 +17,9 @@ class BrandResource extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->name,
+            'mobile' => $this->mobile,
+            'tablet' => $this->tablet,
+            'laptop' => $this->laptop,
             'image' =>  $this->media ? $this->media->baseMedia->getUrl() : null,
             'slug' => $this->slug,
             'devices' => DeviceResource::collection($this->whenLoaded('devices'))

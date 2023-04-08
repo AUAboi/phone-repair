@@ -2,15 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
-  font-family: "Jost", sans-serif;
-  overflow-x: hidden;
+@font-face {
+  font-family: "Futura";
+  src: url("../fonts/futura/FuturaPT-Book.woff") format("woff");
 }
 
-@supports (font-variation-settings: normal) {
-  body {
-    font-family: "JostVariable";
-  }
+body {
+  font-family: "Futura", sans-serif;
+  overflow-x: hidden;
 }
 
 ::selection {

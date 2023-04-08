@@ -10,7 +10,57 @@ const props = defineProps(["brands", "categories"]);
 <template>
   <Head title="Welcome" />
   <BannerSlideshow />
-  <ProductsSection :categories="categories" />
+  <section class="my-12">
+    <h2 class="text-red-600 text-center text-4xl font-bold">
+      Devices and brands we repair
+    </h2>
+    <div
+      class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 max-w-3xl mx-auto my-8"
+    >
+      <div class="flex flex-col gap-4 items-center">
+        <img
+          width="300"
+          height="250"
+          class="w-64 h-52"
+          src="images/mobile.webp"
+        />
+        <h4 class="text-4xl text-fuchsia-900 text-center">
+          Smartphone Repairs
+        </h4>
+        <ActionButton :href="route('public.categoryBrands', 'mobile')">
+          Book Now
+        </ActionButton>
+      </div>
+      <div class="flex flex-col gap-4 items-center">
+        <img
+          width="300"
+          height="250"
+          class="w-64 h-52"
+          src="images/tablet.webp"
+        />
+        <h4 class="text-4xl text-fuchsia-900 text-center">
+          iPad-Tablets Repairs
+        </h4>
+        <ActionButton :href="route('public.categoryBrands', 'tablet')">
+          Book Now
+        </ActionButton>
+      </div>
+      <div class="flex flex-col gap-4 items-center">
+        <img
+          width="300"
+          height="250"
+          class="w-64 h-52"
+          src="images/laptop.webp"
+        />
+        <h4 class="text-4xl text-fuchsia-900 text-center">
+          MacBook-Laptop Repairs
+        </h4>
+        <ActionButton :href="route('public.categoryBrands', 'laptop')">
+          Book Now
+        </ActionButton>
+      </div>
+    </div>
+  </section>
   <section
     style="background-image: url('images/bg_06.jpg')"
     class="bg-cover bg-fixed bg-no-repeat bg-center relative"
@@ -41,29 +91,5 @@ const props = defineProps(["brands", "categories"]);
       </div>
     </div>
   </section>
-
-  <section class="my-14">
-    <h2 class="text-red-600 text-center text-4xl font-bold">Brands we offer</h2>
-    <div
-      class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 max-w-3xl mx-auto my-8"
-    >
-      <div
-        class="flex flex-col gap-4 items-center"
-        v-for="brand in brands"
-        :key="brand.id"
-      >
-        <img
-          width="300"
-          height="400"
-          class="w-64 h-56"
-          :src="brand.image"
-          :alt="brand.name"
-        />
-        <h4 class="text-4xl text-fuchsia-900 text-center">{{ brand.name }}</h4>
-        <ActionButton :href="route('public.repairs.brand', brand.slug)">
-          Book Now
-        </ActionButton>
-      </div>
-    </div>
-  </section>
+  <ProductsSection :categories="categories" />
 </template>

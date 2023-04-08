@@ -13,7 +13,16 @@ class Brand extends Model
 
     protected $fillable = [
         'name',
+        'mobile',
+        'laptop',
+        'tablet',
         'slug'
+    ];
+
+    protected $casts = [
+        'mobile' => 'boolean',
+        'laptop' => 'boolean',
+        'tablet' => 'boolean',
     ];
 
     public function getSlugOptions(): SlugOptions

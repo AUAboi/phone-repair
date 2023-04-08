@@ -25,7 +25,10 @@ class UpdateBrandRequest extends FormRequest
     {
         return [
             'name' => 'required|unique:brands,name,' . $this->route('brand')->id,
-            'image' => 'required|file|mimes:png,jpg,webp|max:3000'
+            'image' => 'required|file|mimes:png,jpg,webp|max:3000',
+            'mobile' => 'boolean|nullable',
+            'laptop' => 'boolean|nullable',
+            'tablet' => 'boolean|nullable',
         ];
     }
 }

@@ -11,7 +11,10 @@ class BrandService
   {
     DB::transaction(function () use ($data) {
       $brand = Brand::create([
-        'name' => $data['name']
+        'name' => $data['name'],
+        'mobile' => $data['mobile'],
+        'laptop' => $data['laptop'],
+        'tablet' => $data['tablet'],
       ]);
       $this->addBrandImage($brand, $data['image']);
     });
@@ -22,6 +25,9 @@ class BrandService
     DB::transaction(function () use ($brand, $data) {
       $brand->update([
         'name' => $data['name'],
+        'mobile' => $data['mobile'],
+        'laptop' => $data['laptop'],
+        'tablet' => $data['tablet'],
       ]);
       $this->addBrandImage($brand, $data['image']);
     });
