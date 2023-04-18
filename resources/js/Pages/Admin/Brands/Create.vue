@@ -34,8 +34,6 @@ const submit = () => {
       <div
         class="bg-white dark:text-white text-gray-900 dark:bg-gray-800 overflow-hidden shadow-sm rounded-lg mx-2 md:mx-0 px-2 py-2 sm:px-4"
       >
-        {{ form }}
-
         <form
           enctype="multipart/form-data"
           class="max-w-md mt-5"

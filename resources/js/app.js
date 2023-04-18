@@ -1,13 +1,13 @@
 import './bootstrap';
 import '../css/app.scss';
 import "../css/unreset.scss"
-import "@fontsource/jost/300.css"
-import "@fontsource/jost/400.css"
-import "@fontsource/jost/500.css"
-import "@fontsource/jost/600.css"
-import "@fontsource/jost/700.css"
-import "@fontsource/jost/800.css"
-import "@fontsource/jost/variable.css";
+// import "@fontsource/jost/300.css"
+// import "@fontsource/jost/400.css"
+// import "@fontsource/jost/500.css"
+// import "@fontsource/jost/600.css"
+// import "@fontsource/jost/700.css"
+// import "@fontsource/jost/800.css"
+// import "@fontsource/jost/variable.css";
 
 import { createApp, h } from 'vue';
 import { createInertiaApp } from '@inertiajs/vue3'
