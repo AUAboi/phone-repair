@@ -66,7 +66,7 @@ const props = defineProps(["brands", "categories"]);
     class="bg-cover bg-fixed bg-no-repeat bg-center relative"
   >
     <div class="bg-[#f2f2f2] bg-opacity-50 absolute w-full h-full top-0"></div>
-    <div class="container mx-auto py-28 relative z-50">
+    <div class="container mx-auto py-28 relative">
       <div class="grid grid-cols-1 md:grid-cols-2 items-center">
         <div class="p-4">
           <img src="images/featured.webp" width="700" height="400" />

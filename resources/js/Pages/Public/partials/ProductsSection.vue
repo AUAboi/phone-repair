@@ -17,7 +17,10 @@ const devices = computed(() => {
 });
 
 const toggledDevice = computed(() => {
-  return devices.value[currentDevice.value];
+  if (devices.length) {
+    return devices.value[currentDevice.value];
+  }
+  return null;
 });
 
 const openDevice = (i, j) => {
@@ -45,7 +48,9 @@ const breakpoints = {
 <template>
   <section>
     <div class="container mx-auto px-5 py-24">
-      <h4 class="text-6xl text-center font-bold">Products We Offer</h4>
+      <h4 v-if="props.categories.length" class="text-6xl text-center font-bold">
+        Products We Offer
+      </h4>
       <div v-for="(category, i) in categories" :key="category.id" class="mt-16">
         <div v-if="category.products.length">
           <h3 class="text-xl text-red-600 font-semibold text-center pb-8">

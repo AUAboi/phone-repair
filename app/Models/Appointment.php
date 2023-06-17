@@ -66,7 +66,7 @@ class Appointment extends Model
      * @var array
      */
     protected $casts = [
-        'phone' => E164PhoneNumberCast::class . ':PK',
+        'phone' => E164PhoneNumberCast::class . ':GB',
     ];
 
     public function user()

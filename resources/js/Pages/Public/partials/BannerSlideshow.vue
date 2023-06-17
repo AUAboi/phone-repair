@@ -1,15 +1,16 @@
 <script setup>
-import { ref } from "vue";
+import { ref, watch } from "vue";
 import { useIntervalFn } from "@vueuse/core";
 import IconChevronRight from "~icons/mdi/chevron-right";
 import IconChevronLeft from "~icons/mdi/chevron-left";
-import { Link } from "@inertiajs/vue3";
+import { Link, router, usePage } from "@inertiajs/vue3";
+import { useLogoStore } from "@/store/logoStore";
 
 const currentSlide = ref(1);
 
 const { pause, resume, isActive } = useIntervalFn(() => {
   nextSlide();
-}, 8000);
+}, 88000);
 
 const nextSlide = () => {
   restartInterval();
@@ -33,6 +34,21 @@ const restartInterval = () => {
   pause();
   resume();
 };
+
+const logoStore = useLogoStore();
+
+watch(
+  () => currentSlide.value,
+  () => {
+    currentSlide.value === 2
+      ? logoStore.toggleLogo("white.png")
+      : logoStore.toggleLogo("red.png");
+  }
+);
+
+router.on("start", () => {
+  logoStore.$reset();
+});
 </script>
 <template>
   <section class="min-h-[700px] md:h-screen">
@@ -54,91 +70,16 @@ const restartInterval = () => {
       <div
         v-if="currentSlide === 1"
         class="slide-1 flex items-center h-full bg-cover bg-no-repeat min-h-[700px]"
-      >
-        <div class="slide mx-auto flex-grow text-center md:text-start">
-          <div class="max-w-xs md:max-w-md lg:max-w-3xl mx-auto lg:mx-0">
-            <h5 class="text-gray-500 text-2xl md:text-4xl">
-              <span class="font-semibold">FONMART</span>
-              {{ new Date().getFullYear() }}
-            </h5>
-            <h3 class="uppercase text-red-500 font-bold text-4xl md:text-8xl">
-              Repair it now
-            </h3>
-            <p class="text-gray-800 md:text-lg">
-              Screen replacement is one of the most common repairs for mobile
-              phones. If your screen is cracked or broken, it can be replaced by
-              a professional technician.
-            </p>
-            <div class="mt-4">
-              <Link
-                as="button"
-                :href="route('public.products')"
-                class="btn-action bg-red-600 font-semibold text-white p-3 before:bg-blue-400"
-              >
-                SHOP NOW
-              </Link>
-            </div>
-          </div>
-        </div>
-      </div>
+      ></div>
       <div
+        ref="redSlide"
         v-else-if="currentSlide === 2"
         class="slide-2 flex items-center h-full bg-cover bg-no-repeat min-h-[700px]"
-      >
-        <div class="slide mx-auto flex-grow text-center md:text-start">
-          <div class="max-w-xs md:max-w-md lg:max-w-2xl mx-auto lg:mx-0">
-            <h5 class="text-gray-500 text-2xl md:text-4xl">
-              <span class="font-semibold">FONMART</span>
-              {{ new Date().getFullYear() }}
-            </h5>
-            <h3 class="uppercase text-red-500 font-bold text-4xl md:text-8xl">
-              Accessories
-            </h3>
-            <p class="text-gray-800 md:text-lg">
-              Phone cases, Screen protectors, Power banks, Headphones, Bluetooth
-              speakers, Selfie sticks, Charging cables.
-            </p>
-            <div class="mt-4">
-              <Link
-                as="button"
-                :href="route('public.products')"
-                class="btn-action bg-red-600 font-semibold text-white p-3 before:bg-blue-400"
-              >
-                SHOP NOW
-              </Link>
-            </div>
-          </div>
-        </div>
-      </div>
+      ></div>
       <div
         v-else-if="currentSlide === 3"
         class="slide-3 flex items-center h-full bg-cover bg-no-repeat min-h-[700px]"
-      >
-        <div class="slide mx-auto flex-grow text-center md:text-start">
-          <div class="max-w-xs md:max-w-md lg:max-w-2xl mx-auto lg:mx-0">
-            <h5 class="text-gray-500 text-2xl md:text-4xl">
-              <span class="font-semibold">FONMART</span>
-              {{ new Date().getFullYear() }}
-            </h5>
-            <h3 class="uppercase text-red-500 font-bold text-4xl md:text-8xl">
-              Unlocking
-            </h3>
-            <p class="text-gray-800 md:text-lg">
-              Carrier Unlock, iCloud Activation Lock, Jailbreak, Bootloader
-              Unlock, Patter/PIN/Password Unlock, Bootloader Unlock.
-            </p>
-            <div class="mt-4">
-              <Link
-                as="button"
-                :href="route('public.products')"
-                class="btn-action bg-red-600 font-semibold text-white p-3 before:bg-blue-400"
-              >
-                SHOP NOW
-              </Link>
-            </div>
-          </div>
-        </div>
-      </div>
+      ></div>
     </transition>
   </section>
 </template>

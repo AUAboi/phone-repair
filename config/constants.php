@@ -1,7 +1,7 @@
 <?php
 return [
   'currency' => 'GBP',
-  'phone_number' => 'PK',
+  'phone_number' => 'GB',
   'statuses' => [
     'pending',
     'cancelled',
