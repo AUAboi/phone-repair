@@ -32,11 +32,7 @@ const breakpoints = {
       <h4 class="text-6xl text-center font-bold pb-6">Brands We Offer</h4>
       <p class="text-center">We offer a variety of brands</p>
       <div>
-        <Carousel
-          :wrap-around="true"
-          :breakpoints="breakpoints"
-          :settings="settings"
-        >
+        <Carousel :breakpoints="breakpoints" :settings="settings">
           <Slide v-for="brand in brands" :key="brand.id">
             <div class="cursor-pointer">
               <div>
