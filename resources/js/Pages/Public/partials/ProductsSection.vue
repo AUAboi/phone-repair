@@ -17,7 +17,7 @@ const devices = computed(() => {
 });
 
 const toggledDevice = computed(() => {
-  if (devices.length) {
+  if (devices.value.length) {
     return devices.value[currentDevice.value];
   }
   return null;
