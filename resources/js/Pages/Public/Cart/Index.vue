@@ -86,7 +86,7 @@ const form = useForm({
             </div>
             <Link
               as="button"
-              href="route('checkout.index')"
+              :href="route('checkout.index')"
               class="bg-red-500 font-semibold hover:bg-red-600 py-3 px-2 rounded-sm text-sm text-white uppercase w-full"
             >
               Continue to checkout

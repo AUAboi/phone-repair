@@ -1,11 +1,13 @@
 <?php
 
-use App\Http\Controllers\AppointmentController;
-use App\Http\Controllers\CartController;
-use App\Http\Controllers\PublicController;
-use Illuminate\Foundation\Application;
-use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+use Illuminate\Support\Facades\Route;
+use Illuminate\Foundation\Application;
+use App\Http\Controllers\CartController;
+use App\Http\Controllers\OrderController;
+use App\Http\Controllers\PublicController;
+use App\Http\Controllers\CheckoutController;
+use App\Http\Controllers\AppointmentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -39,13 +41,17 @@ Route::post('/book-appointment/repair/{device}', [AppointmentController::class, 
 Route::get('/book-appointment/product/{product}', [AppointmentController::class, 'createProductAppointment'])->name('public.appointments.product.create');
 Route::post('/book-appointment/product/{product}', [AppointmentController::class, 'storeProductAppointment'])->name('public.appointments.product.store');
 
-
 Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
 Route::post('/cart/add', [CartController::class, 'add'])->name('cart.add');
 Route::post('/cart/remove', [CartController::class, 'remove'])->name('cart.remove');
 
 Route::post('/cart/remove-item', [CartController::class, 'removeItem'])->name('cart.removeitem');
 
+Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout.index');
+
+Route::post('/order/place', [OrderController::class, 'store'])->name('order.store');
+
 Route::get('/{deviceCategory}/brands', [PublicController::class, 'categoryBrands'])->name('public.categoryBrands');
+
 require __DIR__ . '/admin.php';
 require __DIR__ . '/auth.php';
