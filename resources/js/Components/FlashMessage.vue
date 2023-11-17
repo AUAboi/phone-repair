@@ -22,7 +22,8 @@ watch(
     enter-from-class="translate-x-60"
     enter-to-class="translate-x-0"
     leave-to-class="translate-x-60"
-    class="text-white fixed top-10 right-0 mx-2 transition-all z-50"
+    style="z-index: 100"
+    class="text-white fixed top-10 right-0 mx-2 transition-all"
   >
     <div v-if="show">
       <div

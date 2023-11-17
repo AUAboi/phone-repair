@@ -59,6 +59,10 @@ class HandleInertiaRequests extends Middleware
                     'location' => $request->url(),
                 ]);
             },
+            'cart' => [
+                'total' => $request->user() ? money(\Cart::session($request->user()->id)->getTotal(), config('constants.currency'), true)
+                    ->formatWithoutZeroes() : null,
+            ],
         ]);
     }
 }

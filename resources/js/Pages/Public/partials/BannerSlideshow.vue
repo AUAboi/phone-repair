@@ -3,8 +3,9 @@ import { ref, watch } from "vue";
 import { useIntervalFn } from "@vueuse/core";
 import IconChevronRight from "~icons/mdi/chevron-right";
 import IconChevronLeft from "~icons/mdi/chevron-left";
-import { Link, router, usePage } from "@inertiajs/vue3";
+import { router } from "@inertiajs/vue3";
 import { useLogoStore } from "@/store/logoStore";
+import { usePointerSwipe } from "@vueuse/core";
 
 const currentSlide = ref(1);
 
@@ -37,6 +38,19 @@ const restartInterval = () => {
 
 const logoStore = useLogoStore();
 
+const slider = ref(null);
+
+const { direction } = usePointerSwipe(slider, {
+  onSwipeEnd: (e) => {
+    if (direction.value === "LEFT") {
+      nextSlide();
+    }
+    if (direction.value === "RIGHT") {
+      previousSlide();
+    }
+  },
+});
+
 watch(
   () => currentSlide.value,
   () => {
@@ -51,7 +65,7 @@ router.on("start", () => {
 });
 </script>
 <template>
-  <section class="min-h-[700px] md:h-screen">
+  <section ref="slider" class="min-h-[700px] md:h-screen">
     <div class="w-full absolute top-1/2 z-40 flex justify-between mt-7 sm:mt-0">
       <button
         @click.prevent="previousSlide"

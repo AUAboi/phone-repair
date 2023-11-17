@@ -3,8 +3,9 @@ import BaseMenu from "./BaseMenu.vue";
 import ResponsiveMenu from "./ResponsiveMenu.vue";
 import { ref, watch } from "vue";
 import { onClickOutside } from "@vueuse/core";
-import { router } from "@inertiajs/vue3";
+import { Link, router } from "@inertiajs/vue3";
 import { useLogoStore } from "@/store/logoStore";
+import CartIcon from "~icons/mdi/cart-outline";
 
 const props = defineProps({
   menuItems: {
@@ -38,6 +39,12 @@ router.on("success", (event) => {
 const logoStore = useLogoStore();
 </script>
 <template>
+  <Link
+    :href="route('cart.index')"
+    class="fixed bottom-10 right-10 text-3xl text-white bg-red-500 p-2 rounded-full"
+  >
+    <CartIcon />
+  </Link>
   <BaseMenu :menu-items="menuItems" />
   <ResponsiveMenu
     :menu-items="menuItems"

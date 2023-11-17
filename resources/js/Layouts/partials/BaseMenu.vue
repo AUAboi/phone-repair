@@ -2,6 +2,7 @@
 import ActionButton from "@/Components/ActionButton.vue";
 import { Link } from "@inertiajs/vue3";
 import LogoutIcon from "~icons/mdi/logout";
+import CartIcon from "~icons/mdi/cart-outline";
 import AccountIcon from "~icons/mdi/account";
 
 const props = defineProps({
@@ -57,11 +58,14 @@ const props = defineProps({
         >
       </div>
     </div>
-    <div v-if="$page.props.auth.user" class="space-x-2 flex-grow text-end">
+    <div
+      v-if="$page.props.auth.user"
+      class="space-x-8 flex-grow text-end flex justify-end"
+    >
       <Link
         as="button"
         method="post"
-        class="text-red-500 text-3xl"
+        class="text-3xl text-white bg-red-500 p-2 pr-1 rounded-full"
         :href="route('logout')"
         ><LogoutIcon />
       </Link>

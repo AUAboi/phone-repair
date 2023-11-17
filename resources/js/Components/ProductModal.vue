@@ -2,6 +2,7 @@
 import Modal from "@/Components/Modal.vue";
 import CloseCircle from "~icons/mdi/close-circle";
 import ActionButton from "./ActionButton.vue";
+import { useForm } from "@inertiajs/vue3";
 
 const props = defineProps({
   modalToggle: {
@@ -9,13 +10,24 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
-
   product: {
     required: true,
   },
 });
 
 const emit = defineEmits(["close"]);
+
+const form = useForm({
+  id: null,
+});
+
+const addToCart = (id) => {
+  form.id = id;
+  form.post(route("cart.add"), {
+    preserveScroll: true,
+    preserveState: true,
+  });
+};
 </script>
 <template>
   <Modal max-width="7xl" :show="modalToggle" @close="$emit('close')">
@@ -114,12 +126,13 @@ const emit = defineEmits(["close"]);
               <span class="title-font font-medium text-2xl text-gray-900">{{
                 product.formatted_price
               }}</span>
-              <ActionButton
-                :href="route('public.appointments.product.create', product.id)"
-                class="ml-auto"
+              <button
+                @click.prevent="addToCart(product.id)"
+                :disabled="form.processing"
+                class="btn-action ml-auto"
               >
-                Book Now
-              </ActionButton>
+                Add to Cart
+              </button>
             </div>
           </div>
         </div>
@@ -133,3 +146,47 @@ const emit = defineEmits(["close"]);
     </section>
   </Modal>
 </template>
+<style scoped>
+.btn-action {
+  background-color: #e52929;
+  z-index: 1;
+  height: 45px;
+  line-height: 1;
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 700;
+  padding: 10px 20px;
+  position: relative;
+  align-items: center;
+  display: inline-flex;
+  letter-spacing: 0.5px;
+  justify-content: center;
+  font-size: 1.3rem;
+}
+
+.btn-action:before {
+  background: #2e2e2e;
+}
+
+.btn-action:hover:before {
+  left: 0px;
+  width: 100%;
+  right: auto;
+}
+
+.btn-action:hover {
+  color: #ffffff;
+}
+
+.btn-action:before {
+  top: 0px;
+  width: 0px;
+  left: auto;
+  right: 0px;
+  z-index: -1;
+  bottom: 0px;
+  content: "";
+  position: absolute;
+  transition: all 0.3s ease-in-out;
+}
+</style>
