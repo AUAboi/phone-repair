@@ -28,7 +28,6 @@ const submit = () => {
   <div class="container mx-auto mb-16 pt-36">
     <div class="flex justify-evenly flex-wrap-reverse gap-14 sm:gap-6 md:gap-0">
       <div class="flex-grow">
-        {{ form }}
         <h2 class="text-3xl text-center font-bold">Complete your purchase</h2>
         <form
           class="max-w-xs sm:max-w-4xl mx-4 sm:mx-auto mt-8"

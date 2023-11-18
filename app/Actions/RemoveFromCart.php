@@ -11,7 +11,9 @@ class RemoveFromCart
   public function handle(Product $product)
   {
     $cartItem = \Cart::get($product->id);
-
+    if (!$cartItem) {
+      return;
+    }
     if ($cartItem->quantity > 1) {
       \Cart::update($product->id, array(
         'quantity' => -1,

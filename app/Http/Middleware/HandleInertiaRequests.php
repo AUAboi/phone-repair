@@ -38,6 +38,9 @@ class HandleInertiaRequests extends Middleware
         $user = null;
         if ($request->user()) {
             $user = new UserResource($request->user());
+            \Cart::session($request->user()->id);
+        } else {
+            \Cart::session($request->session()->getId());
         }
         return array_merge(parent::share($request), [
             'flash' => function () use ($request) {
@@ -60,7 +63,8 @@ class HandleInertiaRequests extends Middleware
                 ]);
             },
             'cart' => [
-                'total' => $request->user() ? money(\Cart::session($request->user()->id)->getTotal(), config('constants.currency'), true)
+                'content' => \Cart::getContent(),
+                'total' => $request->user() ? money(\Cart::getTotal(), config('constants.currency'), true)
                     ->formatWithoutZeroes() : null,
             ],
         ]);

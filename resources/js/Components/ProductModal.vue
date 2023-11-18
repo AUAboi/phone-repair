@@ -2,7 +2,8 @@
 import Modal from "@/Components/Modal.vue";
 import CloseCircle from "~icons/mdi/close-circle";
 import ActionButton from "./ActionButton.vue";
-import { useForm } from "@inertiajs/vue3";
+import { useForm, usePage } from "@inertiajs/vue3";
+import { computed } from "vue";
 
 const props = defineProps({
   modalToggle: {
@@ -21,6 +22,10 @@ const form = useForm({
   id: null,
 });
 
+const cart = computed(() => {
+  return usePage().props.cart;
+});
+
 const addToCart = (id) => {
   form.id = id;
   form.post(route("cart.add"), {
@@ -28,9 +33,23 @@ const addToCart = (id) => {
     preserveState: true,
   });
 };
+
+const removeFromCart = (id) => {
+  form.id = id;
+  form.post(route("cart.remove"), {
+    preserveScroll: true,
+    preserveState: true,
+  });
+};
+
+const isCartProduct = computed(() => {
+  return Object.keys(cart.value.content).find((element) => {
+    return cart.value.content[element].id === props.product.id;
+  });
+});
 </script>
 <template>
-  <Modal max-width="7xl" :show="modalToggle" @close="$emit('close')">
+  <Modal max-width="5xl" :show="modalToggle" @close="$emit('close')">
     <section class="text-gray-600 body-font overflow-hidden">
       <div class="container px-5 py-24 mx-auto">
         <div class="lg:w-4/5 mx-auto flex flex-wrap">
@@ -46,86 +65,14 @@ const addToCart = (id) => {
             <h1 class="text-gray-900 text-3xl title-font font-medium mb-1">
               {{ product.name }}
             </h1>
-            <div class="flex mb-4">
-              <span class="flex items-center">
-                <svg
-                  fill="currentColor"
-                  stroke="currentColor"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  class="w-4 h-4 text-red-500"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"
-                  ></path>
-                </svg>
-                <svg
-                  fill="currentColor"
-                  stroke="currentColor"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  class="w-4 h-4 text-red-500"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"
-                  ></path>
-                </svg>
-                <svg
-                  fill="currentColor"
-                  stroke="currentColor"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  class="w-4 h-4 text-red-500"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"
-                  ></path>
-                </svg>
-                <svg
-                  fill="currentColor"
-                  stroke="currentColor"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  class="w-4 h-4 text-red-500"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"
-                  ></path>
-                </svg>
-                <svg
-                  :fill="Math.random() * 100 > 50 ? 'currentColor' : 'none'"
-                  stroke="currentColor"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  class="w-4 h-4 text-red-500"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"
-                  ></path>
-                </svg>
-                <span class="text-gray-600 ml-3"
-                  >{{ Math.ceil(Math.random() * 100) }} Reviews</span
-                >
-              </span>
-            </div>
             <div v-html="product.body" class="leading-relaxed"></div>
             <div
               class="flex mt-6 items-center pb-5 border-b-2 border-gray-100 mb-5"
             ></div>
-            <div class="flex">
-              <span class="title-font font-medium text-2xl text-gray-900">{{
-                product.formatted_price
-              }}</span>
+            <div v-if="!isCartProduct" class="flex">
+              <span class="title-font font-medium text-2xl text-gray-900"
+                >{{ product.formatted_price }}
+              </span>
               <button
                 @click.prevent="addToCart(product.id)"
                 :disabled="form.processing"
@@ -133,6 +80,36 @@ const addToCart = (id) => {
               >
                 Add to Cart
               </button>
+            </div>
+            <div v-else class="flex justify-between">
+              <span class="title-font font-medium text-2xl text-gray-900">{{
+                product.formatted_price
+              }}</span>
+              <div class="flex justify-center w-1/5 items-center">
+                <div class="cursor-pointer" @click="removeFromCart(product.id)">
+                  <svg
+                    class="fill-current text-gray-600 w-3"
+                    viewBox="0 0 448 512"
+                  >
+                    <path
+                      d="M416 208H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h384c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z"
+                    />
+                  </svg>
+                </div>
+                <span class="mx-2 border text-center w-8">{{
+                  cart.content[isCartProduct].quantity
+                }}</span>
+                <div class="cursor-pointer" @click="addToCart(product.id)">
+                  <svg
+                    class="fill-current text-gray-600 w-3"
+                    viewBox="0 0 448 512"
+                  >
+                    <path
+                      d="M416 208H272V64c0-17.67-14.33-32-32-32h-32c-17.67 0-32 14.33-32 32v144H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h144v144c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V304h144c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z"
+                    />
+                  </svg>
+                </div>
+              </div>
             </div>
           </div>
         </div>

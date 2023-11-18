@@ -9,16 +9,6 @@ const props = defineProps(["navigation"]);
 
 const menuItems = [
   {
-    text: "Products",
-    href: route("public.products"),
-    children: props.navigation.products.map((p) => {
-      return {
-        text: p.name,
-        href: route("public.appointments.product.create", p.id),
-      };
-    }),
-  },
-  {
     text: "Repair",
     href: route("public.repairs"),
     children: props.navigation.devices.map((d) => {
@@ -28,7 +18,10 @@ const menuItems = [
       };
     }),
   },
-
+  {
+    text: "Products",
+    href: route("public.products"),
+  },
   {
     text: "Contact Us",
     href: route("public.contact"),
