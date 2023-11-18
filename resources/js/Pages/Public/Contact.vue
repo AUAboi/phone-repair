@@ -83,7 +83,7 @@ const submit = () => {
 
             <input
               class="border-gray-300 bg-gray-100 h-14 w-full focus:border-none focus:ring-red-500"
-              type="text"
+              type="email"
               placeholder="Your Email"
               v-model="form.email"
             />

@@ -12,6 +12,8 @@ use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Resources\OrderResource;
+use App\Mail\OrderPlaced;
+use Illuminate\Support\Facades\Mail;
 
 class OrderController extends Controller
 {
@@ -103,6 +105,8 @@ class OrderController extends Controller
                     "source" => $request->card['token']['id'],
                     "description" => "This payment is for test purposes",
                 ]);
+
+                Mail::to($order->email)->send(new OrderPlaced($order));
             });
         } catch (\Stripe\Exception\CardException $e) {
             return redirect()->route('public.home')->with('error', $e->getError()->message);

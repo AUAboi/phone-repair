@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use App\Models\OrderProduct;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Casts\Attribute;
@@ -36,6 +37,11 @@ class Order extends Model
     public function getFormattedTotalAttribute()
     {
         return money($this->total, config('constants.currency'), true)->formatWithoutZeroes();
+    }
+
+    public function getDeliveryTimeAttribute()
+    {
+        return Carbon::createFromTimestamp(strtotime($this->created_at))->addDays(5)->format("F d, Y");
     }
 
     public function products()
