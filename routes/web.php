@@ -8,6 +8,7 @@ use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PublicController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\AppointmentController;
+use App\Http\Controllers\ContactController;
 
 /*
 |--------------------------------------------------------------------------
@@ -50,6 +51,8 @@ Route::post('/cart/remove-item', [CartController::class, 'removeItem'])->name('c
 Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout.index');
 
 Route::post('/order/place', [OrderController::class, 'store'])->name('order.store');
+
+Route::post('/contact/send', [ContactController::class, 'send'])->name('contact.send');
 
 Route::get('/{deviceCategory}/brands', [PublicController::class, 'categoryBrands'])->name('public.categoryBrands');
 

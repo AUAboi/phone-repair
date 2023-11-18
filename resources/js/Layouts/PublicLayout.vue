@@ -1,7 +1,7 @@
 <script setup>
 import ApplicationLogo from "@/Components/ApplicationLogo.vue";
 import FlashMessage from "@/Components/FlashMessage.vue";
-import { Link, usePage } from "@inertiajs/vue3";
+import { Link } from "@inertiajs/vue3";
 import PublicFooter from "./partials/PublicFooter.vue";
 import PublicNavigation from "./partials/PublicNavigation.vue";
 

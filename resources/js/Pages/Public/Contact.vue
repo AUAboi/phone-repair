@@ -2,7 +2,21 @@
 import MapMarkerOutline from "~icons/mdi/map-marker-outline";
 import PhoneInTalkOutline from "~icons/mdi/phone-in-talk-outline";
 import EmailOutline from "~icons/mdi/email-outline";
-import { Head, usePage } from "@inertiajs/vue3";
+import { Head, useForm } from "@inertiajs/vue3";
+
+const form = useForm({
+  name: "",
+  email: "",
+  subject: "",
+  message: "",
+});
+
+const submit = () => {
+  form.post(route("contact.send"), {
+    preserveScroll: true,
+    preserveState: false,
+  });
+};
 </script>
 <template>
   <Head title="Contact Us" />
@@ -53,17 +67,25 @@ import { Head, usePage } from "@inertiajs/vue3";
       </div>
       <div class="flex-grow p-4">
         <h2 class="font-bold text-3xl pb-6">Feedback</h2>
-        <form class="space-y-8">
+        <div class="mb-5" v-if="form.hasErrors">
+          <div class="text-red-500" v-for="error in form.errors">
+            {{ error }}
+          </div>
+        </div>
+        <div class="space-y-8">
           <div class="flex flex-col sm:flex-row gap-8">
             <input
               class="border-gray-300 bg-gray-100 h-14 w-full focus:border-none focus:ring-red-500"
               type="text"
               placeholder="Your Name"
+              v-model="form.name"
             />
+
             <input
               class="border-gray-300 bg-gray-100 h-14 w-full focus:border-none focus:ring-red-500"
               type="text"
               placeholder="Your Email"
+              v-model="form.email"
             />
           </div>
           <div>
@@ -71,20 +93,23 @@ import { Head, usePage } from "@inertiajs/vue3";
               class="border-gray-300 bg-gray-100 h-14 w-full focus:border-none focus:ring-red-500"
               type="text"
               placeholder="Subject"
+              v-model="form.subject"
             />
           </div>
           <div>
             <textarea
               placeholder="Your Message"
+              v-model="form.message"
               class="border-gray-300 bg-gray-100 h-14 w-full focus:border-none focus:ring-red-500 min-h-[130px]"
             ></textarea>
           </div>
           <button
+            @click.prevent="submit"
             class="btn-action text-xl text-white py-4 px-10 bg-red-600 before:bg-black"
           >
             Submit
           </button>
-        </form>
+        </div>
       </div>
     </div>
   </section>
