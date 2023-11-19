@@ -47,19 +47,22 @@ const props = defineProps({
       class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 max-w-6xl mx-auto"
     >
       <div
-        class="cursor-pointer text-center"
+        class="cursor-pointer text-center flex flex-col"
         v-for="(brand, index) in brands"
         :key="index"
       >
         <div>
           <img
-            class="h-64 w-52 rounded-2xl mx-auto"
+            class="w-52 rounded-2xl mx-auto"
             :src="brand.image"
             :alt="brand.name"
           />
         </div>
         <h4 class="text-lg font-semibold py-4">{{ brand.name }}</h4>
-        <ActionButton :href="route('public.repairs.brand', brand.slug)">
+        <ActionButton
+          class="mt-auto w-fit mx-auto"
+          :href="route('public.repairs.brand', brand.slug)"
+        >
           Book Now
         </ActionButton>
       </div>

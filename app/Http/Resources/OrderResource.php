@@ -17,8 +17,11 @@ class OrderResource extends JsonResource
         return [
             'first_name' => $this->first_name,
             'last_name' => $this->last_name,
+            'user' => new UserResource($this->whenLoaded('user')),
+            'name' => $this->name,
             'phone' => $this->phone,
             'email' => $this->email,
+            'order_status' => $this->order_status,
             'total' => $this->formatted_total
         ];
     }

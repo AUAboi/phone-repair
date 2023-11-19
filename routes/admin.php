@@ -10,6 +10,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\AppointmentController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DeviceRepairController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 
 Route::middleware(['auth', 'admin'])->group(function () {
@@ -66,4 +67,6 @@ Route::middleware(['auth', 'admin'])->group(function () {
   Route::get('/appointments/{appointment}', [AppointmentController::class, 'show'])->name('appointments.show');
 
   Route::get('/users', [UserController::class, 'index'])->name('users.index');
+
+  Route::get('/orders', [OrderController::class, 'index'])->name('orders.index');
 });

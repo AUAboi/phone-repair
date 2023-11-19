@@ -20,6 +20,7 @@ class OrderController extends Controller
     public function index()
     {
         $orders = Order::orderBy('created_at', 'DESC')
+            ->with(['user'])
             ->paginate(10)
             ->withQueryString();
 

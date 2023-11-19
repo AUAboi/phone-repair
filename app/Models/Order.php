@@ -14,6 +14,7 @@ class Order extends Model
 
     protected $fillable = [
         'order_no',
+        'user_id',
         'email',
         'phone',
         'zip_code',
@@ -23,6 +24,7 @@ class Order extends Model
         'last_name',
         'total',
         'status',
+        'order_status'
     ];
 
 
@@ -34,6 +36,11 @@ class Order extends Model
         );
     }
 
+    public function getNameAttribute()
+    {
+        return "$this->first_name $this->last_name";
+    }
+
     public function getFormattedTotalAttribute()
     {
         return money($this->total, config('constants.currency'), true)->formatWithoutZeroes();
@@ -42,6 +49,11 @@ class Order extends Model
     public function getDeliveryTimeAttribute()
     {
         return Carbon::createFromTimestamp(strtotime($this->created_at))->addDays(5)->format("F d, Y");
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 
     public function products()

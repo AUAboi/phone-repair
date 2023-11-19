@@ -3,10 +3,11 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Models\Order;
+use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
-use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
@@ -55,6 +56,11 @@ class User extends Authenticatable
                 ->where('first_name', 'like', '%' . $search . '%')
                 ->Orwhere('last_name', 'like', '%' . $search . '%');
         });
+    }
+
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
     }
 
     public function appointments()
