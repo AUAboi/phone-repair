@@ -9,6 +9,7 @@ use App\Http\Controllers\PublicController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\AppointmentController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\UserProfileController;
 
 /*
 |--------------------------------------------------------------------------
@@ -53,6 +54,8 @@ Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout.in
 Route::post('/order/place', [OrderController::class, 'store'])->name('order.store');
 
 Route::post('/contact/send', [ContactController::class, 'send'])->name('contact.send');
+
+Route::get('/user/profile', [UserProfileController::class, 'index']);
 
 Route::get('/{deviceCategory}/brands', [PublicController::class, 'categoryBrands'])->name('public.categoryBrands');
 
