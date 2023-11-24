@@ -62,10 +62,13 @@ const breakpoints = {
                 v-for="(product, j) in category.products"
                 :key="product.id"
               >
-                <div class="cursor-pointer" @click="openDevice(i, j)">
+                <div
+                  class="cursor-pointer text-center flex flex-col h-full"
+                  @click="openDevice(i, j)"
+                >
                   <div>
                     <img
-                      class="h-64 w-52 rounded-2xl"
+                      class="w-52 rounded-2xl mx-auto"
                       :src="product.image"
                       alt=""
                     />

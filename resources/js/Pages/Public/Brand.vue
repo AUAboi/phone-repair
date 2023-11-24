@@ -59,15 +59,15 @@ const breakpoints = {
       :settings="settings"
     >
       <Slide v-for="device in brand.devices" :key="device.id">
-        <div class="cursor-pointer">
+        <div class="cursor-pointer text-center flex flex-col h-full">
           <div>
             <img
-              class="h-64 w-52 rounded-2xl"
+              class="w-60 rounded-2xl mx-auto"
               :src="device.image"
               :alt="device.name"
             />
           </div>
-          <h4 class="text-lg font-semibold pt-4">{{ device.name }}</h4>
+          <h4 class="text-lg font-semibold pt-4 mt-auto">{{ device.name }}</h4>
           <ActionButton
             :href="route('public.appointments.create', device.slug)"
           >

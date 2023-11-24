@@ -17,7 +17,7 @@ class ProductResource extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->name,
-            'image' =>  $this->media ? $this->media->baseMedia->getUrl() : null,
+            'image' => $this->media ? $this->media->baseMedia->getUrl() : null,
             'body' => $this->body,
             'formatted_price' => $this->formatted_price,
             'price' => $this->price,
