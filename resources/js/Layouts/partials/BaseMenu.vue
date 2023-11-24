@@ -58,20 +58,12 @@ const props = defineProps({
         >
       </div>
     </div>
-    <div
-      v-if="$page.props.auth.user"
-      class="space-x-8 flex-grow text-end flex justify-end"
-    >
+
+    <div class="space-x-2 flex-grow text-end">
       <Link
         as="button"
-        method="post"
-        class="text-3xl text-white bg-red-500 p-2 pr-1 rounded-full"
-        :href="route('logout')"
-        ><LogoutIcon />
-      </Link>
-    </div>
-    <div v-else class="space-x-2 flex-grow text-end">
-      <Link as="button" class="text-red-500 text-3xl" :href="route('register')"
+        class="text-3xl text-white bg-red-500 p-1 rounded-full"
+        :href="route('user.profile')"
         ><AccountIcon />
       </Link>
     </div>

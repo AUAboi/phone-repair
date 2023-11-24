@@ -21,7 +21,11 @@ class OrderResource extends JsonResource
             'name' => $this->name,
             'phone' => $this->phone,
             'email' => $this->email,
+            'created_at' =>  $this->created_at->diffForHumans(),
             'order_status' => $this->order_status,
+            'order_no' => $this->order_no,
+            'products' => $this->whenLoaded('products'),
+            'slug' => $this->order_no,
             'total' => $this->formatted_total
         ];
     }

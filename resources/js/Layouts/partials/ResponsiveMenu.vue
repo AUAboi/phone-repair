@@ -52,6 +52,12 @@ const props = defineProps({
       </div>
       <div v-if="$page.props.auth.user" class="space-x-2 mt-auto text-white">
         <Link
+          class="text-xl bg-red-500 hover:bg-red-600 px-4 py-1"
+          :href="route('user.profile')"
+        >
+          Profile</Link
+        >
+        <Link
           as="button"
           method="post"
           class="text-xl bg-red-500 hover:bg-red-600 px-4 py-1"

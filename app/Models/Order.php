@@ -27,6 +27,13 @@ class Order extends Model
         'order_status'
     ];
 
+    /**
+     * Get the route key for the model.
+     */
+    public function getRouteKeyName(): string
+    {
+        return 'order_no';
+    }
 
     protected function price(): Attribute
     {

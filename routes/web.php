@@ -51,13 +51,19 @@ Route::post('/cart/remove-item', [CartController::class, 'removeItem'])->name('c
 
 Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout.index');
 
+
+Route::get('tracking/order/{order:order_no}', [OrderController::class, 'show'])->name('order.show');
+
 Route::post('/order/place', [OrderController::class, 'store'])->name('order.store');
 
 Route::post('/contact/send', [ContactController::class, 'send'])->name('contact.send');
 
-Route::get('/user/profile', [UserProfileController::class, 'index']);
 
 Route::get('/{deviceCategory}/brands', [PublicController::class, 'categoryBrands'])->name('public.categoryBrands');
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/user/profile', [UserProfileController::class, 'index'])->name('user.profile');
+});
 
 require __DIR__ . '/admin.php';
 require __DIR__ . '/auth.php';

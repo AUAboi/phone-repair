@@ -118,6 +118,13 @@ class OrderController extends Controller
         return redirect()->route('public.home')->with('success', 'Order successfull');
     }
 
+    public function show(Order $order)
+    {
+        return Inertia::render("Public/Orders/Show", [
+            'order' => new OrderResource($order->load('products'))
+        ]);
+    }
+
 
     private function generateNumber(Order $order)
     {

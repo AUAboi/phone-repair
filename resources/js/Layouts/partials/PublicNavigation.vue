@@ -41,7 +41,7 @@ const logoStore = useLogoStore();
 <template>
   <Link
     :href="route('cart.index')"
-    class="fixed bottom-10 right-10 text-3xl text-white bg-red-500 p-2 rounded-full"
+    class="fixed bottom-10 right-2 md:right-10 text-3xl text-white bg-red-500 p-2 rounded-full"
   >
     <CartIcon />
   </Link>
