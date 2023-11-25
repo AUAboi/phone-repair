@@ -20,7 +20,7 @@ const labels = [
     value: "Total Amount",
   },
   {
-    key: "created_at",
+    key: "formatted_order_date",
     value: "",
   },
 ];

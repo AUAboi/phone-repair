@@ -62,6 +62,7 @@ class OrderController extends Controller
 
             $cartContent = $row->transform(fn ($item) => [
                 'id' => $item->id,
+                'product_id' => $item->associatedModel->id,
                 'name' => $item->associatedModel->name,
                 'price' => $item->associatedModel->formatted_price,
                 'price_original' => $item->associatedModel->price,
@@ -93,7 +94,14 @@ class OrderController extends Controller
 
 
                 foreach ($cartContent as $key => $item) {
-                    $order->products()->create(['quantity' => $item['quantity'], 'price' => $item['price_original'], 'name' => $item['name']]);
+                    $order->products()->create(
+                        [
+                            'quantity' => $item['quantity'],
+                            'price' => $item['price_original'],
+                            'name' => $item['name'],
+                            'product_id' => $item['product_id']
+                        ]
+                    );
                 }
 
                 \Cart::clear();
@@ -121,7 +129,8 @@ class OrderController extends Controller
     public function show(Order $order)
     {
         return Inertia::render("Public/Orders/Show", [
-            'order' => new OrderResource($order->load('products'))
+            'previous_orders' => $order->user ? count($order->user->orders) : null,
+            'order' => new OrderResource($order->load(['products', 'products.product', 'products.product.media']))
         ]);
     }
 

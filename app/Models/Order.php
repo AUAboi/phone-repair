@@ -58,6 +58,12 @@ class Order extends Model
         return Carbon::createFromTimestamp(strtotime($this->created_at))->addDays(5)->format("F d, Y");
     }
 
+
+    public function getFullAddressAttribute()
+    {
+        return "$this->address, $this->city $this->zip_code";
+    }
+
     public function user()
     {
         return $this->belongsTo(User::class);
