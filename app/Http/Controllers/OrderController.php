@@ -12,7 +12,10 @@ use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Resources\OrderResource;
+use App\Mail\OrderCancelled;
+use App\Mail\OrderDelivered;
 use App\Mail\OrderPlaced;
+use App\Mail\OrderShipped;
 use Illuminate\Support\Facades\Mail;
 
 class OrderController extends Controller
@@ -115,6 +118,9 @@ class OrderController extends Controller
                     "description" => "This payment is for test purposes",
                 ]);
 
+                $order->payment_status = "paid";
+                $order->save();
+
                 Mail::to($order->email)->send(new OrderPlaced($order));
             });
         } catch (\Stripe\Exception\CardException $e) {
@@ -134,6 +140,38 @@ class OrderController extends Controller
         ]);
     }
 
+    public function edit(Order $order)
+    {
+        return Inertia::render("Admin/Orders/Edit", [
+            'order' => new OrderResource($order->load(['products', 'products.product', 'products.product.media']))
+        ]);
+    }
+
+    public function update(Request $request, Order $order)
+    {
+        $request->validate([
+            'order_status' => 'required|in:delivered,preparing,cancelled,in-transit',
+            'send_email' => 'required|boolean'
+        ]);
+
+        $order->update([
+            'order_status' => $request->order_status
+        ]);
+
+        if ($request->send_email) {
+            if ($request->order_status === "in-transit") {
+                Mail::to($order->email)->send(new OrderShipped($order));
+            } else if ($request->order_status === "cancelled") {
+                Mail::to($order->email)->send(new OrderCancelled($order));
+            } else if ($request->order_status === "delivered") {
+                Mail::to($order->email)->send(new OrderDelivered($order));
+            }
+        }
+
+
+
+        return redirect()->back()->with("success", "Updated successfully");
+    }
 
     private function generateNumber(Order $order)
     {

@@ -25,10 +25,12 @@ class OrderResource extends JsonResource
             'created_at' =>  $this->created_at,
             'formatted_order_date' => $this->created_at->diffForHumans(),
             'order_status' => $this->order_status,
+            'payment_status' => $this->payment_status,
             'order_no' => $this->order_no,
             'products' => OrderProductResource::collection($this->whenLoaded('products')),
             'slug' => $this->order_no,
             'total' => $this->formatted_total
+
         ];
     }
 }

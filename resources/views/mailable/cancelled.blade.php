@@ -139,12 +139,12 @@
                                 <tr>
                                     <td align="center"
                                         style="font-family: Open Sans, Helvetica, Arial, sans-serif; font-size: 16px; font-weight: 400; line-height: 24px; padding-top: 25px;">
-                                        <img src="https://img.icons8.com/carbon-copy/100/000000/checked-checkbox.png"
-                                            width="125" height="120" style="display: block; border: 0px;" /><br>
+                                        <img src="https://img.icons8.com/multiply" width="125" height="120"
+                                            style="display: block; border: 0px;" /><br>
                                         <h2
                                             style="font-size: 30px; font-weight: 800; line-height: 36px; color: #333333; margin: 0;">
-                                            Thank You For Your Order! You can track your order <a
-                                                href="http://127.0.0.1:8000/tracking/order/{{ $order->order_no }}">here</a>
+                                            Uh oh! Your order was cancelled. If you have any questions, contact our
+                                            helpline. Apologies for any inconvinience caused.
                                         </h2>
                                     </td>
                                 </tr>
@@ -220,19 +220,7 @@
                                                 </tr>
                                             </table>
                                         </div>
-                                        <div
-                                            style="display:inline-block; max-width:50%; min-width:240px; vertical-align:top; width:100%;">
-                                            <table align="left" border="0" cellpadding="0" cellspacing="0"
-                                                width="100%" style="max-width:300px;">
-                                                <tr>
-                                                    <td align="left" valign="top"
-                                                        style="font-family: Open Sans, Helvetica, Arial, sans-serif; font-size: 16px; font-weight: 400; line-height: 24px;">
-                                                        <p style="font-weight: 800;">Estimated Delivery Date</p>
-                                                        <p>{{ $order->delivery_time }}</p>
-                                                    </td>
-                                                </tr>
-                                            </table>
-                                        </div>
+
                                     </td>
                                 </tr>
                             </table>

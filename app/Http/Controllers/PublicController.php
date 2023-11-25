@@ -38,6 +38,11 @@ class PublicController extends Controller
         return Inertia::render('Public/Contact');
     }
 
+    public function tracking()
+    {
+        return Inertia::render('Public/Tracking');
+    }
+
     public function repairBrand(Brand $brand)
     {
         return Inertia::render('Public/Brand', [

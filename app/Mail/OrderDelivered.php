@@ -10,7 +10,7 @@ use Illuminate\Queue\SerializesModels;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
-class OrderShipped extends Mailable
+class OrderDelivered extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -32,7 +32,7 @@ class OrderShipped extends Mailable
     public function envelope()
     {
         return new Envelope(
-            subject: 'Order Shipped',
+            subject: 'Order Delivered Successfully',
         );
     }
 
@@ -44,7 +44,7 @@ class OrderShipped extends Mailable
     public function content()
     {
         return new Content(
-            view: 'mailable.shipped',
+            view: 'mailable.delivered',
         );
     }
 

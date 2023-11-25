@@ -143,8 +143,7 @@
                                             width="125" height="120" style="display: block; border: 0px;" /><br>
                                         <h2
                                             style="font-size: 30px; font-weight: 800; line-height: 36px; color: #333333; margin: 0;">
-                                            Thank You For Your Order! You can track your order <a
-                                                href="http://127.0.0.1:8000/tracking/order/{{ $order->order_no }}">here</a>
+                                            Head's up! Your order is in transit now. You will recieve it soon.
                                         </h2>
                                     </td>
                                 </tr>

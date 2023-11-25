@@ -47,7 +47,11 @@ const labels = [
         class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm rounded-lg mx-2 md:mx-0"
       >
         <div class="text-gray-900 dark:text-gray-100 overflow-x-auto">
-          <DataTable :table-data="orders.data" :labels="labels" />
+          <DataTable
+            resource-route="orders.edit"
+            :table-data="orders.data"
+            :labels="labels"
+          />
         </div>
         <Paginator :links="orders.meta.links" />
       </div>

@@ -54,6 +54,8 @@ Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout.in
 
 Route::get('tracking/order/{order:order_no}', [OrderController::class, 'show'])->name('order.show');
 
+Route::get('tracking/order/', [PublicController::class, 'tracking'])->name('public.tracking');
+
 Route::post('/order/place', [OrderController::class, 'store'])->name('order.store');
 
 Route::post('/contact/send', [ContactController::class, 'send'])->name('contact.send');

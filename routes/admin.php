@@ -69,4 +69,6 @@ Route::middleware(['auth', 'admin'])->group(function () {
   Route::get('/users', [UserController::class, 'index'])->name('users.index');
 
   Route::get('/orders', [OrderController::class, 'index'])->name('orders.index');
+  Route::get('/orders/{order:order_no}', [OrderController::class, 'edit'])->name('orders.edit');
+  Route::post('/orders/{order:order_no}', [OrderController::class, 'update'])->name('orders.update');
 });
