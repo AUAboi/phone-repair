@@ -8,13 +8,23 @@ import FormInputImage from "@/Components/FormInputImage.vue";
 import ImagePreview from "@/Components/ImagePreview.vue";
 import { component as CKEditor } from "@ckeditor/ckeditor5-vue";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
+import { onMounted } from "vue";
+import useSweetAlert from "@/Composables/useSweetAlert";
+import { urlToImageFile } from "@/utils";
+
+const props = defineProps({
+  post: {
+    required: true,
+  },
+});
 
 const form = useForm({
-  author: usePage().props.auth.user.full_name,
-  body: "",
-  title: "",
-  status: "published",
-  image: "",
+  _method: "put",
+  author: props.post.author,
+  body: props.post.body,
+  title: props.post.title,
+  status: props.post.status,
+  image: props.post.image,
 });
 
 const handleSelectedMedia = (files) => {
@@ -22,12 +32,33 @@ const handleSelectedMedia = (files) => {
 };
 
 const submit = () => {
-  form.post(route("posts.store"));
+  form.post(route("posts.update", props.post.slug));
+};
+
+const setFormValues = async () => {
+  form.image = await urlToImageFile(props.post.image);
+};
+
+onMounted(setFormValues);
+
+const { alertConfirm } = useSweetAlert();
+
+const destroy = () => {
+  alertConfirm(
+    (result) => {
+      if (result.isConfirmed) {
+        form.delete(route("posts.destroy", props.post.slug));
+      }
+    },
+    {
+      title: `Deleting ${props.post.title}. Proceed?`,
+    }
+  );
 };
 </script>
 <template>
-  <Head title="Create Post" />
-  <PageHeader>Create Post</PageHeader>
+  <Head title="Edit Post" />
+  <PageHeader>Edit Post</PageHeader>
 
   <div class="py-12">
     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
@@ -37,7 +68,7 @@ const submit = () => {
       <div
         class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm rounded-lg mx-2 md:mx-0 px-2 py-2 sm:px-4"
       >
-        <form class="mt-5" @submit.prevent="submit">
+        <form id="update-form" class="mt-5" @submit.prevent="submit">
           <div class="flex">
             <FormInputImage
               label="Image"
@@ -71,9 +102,22 @@ const submit = () => {
             </div>
           </div>
           <div class="mt-6 space-x-4">
-            <PrimaryButton class="mb-4 px-10" type="submit">
-              Publish
-            </PrimaryButton>
+            <div class="flex items-center gap-5 mb-4">
+              <PrimaryButton class="px-10" type="submit">
+                Publish
+              </PrimaryButton>
+              <form @submit.prevent="destroy" id="delete-form" class="m-0">
+                <button
+                  form="delete-form"
+                  :disabled="form.processing"
+                  type="submit"
+                  class="hover:underline text-red-600"
+                >
+                  Delete
+                </button>
+              </form>
+            </div>
+
             <div
               class="flex items-center gap-4 text-gray-900 dark:text-gray-100"
             >
@@ -91,7 +135,6 @@ const submit = () => {
       </div>
     </div>
   </div>
-  <div></div>
 </template>
 
 <style>

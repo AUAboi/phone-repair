@@ -14,7 +14,12 @@ const is_admin = usePage().props.auth.user.is_admin;
         class="text-lg py-4 px-2 bg-gray-300 rounded my-4 mx-4"
         v-if="is_admin"
       >
-        Post status is: {{ post.status }}
+        Post status is: {{ post.status }}.
+        <Link
+          class="font-bold underline text-blue-500"
+          :href="route('posts.edit', post.slug)"
+          >Edit</Link
+        >
       </div>
       <div class="flex flex-col md:flex-row gap-5">
         <div class="max-w-5xl mx-auto">

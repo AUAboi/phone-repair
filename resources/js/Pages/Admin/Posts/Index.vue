@@ -76,7 +76,11 @@ watch(
         class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm rounded-lg mx-2 md:mx-0"
       >
         <div class="text-gray-900 dark:text-gray-100">
-          <DataTable :table-data="posts.data" :labels="labels" />
+          <DataTable
+            resource-route="posts.edit"
+            :table-data="posts.data"
+            :labels="labels"
+          />
         </div>
         <Paginator :links="posts.meta.links" />
       </div>

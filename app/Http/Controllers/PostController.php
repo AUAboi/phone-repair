@@ -6,8 +6,10 @@ use App\Models\Post;
 use Inertia\Inertia;
 use Illuminate\Http\Request;
 use App\Services\PostService;
+use Illuminate\Support\Facades\DB;
 use App\Http\Resources\PostResource;
 use App\Http\Requests\StorePostRequest;
+use App\Http\Requests\UpdatePostRequest;
 use Illuminate\Support\Facades\Redirect;
 
 class PostController extends Controller
@@ -55,6 +57,36 @@ class PostController extends Controller
         ]);
     }
 
+    public function edit(Post $post)
+    {
+        return Inertia::render('Admin/Posts/Edit', [
+            'post' => new PostResource($post),
+        ]);
+    }
+
+    public function update(UpdatePostRequest $request, PostService $postService, Post $post)
+    {
+        try {
+            $postService->updatePost($post, $request->validated());
+        } catch (\Throwable $th) {
+            return Redirect::route('posts.index')->with('error', 'Error cant update: ' . $th->getMessage());
+        }
+
+        return Redirect::route('posts.index')->with('success', 'Post added succesfully.');
+    }
+
+    public function destroy(Post $post)
+    {
+        DB::transaction(function () use ($post) {
+            if ($post->media) {
+                $post->media->delete();
+            }
+            $post->delete();
+        });
+
+
+        return Redirect::route('posts.index')->with('success', 'Post deleted successfully.');
+    }
     public function search(Request $request)
     {
         $filters = $request->all('search');
