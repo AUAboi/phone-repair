@@ -9,6 +9,7 @@ use App\Http\Controllers\PublicController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\AppointmentController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\PostController;
 use App\Http\Controllers\UserProfileController;
 
 /*
@@ -60,6 +61,9 @@ Route::post('/order/place', [OrderController::class, 'store'])->name('order.stor
 
 Route::post('/contact/send', [ContactController::class, 'send'])->name('contact.send');
 
+Route::get('/blog/search', [PostController::class, 'search'])->name('post.search');
+
+Route::get('/blog/{post:slug}', [PostController::class, 'show'])->name('post.show');
 
 Route::get('/{deviceCategory}/brands', [PublicController::class, 'categoryBrands'])->name('public.categoryBrands');
 

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "5f06c8c8b76742d186f188341047dcf5",
+    "content-hash": "7a6d87fb6ee3f2fd15d3e3da2863f418",
     "packages": [
         {
             "name": "akaunting/laravel-money",
@@ -3809,25 +3809,25 @@
         },
         {
             "name": "spatie/laravel-sluggable",
-            "version": "3.4.1",
+            "version": "3.5.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/laravel-sluggable.git",
-                "reference": "8d42bbfac13302e9bfbcc869ea5579c235aa4981"
+                "reference": "041af2533fe2206715e9a4a9cad2cab6cb796655"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/laravel-sluggable/zipball/8d42bbfac13302e9bfbcc869ea5579c235aa4981",
-                "reference": "8d42bbfac13302e9bfbcc869ea5579c235aa4981",
+                "url": "https://api.github.com/repos/spatie/laravel-sluggable/zipball/041af2533fe2206715e9a4a9cad2cab6cb796655",
+                "reference": "041af2533fe2206715e9a4a9cad2cab6cb796655",
                 "shasum": ""
             },
             "require": {
-                "illuminate/database": "^8.0|^9.0",
-                "illuminate/support": "^8.0|^9.0",
+                "illuminate/database": "^8.0|^9.0|^10.0",
+                "illuminate/support": "^8.0|^9.0|^10.0",
                 "php": "^8.0"
             },
             "require-dev": {
-                "orchestra/testbench": "^6.23|^7.0",
+                "orchestra/testbench": "^6.23|^7.0|^8.0",
                 "pestphp/pest": "^1.20",
                 "spatie/laravel-translatable": "^5.0|^6.0"
             },
@@ -3856,7 +3856,7 @@
                 "spatie"
             ],
             "support": {
-                "source": "https://github.com/spatie/laravel-sluggable/tree/3.4.1"
+                "source": "https://github.com/spatie/laravel-sluggable/tree/3.5.0"
             },
             "funding": [
                 {
@@ -3864,7 +3864,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2022-12-07T13:04:11+00:00"
+            "time": "2023-05-29T09:42:35+00:00"
         },
         {
             "name": "spatie/temporary-directory",

@@ -11,6 +11,7 @@ use App\Http\Controllers\AppointmentController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DeviceRepairController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProductController;
 
 Route::middleware(['auth', 'admin'])->group(function () {
@@ -71,4 +72,9 @@ Route::middleware(['auth', 'admin'])->group(function () {
   Route::get('/orders', [OrderController::class, 'index'])->name('orders.index');
   Route::get('/orders/{order:order_no}', [OrderController::class, 'edit'])->name('orders.edit');
   Route::post('/orders/{order:order_no}', [OrderController::class, 'update'])->name('orders.update');
+
+  Route::get('/posts', [PostController::class, 'index'])->name('posts.index');
+  Route::get('/posts/create', [PostController::class, 'create'])->name('posts.create');
+
+  Route::post('/posts/create', [PostController::class, 'store'])->name('posts.store');
 });

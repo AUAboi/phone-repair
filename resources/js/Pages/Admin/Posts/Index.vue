@@ -11,7 +11,7 @@ import { watch } from "vue";
 import { router } from "@inertiajs/vue3";
 
 const props = defineProps({
-  products: {
+  posts: {
     required: true,
     type: Object,
   },
@@ -23,12 +23,16 @@ const props = defineProps({
 
 const labels = [
   {
-    key: "name",
-    value: "Name",
+    key: "title",
+    value: "Title",
   },
   {
-    key: "category.name",
-    value: "Category",
+    key: "author",
+    value: "Author",
+  },
+  {
+    key: "status",
+    value: "Status",
   },
 ];
 
@@ -43,7 +47,7 @@ const reset = () => {
 watch(
   form,
   throttle(() => {
-    router.get(route("products.index"), pickBy(form), {
+    router.get(route("posts.index"), pickBy(form), {
       preserveState: true,
       preserveScroll: true,
     });
@@ -52,8 +56,9 @@ watch(
 );
 </script>
 <template>
-  <Head title="Products" />
-  <PageHeader>Products</PageHeader>
+  <Head title="users" />
+
+  <PageHeader>Blog Posts</PageHeader>
   <div class="py-12">
     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
       <div class="flex items-center gap-4 md:gap-0 justify-between">
@@ -62,22 +67,18 @@ watch(
           v-model="form.search"
           @reset="reset"
         />
-        <Link :href="route('products.create')" as="button" class="btn--primary"
-          >Create <span class="hidden md:inline"> Product</span></Link
+        <Link :href="route('posts.create')" as="button" class="btn--primary"
+          >Publish <span class="hidden md:inline"> Blog</span></Link
         >
       </div>
 
       <div
         class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm rounded-lg mx-2 md:mx-0"
       >
-        <div class="text-gray-900 dark:text-gray-100 overflow-x-auto">
-          <DataTable
-            :table-data="products.data"
-            :labels="labels"
-            resource-route="products.edit"
-          />
+        <div class="text-gray-900 dark:text-gray-100">
+          <DataTable :table-data="posts.data" :labels="labels" />
         </div>
-        <Paginator :links="products.meta.links" />
+        <Paginator :links="posts.meta.links" />
       </div>
     </div>
   </div>
