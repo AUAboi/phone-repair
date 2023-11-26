@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use Illuminate\Support\Str;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class PostResource extends JsonResource
@@ -22,6 +23,7 @@ class PostResource extends JsonResource
             'formatted_date' => $this->created_at->diffForHumans(),
             'created_at' => $this->created_at->format('d F Y'),
             'author' => $this->author,
+            'summary' =>  $this->summary,
             'status' => $this->status,
             'slug' => $this->slug,
         ];

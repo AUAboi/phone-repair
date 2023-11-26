@@ -44,9 +44,14 @@ class PostController extends Controller
 
     public function show(Post $post)
     {
+        if ($post->status == "draft") {
+            if (!auth()->user()->is_admin) {
+                return redirect()->back();
+            }
+        }
         return Inertia::render('Public/Blog', [
             'post' => new PostResource($post),
-            'related_posts' => PostResource::collection(Post::where('id', '!=', $post->id)->latest()->take(3)->get())
+            'related_posts' => PostResource::collection(Post::where('id', '!=', $post->id)->publishedPosts()->latest()->take(5)->get())
         ]);
     }
 
@@ -55,7 +60,7 @@ class PostController extends Controller
         $filters = $request->all('search');
         $posts =  Post::orderBy('updated_at')
             ->filter($filters)
-            ->paginate(10)
+            ->paginate(100)
             ->withQueryString();
 
         return Inertia::render('Public/Search', [

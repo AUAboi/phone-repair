@@ -3,8 +3,9 @@ import ActionButton from "@/Components/ActionButton.vue";
 import { Head, Link } from "@inertiajs/vue3";
 import BannerSlideshow from "./partials/BannerSlideshow.vue";
 import ProductsSection from "./partials/ProductsSection.vue";
+import PostSection from "@/Components/PostSection.vue";
 
-const props = defineProps(["brands", "categories"]);
+const props = defineProps(["brands", "categories", "posts"]);
 </script>
 
 <template>
@@ -92,4 +93,6 @@ const props = defineProps(["brands", "categories"]);
     </div>
   </section>
   <ProductsSection :categories="categories" />
+  <h4 class="text-6xl text-center font-bold">Check out our blogs</h4>
+  <PostSection :posts="posts" />
 </template>

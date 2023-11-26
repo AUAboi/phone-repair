@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Support\Str;
 use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
 use Illuminate\Database\Eloquent\Model;
@@ -51,5 +52,17 @@ class Post extends Model
             $query
                 ->where('title', 'like', '%' . $search . '%');
         });
+    }
+
+    public function scopePublishedPosts($query)
+    {
+        $query
+            ->where('status', '=',  'published');
+    }
+
+    public function getSummaryAttribute()
+    {
+        $content = Str::words(strip_tags($this->body), 20, '...');
+        return str_replace('&nbsp;', ' ', $content);
     }
 }

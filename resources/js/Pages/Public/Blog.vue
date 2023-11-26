@@ -1,20 +1,30 @@
 <script setup>
 import SearchBlog from "@/Components/SearchBlog.vue";
-import { Link } from "@inertiajs/vue3";
+import { Link, usePage } from "@inertiajs/vue3";
 import CalenderIcon from "~icons/mdi/calendar-month";
 
 const props = defineProps(["post", "related_posts"]);
+
+const is_admin = usePage().props.auth.user.is_admin;
 </script>
 <template>
   <section class="py-24">
-    <div class="mt-32 relative container mx-auto">
-      <div class="flex gap-5">
+    <div class="mt-32 relative container mx-auto px-4">
+      <div
+        class="text-lg py-4 px-2 bg-gray-300 rounded my-4 mx-4"
+        v-if="is_admin"
+      >
+        Post status is: {{ post.status }}
+      </div>
+      <div class="flex flex-col md:flex-row gap-5">
         <div class="max-w-5xl mx-auto">
           <div>
             <img class="object-cover w-full" :src="post.image" alt="" />
           </div>
           <div>
-            <h2 class="text-5xl md:text-7xl mt-6">{{ post.title }}</h2>
+            <h2 class="text-3xl sm:text-5xl md:text-7xl mt-6">
+              {{ post.title }}
+            </h2>
             <div class="border-b-2 pb-6 pr-4 mb-5 w-fit border-b-red-300">
               <p class="mt-3">
                 <span class="font-bold"> Author: </span>
@@ -36,7 +46,7 @@ const props = defineProps(["post", "related_posts"]);
             <Link
               v-for="p in related_posts"
               as="div"
-              href="/"
+              :href="route('post.show', p.slug)"
               class="cursor-pointer border pb-4"
             >
               <img :src="p.image" alt="" />

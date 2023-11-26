@@ -5,9 +5,11 @@ namespace App\Http\Controllers;
 use App\Http\Resources\BrandResource;
 use App\Http\Resources\CategoryResource;
 use App\Http\Resources\DeviceResource;
+use App\Http\Resources\PostResource;
 use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Device;
+use App\Models\Post;
 use Inertia\Inertia;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
@@ -16,8 +18,15 @@ class PublicController extends Controller
 {
     public function home()
     {
+
+        $posts =  Post::orderBy('updated_at')
+            ->with(['media', 'media.baseMedia'])
+            ->publishedPosts()
+            ->get();
+
         return Inertia::render('Public/Home', [
             'brands' => BrandResource::collection(Brand::all()->load('devices')),
+            'posts' => PostResource::collection($posts),
             'categories' => CategoryResource::collection(Category::orderBy('name', 'ASC')->get()->load('products', 'products.category'))
         ]);
     }
