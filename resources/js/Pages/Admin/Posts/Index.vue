@@ -56,7 +56,7 @@ watch(
 );
 </script>
 <template>
-  <Head title="users" />
+  <Head title="Posts" />
 
   <PageHeader>Blog Posts</PageHeader>
   <div class="py-12">

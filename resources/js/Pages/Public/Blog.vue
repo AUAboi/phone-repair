@@ -1,6 +1,6 @@
 <script setup>
 import SearchBlog from "@/Components/SearchBlog.vue";
-import { Link, usePage } from "@inertiajs/vue3";
+import { Head, Link, usePage } from "@inertiajs/vue3";
 import CalenderIcon from "~icons/mdi/calendar-month";
 
 const props = defineProps(["post", "related_posts"]);
@@ -8,6 +8,7 @@ const props = defineProps(["post", "related_posts"]);
 const is_admin = usePage().props.auth.user.is_admin;
 </script>
 <template>
+  <Head :title="post.title" />
   <section class="py-24">
     <div class="mt-32 relative container mx-auto px-4">
       <div
