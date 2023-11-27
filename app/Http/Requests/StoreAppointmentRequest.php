@@ -25,11 +25,12 @@ class StoreAppointmentRequest extends FormRequest
     {
         return [
             'device_repair_id' => 'required|exists:device_repairs,id',
+            'repair_type' => 'required',
             'first_name' => 'required|string|max:255',
             'last_name' => 'required|string|max:255',
             'email' => 'required|email',
             'message' => 'nullable|string|max:255',
-            'phone' => 'required|phone:' . config('constants.phone_number'),
+            'phone' => 'required|phone:PK',
             'zip_code' => 'required|string',
             'city' => 'required|string',
             'address' => 'required|string',

@@ -17,10 +17,10 @@ const devices = computed(() => {
 });
 
 const toggledDevice = computed(() => {
-  if (devices.value.length) {
+  if (devices.value && devices.value.length) {
     return devices.value[currentDevice.value];
   }
-  return null;
+  return {};
 });
 
 const openDevice = (i, j) => {

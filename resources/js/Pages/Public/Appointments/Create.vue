@@ -5,6 +5,7 @@ import AddPersonalInformation from "./CreateForm/AddPersonalInformation.vue";
 import ChooseAppointment from "./CreateForm/ChooseAppointment.vue";
 import ChooseRepairTypeStep from "./CreateForm/ChooseRepairTypeStep.vue";
 import FormPaginator from "./CreateForm/FormPaginator.vue";
+import { onMounted } from "vue";
 
 const props = defineProps(["device", "repairs"]);
 
@@ -12,6 +13,13 @@ const stepForm = useStepFormStore();
 stepForm.form.repair_type = props.device.device_repairs[0].repair_type;
 
 stepForm.device = props.device;
+
+onMounted(() => {
+  console.log("test");
+  stepForm.form.repair_type = props.device.device_repairs[0].repair_type;
+
+  stepForm.device = props.device;
+});
 </script>
 
 <template>
@@ -26,7 +34,7 @@ stepForm.device = props.device;
       <li v-for="error in stepForm.form.errors">{{ error }}</li>
     </ul>
   </div>
-
+  {{ stepForm }}
   <form class="py-8 px-2 min-h-screen flex items-center">
     <transition
       class="w-full"

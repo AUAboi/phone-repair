@@ -93,6 +93,14 @@ const props = defineProps(["brands", "categories", "posts"]);
     </div>
   </section>
   <ProductsSection :categories="categories" />
-  <h4 class="text-6xl text-center font-bold">Check out our blogs</h4>
-  <PostSection :posts="posts" />
+  <div v-if="posts.length">
+    <h4 class="text-6xl text-center font-bold">Check out our blogs</h4>
+    <Link
+      as="p"
+      :href="route('post.search')"
+      class="text-center mx-auto underline cursor-pointer text-blue-400 text-xl"
+      >Check out all</Link
+    >
+    <PostSection :posts="posts" />
+  </div>
 </template>
