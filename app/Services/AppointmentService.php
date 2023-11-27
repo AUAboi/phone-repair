@@ -2,14 +2,16 @@
 
 namespace App\Services;
 
-use App\Models\Appointment;
-use App\Models\Device;
-use App\Models\DeviceRepair;
-use App\Models\Product;
-use App\Models\User;
-use Carbon\Carbon;
 use DateTime;
+use Carbon\Carbon;
+use App\Models\User;
+use App\Models\Device;
+use App\Models\Product;
+use App\Models\Appointment;
+use App\Models\DeviceRepair;
+use App\Mail\AppointmentBooked;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 
 class AppointmentService
 {
@@ -40,6 +42,8 @@ class AppointmentService
 
       $appointment->appointment_number = $this->generateIdentifier($appointment);
       $appointment->save();
+
+      Mail::to($appointment->email)->send(new AppointmentBooked($appointment));
     });
   }
 

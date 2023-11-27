@@ -53,11 +53,7 @@ const breakpoints = {
     >
       Choose your device
     </h4>
-    <Carousel
-      :wrap-around="true"
-      :breakpoints="breakpoints"
-      :settings="settings"
-    >
+    <Carousel :breakpoints="breakpoints" :settings="settings">
       <Slide v-for="device in brand.devices" :key="device.id">
         <div class="cursor-pointer text-center flex flex-col h-full">
           <div>

@@ -18,6 +18,15 @@ const props = defineProps({
   </p>
 
   <div class="mt-8 max-w-xs">
+    <div class="flex flex-col sm:flex-row justify-between">
+      <span class="text-lg font-medium text-gray-900 dark:text-gray-100"
+        >Date and time:
+      </span>
+      <span class="mt-1 text-gray-600 dark:text-gray-400">
+        {{ appointment.appointment_date }},
+        {{ appointment.appointment_time }}
+      </span>
+    </div>
     <div
       class="flex flex-col sm:flex-row justify-between"
       v-if="appointment.device"

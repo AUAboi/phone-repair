@@ -56,7 +56,7 @@ class AppointmentController extends Controller
         try {
             $appointmentService->createAppointment($device, $request->validated(), $request->user() ?? null);
         } catch (\Throwable $th) {
-            return redirect()->back()->with('error', $th->getMessage());
+            return redirect()->route('public.repairs')->with('error', $th->getMessage());
         }
 
         return Redirect::route('public.home')->with('success', 'Appointment registered successfully');

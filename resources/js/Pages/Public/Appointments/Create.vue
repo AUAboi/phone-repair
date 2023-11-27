@@ -34,7 +34,6 @@ onMounted(() => {
       <li v-for="error in stepForm.form.errors">{{ error }}</li>
     </ul>
   </div>
-  {{ stepForm }}
   <form class="py-8 px-2 min-h-screen flex items-center">
     <transition
       class="w-full"
