@@ -2,6 +2,7 @@
 import StepFormInput from "@/Components/StepFormInput.vue";
 import { Head, useForm, usePage } from "@inertiajs/vue3";
 import CartCheckout from "@/Pages/Public/Cart/Partials/CartCheckout.vue";
+import FormSelect from "@/Components/FormSelect.vue";
 
 const page = usePage();
 const form = useForm({
@@ -9,6 +10,7 @@ const form = useForm({
   last_name: page.props.auth.user?.last_name,
   phone: page.props.auth.user?.phone,
   email: page.props.auth.user?.email,
+  payment_method: "",
   zip_code: null,
   address: null,
   message: null,
@@ -102,7 +104,19 @@ const submit = () => {
             </div>
           </div>
           <h3 class="text-2xl font-bold">Payment info</h3>
-          <div class="mt-6">
+          <FormSelect
+            v-model="form.payment_method"
+            :error="form.errors.payment_method"
+            label="Choose Payment Method"
+          >
+            <option value="">Select</option>
+            <option value="cod">Cash on Delivery</option>
+            <option value="card">Credit Card/Debit Card</option>
+          </FormSelect>
+          <div
+            class="mt-6"
+            v-if="form.payment_method && form.payment_method === 'card'"
+          >
             <p class="text-red-500" v-if="form.card.error">
               {{ form.card.error.message }}
             </p>
@@ -112,8 +126,11 @@ const submit = () => {
 
           <div class="mt-8">
             <button
-              :disabled="form.processing || !form.card.token"
-              class="flex mx-auto hover:bg-blue-600 bg-blue-500 disabled:bg-gray-400 disabled:cursor-not-allowed text-white px-8 py-1 rounded-sm"
+              :disabled="
+                form.processing ||
+                (!form.card.token && form.payment_method === 'card')
+              "
+              class="flex mx-auto hover:bg-red-600 bg-red-500 disabled:bg-gray-400 disabled:cursor-not-allowed text-white px-8 py-1 rounded-sm"
             >
               Pay Now
             </button>

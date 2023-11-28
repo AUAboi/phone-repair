@@ -22,8 +22,10 @@ const formatted = useDateFormat(props.order.created_at, "D MMMM, YYYY");
       <h1
         class="text-xl dark:text-white lg:text-4xl font-medium leading-7 lg:leading-9 text-gray-800 capitalize"
       >
-        Status: {{ order.order_status }}
+        Order Status: {{ order.order_status }} - Payment
+        {{ order.payment_status }}
       </h1>
+
       <p
         class="text-base dark:text-gray-300 font-medium leading-6 text-gray-600"
       >
@@ -182,6 +184,18 @@ const formatted = useDateFormat(props.order.created_at, "D MMMM, YYYY");
                   class="w-48 lg:w-full dark:text-gray-300 xl:w-48 text-center md:text-left text-sm leading-5 text-gray-600"
                 >
                   {{ order.full_address }}
+                </p>
+              </div>
+              <div>
+                <p
+                  class="text-base dark:text-white font-semibold leading-4 text-center md:text-left text-gray-800"
+                >
+                  Payment Method
+                </p>
+                <p
+                  class="w-48 lg:w-full dark:text-gray-300 xl:w-48 text-center md:text-left text-lg uppercase mt-4 leading-5 text-gray-600"
+                >
+                  {{ order.payment_method }}
                 </p>
               </div>
             </div>

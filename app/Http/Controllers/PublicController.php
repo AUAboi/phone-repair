@@ -9,6 +9,7 @@ use App\Http\Resources\PostResource;
 use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Device;
+use App\Models\Order;
 use App\Models\Post;
 use Inertia\Inertia;
 use Illuminate\Http\Request;

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreOrderRequest;
 use Stripe;
 use DateTime;
 use Exception;
@@ -32,20 +33,8 @@ class OrderController extends Controller
         ]);
     }
 
-    public function store(Request $request)
+    public function store(StoreOrderRequest $request)
     {
-        $request->validate([
-            'first_name' => 'required|string|max:255',
-            'last_name' => 'required|string|max:255',
-            'email' => 'required|email',
-            'phone' => 'required|phone:' . config('constants.phone_number'),
-            'zip_code' => 'required|string',
-            'city' => 'required|string',
-            'address' => 'required|string',
-            'card.token' => 'required'
-        ]);
-
-
         if (auth()->id()) {
             \Cart::session(auth()->id());
         } else {
@@ -78,7 +67,7 @@ class OrderController extends Controller
             return redirect()->route('cart.index');
         }
         try {
-            DB::transaction(function () use ($request, $cartContent) {
+            $order = DB::transaction(function () use ($request, $cartContent,) {
                 $order = Order::create([
                     'user_id' => auth()->id() ?? null,
                     'email' => $request->email,
@@ -88,6 +77,7 @@ class OrderController extends Controller
                     'zip_code' => $request->zip_code,
                     'city' => $request->city,
                     'address' => $request->address,
+                    'payment_method' => $request->payment_method,
                     'total' => \Cart::getTotal(),
                 ]);
 
@@ -110,18 +100,24 @@ class OrderController extends Controller
                 \Cart::clear();
 
 
-                Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
-                Stripe\Charge::create([
-                    "amount" => $order->total * 100,
-                    "currency" => "USD",
-                    "source" => $request->card['token']['id'],
-                    "description" => "This payment is for test purposes",
-                ]);
+                if ($order->payment_method == "card") {
+                    Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
+                    Stripe\Charge::create([
+                        "amount" => $order->total * 100,
+                        "currency" => "USD",
+                        "source" => $request->card['token']['id'],
+                        "description" => "This payment is for test purposes",
+                    ]);
 
-                $order->payment_status = "paid";
-                $order->save();
+                    $order->payment_status = "paid";
+                    $order->save();
+                }
+
+
 
                 Mail::to($order->email)->send(new OrderPlaced($order));
+
+                return $order;
             });
         } catch (\Stripe\Exception\CardException $e) {
             return redirect()->route('public.home')->with('error', $e->getError()->message);
@@ -129,7 +125,7 @@ class OrderController extends Controller
             return redirect()->route('public.home')->with('error', $e->getMessage());
         }
 
-        return redirect()->route('public.home')->with('success', 'Order successfull');
+        return redirect()->route('order.show',  $order->order_no)->with('success', 'Order successfull');
     }
 
     public function show(Order $order)

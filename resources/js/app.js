@@ -20,7 +20,6 @@ import PublicLayout from "@/Layouts/PublicLayout.vue"
 
 const appName = window.document.getElementsByTagName('title')[0]?.innerText || 'Laravel';
 
-
 const pinia = createPinia()
 
 createInertiaApp({

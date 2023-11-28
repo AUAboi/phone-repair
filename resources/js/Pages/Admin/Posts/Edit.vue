@@ -1,16 +1,14 @@
 <script setup>
-import { Head, useForm, usePage } from "@inertiajs/vue3";
+import { Head, useForm } from "@inertiajs/vue3";
 import PageHeader from "@/Components/PageHeader.vue";
 import FormInput from "@/Components/FormInput.vue";
-import FormSelect from "@/Components/FormSelect.vue";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
 import FormInputImage from "@/Components/FormInputImage.vue";
 import ImagePreview from "@/Components/ImagePreview.vue";
-import { component as CKEditor } from "@ckeditor/ckeditor5-vue";
-import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import { onMounted } from "vue";
 import useSweetAlert from "@/Composables/useSweetAlert";
 import { urlToImageFile } from "@/utils";
+import WYSISWYGEditor from "@/Components/WYSISWYGEditor.vue";
 
 const props = defineProps({
   post: {
@@ -95,8 +93,7 @@ const destroy = () => {
             <h2 class="text-lg font-medium text-gray-900 dark:text-gray-100">
               Body text
             </h2>
-
-            <CKEditor :editor="ClassicEditor" v-model="form.body"></CKEditor>
+            <WYSISWYGEditor v-model="form.body" />
             <div v-if="form.errors.body" class="text-red-700 mt-2 text-sm">
               {{ form.errors.body }}
             </div>
@@ -140,13 +137,5 @@ const destroy = () => {
 <style>
 .blog-preview img {
   width: 1280px;
-}
-
-.ck-editor__editable_inline {
-  min-height: 400px;
-}
-
-.dark {
-  --ck-spacing-standard: 1rem;
 }
 </style>

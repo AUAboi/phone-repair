@@ -6,8 +6,7 @@ import FormSelect from "@/Components/FormSelect.vue";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
 import FormInputImage from "@/Components/FormInputImage.vue";
 import ImagePreview from "@/Components/ImagePreview.vue";
-import { component as CKEditor } from "@ckeditor/ckeditor5-vue";
-import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
+import WYSISWYGEditor from "@/Components/WYSISWYGEditor.vue";
 
 const props = defineProps({
   categories: {
@@ -86,7 +85,7 @@ const submit = () => {
         Body text
       </h2>
 
-      <CKEditor :editor="ClassicEditor" v-model="form.body"></CKEditor>
+      <WYSISWYGEditor v-model="form.body" />
       <div v-if="form.errors.body" class="text-red-700 mt-2 text-sm">
         {{ form.errors.body }}
       </div>

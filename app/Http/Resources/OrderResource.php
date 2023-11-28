@@ -26,6 +26,7 @@ class OrderResource extends JsonResource
             'formatted_order_date' => $this->created_at->diffForHumans(),
             'order_status' => $this->order_status,
             'payment_status' => $this->payment_status,
+            'payment_method' => $this->payment_method,
             'order_no' => $this->order_no,
             'products' => OrderProductResource::collection($this->whenLoaded('products')),
             'slug' => $this->order_no,

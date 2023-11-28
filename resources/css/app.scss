@@ -62,9 +62,11 @@ body {
   position: absolute;
   transition: all 0.3s ease-in-out;
 }
-.ck-file-dialog-button {
-  display: none;
+
+.ck-editor__editable_inline {
+  min-height: 400px;
 }
+
 /* 
 .dark {
   --ck-color-text: theme(colors.white);

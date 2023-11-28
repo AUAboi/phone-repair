@@ -18,6 +18,7 @@ class Order extends Model
         'email',
         'phone',
         'zip_code',
+        'payment_method',
         'city',
         'address',
         'first_name',

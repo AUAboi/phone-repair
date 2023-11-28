@@ -5,8 +5,7 @@ import FormInput from "@/Components/FormInput.vue";
 import FormSelect from "@/Components/FormSelect.vue";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
 import useSweetAlert from "@/Composables/useSweetAlert";
-import { component as CKEditor } from "@ckeditor/ckeditor5-vue";
-import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
+import WYSISWYGEditor from "@/Components/WYSISWYGEditor.vue";
 
 const props = defineProps({
   device: {
@@ -88,8 +87,8 @@ const destroy = () => {
           <h2 class="text-lg font-medium text-gray-900 dark:text-gray-100">
             Body text
           </h2>
+          <WYSISWYGEditor v-model="form.body" />
 
-          <CKEditor :editor="ClassicEditor" v-model="form.body"></CKEditor>
           <div v-if="form.errors.body" class="text-red-700 mt-2 text-sm">
             {{ form.errors.body }}
           </div>
