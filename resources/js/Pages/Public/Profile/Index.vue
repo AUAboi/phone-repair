@@ -4,9 +4,9 @@ import UpdatePasswordForm from "@/Pages/Public/Profile/partials/UpdatePasswordFo
 import UpdateProfileInformationForm from "@/Pages/Public/Profile/partials/UpdateProfileInformationForm.vue";
 import { Head, Link } from "@inertiajs/vue3";
 
-const props = defineProps(["user", "orders"]);
+const props = defineProps(["user", "orders", "appointments"]);
 
-const labels = [
+const orderLabels = [
   {
     key: "order_no",
     value: "Order No",
@@ -24,6 +24,37 @@ const labels = [
     value: "",
   },
 ];
+
+const appointmentLabels = [
+  {
+    key: "appointment_number",
+    value: "Appointment Number",
+  },
+  {
+    key: "full_name",
+    value: "Name",
+  },
+  {
+    key: "device_name",
+    value: "Product / Service",
+  },
+  {
+    key: "phone",
+    value: "Phone",
+  },
+  {
+    key: "email",
+    value: "Email",
+  },
+  {
+    key: "appointment_date",
+    value: "Appointment Date",
+  },
+  {
+    key: "appointment_time",
+    value: "Appointment Time",
+  },
+];
 </script>
 
 <template>
@@ -38,10 +69,21 @@ const labels = [
         <UpdatePasswordForm />
       </div>
       <div class="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
+        <h6 class="text-4xl font-semibold">Your Orders</h6>
+
         <DataTable
           resource-route="order.show"
-          :table-data="orders.data"
-          :labels="labels"
+          :table-data="orders"
+          :labels="orderLabels"
+        />
+      </div>
+      <div class="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
+        <h6 class="text-4xl font-semibold">Your Appointments</h6>
+
+        <DataTable
+          resource-route="appointment.show"
+          :table-data="appointments"
+          :labels="appointmentLabels"
         />
       </div>
       <Link

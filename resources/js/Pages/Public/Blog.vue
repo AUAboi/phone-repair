@@ -23,7 +23,7 @@ const is_admin = usePage().props.auth.user.is_admin;
         >
       </div>
       <div class="flex flex-col md:flex-row gap-5">
-        <div class="max-w-5xl mx-auto">
+        <div class="max-w-5xl w-full mx-auto">
           <div>
             <img class="object-cover w-full" :src="post.image" alt="" />
           </div>

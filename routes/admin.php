@@ -65,7 +65,7 @@ Route::middleware(['auth', 'admin'])->group(function () {
   Route::delete('/repairs/{deviceRepair}/remove', [DeviceRepairController::class, 'destroy'])->name('device.repair.destroy');
 
   Route::get('/appointments', [AppointmentController::class, 'index'])->name('appointments.index');
-  Route::get('/appointments/{appointment}', [AppointmentController::class, 'show'])->name('appointments.show');
+  Route::get('/appointments/{appointment:appointment_number}', [AppointmentController::class, 'show'])->name('appointments.show');
 
   Route::get('/users', [UserController::class, 'index'])->name('users.index');
 

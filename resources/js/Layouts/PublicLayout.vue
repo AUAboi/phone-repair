@@ -23,7 +23,7 @@ const menuItems = [
     href: route("public.products"),
   },
   {
-    text: "Track your order",
+    text: "Tracking",
     href: "#",
     children: [
       {

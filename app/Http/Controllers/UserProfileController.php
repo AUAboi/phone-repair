@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\AppointmentResource;
 use App\Http\Resources\OrderResource;
 use Inertia\Inertia;
 use App\Models\Order;
@@ -19,11 +20,17 @@ class UserProfileController extends Controller
             $user
             ->orders()
             ->orderBy('created_at', 'DESC')
-            ->paginate(10)
-            ->withQueryString();
+            ->get();
+
+        $appointments =
+            $user
+            ->appointments()
+            ->orderBy('created_at', 'DESC')
+            ->get();
 
         return Inertia::render("Public/Profile/Index",  [
             "user" => $user,
+            "appointments" => AppointmentResource::collection($appointments),
             "orders" => OrderResource::collection($orders)
         ]);
     }

@@ -32,8 +32,6 @@ class Appointment extends Model
         'status'
     ];
 
-
-
     protected function phone(): Attribute
     {
         return Attribute::make(
