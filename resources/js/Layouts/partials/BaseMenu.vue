@@ -1,8 +1,5 @@
 <script setup>
-import ActionButton from "@/Components/ActionButton.vue";
 import { Link } from "@inertiajs/vue3";
-import LogoutIcon from "~icons/mdi/logout";
-import CartIcon from "~icons/mdi/cart-outline";
 import AccountIcon from "~icons/mdi/account";
 
 const props = defineProps({
@@ -39,6 +36,9 @@ const props = defineProps({
             </span>
           </Link>
           <ul
+            :style="`grid-template-rows: repeat(${
+              item.children.length > 3 ? 3 : item.children.length
+            }, 1fr)`"
             class="animated-menu absolute hidden text-neutral-700 bg-white shadow-md group-hover:grid text-base"
           >
             <li v-for="(child, index) in item.children" :key="index">
@@ -79,7 +79,6 @@ const props = defineProps({
   -webkit-animation-fill-mode: both;
   -webkit-animation-name: slideInUp-30;
 
-  grid-template-rows: repeat(3, 1fr);
   grid-auto-flow: column;
 }
 

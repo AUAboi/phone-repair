@@ -40,6 +40,13 @@ class AppointmentController extends Controller
         ]);
     }
 
+    public function showAppointment(Appointment $appointment)
+    {
+        return Inertia::render('Public/Appointments/Show', [
+            'appointment' => new AppointmentResource($appointment->load(['device', 'device.brand', 'user', 'deviceRepair', 'deviceRepair.repair'])),
+        ]);
+    }
+
     public function create(Device $device)
     {
         if (!$device->repairs()->count()) {

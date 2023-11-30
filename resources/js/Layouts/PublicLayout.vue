@@ -24,7 +24,17 @@ const menuItems = [
   },
   {
     text: "Track your order",
-    href: route("public.tracking"),
+    href: "#",
+    children: [
+      {
+        text: "Track your order",
+        href: route("public.order.tracking"),
+      },
+      {
+        text: "Track your appointment",
+        href: route("public.appointment.tracking"),
+      },
+    ],
   },
   {
     text: "Contact Us",

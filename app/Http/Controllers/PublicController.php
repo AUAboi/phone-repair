@@ -48,9 +48,14 @@ class PublicController extends Controller
         return Inertia::render('Public/Contact');
     }
 
-    public function tracking()
+    public function orderTracking()
     {
-        return Inertia::render('Public/Tracking');
+        return Inertia::render('Public/OrderTracking');
+    }
+
+    public function appointmentTracking()
+    {
+        return Inertia::render('Public/AppointmentTracking');
     }
 
     public function repairBrand(Brand $brand)
@@ -67,7 +72,7 @@ class PublicController extends Controller
         ]);
     }
 
-    public function categoryBrands(Request $request, string $deviceCategory)
+    public function categoryBrands(string $deviceCategory)
     {
         $deviceCategories = config('constants.deviceCategories');
         if (!in_array($deviceCategory, $deviceCategories, true)) {
