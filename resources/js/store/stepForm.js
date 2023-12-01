@@ -75,9 +75,7 @@ export const useStepFormStore = defineStore('stepForm', () => {
 
   const submit = () => {
     form.post(route('public.appointments.store', device.value.slug), {
-      preserveState: true,
       onSuccess: () => $reset(),
-
     })
   }
 
