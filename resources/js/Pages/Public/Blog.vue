@@ -5,7 +5,7 @@ import CalenderIcon from "~icons/mdi/calendar-month";
 
 const props = defineProps(["post", "related_posts"]);
 
-const is_admin = usePage().props.auth.user.is_admin;
+const is_admin = usePage().props?.auth?.user?.is_admin;
 </script>
 <template>
   <Head :title="post.title" />

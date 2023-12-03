@@ -17,6 +17,8 @@ class Appointment extends Model
         'user_id',
         'device_id',
         'device_repair_id',
+        'device_repair_title',
+        'device_repair_price',
         'device_name',
         'first_name',
         'last_name',

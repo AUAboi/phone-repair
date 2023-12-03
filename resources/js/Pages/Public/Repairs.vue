@@ -68,7 +68,11 @@ const breakpoints = {
             {{ brand.name }}
           </h3>
           <div>
-            <Carousel :breakpoints="breakpoints" :settings="settings">
+            <Carousel
+              :wrap-around="brand.devices.length > 3"
+              :breakpoints="breakpoints"
+              :settings="settings"
+            >
               <Slide v-for="(device, j) in brand.devices" :key="device.id">
                 <div class="cursor-pointer text-center flex flex-col h-full">
                   <div>

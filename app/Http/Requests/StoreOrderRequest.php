@@ -27,7 +27,7 @@ class StoreOrderRequest extends FormRequest
             'first_name' => 'required|string|max:255',
             'last_name' => 'required|string|max:255',
             'email' => 'required|email',
-            'phone' => 'required|phone:' . config('constants.phone_number'),
+            'phone' => 'required|phone:PK',
             'zip_code' => 'required|string',
             'city' => 'required|string',
             'address' => 'required|string',
@@ -42,6 +42,7 @@ class StoreOrderRequest extends FormRequest
     public function messages(): array
     {
         return [
+            'phone.phone' => "Phone number must be a valid Pakistan number",
             'payment_method.in' => 'Must Either be Cash on Delivery or Card',
             'card.token.required_if' => 'You must enter card for selected payment method'
         ];

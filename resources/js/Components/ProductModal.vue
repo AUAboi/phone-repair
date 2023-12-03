@@ -65,7 +65,7 @@ const isCartProduct = computed(() => {
             <h1 class="text-gray-900 text-3xl title-font font-medium mb-1">
               {{ product.name }}
             </h1>
-            <div v-html="product.body" class="leading-relaxed"></div>
+            <div v-html="product.body" class="uncss"></div>
             <div
               class="flex mt-6 items-center pb-5 border-b-2 border-gray-100 mb-5"
             ></div>

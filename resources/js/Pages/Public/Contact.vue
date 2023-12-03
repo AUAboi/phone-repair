@@ -14,7 +14,7 @@ const form = useForm({
 const submit = () => {
   form.post(route("contact.send"), {
     preserveScroll: true,
-    preserveState: false,
+    onSuccess: () => form.reset(),
   });
 };
 </script>
@@ -72,6 +72,7 @@ const submit = () => {
             {{ error }}
           </div>
         </div>
+
         <div class="space-y-8">
           <div class="flex flex-col sm:flex-row gap-8">
             <input

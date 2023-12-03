@@ -3,7 +3,7 @@ import { useStepFormStore } from "@/store/stepForm";
 
 import Datepicker from "@vuepic/vue-datepicker";
 import "@vuepic/vue-datepicker/dist/main.css";
-import { ref } from "vue";
+import { onMounted, ref } from "vue";
 const stepForm = useStepFormStore();
 
 let now = new Date();
@@ -11,6 +11,10 @@ let now = new Date();
 const minDate = new Date();
 
 const startTime = ref({ hours: now.getHours(), minutes: 0 });
+
+onMounted(() => {
+  stepForm.form.appointment_time = startTime.value;
+});
 </script>
 <template>
   <div>

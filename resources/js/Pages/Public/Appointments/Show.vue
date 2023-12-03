@@ -2,6 +2,7 @@
 import CustomerDetails from "@/Pages/Admin/Appointments/Partials/CustomerDetails.vue";
 
 import DeviceDetails from "@/Pages/Admin/Appointments/Partials/DeviceDetails.vue";
+import { Head } from "@inertiajs/vue3";
 
 const props = defineProps({
   appointment: {
@@ -10,6 +11,8 @@ const props = defineProps({
 });
 </script>
 <template>
+  <Head :title="`Appointment #${appointment.appointment_number}`" />
+
   <section class="pt-28">
     <div class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8 space-y-6">
       <div class="px-4 sm:px-8 mx-2 sm:mx-0 pt-9">

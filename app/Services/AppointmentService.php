@@ -22,11 +22,14 @@ class AppointmentService
       $time  =  $data['appointment_time']['hours'] . ":" . $data['appointment_time']['minutes'];
       $timestamp = strtotime($time);
 
+      $deviceRepair = DeviceRepair::find($data['device_repair_id']);
       $appointment = Appointment::create([
         'user_id' => $user ? $user->id : null,
         'device_id' => $device->id,
         'device_name' => 'Repair ' . $device->name,
         'device_repair_id' => $data['device_repair_id'],
+        'device_repair_title' => $data['device_repair_id'],
+        'device_repair_price' => $deviceRepair->price,
         'first_name' => $data['first_name'],
         'last_name' => $data['last_name'],
         'email' => $data['email'],
@@ -37,7 +40,7 @@ class AppointmentService
         'address' => $data['address'],
         'appointment_date' => Carbon::parse($data['appointment_date'])->toDate(),
         'appointment_time' => Carbon::parse($timestamp)->toTimeString(),
-        'total' => DeviceRepair::find($data['device_repair_id'])->price
+        'total' => $deviceRepair->price
       ]);
 
       $appointment->appointment_number = $this->generateIdentifier($appointment);
