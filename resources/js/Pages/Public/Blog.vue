@@ -8,6 +8,11 @@ const props = defineProps(["post", "related_posts"]);
 const is_admin = usePage().props?.auth?.user?.is_admin;
 </script>
 <template>
+  <Head>
+    <title>{{ post.title }}</title>
+    <meta name="description" :content="post.summary" />
+    <meta name="author" :content="post.author" />
+  </Head>
   <Head :title="post.title" />
   <section class="py-24">
     <div class="mt-32 relative container mx-auto px-4">
