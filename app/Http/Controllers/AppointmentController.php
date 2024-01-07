@@ -61,7 +61,7 @@ class AppointmentController extends Controller
     public function store(Device $device,  StoreAppointmentRequest $request, AppointmentService $appointmentService)
     {
         try {
-            $appointmentService->createAppointment($device, $request->validated(), $request->user() ?? null);
+            $appointment = $appointmentService->createAppointment($device, $request->validated(), $request->user() ?? null);
         } catch (\Throwable $th) {
             return redirect()->route('public.repairs')->with('error', $th->getMessage());
         }

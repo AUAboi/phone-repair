@@ -47,6 +47,8 @@ class AppointmentService
       $appointment->save();
 
       Mail::to($appointment->email)->send(new AppointmentBooked($appointment));
+
+      return $appointment;
     });
   }
 
