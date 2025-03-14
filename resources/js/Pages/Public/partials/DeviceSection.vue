@@ -1,117 +1,70 @@
 <script setup>
-import Modal from "@/Components/Modal.vue";
-import ProductModal from "@/Components/ProductModal.vue";
 import { Link } from "@inertiajs/vue3";
-import { ref, computed } from "vue";
-import CloseCircle from "~icons/mdi/close-circle";
 
-const props = defineProps(["categories"]);
-
-const currentActive = ref(0);
-
-const currentDevice = ref(0);
-
-const modalToggle = ref(false);
-
-const devices = computed(() => {
-  return props.categories[currentActive.value]?.products;
-});
-
-const toggledDevice = computed(() => {
-  return devices.value[currentDevice.value];
-});
-
-const openDevice = (index) => {
-  currentDevice.value = index;
-  modalToggle.value = true;
-};
+const props = defineProps(["brands"]);
 </script>
 <template>
-  <section>
-    <div class="container mx-auto px-5 py-24">
-      <h4 class="text-6xl text-center font-bold">Products We Offer</h4>
-      <ul class="flex flex-wrap justify-center mt-8 gap-6">
-        <li
-          class="font-bold relative text-lg list-click cursor-pointer"
-          v-for="(category, index) in categories"
-          :key="category.id"
-          :class="{ active: currentActive === index }"
-        >
-          <a href="#" @click.prevent="currentActive = index">
-            {{ category.name }}
-          </a>
-        </li>
-      </ul>
+  <div class="s-py-50-100">
+    <div class="container-fluid">
       <div
-        class="flex flex-wrap justify-center md:justify-between mt-9 gap-y-12 max-w-6xl mx-auto"
+        class="max-w-xl mx-auto mb-8 md:mb-12 text-center"
+        data-aos="fade-up"
+        data-aos-delay="100"
       >
+        <div>
+          <img :src="sofa" alt="" class="mx-auto w-14 sm:w-24" />
+        </div>
+        <h3 class="leading-none mt-4 md:mt-6 text-2xl md:text-3xl">Brands</h3>
+        <p class="mt-3">
+          Be the first to experience innovation with our latest arrivals. Stay
+          ahead of the curve and discover what's new in style, technology, and
+          more.
+        </p>
+      </div>
+      <div data-aos="fade-up" data-aos-delay="100">
         <div
-          class="flex-shrink-0 flex-grow-0 basis-full sm:basis-1/2 md:basis-1/3"
-          v-for="(device, index) in devices"
-          :key="index"
+          class="max-w-[1720px] mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-8"
         >
           <div
-            @click="openDevice(index)"
-            class="flex flex-col justify-between h-full text-center"
+            v-for="(item, index) in brands"
+            :key="index"
+            class="group flex flex-col justify-between"
           >
-            <div>
-              <img
-                class="mx-auto max-w-xs"
-                :src="device.image"
-                :alt="device.name"
-              />
+            <div class="relative overflow-hidden">
+              <router-link :to="`/product-details/${item.id}`">
+                <img
+                  class="w-full transform group-hover:scale-110 duration-300"
+                  :src="item.image"
+                  alt="shop"
+                />
+              </router-link>
             </div>
-            <h4 class="font-semibold text-xl">{{ device.name }}</h4>
-            <h5 class="text-2xl font-bold">{{ device.formatted_price }}</h5>
+            <div
+              class="md:px-2 lg:px-4 xl:px-6 lg:pt-6 pt-5 flex gap-4 md:gap-5 flex-col"
+            >
+              <div>
+                <h5 class="font-normal dark:text-white text-xl leading-[1.5]">
+                  <router-link
+                    :to="`/product-details/${item.id}`"
+                    class="text-underline"
+                  >
+                    {{ item.name }}
+                  </router-link>
+                </h5>
+              </div>
+            </div>
           </div>
         </div>
       </div>
+      <div class="text-center mt-7 md:mt-12">
+        <Link
+          :href="route('public.repairs')"
+          class="btn btn-outline"
+          data-text="All Brands"
+        >
+          <span>All Brands</span>
+        </Link>
+      </div>
     </div>
-    <ProductModal
-      @close="modalToggle = false"
-      :modal-toggle="modalToggle"
-      :product="toggledDevice"
-    />
-  </section>
+  </div>
 </template>
-
-<style scoped>
-.list-click:hover:before,
-li.list-click.active:before,
-.list-click:before {
-  left: 0px;
-  width: 100%;
-  right: auto;
-}
-
-.list-click:before {
-  width: 0px;
-  left: auto;
-  right: 0px;
-  z-index: -1;
-  bottom: 0px;
-  height: 2px;
-  content: "";
-  position: absolute;
-  background: #ed1d24;
-  transition: width 0.3s linear;
-}
-
-li.list-click:hover,
-li.list-click.active {
-  color: #ed1d24;
-}
-
-li.list-click {
-  z-index: 1;
-  line-height: 1;
-  display: block;
-  font-size: 18px;
-  font-weight: 700;
-  position: relative;
-  padding-bottom: 2px;
-  color: #2e2e2e;
-  text-transform: uppercase;
-  transition: 300ms;
-}
-</style>

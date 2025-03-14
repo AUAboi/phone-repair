@@ -6,11 +6,13 @@ use App\Http\Resources\BrandResource;
 use App\Http\Resources\CategoryResource;
 use App\Http\Resources\DeviceResource;
 use App\Http\Resources\PostResource;
+use App\Http\Resources\ProductResource;
 use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Device;
 use App\Models\Order;
 use App\Models\Post;
+use App\Models\Product;
 use Inertia\Inertia;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
@@ -28,7 +30,8 @@ class PublicController extends Controller
         return Inertia::render('Public/Home', [
             'brands' => BrandResource::collection(Brand::all()->load('devices')),
             'posts' => PostResource::collection($posts),
-            'categories' => CategoryResource::collection(Category::orderBy('name', 'ASC')->get()->load('products', 'products.category'))
+            'categories' => CategoryResource::collection(Category::orderBy('name', 'ASC')->get()->load('products', 'products.category')),
+            'products' => ProductResource::collection(Product::inRandomOrder()->get())
         ]);
     }
 
@@ -82,6 +85,13 @@ class PublicController extends Controller
         return Inertia::render('Public/CategoryBrands', [
             'brands' => BrandResource::collection(Brand::where($deviceCategory, 1)->get()),
             'deviceCategory' => $deviceCategory
+        ]);
+    }
+
+    public function shop()
+    {
+        return Inertia::render('Public/Shop/Index', [
+            'products' => ProductResource::collection(Product::inRandomOrder()->get())
         ]);
     }
 }

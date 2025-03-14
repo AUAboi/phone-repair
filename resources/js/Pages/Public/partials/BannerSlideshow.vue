@@ -2,26 +2,10 @@
 import { Swiper, SwiperSlide } from "swiper/vue";
 import { Autoplay, Pagination, Navigation } from "swiper/modules";
 import "swiper/swiper-bundle.css";
-import Aos from "aos";
 import "aos/dist/aos.css";
-import { onMounted } from "vue";
 import banner1 from "@/assets/img/home-v1/banner-01.png";
 import banner2 from "@/assets/img/home-v1/banner-02.png";
 import banner3 from "@/assets/img/shortcode/carousel/Summer.png";
-import shape1 from "@/assets/img/home-v1/shape-01.png";
-import bg from "@/assets/img/home-v1/choose-us-bg.jpg";
-import chair from "@/assets/img/svg/chair.svg";
-import sofa from "@/assets/img/svg/sofa.svg";
-import like from "@/assets/img/svg/like.svg";
-import bed from "@/assets/img/svg/bed.svg";
-import hand from "@/assets/img/svg/hand.svg";
-import product1 from "@/assets/img/home-v1/ftur-pdct-01.jpg";
-import product2 from "@/assets/img/home-v1/ftur-pdct-02.jpg";
-import comment from "@/assets/img/svg/comment.svg";
-
-onMounted(() => {
-  Aos.init();
-});
 </script>
 <template>
   <swiper

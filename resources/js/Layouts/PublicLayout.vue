@@ -1,48 +1,30 @@
 <script setup>
 import ApplicationLogo from "@/Components/ApplicationLogo.vue";
 import FlashMessage from "@/Components/FlashMessage.vue";
-import { Link } from "@inertiajs/vue3";
+import { Link, usePage } from "@inertiajs/vue3";
 import PublicFooter from "./partials/PublicFooter.vue";
 import PublicNavigation from "./partials/PublicNavigation.vue";
-import { ref } from "vue";
+import { onMounted, ref } from "vue";
 import { useLogoStore } from "@/store/logoStore";
+import Aos from "aos";
+import "aos/dist/aos.css";
 
 const props = defineProps(["navigation"]);
+const toggle = ref(false);
 
-const menuItems = [
-  {
-    text: "Repair",
-    href: route("public.repairs"),
-    children: props.navigation.devices.map((d) => {
-      return {
-        text: d.name,
-        href: route("public.appointments.create", d.slug),
-      };
-    }),
-  },
-  {
-    text: "Products",
-    href: route("public.products"),
-  },
-  {
-    text: "Tracking",
-    href: "#",
-    children: [
-      {
-        text: "Track your order",
-        href: route("public.order.tracking"),
-      },
-      {
-        text: "Track your appointment",
-        href: route("public.appointment.tracking"),
-      },
-    ],
-  },
-  {
-    text: "Contact Us",
-    href: route("public.contact"),
-  },
-];
+onMounted(() => {
+  Aos.init();
+});
+
+const page = usePage();
+
+const isUrl = (...urls) => {
+  let currentUrl = page.url.substring(1);
+  if (urls[0] === "") {
+    return currentUrl === "";
+  }
+  return urls.filter((url) => currentUrl.startsWith(url)).length;
+};
 </script>
 <template>
   <div
@@ -71,19 +53,10 @@ const menuItems = [
             <li
               class="relative"
               :class="
-                [
-                  '/',
-                  '/index-v2',
-                  '/index-v3',
-                  '/index-v4',
-                  '/index-v5',
-                  '/index-v6',
-                ].includes(current)
-                  ? 'active'
-                  : ''
+                ['public.home'].includes(route().current()) ? 'active' : ''
               "
             >
-              <Link href="#">Home<span></span></Link>
+              <Link :href="route('public.home')">Home<span></span></Link>
               <ul
                 class="sub-menu lg:absolute z-50 lg:top-full lg:left-0 lg:min-w-[220px] lg:invisible lg:transition-all lg:bg-white lg:dark:bg-title lg:py-[15px] lg:pr-[30px]"
               >
@@ -309,47 +282,10 @@ const menuItems = [
             <li
               class="relative"
               :class="
-                [
-                  '/shop-v1',
-                  '/shop-v2',
-                  '/shop-v3',
-                  '/shop-v4',
-                  '/product-details',
-                  '/cart',
-                  '/checkout',
-                ].includes(current)
-                  ? 'active'
-                  : ''
+                ['public.shop'].includes(route().current()) ? 'active' : ''
               "
             >
-              <router-link to="#">Shop<span></span></router-link>
-              <ul
-                class="sub-menu lg:absolute z-50 lg:top-full lg:left-0 lg:min-w-[220px] lg:invisible lg:transition-all lg:bg-white lg:dark:bg-title lg:py-[15px] lg:pr-[30px]"
-              >
-                <li :class="current === '/shop-v1' ? 'active' : ''">
-                  <router-link to="/shop-v1">Shop Layout 01</router-link>
-                </li>
-                <li :class="current === '/shop-v2' ? 'active' : ''">
-                  <router-link to="/shop-v2">Shop Layout 02</router-link>
-                </li>
-                <li :class="current === '/shop-v3' ? 'active' : ''">
-                  <router-link to="/shop-v3">Shop Layout 03</router-link>
-                </li>
-                <li :class="current === '/shop-v4' ? 'active' : ''">
-                  <router-link to="/shop-v4">Shop Layout 04</router-link>
-                </li>
-                <li :class="current === '/product-details' ? 'active' : ''">
-                  <router-link to="/product-details"
-                    >Product Details</router-link
-                  >
-                </li>
-                <li :class="current === '/cart' ? 'active' : ''">
-                  <router-link to="/cart">My Cart</router-link>
-                </li>
-                <li :class="current === '/checkout' ? 'active' : ''">
-                  <router-link to="/checkout">Checkout</router-link>
-                </li>
-              </ul>
+              <Link :href="route('public.shop')">Shop</Link>
             </li>
             <li
               class="relative"
