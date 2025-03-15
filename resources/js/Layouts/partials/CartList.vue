@@ -8,7 +8,7 @@ const props = defineProps(["cart", "cartList"]);
     v-if="cartList"
     class="hdr_cart_popup w-80 md:w-96 absolute z-50 top-full right-0 sm:right-10 xl:right-0 bg-white dark:bg-title p-5 md:p-[30px] border border-primary"
   >
-    <h4 class="font-medium leading-none mb-4 text-xl md:text-2xl">Cart List</h4>
+    <h4 class="font-medium leading-none mb-4 text-xl md:text-2xl">Cart</h4>
     <div>
       <div class="hdr-cart-item">
         <div
