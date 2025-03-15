@@ -2,6 +2,7 @@
 
 namespace App\Actions;
 
+use App\Http\Resources\ProductResource;
 use App\Models\Product;
 use App\Models\User;
 use Darryldecode\Cart\Cart;
@@ -15,7 +16,7 @@ class AddToCart
       'name' => $product->name,
       'price' => $product->price,
       'quantity' => 1,
-      'associatedModel' => $product
+      'associatedModel' => new ProductResource($product)
     ));
   }
 }

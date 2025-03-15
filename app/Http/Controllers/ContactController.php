@@ -14,6 +14,7 @@ class ContactController extends Controller
         $request->validate([
             'name' => 'required|string',
             'subject' => 'required|string',
+            'phone' => 'required|phone:' . config('constants.phone_number'),
             'email' => 'required|email',
             'message' => 'required|string',
         ]);
@@ -21,6 +22,7 @@ class ContactController extends Controller
         $contact = [
             'name' => $request->name,
             'subject' => $request->subject,
+            'phone' => $request->phone,
             'email' => $request->email,
             'message' => $request->message,
         ];

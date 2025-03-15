@@ -5,6 +5,7 @@ import MdiEyeOutline from "~icons/mdi/eye-outline";
 import product1 from "@/assets/img/home-v1/ftur-pdct-01.jpg";
 import product2 from "@/assets/img/home-v1/ftur-pdct-02.jpg";
 import MdiCartOutline from "~icons/mdi/cart-outline";
+import { Link } from "@inertiajs/vue3";
 
 const props = defineProps(["products"]);
 </script>
@@ -35,32 +36,35 @@ const props = defineProps(["products"]);
         <div class="grid sm:grid-cols-2 gap-5 sm:gap-8 lg:max-w-[766px] w-full">
           <div v-for="(item, index) in products" :key="index" class="group">
             <div class="relative overflow-hidden">
-              <router-link :to="`/product-details/${item.id}`">
+              <Link :href="`/product-details/${item.id}`">
                 <img
                   class="w-full transform group-hover:scale-110 duration-300"
                   :src="item.image"
                   alt="shop"
                 />
-              </router-link>
+              </Link>
 
               <div
                 class="absolute z-10 top-[50%] right-3 transform -translate-y-[40%] opacity-0 duration-300 transition-all group-hover:-translate-y-1/2 group-hover:opacity-100 flex flex-col items-end gap-3"
               >
-                <router-link
-                  to="#"
+                <Link
+                  method="post"
+                  :href="route('cart.add', { id: item.id })"
                   class="bg-white dark:bg-title dark:text-white bg-opacity-80 flex items-center justify-center gap-2 px-4 py-[10px] text-base leading-none text-title rounded-[40px] h-14 overflow-hidden new-product-icon"
                 >
                   <MdiCartOutline class="dark:text-white text-[24px]" /><span
                     class="mt-1"
                     >Add to Cart</span
                   >
-                </router-link>
-                <button
+                </Link>
+                <Link
+                  as="button"
+                  :href="route('public.product.show', item.id)"
                   class="bg-white dark:bg-title dark:text-white bg-opacity-80 flex items-center justify-center gap-2 px-4 py-[10px] text-base leading-none text-title rounded-[40px] h-14 overflow-hidden new-product-icon quick-view"
                 >
                   <MdiEyeOutline class="dark:text-white text-[24px]" />
                   <span class="mt-1">Quick View</span>
-                </button>
+                </Link>
               </div>
             </div>
             <div
@@ -71,12 +75,12 @@ const props = defineProps(["products"]);
               </h4>
               <div>
                 <h5 class="font-normal dark:text-white text-xl leading-[1.5]">
-                  <router-link
-                    :to="`/product-details/${item.id}`"
+                  <Link
+                    :href="route('public.product.show', item.id)"
                     class="text-underline"
                   >
                     {{ item.name }}
-                  </router-link>
+                  </Link>
                 </h5>
                 <ul class="flex items-center gap-2 mt-1">
                   <li>

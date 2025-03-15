@@ -1,5 +1,6 @@
 import "./bootstrap";
 import "../css/style.css";
+import "../css/app.scss";
 import "../css/unreset.scss";
 // import "@fontsource/jost/300.css"
 // import "@fontsource/jost/400.css"

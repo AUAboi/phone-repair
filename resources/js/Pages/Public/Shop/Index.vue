@@ -3,8 +3,9 @@ import { onMounted, ref } from "vue";
 import LayoutOne from "@/Components/template/layout-one.vue";
 import bg from "@/assets/img/shortcode/breadcumb.jpg";
 import Aos from "aos";
+import { Head, Link } from "@inertiajs/vue3";
 
-const props = defineProps(["products"]);
+const props = defineProps(["products", "categories"]);
 
 onMounted(() => {
   Aos.init();
@@ -32,6 +33,7 @@ const handleSelect = (option, event) => {
 };
 </script>
 <template>
+  <Head title="Shop" />
   <div>
     <div
       class="flex items-center gap-4 flex-wrap bg-overlay p-14 sm:p-16 before:bg-title before:bg-opacity-70"
@@ -65,88 +67,17 @@ const handleSelect = (option, event) => {
               Choose Category
             </h4>
             <div class="flex flex-wrap gap-[10px] md:gap-[15px]">
-              <router-link
+              <Link
+                v-for="category in categories"
+                :key="category.id"
                 class="btn btn-theme-outline btn-sm shop1-button"
-                to="/product-category"
-                data-text="Sofa & Chair"
-                ><span>Sofa & Chair</span></router-link
-              >
-              <router-link
-                class="btn btn-theme-outline btn-sm shop1-button"
-                to="/product-category"
-                data-text="Full Interior"
-                ><span>Full Interior</span></router-link
-              >
-              <router-link
-                class="btn btn-theme-outline btn-sm shop1-button"
-                to="/product-category"
-                data-text="Lamp & Vase"
-                ><span>Lamp & Vase</span></router-link
-              >
-              <router-link
-                class="btn btn-theme-outline btn-sm shop1-button"
-                to="/product-category"
-                data-text="Table"
-                ><span>Table</span></router-link
-              >
-              <router-link
-                class="btn btn-theme-outline btn-sm shop1-button"
-                to="/product-category"
-                data-text="Wood Design"
-                ><span>Wood Design</span></router-link
+                :href="`/${category.slug}`"
+                :data-text="category.name"
+                ><span>{{ category.name }}</span></Link
               >
             </div>
           </div>
           <div class="max-w-[562px] w-full grid sm:grid-cols-2 gap-8 md:gap-12">
-            <div>
-              <h4
-                class="font-medium leading-none text-xl sm:text-2xl mb-5 sm:mb-6"
-              >
-                Price Range
-              </h4>
-              <div class="grid grid-cols-2 gap-[15px]">
-                <div
-                  class="py-[10px] px-5 border border-title dark:border-white-light flex items-center justify-center gap-[5px]"
-                >
-                  <span
-                    class="text-title dark:text-white font-medium leading-none"
-                    >Min:</span
-                  >
-                  <div class="relative">
-                    <span
-                      class="text-title dark:text-white font-medium leading-none absolute left-0 top-1/2 block transform -translate-y-1/2"
-                      >$</span
-                    >
-                    <input
-                      class="pl-[10px] w-full appearance-none bg-transparent text-title dark:text-white font-medium leading-none placeholder:text-title dark:placeholder:text-white placeholder placeholder:font-medium placeholder:leading-none outline-none"
-                      type="number"
-                      placeholder="0"
-                      value="0"
-                    />
-                  </div>
-                </div>
-                <div
-                  class="py-[10] px-5 border border-title dark:border-white-light flex items-center justify-center gap-[5px]"
-                >
-                  <span
-                    class="text-title dark:text-white font-medium leading-none"
-                    >Max:</span
-                  >
-                  <div class="relative">
-                    <span
-                      class="text-title dark:text-white font-medium leading-none absolute left-0 top-1/2 block transform -translate-y-1/2"
-                      >$</span
-                    >
-                    <input
-                      class="pl-[10px] w-full appearance-none bg-transparent text-title dark:text-white font-medium leading-none placeholder:text-title dark:placeholder:text-white placeholder:font-medium placeholder:leading-none outline-none"
-                      type="number"
-                      placeholder="100"
-                      value="100"
-                    />
-                  </div>
-                </div>
-              </div>
-            </div>
             <div>
               <h4
                 class="font-medium leading-none text-xl sm:text-2xl mb-5 sm:mb-6"

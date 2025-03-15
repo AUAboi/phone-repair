@@ -14,7 +14,7 @@ use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProductController;
 
-Route::middleware(['auth', 'admin'])->group(function () {
+Route::middleware(['auth', 'admin'])->prefix('/admin')->group(function () {
   // Route::get('/dashboard', function () {
   //   return Inertia::render('Admin/Dashboard');
   // })->name('dashboard');

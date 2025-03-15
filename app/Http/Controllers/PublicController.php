@@ -91,7 +91,16 @@ class PublicController extends Controller
     public function shop()
     {
         return Inertia::render('Public/Shop/Index', [
+            'categories' => CategoryResource::collection(Category::orderBy('name', 'ASC')->get()),
             'products' => ProductResource::collection(Product::inRandomOrder()->get())
+        ]);
+    }
+
+    public function product(Product $product)
+    {
+        return Inertia::render('Public/Product/Show', [
+            'product' => new ProductResource($product->load('category')),
+            'products' => ProductResource::collection(Product::all()->except($product->id))
         ]);
     }
 }

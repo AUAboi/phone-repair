@@ -39,6 +39,9 @@ Route::get('/contact-us', [PublicController::class, 'contact'])->name('public.co
 Route::get('/phone/repairs', [PublicController::class, 'repairs'])->name('public.repairs');
 Route::get('/all-repairs/{brand}', [PublicController::class, 'repairBrand'])->name('public.repairs.brand');
 Route::get('/all-products', [PublicController::class, 'products'])->name('public.products');
+
+Route::get('/product-details/{product}', [PublicController::class, 'product'])->name('public.product.show');
+
 Route::get('/book-appointment/repair/{device}', [AppointmentController::class, 'create'])->name('public.appointments.create');
 Route::post('/book-appointment/repair/{device}', [AppointmentController::class, 'store'])->name('public.appointments.store');
 
@@ -54,11 +57,11 @@ Route::post('/cart/remove-item', [CartController::class, 'removeItem'])->name('c
 Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout.index');
 
 
-Route::get('tracking/order/{order:order_no}', [OrderController::class, 'show'])->name('order.show');
+Route::get('/tracking/order/{order:order_no}', [OrderController::class, 'show'])->name('order.show');
 Route::get('tracking/appointment/{appointment:appointment_number}', [AppointmentController::class, 'showAppointment'])->name('appointment.show');
 
-Route::get('tracking/order', [PublicController::class, 'orderTracking'])->name('public.order.tracking');
-Route::get('tracking/appointment', [PublicController::class, 'appointmentTracking'])->name('public.appointment.tracking');
+Route::get('/tracking/order', [PublicController::class, 'orderTracking'])->name('public.order.tracking');
+Route::get('/tracking/appointment', [PublicController::class, 'appointmentTracking'])->name('public.appointment.tracking');
 
 Route::post('/order/place', [OrderController::class, 'store'])->name('order.store');
 

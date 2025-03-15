@@ -37,7 +37,7 @@ const isUrl = (...urls) => {
       >
         <Link :href="route('public.home')" class="cursor-pointer block">
           <img
-            src="images/red.png"
+            src="/images/red.png"
             alt=""
             class="block w-[120px] sm:w-[200px]"
           />
@@ -333,7 +333,7 @@ const isUrl = (...urls) => {
               </ul>
             </li>
             <li :class="current === '/contact' ? 'active' : ''">
-              <Link href="/contact">Contact</Link>
+              <Link :href="route('public.contact')">Contact</Link>
             </li>
             <li :class="current === '/login' ? 'active' : ''" class="lg:hidden">
               <Link href="/login">Login</Link>

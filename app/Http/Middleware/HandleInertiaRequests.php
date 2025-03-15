@@ -42,6 +42,9 @@ class HandleInertiaRequests extends Middleware
         } else {
             \Cart::session($request->session()->getId());
         }
+
+        $cartCollection = \Cart::getContent();
+
         return array_merge(parent::share($request), [
             'flash' => function () use ($request) {
                 return [
@@ -63,9 +66,10 @@ class HandleInertiaRequests extends Middleware
                 ]);
             },
             'cart' => [
-                'content' => \Cart::getContent(),
-                'total' => $request->user() ? money(\Cart::getTotal(), config('constants.currency'), true)
-                    ->formatWithoutZeroes() : null,
+                'length' => $cartCollection->count(),
+                'content' => $cartCollection,
+                'total' => money(\Cart::getTotal(), config('constants.currency'), true)
+                    ->formatWithoutZeroes(),
             ],
         ]);
     }

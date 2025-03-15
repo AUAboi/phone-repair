@@ -1,14 +1,17 @@
 <script setup>
-import { ref } from "vue";
+import { computed, ref } from "vue";
 
 import CartIcon from "~icons/mdi/cart-outline";
 import CartList from "./CartList.vue";
+import { usePage } from "@inertiajs/vue3";
 
 const cartList = ref(false);
 
 const props = defineProps(["toggle"]);
 
 const emit = defineEmits(["toggle-change"]);
+
+const cart = computed(() => usePage().props.cart);
 
 function handleToggle() {
   emit("toggle-change", !props.toggle); // Correctly use `toggle` prop here
@@ -25,11 +28,11 @@ function handleToggle() {
     <button class="relative hdr_cart_btn" @click="cartList = !cartList">
       <span
         class="absolute w-[22px] h-[22px] bg-secondary top-[0px] -right-[11px] rounded-full flex items-center justify-center text-xs leading-none text-white"
-        >22</span
+        >{{ cart.length ?? 0 }}</span
       >
       <CartIcon class="text-title dark:text-white text-[24px] sm:text-[28px]" />
     </button>
-    <CartList :cartList="cartList" />
+    <CartList :cartList="cartList" :cart="cart" />
     <button
       class="hamburger"
       :class="toggle ? 'opened' : ''"
