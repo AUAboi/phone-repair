@@ -11,6 +11,7 @@ use App\Http\Controllers\AppointmentController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\UserProfileController;
+use Illuminate\Support\Facades\Artisan;
 
 /*
 |--------------------------------------------------------------------------
@@ -76,6 +77,11 @@ Route::get('/{deviceCategory}/brands', [PublicController::class, 'categoryBrands
 Route::middleware(['auth'])->group(function () {
     Route::get('/user/profile', [UserProfileController::class, 'index'])->name('user.profile');
 });
+
+Route::get('/sym', function () {
+    Artisan::call('storage:link');
+});
+
 
 require __DIR__ . '/admin.php';
 require __DIR__ . '/auth.php';

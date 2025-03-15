@@ -31,7 +31,7 @@ class CartController extends Controller
                 }
             }
 
-            $cartContent = $row->transform(fn ($item) => [
+            $cartContent = $row->transform(fn($item) => [
                 'id' => $item->id,
                 'name' => $item->associatedModel->name,
                 'price' => $item->associatedModel->formatted_price,
@@ -42,7 +42,7 @@ class CartController extends Controller
         }
 
         return Inertia::render('Public/Cart/Index', [
-            'cart' => [
+            '_cart' => [
                 'content' => $cartContent,
                 'total' => money(\Cart::getTotal(), config('constants.currency'), true)->format(),
                 'quantity' => \Cart::getTotalQuantity()
