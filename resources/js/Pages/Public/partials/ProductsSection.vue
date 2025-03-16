@@ -34,7 +34,11 @@ const props = defineProps(["products"]);
         data-aos-delay="100"
       >
         <div class="grid sm:grid-cols-2 gap-5 sm:gap-8 lg:max-w-[766px] w-full">
-          <div v-for="(item, index) in products" :key="index" class="group">
+          <div
+            v-for="item in products.slice(0, 4)"
+            :key="item.id"
+            class="group"
+          >
             <div class="relative overflow-hidden">
               <Link :href="`/product-details/${item.id}`">
                 <img
@@ -49,6 +53,7 @@ const props = defineProps(["products"]);
               >
                 <Link
                   method="post"
+                  as="button"
                   :href="route('cart.add', { id: item.id })"
                   class="bg-white dark:bg-title dark:text-white bg-opacity-80 flex items-center justify-center gap-2 px-4 py-[10px] text-base leading-none text-title rounded-[40px] h-14 overflow-hidden new-product-icon"
                 >
@@ -106,110 +111,56 @@ const props = defineProps(["products"]);
           </div>
         </div>
         <div class="grid sm:grid-cols-2 gap-5 sm:gap-8 lg:max-w-[925px] w-full">
-          <div class="group flex flex-col">
+          <div
+            v-for="item in products.slice(4, 6)"
+            :key="item.id"
+            class="group flex flex-col"
+          >
             <div class="relative overflow-hidden flex-1">
-              <router-link to="/product-details">
+              <Link :href="`/product-details/${item.id}`">
                 <img
                   class="w-full transform group-hover:scale-110 duration-300 h-full object-cover"
-                  :src="product1"
+                  :src="item.image"
                   alt="product-card"
                 />
-              </router-link>
+              </Link>
 
               <div
                 class="absolute z-10 top-[50%] right-3 transform -translate-y-[40%] opacity-0 duration-300 transition-all group-hover:-translate-y-1/2 group-hover:opacity-100 flex flex-col items-end gap-3"
               >
-                <router-link
-                  to="#"
+                <Link
+                  method="post"
+                  as="button"
+                  :href="route('cart.add', { id: item.id })"
                   class="bg-white dark:bg-title dark:text-white bg-opacity-80 flex items-center justify-center gap-2 px-4 py-[10px] text-base leading-none text-title rounded-[40px] h-14 overflow-hidden new-product-icon"
                 >
                   <MdiCartOutline class="dark:text-white text-[24px]" /><span
                     class="mt-1"
                     >Add to Cart</span
                   >
-                </router-link>
-                <button
+                </Link>
+                <Link
+                  as="button"
+                  :href="route('public.product.show', item.id)"
                   class="bg-white dark:bg-title dark:text-white bg-opacity-80 flex items-center justify-center gap-2 px-4 py-[10px] text-base leading-none text-title rounded-[40px] h-14 overflow-hidden new-product-icon quick-view"
                 >
                   <MdiEyeOutline class="dark:text-white text-[24px]" />
                   <span class="mt-1">Quick View</span>
-                </button>
+                </Link>
               </div>
             </div>
             <div class="lg:pt-6 pt-5 flex gap-3 md:gap-4 flex-col">
               <h4 class="font-medium leading-none dark:text-white text-lg">
-                $122.75
-                <span class="text-title/50 line-through pl-2 inline-block"
-                  >$140.99</span
-                >
+                {{ item.formatted_price }}
               </h4>
               <div>
                 <h5 class="font-normal dark:text-white text-xl leading-[1.5]">
-                  <router-link to="/product-details" class="text-underline">
-                    Convertible Sofa
-                  </router-link>
-                </h5>
-                <ul class="flex items-center gap-2 mt-1">
-                  <li>
-                    <MdiStar class="text-[#EE9818] text-[14px]" />
-                  </li>
-                  <li>
-                    <MdiStar class="text-[#EE9818] text-[14px]" />
-                  </li>
-                  <li>
-                    <MdiStar class="text-[#EE9818] text-[14px]" />
-                  </li>
-                  <li>
-                    <MdiStar class="text-[#EE9818] text-[14px]" />
-                  </li>
-
-                  <li>
-                    <MdiStar class="text-slate-300 text-[14px]" />
-                  </li>
-                  <li class="dark:text-gray-100">( 1,230 )</li>
-                </ul>
-              </div>
-            </div>
-          </div>
-          <div class="group flex flex-col">
-            <div class="relative overflow-hidden flex-1">
-              <router-link to="/product-details">
-                <img
-                  class="w-full transform group-hover:scale-110 duration-300 h-full object-cover"
-                  :src="product2"
-                  alt="product-card"
-                />
-              </router-link>
-
-              <div
-                class="absolute z-10 top-[50%] right-3 transform -translate-y-[40%] opacity-0 duration-300 transition-all group-hover:-translate-y-1/2 group-hover:opacity-100 flex flex-col items-end gap-3"
-              >
-                <router-link
-                  to="#"
-                  class="bg-white dark:bg-title dark:text-white bg-opacity-80 flex items-center justify-center gap-2 px-4 py-[10px] text-base leading-none text-title rounded-[40px] h-14 overflow-hidden new-product-icon"
-                >
-                  <MdiCartOutline class="dark:text-white text-[24px]" /><span
-                    class="mt-1"
-                    >Add to Cart</span
+                  <Link
+                    :href="route('public.product.show', item.id)"
+                    class="text-underline"
                   >
-                </router-link>
-                <button
-                  class="bg-white dark:bg-title dark:text-white bg-opacity-80 flex items-center justify-center gap-2 px-4 py-[10px] text-base leading-none text-title rounded-[40px] h-14 overflow-hidden new-product-icon quick-view"
-                >
-                  <MdiEyeOutline class="dark:text-white text-[24px]" />
-                  <span class="mt-1">Quick View</span>
-                </button>
-              </div>
-            </div>
-            <div class="lg:pt-6 pt-5 flex gap-3 md:gap-4 flex-col">
-              <h4 class="font-medium leading-none dark:text-white text-lg">
-                $122.75 - $140.99
-              </h4>
-              <div>
-                <h5 class="font-normal dark:text-white text-xl leading-[1.5]">
-                  <router-link to="/product-details" class="text-underline">
-                    Flower vase for Table
-                  </router-link>
+                    {{ item.name }}
+                  </Link>
                 </h5>
                 <ul class="flex items-center gap-2 mt-1">
                   <li>

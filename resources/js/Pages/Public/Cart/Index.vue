@@ -4,11 +4,11 @@ import { Link, Head, useForm } from "@inertiajs/vue3";
 import CartItem from "@/Pages/Public/Cart/Partials/CartItem.vue";
 
 const props = defineProps({
-  cart: Object,
+  cartContents: Object,
 });
 
 const hasCartItems = computed(() => {
-  return Object.keys(props.cart.content).length;
+  return Object.keys(props.cartContents.content).length;
 });
 
 const form = useForm({
@@ -25,7 +25,9 @@ const form = useForm({
         <div class="bg-white px-10 py-10 flex-grow">
           <div class="flex justify-between border-b pb-8">
             <h1 class="font-semibold text-2xl">Cart</h1>
-            <h2 class="font-semibold text-2xl">{{ cart.quantity }} Items</h2>
+            <h2 class="font-semibold text-2xl">
+              {{ cartContents.quantity }} Items
+            </h2>
           </div>
           <div class="flex mt-10 bg-red-500 py-2 px-2">
             <h3 class="font-semibold text-gray-200 text-xs uppercase w-2/5">
@@ -48,7 +50,7 @@ const form = useForm({
             </h3>
           </div>
           <CartItem
-            v-for="item in cart.content"
+            v-for="item in cartContents.content"
             :cartProduct="item"
             :key="item.id"
           />
@@ -72,9 +74,9 @@ const form = useForm({
           <h1 class="font-semibold text-2xl border-b pb-8">Order Summary</h1>
           <div class="flex justify-between mt-10 mb-5">
             <span class="font-semibold text-sm uppercase"
-              >{{ cart.quantity }} Items</span
+              >{{ cartContents.quantity }} Items</span
             >
-            <span class="font-semibold text-sm">{{ cart.total }}</span>
+            <span class="font-semibold text-sm">{{ cartContents.total }}</span>
           </div>
 
           <div class="border-t mt-8">
@@ -82,7 +84,7 @@ const form = useForm({
               class="flex font-semibold justify-between py-6 text-sm uppercase"
             >
               <span>Total cost</span>
-              <span>{{ cart.total }}</span>
+              <span>{{ cartContents.total }}</span>
             </div>
             <Link
               as="button"

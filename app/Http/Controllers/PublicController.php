@@ -51,6 +51,11 @@ class PublicController extends Controller
         return Inertia::render('Public/Contact');
     }
 
+    public function about()
+    {
+        return Inertia::render('Public/About');
+    }
+
     public function orderTracking()
     {
         return Inertia::render('Public/OrderTracking');

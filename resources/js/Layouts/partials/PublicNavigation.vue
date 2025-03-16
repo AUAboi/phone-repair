@@ -4,6 +4,7 @@ import { computed, ref } from "vue";
 import CartIcon from "~icons/mdi/cart-outline";
 import CartList from "./CartList.vue";
 import { Link, usePage } from "@inertiajs/vue3";
+import { onClickOutside } from "@vueuse/core";
 
 const cartList = ref(false);
 
@@ -14,8 +15,15 @@ const emit = defineEmits(["toggle-change"]);
 const cart = computed(() => usePage().props.cart);
 
 function handleToggle() {
-  emit("toggle-change", !props.toggle); // Correctly use `toggle` prop here
+  emit("toggle-change", !props.toggle);
 }
+
+const cartRef = ref(null);
+const cartButtonRef = ref(null);
+
+onClickOutside(cartRef, () => (cartList.value = false), {
+  ignore: [cartButtonRef],
+});
 </script>
 <template>
   <div class="flex items-center gap-4 sm:gap-6">
@@ -25,14 +33,18 @@ function handleToggle() {
       >Login</Link
     >
 
-    <button class="relative hdr_cart_btn" @click="cartList = !cartList">
+    <button
+      class="relative hdr_cart_btn"
+      @click="cartList = !cartList"
+      ref="cartButtonRef"
+    >
       <span
         class="absolute w-[22px] h-[22px] bg-secondary top-[0px] -right-[11px] rounded-full flex items-center justify-center text-xs leading-none text-white"
         >{{ cart.length ?? 0 }}</span
       >
       <CartIcon class="text-title dark:text-white text-[24px] sm:text-[28px]" />
     </button>
-    <CartList :cartList="cartList" :cart="cart" />
+    <CartList ref="cartRef" :cartList="cartList" :cart="cart" />
     <button
       class="hamburger"
       :class="toggle ? 'opened' : ''"

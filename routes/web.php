@@ -37,6 +37,7 @@ Route::get('/test', function () {
 Route::get('/', [PublicController::class, 'home'])->name('public.home');
 Route::get('/shop', [PublicController::class, 'shop'])->name('public.shop');
 Route::get('/contact-us', [PublicController::class, 'contact'])->name('public.contact');
+Route::get('/about-us', [PublicController::class, 'about'])->name('public.about');
 Route::get('/phone/repairs', [PublicController::class, 'repairs'])->name('public.repairs');
 Route::get('/all-repairs/{brand}', [PublicController::class, 'repairBrand'])->name('public.repairs.brand');
 Route::get('/all-products', [PublicController::class, 'products'])->name('public.products');
