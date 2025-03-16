@@ -29,12 +29,12 @@ class CheckoutController extends Controller
                 }
             }
 
-            $cartContent = $row->transform(fn ($item) => [
+            $cartContent = $row->transform(fn($item) => [
                 'id' => $item->id,
                 'name' => $item->associatedModel->name,
                 'price' => $item->associatedModel->formatted_price,
+                'associatedModel' => $item->associatedModel,
                 'quantity' => $item->quantity,
-
                 'total_price' => money($item->associatedModel->price * $item->quantity, config('constants.currency'), true)->format(),
             ]);
         }
@@ -45,7 +45,7 @@ class CheckoutController extends Controller
         }
 
         return Inertia::render('Public/Checkout/Index', [
-            'cart' => [
+            'cartContents' => [
                 'content' => $cartContent,
                 'total' => money(\Cart::getTotal(), config('constants.currency'), true)->formatWithoutZeroes(),
                 'quantity' => \Cart::getTotalQuantity()

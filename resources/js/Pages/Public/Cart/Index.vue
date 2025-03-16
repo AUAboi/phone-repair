@@ -5,6 +5,7 @@ import CartItem from "@/Pages/Public/Cart/Partials/CartItem.vue";
 import Aos from "aos";
 import { onMounted } from "vue";
 import IncDec from "../Product/partials/inc-dec.vue";
+import bg from "@/assets/img/shortcode/breadcumb.jpg";
 
 const props = defineProps({
   cartContents: Object,
@@ -34,7 +35,7 @@ onMounted(() => {
       <ul
         class="flex items-center justify-center gap-[10px] text-base md:text-lg leading-none font-normal text-white mt-3 md:mt-4"
       >
-        <li><router-link to="/">Home</router-link></li>
+        <li><Link :href="route('public.home')">Home</Link></li>
         <li>/</li>
         <li class="text-primary">Cart</li>
       </ul>

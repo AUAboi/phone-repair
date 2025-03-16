@@ -1,8 +1,10 @@
 <script setup>
 import StepFormInput from "@/Components/StepFormInput.vue";
-import { Head, useForm, usePage } from "@inertiajs/vue3";
+import { Head, Link, useForm, usePage } from "@inertiajs/vue3";
 import CartCheckout from "@/Pages/Public/Cart/Partials/CartCheckout.vue";
 import FormSelect from "@/Components/FormSelect.vue";
+import bg from "@/assets/img/shortcode/breadcumb.jpg";
+import { computed } from "vue";
 
 const page = usePage();
 const form = useForm({
@@ -18,7 +20,7 @@ const form = useForm({
   card: "",
 });
 
-const props = defineProps(["cart", "quantity", "total"]);
+const props = defineProps(["cartContents", "quantity", "total"]);
 
 const submit = () => {
   form.post(route("order.store"));
@@ -27,135 +29,353 @@ const submit = () => {
 
 <template>
   <Head title="Checkout" />
-  <div class="container mx-auto mb-16 pt-36">
-    <div class="flex justify-evenly flex-wrap-reverse gap-14 sm:gap-6 md:gap-0">
-      <div class="flex-grow">
-        <h2 class="text-3xl text-center font-bold">Complete your purchase</h2>
-        <form
-          class="max-w-xs sm:max-w-4xl mx-4 sm:mx-auto mt-8"
-          @submit.prevent="submit"
-        >
-          <h3 class="text-2xl font-bold">Personal info</h3>
-          <div class="flex flex-wrap flex-grow">
-            <div class="p-2 w-full md:w-1/2">
-              <div class="relative">
-                <StepFormInput
-                  label="First Name"
-                  v-model="form.first_name"
-                  :error="form.errors.first_name"
-                />
-              </div>
-            </div>
-            <div class="p-2 w-full md:w-1/2">
-              <div class="relative">
-                <StepFormInput
-                  label="Last Name"
-                  v-model="form.last_name"
-                  :error="form.errors.last_name"
-                />
-              </div>
-            </div>
-            <div class="p-2 w-full md:w-1/2">
-              <div class="relative">
-                <StepFormInput
-                  label="Email"
-                  v-model="form.email"
-                  :error="form.errors.email"
-                />
-              </div>
-            </div>
-            <div class="p-2 w-full md:w-1/2">
-              <div class="relative">
-                <StepFormInput
-                  label="Phone"
-                  v-model="form.phone"
-                  :error="form.errors.phone"
-                />
-              </div>
-            </div>
-          </div>
-          <div
-            class="flex flex-col bg-white rounded-md py-2 max-w-fit md:max-w-none mx-auto"
-          >
-            <div class="p-2">
-              <div class="relative">
-                <StepFormInput
-                  label="Address"
-                  v-model="form.address"
-                  :error="form.errors.address"
-                />
-              </div>
-            </div>
-            <div class="p-2 flex flex-wrap">
-              <div class="relative w-full md:w-1/2">
-                <StepFormInput
-                  label="City"
-                  v-model="form.city"
-                  :error="form.errors.city"
-                />
-              </div>
-              <div class="relative w-full md:w-1/2">
-                <StepFormInput
-                  label="Zip Code"
-                  v-model="form.zip_code"
-                  :error="form.errors.zip_code"
-                />
-              </div>
-            </div>
-          </div>
-          <h3 class="text-2xl font-bold">Payment info</h3>
-          <FormSelect
-            v-model="form.payment_method"
-            :error="form.errors.payment_method"
-            label="Choose Payment Method"
-          >
-            <option value="">Select</option>
-            <option value="cod">Cash on Delivery</option>
-            <option value="card">Credit Card/Debit Card</option>
-          </FormSelect>
-          <div
-            class="mt-6"
-            v-if="form.payment_method && form.payment_method === 'card'"
-          >
-            <p class="text-red-500" v-if="form.card.error">
-              {{ form.card.error.message }}
-            </p>
-
-            <CartCheckout v-model="form.card" />
-          </div>
-
-          <div class="mt-8">
-            <button
-              :disabled="
-                form.processing ||
-                (!form.card.token && form.payment_method === 'card')
-              "
-              class="flex mx-auto hover:bg-red-600 bg-red-500 disabled:bg-gray-400 disabled:cursor-not-allowed text-white px-8 py-1 rounded-sm"
-            >
-              Pay Now
-            </button>
-          </div>
-        </form>
-      </div>
-
-      <div
-        id="summary"
-        class="px-8 py-10 flex-grow border border-gray-300 bg-gray-200 flex flex-col"
+  <div
+    class="flex items-center gap-4 flex-wrap bg-overlay p-14 sm:p-16 before:bg-title before:bg-opacity-70"
+    :style="{ backgroundImage: 'url(' + bg + ')' }"
+  >
+    <div class="text-center w-full">
+      <h2
+        class="text-white text-8 md:text-[40px] font-normal leading-none text-center"
       >
-        <h1 class="font-semibold text-2xl border-b pb-8">Order Summary</h1>
-        <div class="flex justify-between mt-10 mb-5 gap-4">
-          <span v-for="item in cart.content" class="text-sm">
-            x{{ item.quantity }} {{ item.name }}</span
+        Checkout
+      </h2>
+      <ul
+        class="flex items-center justify-center gap-[10px] text-base md:text-lg leading-none font-normal text-white mt-3 md:mt-4 flex-wrap"
+      >
+        <li><Link :href="route('public.home')">Home</Link></li>
+        <li>/</li>
+        <li class="text-primary">Checkout</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="s-py-100">
+    <div class="container">
+      <div
+        class="max-w-[1220px] mx-auto grid lg:grid-cols-2 gap-[30px] lg:gap-[70px]"
+      >
+        <div
+          class="bg-[#FAFAFA] dark:bg-dark-secondary p-[30px] md:p-[40px] lg:p-[50px] border border-[#17243026] border-opacity-15 rounded-xl"
+          data-aos="fade-up"
+        >
+          <p
+            class="mb-5 w-full bg-white dark:bg-dark-secondary border border-[#E3E5E6] text-title dark:text-white focus:border-primary p-4 outline-none duration-300 whitespace-normal"
           >
-          <span class="font-semibold text-sm">{{ cart.total }}</span>
+            Are you missing your coupon code ?
+            <button
+              @click="open = !open"
+              class="ml-1 add-coupon-code underline text-[#209A60]"
+            >
+              Click here to add
+            </button>
+          </p>
+
+          <div v-if="open" class="coupon-wrapper gap-3 md:flex mb-[30px]">
+            <input
+              class="max-w-[220px] w-full h-12 md:h-14 bg-white dark:bg-dark-secondary border border-[#E3E5E6] text-title dark:text-white focus:border-primary p-4 outline-none duration-300"
+              type="text"
+              placeholder="Coupon code"
+            />
+            <router-link
+              to="#"
+              class="btn btn-sm-px btn-theme-solid"
+              data-text="Apply coupon"
+            >
+              <span>Apply coupon</span>
+            </router-link>
+          </div>
+
+          <h4
+            class="font-semibold leading-none text-xl md:text-2xl mb-6 md:mb-[30px]"
+          >
+            Billing Information
+          </h4>
+          <div class="grid gap-5 md:gap-6">
+            <div>
+              <label
+                class="text-base md:text-lg text-title dark:text-white leading-none mb-2 sm:mb-3 block"
+                >Full Name</label
+              >
+              <input
+                class="w-full h-12 md:h-14 bg-white dark:bg-dark-secondary border border-[#E3E5E6] text-title dark:text-white focus:border-primary p-4 outline-none duration-300"
+                type="text"
+                placeholder="Enter your full name"
+              />
+            </div>
+
+            <div>
+              <label
+                class="text-base md:text-lg text-title dark:text-white leading-none mb-2 sm:mb-3 block"
+                >Email</label
+              >
+              <input
+                class="w-full h-12 md:h-14 bg-white dark:bg-dark-secondary border border-[#E3E5E6] text-title dark:text-white focus:border-primary p-4 outline-none duration-300"
+                type="text"
+                placeholder="Enter your email address"
+              />
+            </div>
+
+            <div>
+              <label
+                class="text-base md:text-lg text-title dark:text-white leading-none mb-2 sm:mb-3 block"
+                >Phone No.</label
+              >
+              <input
+                class="w-full h-12 md:h-14 bg-white dark:bg-dark-secondary border border-[#E3E5E6] text-title dark:text-white focus:border-primary p-4 outline-none duration-300"
+                type="number"
+                placeholder="Type your phone number"
+              />
+            </div>
+          </div>
+
+          <div class="grid md:grid-cols-2 gap-5 md:gap-6">
+            <div class="mt-5">
+              <label
+                class="text-base md:text-lg text-title dark:text-white leading-none mb-2 sm:mb-3 block"
+                >Town / City</label
+              >
+              <select
+                class="nice-select select-active p-4 !bg-white dark:!bg-dark-secondary"
+              >
+                <option value="{1}">Sylht</option>
+                <option value="{2}">Dhaka</option>
+                <option value="{2}">Chittagong</option>
+                <option value="{2}">Rajshahi</option>
+                <option value="{2}">Bogura</option>
+              </select>
+            </div>
+
+            <div class="mt-5">
+              <label
+                class="text-base md:text-lg text-title dark:text-white leading-none mb-2 sm:mb-3 block"
+                >Zip Code</label
+              >
+              <input
+                class="w-full h-12 md:h-14 bg-white dark:bg-dark-secondary border border-[#E3E5E6] text-title dark:text-white focus:border-primary p-4 outline-none duration-300"
+                type="text"
+                placeholder="1217"
+              />
+            </div>
+
+            <div>
+              <label
+                class="text-base md:text-lg text-title dark:text-white leading-none mb-2 sm:mb-3 block"
+                >Address Line 1</label
+              >
+              <input
+                class="w-full h-12 md:h-14 bg-white dark:bg-dark-secondary border border-[#E3E5E6] text-title dark:text-white focus:border-primary p-4 outline-none duration-300"
+                type="number"
+                placeholder="Your full address"
+              />
+            </div>
+
+            <div>
+              <label
+                class="text-base md:text-lg text-title dark:text-white leading-none mb-2 sm:mb-3 block"
+              >
+                Address Line 2
+              </label>
+              <input
+                class="w-full h-12 md:h-14 bg-white dark:bg-dark-secondary border border-[#E3E5E6] text-title dark:text-white focus:border-primary p-4 outline-none duration-300"
+                type="number"
+                placeholder="Your full address"
+              />
+            </div>
+          </div>
+          <div class="mt-5">
+            <label
+              class="text-base md:text-lg text-title dark:text-white leading-none mb-2 sm:mb-3 block"
+            >
+              Additional Text
+            </label>
+            <textarea
+              class="w-full h-[120px] bg-white dark:bg-dark-secondary border border-[#E3E5E6] text-title dark:text-white focus:border-primary p-4 outline-none duration-300"
+              name="Message"
+              placeholder="Type your message"
+            ></textarea>
+          </div>
         </div>
 
-        <div class="border-t mt-auto">
+        <div data-aos="fade-up" data-aos-delay="{200}">
           <div
-            class="flex font-semibold justify-between py-6 text-sm uppercase"
+            class="bg-[#FAFAFA] dark:bg-dark-secondary pt-[30px] md:pt-[40px] lg:pt-[50px] px-[30px] md:px-[40px] lg:px-[50px] pb-[30px] border border-[#17243026] border-opacity-15 rounded-xl"
           >
-            <span>Total cost</span>
-            <span>{{ cart.total }}</span>
+            <h4
+              class="font-semibold leading-none text-xl md:text-2xl mb-6 md:mb-10"
+            >
+              Product Information
+            </h4>
+            <div class="grid gap-5 mg:gap-6">
+              <div
+                v-for="item in cartContents.content"
+                class="flex items-center justify-between gap-5"
+              >
+                <div
+                  class="flex items-center gap-3 md:gap-4 lg:gap-6 cart-product flex-wrap"
+                >
+                  <div class="w-16 sm:w-[70px] flex-none">
+                    <img :src="item.associatedModel.image" alt="product" />
+                  </div>
+                  <div class="flex-1">
+                    <h6 class="leading-none font-medium">
+                      {{ item.associatedModel.category }}
+                    </h6>
+                    <h5 class="font-semibold leading-none mt-2">
+                      <router-link to="#">{{ item.name }}</router-link>
+                    </h5>
+                  </div>
+                </div>
+
+                <h6 class="leading-none">
+                  {{ item.quantity }}&nbsp;x&nbsp;{{ item.price }}
+                </h6>
+              </div>
+            </div>
+            <div
+              class="mt-6 pt-6 border-t border-bdr-clr dark:border-bdr-clr-drk text-right flex justify-end flex-col w-full ml-auto mr-0"
+            >
+              <div
+                class="flex justify-between flex-wrap text-base sm:text-lg text-title dark:text-white font-medium"
+              >
+                <span>Sub Total:</span>
+                <span>{{ cartContents.total }}</span>
+              </div>
+              <div
+                class="flex justify-between flex-wrap text-base sm:text-lg text-title dark:text-white font-medium mt-3"
+              >
+                <span>Coupon Discount:</span>
+                <span>0</span>
+              </div>
+              <div
+                class="flex justify-between flex-wrap text-base sm:text-lg text-title dark:text-white font-medium mt-3"
+              >
+                <span>VAT:</span>
+                <span> 0</span>
+              </div>
+            </div>
+
+            <div
+              class="mt-6 pt-6 border-t border-bdr-clr dark:border-bdr-clr-drk"
+            >
+              <div
+                class="flex justify-between flex-wrap font-semibold leading-none text-2xl md:text-3xl"
+              >
+                <span>Total:</span>
+                <span>&nbsp;{{ cartContents.total }}</span>
+              </div>
+            </div>
+          </div>
+          <div class="mt-7 md:mt-12">
+            <h4
+              class="font-semibold leading-none text-xl md:text-2xl mb-6 md:mb-10"
+            >
+              Payment Method
+            </h4>
+            <div class="flex gap-5 sm:gap-8 md:gap-12 flex-wrap">
+              <div>
+                <label class="flex items-center gap-[10px] categoryies-iteem">
+                  <input
+                    class="appearance-none hidden"
+                    type="radio"
+                    name="item-type"
+                  />
+                  <span
+                    class="w-4 h-4 rounded-full border border-title dark:border-white flex items-center justify-center duration-300"
+                  >
+                    <svg
+                      class="duration-300 opacity-0"
+                      width="8"
+                      height="8"
+                      viewBox="0 0 10 10"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <rect width="10" height="10" rx="5" fill="#BB976D" />
+                    </svg>
+                  </span>
+                  <span
+                    class="sm:text-lg text-title dark:text-white block sm:leading-none transform translate-y-[3px] select-none"
+                    >Cash On Delivery</span
+                  >
+                </label>
+                <p class="ml-6 text-[15px] leading-none mt-2">
+                  Time ( 07 - 10 ) Days
+                </p>
+              </div>
+              <div>
+                <label class="flex items-center gap-[10px] categoryies-iteem">
+                  <input
+                    class="appearance-none hidden"
+                    type="radio"
+                    name="item-type"
+                  />
+                  <span
+                    class="w-4 h-4 rounded-full border border-title dark:border-white flex items-center justify-center duration-300"
+                  >
+                    <svg
+                      class="duration-300 opacity-0"
+                      width="8"
+                      height="8"
+                      viewBox="0 0 10 10"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <rect width="10" height="10" rx="5" fill="#BB976D" />
+                    </svg>
+                  </span>
+                  <span
+                    class="sm:text-lg text-title dark:text-white block sm:leading-none transform translate-y-[3px] select-none"
+                    >Debit / Credit Card</span
+                  >
+                </label>
+                <p class="ml-6 text-[15px] leading-none mt-2">
+                  Time ( 07 - 10 ) Days
+                </p>
+              </div>
+            </div>
+            <div class="mt-6 sm:mt-8 md:mt-10">
+              <label class="flex items-center gap-2 iam-agree">
+                <input
+                  class="appearance-none hidden"
+                  type="checkbox"
+                  name="categories"
+                />
+                <span
+                  class="w-6 h-6 rounded-[5px] border-2 border-title dark:border-white flex items-center justify-center duration-300"
+                >
+                  <svg
+                    class="duration-300 opacity-0 text-title dark:text-white fill-current"
+                    width="15"
+                    height="12"
+                    viewBox="0 0 20 15"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M18.3819 0.742676L6.10461 11.8998L2.25731 8.06381L0.763672 9.55745L6.20645 15.0002L20 2.32686L18.3819 0.742676Z"
+                    />
+                  </svg>
+                </span>
+                <span
+                  class="text-base sm:text-lg text-title dark:text-white leading-none sm:leading-none select-none inline-block transform translate-y-[3px]"
+                  >I Agree all terms & Conditions</span
+                >
+              </label>
+            </div>
+            <div class="mt-4 md:mt-6 flex flex-wrap gap-3">
+              <router-link
+                to="#"
+                class="btn btn-outline"
+                data-text="Back to Cart"
+                ><span>Back to Cart</span></router-link
+              >
+              <router-link
+                to="#"
+                class="btn btn-theme-solid"
+                data-text="Place to Order"
+                ><span>Place to Order</span></router-link
+              >
+            </div>
           </div>
         </div>
       </div>
