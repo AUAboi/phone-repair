@@ -88,6 +88,6 @@ jobs:
       - name: 📂 Upload files to Production Server
         run: |
           sshpass -p "${{ secrets.SSH_PASSWORD }}" rsync -avz --delete \
-            --exclude '.git' --exclude '.htaccess' --exclude '.env' \
+            --exclude-from <(git ls-files -oi --exclude-standard) \
             -e "ssh -o StrictHostKeyChecking=no -p ${{ secrets.SSH_PORT }}" \
             ./ ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/home/${{ secrets.SSH_USER }}/public_html/
