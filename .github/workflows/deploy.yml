@@ -85,9 +85,10 @@ jobs:
         run: npm run build
 
       # Upload files via SCP
-      - name: 📂 Upload files to Production Server
+      - name: 📂 Deploy files using rsync
         run: |
           sshpass -p "${{ secrets.SSH_PASSWORD }}" rsync -avz --delete \
-            --exclude-from <(git ls-files -oi --exclude-standard) \
+            --filter=':- .gitignore' \
+            --exclude '.git' --exclude '.htaccess' --exclude '.env' \
             -e "ssh -o StrictHostKeyChecking=no -p ${{ secrets.SSH_PORT }}" \
             ./ ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/home/${{ secrets.SSH_USER }}/public_html/
