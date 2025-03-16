@@ -134,23 +134,18 @@ const activeImage = ref(1);
             data-aos="fade-up"
             data-aos-delay="200"
           >
-            <IncDec />
+            <IncDec :item="product" />
 
             <div class="flex gap-4 mt-4 sm:mt-6">
-              <router-link
-                to="/cart"
+              <Link
+                as="div"
+                method="post"
+                :href="route('cart.add', { id: product.id })"
                 class="btn btn-solid"
                 data-text="Add to Cart"
               >
                 <span>Add to Cart</span>
-              </router-link>
-              <router-link
-                to="#"
-                class="btn btn-outline"
-                data-text="Add to Wishlist"
-              >
-                <span>Add to Wishlist</span>
-              </router-link>
+              </Link>
             </div>
           </div>
           <div

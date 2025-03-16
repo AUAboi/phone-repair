@@ -20,6 +20,7 @@ class CartController extends Controller
 
         $row = \Cart::getContent();
 
+
         $cartContent = [];
         if ($row->count()) {
             // remove from cart if item doesnt exist anymore
@@ -36,7 +37,8 @@ class CartController extends Controller
                 'name' => $item->associatedModel->name,
                 'price' => $item->associatedModel->formatted_price,
                 'quantity' => $item->quantity,
-
+                'formatted_price' =>  money($item->associatedModel->price, config('constants.currency'), true)->format(),
+                'associatedModel' => $item->associatedModel,
                 'total_price' => money($item->associatedModel->price * $item->quantity, config('constants.currency'), true)->format(),
             ]);
         }

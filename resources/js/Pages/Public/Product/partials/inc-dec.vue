@@ -1,5 +1,50 @@
+<script setup>
+import { useForm, usePage } from "@inertiajs/vue3";
+import { computed } from "vue";
+
+const form = useForm({
+  id: null,
+});
+
+const props = defineProps(["item"]);
+
+const increment = () => {
+  addToCart(props.item.id);
+};
+
+const decrement = () => {
+  removeFromCart(props.item.id);
+};
+
+const addToCart = (id) => {
+  form.id = id;
+  form.post(route("cart.add"), {
+    preserveScroll: true,
+    preserveState: true,
+  });
+};
+
+const removeFromCart = (id) => {
+  form.id = id;
+  form.post(route("cart.remove"), {
+    preserveScroll: true,
+    preserveState: true,
+  });
+};
+
+const cart = computed(() => usePage().props.cart);
+
+const cartItem = computed(() => {
+  return (
+    Object.values(cart.value.content).find(
+      (item) => item.id === props.item.id
+    ) || null
+  );
+});
+</script>
+
 <template>
-  <div class="inc-dec flex items-center gap-2">
+  <div class="inc-dec flex items-center gap-2" v-if="cartItem">
     <button
       @click="decrement"
       class="dec w-8 h-8 bg-[#E8E9EA] dark:bg-dark-secondary flex items-center justify-center"
@@ -20,7 +65,7 @@
     <input
       class="w-6 h-auto outline-none bg-transparent text-base mg:text-lg leading-none text-title dark:text-white text-center"
       type="text"
-      :value="count"
+      :value="cartItem.quantity"
     />
     <button
       @click="increment"
@@ -41,18 +86,3 @@
     </button>
   </div>
 </template>
-
-<script setup>
-import { ref } from "vue";
-
-const count = ref(3);
-
-const increment = () => {
-  count.value++;
-};
-const decrement = () => {
-  if (count.value > 0) {
-    count.value--;
-  }
-};
-</script>
