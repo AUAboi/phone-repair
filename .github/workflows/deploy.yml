@@ -87,4 +87,7 @@ jobs:
       # Upload files via SCP
       - name: 📂 Upload files to Production Server
         run: |
-          sshpass -p "3VM3W0zpDmH27/Rt" rsync -avz --delete --exclude '.git' -e "ssh -o StrictHostKeyChecking=no -p 65002" ./ u977062657@31.220.106.186:/home/u977062657/public_html/
+          sshpass -p "${{ secrets.SSH_PASSWORD }}" rsync -avz --delete \
+            --exclude '.git' --exclude '.htaccess' --exclude '.env' \
+            -e "ssh -o StrictHostKeyChecking=no -p ${{ secrets.SSH_PORT }}" \
+            ./ ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/home/${{ secrets.SSH_USER }}/public_html/
