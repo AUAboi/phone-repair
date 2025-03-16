@@ -1,7 +1,7 @@
 <script setup>
 import logo from "@/assets/img/footer-logo.svg";
 import bg from "@/assets/img/bg/footer.jpg";
-
+import { Link } from "@inertiajs/vue3";
 import { ref } from "vue";
 
 const year = ref(new Date().getFullYear());
@@ -9,81 +9,28 @@ const year = ref(new Date().getFullYear());
 const footerLink1 = [
   {
     name: "About",
-    link: "/about",
-  },
-  {
-    name: "Team",
-    link: "/team",
-  },
-  {
-    name: "Portfolio",
-    link: "/portfolio-v1",
-  },
-  {
-    name: "Clients",
-    link: "/our-clients",
-  },
-  {
-    name: "Error",
-    link: "/error",
+    link: route("public.about"),
   },
 ];
-const footerLink2 = [
-  {
-    name: "Shipping Method",
-    link: "/shipping-method",
-  },
-  {
-    name: "Payment Method",
-    link: "/payment-method",
-  },
-  {
-    name: "My Account",
-    link: "/my-profile",
-  },
-  {
-    name: "Coming Soon",
-    link: "/coming-soon",
-  },
-];
+const footerLink2 = [];
 const footerLink3 = [
   {
     name: "Shop",
-    link: "/shop-v1",
-  },
-  {
-    name: "Product Single",
-    link: "/product-details",
+    link: route("public.shop"),
   },
   {
     name: "Cart",
-    link: "/cart",
+    link: route("cart.index"),
   },
   {
     name: "Checkout",
-    link: "/checkout",
-  },
-  {
-    name: "Wishlist",
-    link: "/wishlist",
+    link: route("checkout.index"),
   },
 ];
 const footerLink4 = [
   {
-    name: "FAQs",
-    link: "/faq",
-  },
-  {
-    name: "Terms & Condition",
-    link: "/terms-and-conditions",
-  },
-  {
-    name: "Return Policy",
-    link: "/",
-  },
-  {
     name: "Contact",
-    link: "/contact",
+    link: route("public.contact"),
   },
 ];
 </script>
@@ -137,27 +84,9 @@ const footerLink4 = [
                   :key="index"
                   class="duration-100 hover:text-primary inline-block group"
                 >
-                  <router-link class="text-underline-primary" :to="item.link">{{
+                  <Link :href="item.link" class="text-underline-primary">{{
                     item.name
-                  }}</router-link>
-                </li>
-              </ul>
-            </div>
-            <div>
-              <h4
-                class="text-white leading-none mb-5 md:mb-6 text-xl md:text-2xl"
-              >
-                Others
-              </h4>
-              <ul class="text-white leading-none flex flex-col gap-4">
-                <li
-                  v-for="(item, index) in footerLink2"
-                  :key="index"
-                  class="duration-100 hover:text-primary inline-block group"
-                >
-                  <router-link class="text-underline-primary" :to="item.link">{{
-                    item.name
-                  }}</router-link>
+                  }}</Link>
                 </li>
               </ul>
             </div>
@@ -167,14 +96,12 @@ const footerLink4 = [
             class="lg:max-w-[522px] w-full sm:text-center -order-1 lg:order-none"
           >
             <img
-              class="sm:mx-auto w-[150px] sm:w-auto"
-              :src="logo"
+              class="sm:mx-auto w-[150px] sm:w-auto max-w-[250px]"
+              src="/images/red-logo.png"
               alt="logo"
             />
             <p class="mt-4 text-white-light max-w-[522px] sm:mx-auto">
-              Furnixar is a modern furniture template for an eCommerce website
-              designed to help you create an impressive online store for your
-              furniture or home decor business.
+              Fonemart website
             </p>
             <div class="flex items-center sm:justify-center gap-4 mt-6">
               <router-link
@@ -278,9 +205,9 @@ const footerLink4 = [
                   :key="index"
                   class="duration-100 hover:text-primary inline-block group"
                 >
-                  <router-link class="text-underline-primary" :to="item.link">{{
+                  <Link class="text-underline-primary" :href="item.link">{{
                     item.name
-                  }}</router-link>
+                  }}</Link>
                 </li>
               </ul>
             </div>
@@ -296,9 +223,9 @@ const footerLink4 = [
                   :key="index"
                   class="duration-100 hover:text-primary inline-block group"
                 >
-                  <router-link class="text-underline-primary" :to="item.link">{{
+                  <Link class="text-underline-primary" :href="item.link">{{
                     item.name
-                  }}</router-link>
+                  }}</Link>
                 </li>
               </ul>
             </div>
@@ -309,11 +236,8 @@ const footerLink4 = [
           class="max-w-[1722px] mx-auto border-t border-white border-opacity-10 py-5 md:py-7 text-center"
         >
           <p class="text-white">
-            © {{ year }} Furnixar Develop with
-            <i class="fa-solid fa-heart text-red-600"></i> by
-            <a href="https://shreethemes.in/" target="_blank" className="ms-1"
-              >Shreethemes</a
-            >
+            © {{ year }} Fonemart
+            <i class="fa-solid fa-heart text-red-600"></i>
           </p>
         </div>
       </div>

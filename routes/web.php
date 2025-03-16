@@ -73,7 +73,7 @@ Route::get('/blog/search', [PostController::class, 'search'])->name('post.search
 
 Route::get('/blog/{post:slug}', [PostController::class, 'show'])->name('post.show');
 
-Route::get('category/{deviceCategory}/brands', [PublicController::class, 'categoryBrands'])->name('public.categoryBrands');
+Route::get('/category/{deviceCategory}/brands', [PublicController::class, 'categoryBrands'])->name('public.categoryBrands');
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/user/profile', [UserProfileController::class, 'index'])->name('user.profile');

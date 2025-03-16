@@ -55,7 +55,7 @@ class HandleInertiaRequests extends Middleware
             'auth' => [
                 'user' => $user,
             ],
-            'logo' => 'red.png',
+            'logo' => 'red-logo.png',
             'navigation' => [
                 'devices' => DeviceResource::collection(Device::all()),
                 'products' => ProductResource::collection(Product::all())

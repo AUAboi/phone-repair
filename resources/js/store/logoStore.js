@@ -1,17 +1,16 @@
-import { defineStore } from "pinia"
-import { ref } from "vue"
+import { defineStore } from "pinia";
+import { ref } from "vue";
 
-export const useLogoStore = defineStore('logoStore', () => {
-
-  const logo = ref("red.png")
+export const useLogoStore = defineStore("logoStore", () => {
+  const logo = ref("red-logo.png");
 
   function toggleLogo(logoPic) {
-    logo.value = logoPic
+    logo.value = logoPic;
   }
 
   function $reset() {
-    logo.value = "red.png"
+    logo.value = "red-logo.png";
   }
 
-  return { logo, toggleLogo, $reset }
-})
+  return { logo, toggleLogo, $reset };
+});
