@@ -84,11 +84,18 @@ jobs:
       - name: 🏗 Build frontend assets
         run: npm run build
 
-      # Upload files via SCP
+      # Upload files via rsync
       - name: 📂 Deploy files using rsync
         run: |
           sshpass -p "${{ secrets.SSH_PASSWORD }}" rsync -avz --delete \
+            --include='vendor/' \
+            --include='node_modules/' \
+            --include='build/' \
+            --exclude='storage/' \
+            --exclude='storage/**' \
+            --exclude='.env' \
+            --exclude='.git' \
+            --exclude='.htaccess' \
             --filter=':- .gitignore' \
-            --exclude '.git' --exclude '.htaccess' --exclude '.env' \
             -e "ssh -o StrictHostKeyChecking=no -p ${{ secrets.SSH_PORT }}" \
             ./ ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/home/${{ secrets.SSH_USER }}/public_html/
