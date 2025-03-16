@@ -3,7 +3,7 @@ import { computed, ref } from "vue";
 
 import CartIcon from "~icons/mdi/cart-outline";
 import CartList from "./CartList.vue";
-import { usePage } from "@inertiajs/vue3";
+import { Link, usePage } from "@inertiajs/vue3";
 
 const cartList = ref(false);
 
@@ -19,10 +19,10 @@ function handleToggle() {
 </script>
 <template>
   <div class="flex items-center gap-4 sm:gap-6">
-    <router-link
-      to="/login"
+    <Link
+      :href="route('login')"
       class="text-lg leading-none text-title dark:text-white transition-all duration-300 hover:text-primary hidden lg:block"
-      >Login</router-link
+      >Login</Link
     >
 
     <button class="relative hdr_cart_btn" @click="cartList = !cartList">

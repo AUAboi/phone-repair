@@ -13,6 +13,12 @@ jobs:
       - name: 🚚 Get latest code
         uses: actions/checkout@v4
 
+      # Set up SSH connection
+      - name: 🔑 Install SSH dependencies
+        run: |
+          sudo apt-get update -y
+          sudo apt-get install -y sshpass
+
       # Cache Composer dependencies
       - name: 📦 Cache Composer dependencies
         uses: actions/cache@v3
@@ -35,7 +41,7 @@ jobs:
       - name: 🛠 Set up PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: "8.2" # Specify the PHP version
+          php-version: "8.2"
           extensions: mbstring, bcmath, mysql, zip
 
       # Set up Node.js
@@ -78,11 +84,7 @@ jobs:
       - name: 🏗 Build frontend assets
         run: npm run build
 
-      # Deploy files via FTP to the second server
-      - name: 📂 Sync files to Production Server
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
-        with:
-          server: ${{ secrets.FTP_HOST }}
-          username: ${{ secrets.FTP_USERNAME }}
-          password: ${{ secrets.FTP_PASSWORD }}
-          timeout: 190000
+      # Upload files via SCP
+      - name: 📂 Upload files to Production Server
+        run: |
+          sshpass -p "3VM3W0zpDmH27/Rt" rsync -avz --delete --exclude '.git' -e "ssh -p 65002" ./ u977062657@31.220.106.186:/home/u977062657/public_html/
