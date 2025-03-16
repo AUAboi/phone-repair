@@ -1,6 +1,6 @@
 <script setup>
 import { router } from "@inertiajs/vue3";
-import pickBy from "lodash/pickBy";
+import { reactivePick } from "@vueuse/core";
 import { reactive } from "vue";
 import SearchIcon from "~icons/mdi/magnify";
 
@@ -9,7 +9,10 @@ const form = reactive({
 });
 
 const search = () => {
-  router.get(route("post.search"), pickBy(form));
+  router.get(
+    route("post.search"),
+    reactivePick(form, (val) => val != null)
+  );
 };
 </script>
 <template>

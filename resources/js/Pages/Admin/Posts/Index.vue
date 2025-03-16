@@ -5,10 +5,9 @@ import Paginator from "@/Components/Paginator.vue";
 import PageHeader from "@/Components/PageHeader.vue";
 import { Head, Link } from "@inertiajs/vue3";
 import { reactive } from "@vue/reactivity";
-import throttle from "lodash/throttle";
-import pickBy from "lodash/pickBy";
-import { watch } from "vue";
+
 import { router } from "@inertiajs/vue3";
+import { reactivePick, watchThrottled } from "@vueuse/core";
 
 const props = defineProps({
   posts: {
@@ -44,15 +43,19 @@ const reset = () => {
   form.search = null;
 };
 
-watch(
+watchThrottled(
   form,
-  throttle(() => {
-    router.get(route("posts.index"), pickBy(form), {
-      preserveState: true,
-      preserveScroll: true,
-    });
-  }, 200),
-  { deep: true }
+  () => {
+    router.get(
+      route("posts.index"),
+      reactivePick(form, (val) => val != null),
+      {
+        preserveState: true,
+        preserveScroll: true,
+      }
+    );
+  },
+  { throttle: 500, deep: true }
 );
 </script>
 <template>

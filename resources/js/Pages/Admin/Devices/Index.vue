@@ -1,79 +1,86 @@
 <script setup>
-import DataTable from '@/Components/DataTable.vue';
-import SearchBox from '@/Components/SearchBox.vue';
-import Paginator from '@/Components/Paginator.vue';
-import PageHeader from '@/Components/PageHeader.vue';
-import { Head, Link } from '@inertiajs/vue3';
-import { reactive } from '@vue/reactivity';
-import throttle from "lodash/throttle";
-import pickBy from "lodash/pickBy";
-import { watch } from 'vue';
-import { router } from '@inertiajs/vue3';
+import DataTable from "@/Components/DataTable.vue";
+import SearchBox from "@/Components/SearchBox.vue";
+import Paginator from "@/Components/Paginator.vue";
+import PageHeader from "@/Components/PageHeader.vue";
+import { Head, Link } from "@inertiajs/vue3";
+import { reactive } from "@vue/reactivity";
+import { router } from "@inertiajs/vue3";
+import { reactivePick, watchThrottled } from "@vueuse/core";
 
 const props = defineProps({
   devices: {
     required: true,
-    type: Object
-
+    type: Object,
   },
   filters: {
     required: true,
-    type: Object
-  }
-})
+    type: Object,
+  },
+});
 
 const labels = [
   {
-    key: 'name',
-    value: 'Name'
+    key: "name",
+    value: "Name",
   },
   {
-    key: 'brand.name',
-    value: 'Brand'
-  }
-]
-
+    key: "brand.name",
+    value: "Brand",
+  },
+];
 
 const form = reactive({
   search: props.filters.search,
-})
+});
 
 const reset = () => {
   form.search = null;
-}
+};
 
-watch(
+watchThrottled(
   form,
-  throttle(() => {
-    router.get(route("devices.index"), pickBy(form), {
-      preserveState: true,
-      preserveScroll: true,
-    });
-  }, 200),
-  { deep: true }
+  () => {
+    router.get(
+      route("categdevices.indexx"),
+      reactivePick(form, (val) => val != null),
+      {
+        preserveState: true,
+        preserveScroll: true,
+      }
+    );
+  },
+  { throttle: 500, deep: true }
 );
-
 </script>
 <template>
-
   <Head title="Devices" />
   <PageHeader>Devices</PageHeader>
   <div class="py-12">
     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
       <div class="flex items-center gap-4 md:gap-0 justify-between">
-        <SearchBox class="w-full max-w-md my-4 mx-2 md:mx-0" v-model="form.search" @reset="reset" />
-        <Link :href="route('devices.create')" as="button" class="btn--primary">Create <span class="hidden md:inline">
-          Device</span></Link>
+        <SearchBox
+          class="w-full max-w-md my-4 mx-2 md:mx-0"
+          v-model="form.search"
+          @reset="reset"
+        />
+        <Link :href="route('devices.create')" as="button" class="btn--primary"
+          >Create <span class="hidden md:inline"> Device</span></Link
+        >
       </div>
 
-      <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm rounded-lg mx-2 md:mx-0">
-        <div class=" text-gray-900 dark:text-gray-100 overflow-x-auto">
-          <DataTable :table-data="devices.data" :labels="labels" resource-route="devices.edit" />
+      <div
+        class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm rounded-lg mx-2 md:mx-0"
+      >
+        <div class="text-gray-900 dark:text-gray-100 overflow-x-auto">
+          <DataTable
+            :table-data="devices.data"
+            :labels="labels"
+            resource-route="devices.edit"
+          />
         </div>
         <Paginator :links="devices.meta.links" />
       </div>
     </div>
   </div>
-
-
 </template>

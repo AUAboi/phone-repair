@@ -1,8 +1,6 @@
 <script setup>
 import ActionButton from "@/Components/ActionButton.vue";
 import { Head } from "@inertiajs/vue3";
-import { Carousel, Navigation, Pagination, Slide } from "vue3-carousel";
-import "vue3-carousel/dist/carousel.css";
 
 const props = defineProps({
   brand: {
@@ -10,22 +8,6 @@ const props = defineProps({
     type: Object,
   },
 });
-
-const settings = {
-  itemsToShow: 1,
-  snapAlign: "center",
-};
-
-const breakpoints = {
-  700: {
-    itemsToShow: 2,
-    snapAlign: "center",
-  },
-  1024: {
-    itemsToShow: 3,
-    snapAlign: "start",
-  },
-};
 </script>
 
 <template>
@@ -53,30 +35,6 @@ const breakpoints = {
     >
       Choose your device
     </h4>
-    <Carousel :breakpoints="breakpoints" :settings="settings">
-      <Slide v-for="device in brand.devices" :key="device.id">
-        <div class="cursor-pointer text-center flex flex-col h-full">
-          <div>
-            <img
-              class="w-60 rounded-2xl mx-auto"
-              :src="device.image"
-              :alt="device.name"
-            />
-          </div>
-          <h4 class="text-lg font-semibold pt-4 mt-auto">{{ device.name }}</h4>
-          <ActionButton
-            :href="route('public.appointments.create', device.slug)"
-          >
-            Book Now
-          </ActionButton>
-        </div>
-      </Slide>
-
-      <template #addons>
-        <Navigation />
-        <Pagination />
-      </template>
-    </Carousel>
   </section>
   <section v-else>
     <h4 class="text-red-600 font-semibold text-lg sm:text-xl text-center my-8">

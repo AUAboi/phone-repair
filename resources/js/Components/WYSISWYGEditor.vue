@@ -1,4 +1,4 @@
-<script setup>
+<!-- <script setup>
 import { component as CKEditor } from "@ckeditor/ckeditor5-vue";
 
 import { ClassicEditor } from "@ckeditor/ckeditor5-editor-classic";
@@ -116,12 +116,7 @@ const editorInput = (value) => {
   console.log(value);
   emit("update:modelValue", value);
 };
-</script>
+</script> -->
 <template>
-  <CKEditor
-    :editor="editor"
-    :config="editorConfig"
-    @input="editorInput"
-    :model-value="modelValue"
-  ></CKEditor>
+  <div></div>
 </template>

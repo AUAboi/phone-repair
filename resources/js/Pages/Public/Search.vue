@@ -1,9 +1,8 @@
 <script setup>
 import { Link, router } from "@inertiajs/vue3";
-import pickBy from "lodash/pickBy";
-import throttle from "lodash/throttle";
-import { reactive, watch } from "vue";
+import { reactive } from "vue";
 import PostSection from "@/Components/PostSection.vue";
+import { reactivePick, watchThrottled } from "@vueuse/core";
 
 const props = defineProps(["filters", "posts"]);
 
@@ -11,15 +10,19 @@ const form = reactive({
   search: props.filters.search,
 });
 
-watch(
+watchThrottled(
   form,
-  throttle(() => {
-    router.get(route("post.search"), pickBy(form), {
-      preserveState: true,
-      preserveScroll: true,
-    });
-  }, 200),
-  { deep: true }
+  () => {
+    router.get(
+      route("post.search"),
+      reactivePick(form, (val) => val != null),
+      {
+        preserveState: true,
+        preserveScroll: true,
+      }
+    );
+  },
+  { throttle: 500, deep: true }
 );
 </script>
 <template>

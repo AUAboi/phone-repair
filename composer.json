@@ -9,17 +9,11 @@
     "license": "MIT",
     "require": {
         "php": "^8.0.2",
-        "akaunting/laravel-money": "^3.1",
-        "darryldecode/cart": "^4.2",
         "guzzlehttp/guzzle": "^7.2",
         "inertiajs/inertia-laravel": "^0.6.3",
         "laravel/framework": "^9.19",
         "laravel/sanctum": "^2.8",
         "laravel/tinker": "^2.7",
-        "propaganistas/laravel-phone": "^4.4",
-        "spatie/laravel-medialibrary": "10.2.*",
-        "spatie/laravel-sluggable": "^3.5",
-        "stripe/stripe-php": "^13.3",
         "tightenco/ziggy": "^1.0"
     },
     "require-dev": {
