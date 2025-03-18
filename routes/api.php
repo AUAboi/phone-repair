@@ -30,7 +30,7 @@ Route::post('payment-intent', function (Request $request) {
         $paymentIntent = PaymentIntent::create([
             'amount' => $request->amount, // Amount in cents (e.g., 3500 for €35)
             'currency' => 'eur', // Klarna supports EUR, USD, GBP, etc.
-            'payment_method_types' => ['card', 'link', 'klarna', 'alipay'], // Include Klarna
+            'payment_method_types' => ['card', 'link', 'klarna', 'paypal'], // Include Klarna
         ]);
 
         return response()->json(['client_secret' => $paymentIntent->client_secret]);
