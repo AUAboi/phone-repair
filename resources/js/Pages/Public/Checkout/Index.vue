@@ -333,6 +333,10 @@ const submit = () => {
                 </p>
               </div>
             </div>
+            <div class="mt-6">
+              <CartCheckout />
+            </div>
+
             <div class="mt-6 sm:mt-8 md:mt-10">
               <label class="flex items-center gap-2 iam-agree">
                 <input
