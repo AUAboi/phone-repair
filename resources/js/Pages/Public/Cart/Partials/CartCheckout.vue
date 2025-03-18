@@ -40,7 +40,7 @@ import { onBeforeMount, ref, useTemplateRef } from "vue";
 import { StripeElements, StripeElement } from "vue-stripe-js";
 
 const stripeKey =
-  "pk_test_51R3y6r2LkFthmFnkaQnX4fbsr9dUKL8hX6k4FUBFD6rLPodNrORYCf3tlr7KL0UWXKR5ndR9KPR1zMNSRNGuJkw200ThcIXJpP";
+  "pk_live_51R3y6r2LkFthmFnk77eGMHxvjrTmWHNPix8p6sQyOeVoHHtmgWw27ZpZZjWrD8tN8Tp8VNCjKi7mW8YmkTX61TKY00zVwDvKPN";
 const stripeOptions = ref({
   // https://stripe.com/docs/js/initializing#init_stripe_js-options
 });
