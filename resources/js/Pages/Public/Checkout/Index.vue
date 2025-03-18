@@ -132,23 +132,19 @@ const submit = () => {
             <div class="mt-5">
               <label
                 class="text-base md:text-lg text-title dark:text-white leading-none mb-2 sm:mb-3 block"
-                >Town / City</label
+                >City</label
               >
-              <select
-                class="nice-select select-active p-4 !bg-white dark:!bg-dark-secondary"
-              >
-                <option value="{1}">Sylht</option>
-                <option value="{2}">Dhaka</option>
-                <option value="{2}">Chittagong</option>
-                <option value="{2}">Rajshahi</option>
-                <option value="{2}">Bogura</option>
-              </select>
+              <input
+                class="w-full h-12 md:h-14 bg-white dark:bg-dark-secondary border border-[#E3E5E6] text-title dark:text-white focus:border-primary p-4 outline-none duration-300"
+                type="text"
+                placeholder="City"
+              />
             </div>
 
             <div class="mt-5">
               <label
                 class="text-base md:text-lg text-title dark:text-white leading-none mb-2 sm:mb-3 block"
-                >Zip Code</label
+                >Post Code</label
               >
               <input
                 class="w-full h-12 md:h-14 bg-white dark:bg-dark-secondary border border-[#E3E5E6] text-title dark:text-white focus:border-primary p-4 outline-none duration-300"
