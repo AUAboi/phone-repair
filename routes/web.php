@@ -102,6 +102,10 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/user/profile', [UserProfileController::class, 'index'])->name('user.profile');
 });
 
+Route::get('/app/migrate', function () {
+    Artisan::call('migrate');
+});
+
 Route::get('/sym', function () {
     Artisan::call('storage:link');
 });
