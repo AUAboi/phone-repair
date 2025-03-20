@@ -35,8 +35,16 @@ class CategoryController extends Controller
     {
         try {
             $category = Category::create([
-                'name' => $request->name
+                'name' => $request->name,
             ]);
+
+            if ($category->media) {
+                $category->media->delete();
+            }
+            $productMedia = $category->media()->create([]);
+            $productMedia->baseMedia()->associate(
+                $productMedia->addMedia($request->image)->toMediaCollection()
+            )->save();
         } catch (\Throwable $th) {
             return Redirect::route('categories.create')->with('error', 'Error cant create: ' . $th->getMessage());
         }
@@ -54,7 +62,17 @@ class CategoryController extends Controller
     public function update(Category $category, UpdateCategoryRequest $request)
     {
         try {
-            $category->update($request->validated());
+            $category->update([
+                'name' => $request->name,
+            ]);
+
+            if ($category->media) {
+                $category->media->delete();
+            }
+            $productMedia = $category->media()->create([]);
+            $productMedia->baseMedia()->associate(
+                $productMedia->addMedia($request->image)->toMediaCollection()
+            )->save();
         } catch (\Throwable $th) {
             return Redirect::route('categories.index')->with('error', 'Error cant update: ' . $th->getMessage());
         }

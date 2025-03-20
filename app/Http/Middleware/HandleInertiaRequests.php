@@ -2,9 +2,11 @@
 
 namespace App\Http\Middleware;
 
+use App\Http\Resources\CategoryResource;
 use App\Http\Resources\DeviceResource;
 use App\Http\Resources\ProductResource;
 use App\Http\Resources\UserResource;
+use App\Models\Category;
 use App\Models\Device;
 use App\Models\Product;
 use Illuminate\Http\Request;
@@ -58,7 +60,7 @@ class HandleInertiaRequests extends Middleware
             'logo' => 'red-logo.png',
             'navigation' => [
                 'devices' => DeviceResource::collection(Device::all()),
-                'products' => ProductResource::collection(Product::all())
+                'categories' => CategoryResource::collection(Category::all())
             ],
             'ziggy' => function () use ($request) {
                 return array_merge((new Ziggy)->toArray(), [

@@ -20,8 +20,8 @@ class Product extends Model
     protected function price(): Attribute
     {
         return Attribute::make(
-            get: fn ($price) => $price / 100,
-            set: fn ($price) => $price * 100,
+            get: fn($price) => $price / 100,
+            set: fn($price) => $price * 100,
         );
     }
 
@@ -41,7 +41,6 @@ class Product extends Model
             $query->where('name', 'like', '%' . $search . '%');
         });
     }
-
 
     public function media()
     {

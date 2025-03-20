@@ -56,15 +56,6 @@ const props = defineProps(["brands"]);
           </div>
         </div>
       </div>
-      <div class="text-center mt-7 md:mt-12">
-        <Link
-          :href="route('public.repairs')"
-          class="btn btn-outline"
-          data-text="All Brands"
-        >
-          <span>All Brands</span>
-        </Link>
-      </div>
     </div>
   </div>
 </template>

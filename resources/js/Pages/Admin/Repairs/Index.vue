@@ -37,14 +37,10 @@ const reset = () => {
 watchThrottled(
   form,
   () => {
-    router.get(
-      route("repairs.index"),
-      reactivePick(form, (val) => val != null),
-      {
-        preserveState: true,
-        preserveScroll: true,
-      }
-    );
+    router.get(route("repairs.index"), form, {
+      preserveState: true,
+      preserveScroll: true,
+    });
   },
   { throttle: 500, deep: true }
 );

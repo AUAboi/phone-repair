@@ -1,30 +1,21 @@
 <script setup>
-import StepFormInput from "@/Components/StepFormInput.vue";
-import { Head, Link, useForm, usePage } from "@inertiajs/vue3";
+import { Head, Link } from "@inertiajs/vue3";
 import CartCheckout from "@/Pages/Public/Cart/Partials/CartCheckout.vue";
-import FormSelect from "@/Components/FormSelect.vue";
 import bg from "@/assets/img/shortcode/breadcumb.jpg";
-import { computed } from "vue";
+import { useCheckoutStore } from "@/store/checkoutStore";
+import { storeToRefs } from "pinia";
 
-const page = usePage();
-const form = useForm({
-  first_name: page.props.auth.user?.first_name,
-  last_name: page.props.auth.user?.last_name,
-  phone: page.props.auth.user?.phone,
-  email: page.props.auth.user?.email,
-  payment_method: "",
-  zip_code: null,
-  address: null,
-  message: null,
-  city: null,
-  card: "",
-});
+const checkoutStore = useCheckoutStore();
 
-const props = defineProps(["cartContents", "quantity", "total"]);
+const { form } = storeToRefs(checkoutStore);
 
-const submit = () => {
-  form.post(route("order.store"));
-};
+const props = defineProps([
+  "cartContents",
+  "quantity",
+  "total",
+  "clientSecret",
+  "stripeKey",
+]);
 </script>
 
 <template>
@@ -90,19 +81,34 @@ const submit = () => {
           >
             Billing Information
           </h4>
-          <div class="grid gap-5 md:gap-6">
+          <div class="grid md:grid-cols-2 gap-5 md:gap-6 mb-5">
             <div>
               <label
                 class="text-base md:text-lg text-title dark:text-white leading-none mb-2 sm:mb-3 block"
-                >Full Name</label
+                >First Name</label
               >
               <input
                 class="w-full h-12 md:h-14 bg-white dark:bg-dark-secondary border border-[#E3E5E6] text-title dark:text-white focus:border-primary p-4 outline-none duration-300"
                 type="text"
-                placeholder="Enter your full name"
+                v-model="form.first_name"
+                placeholder="Enter your first name"
               />
             </div>
+            <div>
+              <label
+                class="text-base md:text-lg text-title dark:text-white leading-none mb-2 sm:mb-3 block"
+                >Last Name</label
+              >
+              <input
+                class="w-full h-12 md:h-14 bg-white dark:bg-dark-secondary border border-[#E3E5E6] text-title dark:text-white focus:border-primary p-4 outline-none duration-300"
+                type="text"
+                v-model="form.last_name"
+                placeholder="Enter your last name"
+              />
+            </div>
+          </div>
 
+          <div class="grid gap-5 md:gap-6">
             <div>
               <label
                 class="text-base md:text-lg text-title dark:text-white leading-none mb-2 sm:mb-3 block"
@@ -111,6 +117,7 @@ const submit = () => {
               <input
                 class="w-full h-12 md:h-14 bg-white dark:bg-dark-secondary border border-[#E3E5E6] text-title dark:text-white focus:border-primary p-4 outline-none duration-300"
                 type="text"
+                v-model="form.email"
                 placeholder="Enter your email address"
               />
             </div>
@@ -124,6 +131,7 @@ const submit = () => {
                 class="w-full h-12 md:h-14 bg-white dark:bg-dark-secondary border border-[#E3E5E6] text-title dark:text-white focus:border-primary p-4 outline-none duration-300"
                 type="number"
                 placeholder="Type your phone number"
+                v-model="form.phone"
               />
             </div>
           </div>
@@ -138,6 +146,7 @@ const submit = () => {
                 class="w-full h-12 md:h-14 bg-white dark:bg-dark-secondary border border-[#E3E5E6] text-title dark:text-white focus:border-primary p-4 outline-none duration-300"
                 type="text"
                 placeholder="City"
+                v-model="form.city"
               />
             </div>
 
@@ -150,33 +159,21 @@ const submit = () => {
                 class="w-full h-12 md:h-14 bg-white dark:bg-dark-secondary border border-[#E3E5E6] text-title dark:text-white focus:border-primary p-4 outline-none duration-300"
                 type="text"
                 placeholder="1217"
+                v-model="form.zip_code"
               />
             </div>
-
-            <div>
-              <label
-                class="text-base md:text-lg text-title dark:text-white leading-none mb-2 sm:mb-3 block"
-                >Address Line 1</label
-              >
-              <input
-                class="w-full h-12 md:h-14 bg-white dark:bg-dark-secondary border border-[#E3E5E6] text-title dark:text-white focus:border-primary p-4 outline-none duration-300"
-                type="number"
-                placeholder="Your full address"
-              />
-            </div>
-
-            <div>
-              <label
-                class="text-base md:text-lg text-title dark:text-white leading-none mb-2 sm:mb-3 block"
-              >
-                Address Line 2
-              </label>
-              <input
-                class="w-full h-12 md:h-14 bg-white dark:bg-dark-secondary border border-[#E3E5E6] text-title dark:text-white focus:border-primary p-4 outline-none duration-300"
-                type="number"
-                placeholder="Your full address"
-              />
-            </div>
+          </div>
+          <div class="mt-5">
+            <label
+              class="text-base md:text-lg text-title dark:text-white leading-none mb-2 sm:mb-3 block"
+              >Address
+            </label>
+            <input
+              class="w-full h-12 md:h-14 bg-white dark:bg-dark-secondary border border-[#E3E5E6] text-title dark:text-white focus:border-primary p-4 outline-none duration-300"
+              type="number"
+              v-model="form.address"
+              placeholder="Your full address"
+            />
           </div>
           <div class="mt-5">
             <label
@@ -188,6 +185,7 @@ const submit = () => {
               class="w-full h-[120px] bg-white dark:bg-dark-secondary border border-[#E3E5E6] text-title dark:text-white focus:border-primary p-4 outline-none duration-300"
               name="Message"
               placeholder="Type your message"
+              v-model="form.message"
             ></textarea>
           </div>
         </div>
@@ -330,51 +328,11 @@ const submit = () => {
               </div>
             </div>
             <div class="mt-6">
-              <CartCheckout />
-            </div>
-
-            <div class="mt-6 sm:mt-8 md:mt-10">
-              <label class="flex items-center gap-2 iam-agree">
-                <input
-                  class="appearance-none hidden"
-                  type="checkbox"
-                  name="categories"
-                />
-                <span
-                  class="w-6 h-6 rounded-[5px] border-2 border-title dark:border-white flex items-center justify-center duration-300"
-                >
-                  <svg
-                    class="duration-300 opacity-0 text-title dark:text-white fill-current"
-                    width="15"
-                    height="12"
-                    viewBox="0 0 20 15"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M18.3819 0.742676L6.10461 11.8998L2.25731 8.06381L0.763672 9.55745L6.20645 15.0002L20 2.32686L18.3819 0.742676Z"
-                    />
-                  </svg>
-                </span>
-                <span
-                  class="text-base sm:text-lg text-title dark:text-white leading-none sm:leading-none select-none inline-block transform translate-y-[3px]"
-                  >I Agree all terms & Conditions</span
-                >
-              </label>
-            </div>
-            <div class="mt-4 md:mt-6 flex flex-wrap gap-3">
-              <router-link
-                to="#"
-                class="btn btn-outline"
-                data-text="Back to Cart"
-                ><span>Back to Cart</span></router-link
-              >
-              <router-link
-                to="#"
-                class="btn btn-theme-solid"
-                data-text="Place to Order"
-                ><span>Place to Order</span></router-link
-              >
+              <CartCheckout
+                :client-secret="clientSecret"
+                :stripe-key="stripeKey"
+                :form="form"
+              />
             </div>
           </div>
         </div>

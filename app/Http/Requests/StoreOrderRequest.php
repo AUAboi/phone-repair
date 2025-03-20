@@ -32,7 +32,7 @@ class StoreOrderRequest extends FormRequest
             'city' => 'required|string',
             'address' => 'required|string',
             'payment_method' => 'required|in:cod,card',
-            'card.token' => 'required_if:payment_method,card'
+            'card.token' => 'required_if:payment_method,card',
         ];
     }
 

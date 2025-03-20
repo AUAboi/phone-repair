@@ -63,7 +63,7 @@ const activeImage = ref(1);
                 />
               </div>
             </div>
-            <div class="product-dtls-nav">
+            <div class="product-dtls-nav hidden">
               <div class="cursor-pointer">
                 <img
                   :src="product && product.image ? product.image : product1"
@@ -154,13 +154,13 @@ const activeImage = ref(1);
             data-aos-delay="300"
           >
             <div class="flex gap-x-12 gap-y-3 flex-wrap">
-              <h6 class="leading-none font-medium">SKU : CH_0015</h6>
+              <!-- <h6 class="leading-none font-medium ">SKU : CH_0015</h6> -->
               <h6 class="leading-none font-medium">
                 Category : {{ product.category.name }}
               </h6>
             </div>
             <div
-              class="flex gap-x-12 lg:gap-x-24 gap-y-3 flex-wrap mt-5 sm:mt-10"
+              class="flex gap-x-12 lg:gap-x-24 gap-y-3 flex-wrap mt-5 sm:mt-10 hidden"
             >
               <div class="flex gap-[10px] items-center">
                 <h6 class="leading-none font-medium">Size :</h6>
@@ -277,7 +277,7 @@ const activeImage = ref(1);
             </div>
           </div>
           <div
-            class="py-4 sm:py-6 border-b border-bdr-clr dark:border-bdr-clr-drk"
+            class="py-4 sm:py-6 border-b border-bdr-clr dark:border-bdr-clr-drk hidden"
             data-aos="fade-up"
             data-aos-delay="400"
           >
@@ -315,7 +315,11 @@ const activeImage = ref(1);
               >
             </div>
           </div>
-          <div class="pt-4 sm:pt-6" data-aos="fade-up" data-aos-delay="500">
+          <div
+            class="pt-4 sm:pt-6 hidden"
+            data-aos="fade-up"
+            data-aos-delay="500"
+          >
             <div class="flex items-center gap-6">
               <h6 class="font-normal">Share :</h6>
               <div class="flex gap-6">

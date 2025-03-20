@@ -4,6 +4,7 @@ import { Swiper, SwiperSlide } from "swiper/vue";
 import { Autoplay, Pagination, Navigation } from "swiper/modules";
 import "swiper/swiper-bundle.css";
 import product1 from "@/assets/img/home-v1/pdct-cgry-01.jpg";
+import { Link } from "@inertiajs/vue3";
 
 const props = defineProps(["categories"]);
 </script>
@@ -50,21 +51,30 @@ const props = defineProps(["categories"]);
             :key="index"
             class="relative block"
           >
-            <img class="w-full object-cover" :src="product1" alt="product" />
-            <div
-              class="absolute bottom-7 left-0 px-5 transform w-full flex justify-start"
+            <Link
+              :href="route('public.categoryProducts', { category: item.slug })"
             >
-              <div class="p-[15px] bg-white dark:bg-title w-auto">
-                <span class="md:text-xl text-primary font-medium leading-none"
-                  >22</span
-                >
-                <h4
-                  class="text-xl md:text-2xl mt-[10px] font-semibold leading-[1.5]"
-                >
-                  {{ item.name }}
-                </h4>
+              <img
+                class="w-full object-cover"
+                :src="item.image ?? product1"
+                alt="product"
+              />
+              <div
+                class="absolute bottom-7 left-0 px-5 transform w-full flex justify-start"
+              >
+                <div class="p-[15px] bg-white dark:bg-title w-auto">
+                  <span
+                    class="md:text-xl text-primary font-medium leading-none"
+                    >{{ item.products.length }}</span
+                  >
+                  <h4
+                    class="text-xl md:text-2xl mt-[10px] font-semibold leading-[1.5]"
+                  >
+                    {{ item.name }}
+                  </h4>
+                </div>
               </div>
-            </div>
+            </Link>
           </swiper-slide>
         </swiper>
       </div>

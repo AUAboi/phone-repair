@@ -171,7 +171,7 @@ onMounted(() => {
             <div class="p-2">
               <div class="relative">
                 <StepFormInput
-                  label="Zip Code"
+                  label="Post Code"
                   v-model="form.zip_code"
                   :error="form.errors.zip_code"
                 />

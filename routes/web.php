@@ -1,17 +1,20 @@
 <?php
 
+use Stripe\Stripe;
 use Inertia\Inertia;
+use Stripe\PaymentIntent;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Application;
+use Illuminate\Support\Facades\Artisan;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\PostController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PublicController;
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\AppointmentController;
-use App\Http\Controllers\ContactController;
-use App\Http\Controllers\PostController;
 use App\Http\Controllers\UserProfileController;
-use Illuminate\Support\Facades\Artisan;
 
 /*
 |--------------------------------------------------------------------------
@@ -42,6 +45,8 @@ Route::get('/phone/repairs', [PublicController::class, 'repairs'])->name('public
 Route::get('/all-repairs/{brand}', [PublicController::class, 'repairBrand'])->name('public.repairs.brand');
 Route::get('/all-products', [PublicController::class, 'products'])->name('public.products');
 
+Route::get('/category/{category}/products', [PublicController::class, 'categoryProducts'])->name('public.categoryProducts');
+
 Route::get('/product-details/{product}', [PublicController::class, 'product'])->name('public.product.show');
 
 Route::get('/book-appointment/repair/{device}', [AppointmentController::class, 'create'])->name('public.appointments.create');
@@ -58,16 +63,34 @@ Route::post('/cart/remove-item', [CartController::class, 'removeItem'])->name('c
 
 Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout.index');
 
-
 Route::get('/tracking/order/{order:order_no}', [OrderController::class, 'show'])->name('order.show');
-Route::get('tracking/appointment/{appointment:appointment_number}', [AppointmentController::class, 'showAppointment'])->name('appointment.show');
+Route::get('/tracking/appointment/{appointment:appointment_number}', [AppointmentController::class, 'showAppointment'])->name('appointment.show');
 
 Route::get('/tracking/order', [PublicController::class, 'orderTracking'])->name('public.order.tracking');
 Route::get('/tracking/appointment', [PublicController::class, 'appointmentTracking'])->name('public.appointment.tracking');
 
 Route::post('/order/place', [OrderController::class, 'store'])->name('order.store');
 
+Route::get('/order/complete', function (Request $request) {
+    Stripe::setApiKey(env('STRIPE_SECRET'));
+
+
+    $paymentIntent = PaymentIntent::retrieve($request->payment_intent);
+
+    if ($paymentIntent->status === 'succeeded') {
+        // \App\Models\Order::where('payment_intent_id', $paymentIntent->id)->update([
+        //     'status' => 'paid',
+        // ]);
+        return redirect()->route('public.order.tracking')->with('success', 'Payment successful!');
+    }
+
+    return redirect()->route('public.home')->with('error', 'Payment failed or pending.');
+})->name('order.complete');
+
+
 Route::post('/contact/send', [ContactController::class, 'send'])->name('contact.send');
+
+Route::get('/blogs', [PostController::class, 'public'])->name('public.posts');
 
 Route::get('/blog/search', [PostController::class, 'search'])->name('post.search');
 

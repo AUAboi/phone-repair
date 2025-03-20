@@ -8,6 +8,7 @@ import { onMounted, ref } from "vue";
 import { useLogoStore } from "@/store/logoStore";
 import Aos from "aos";
 import "aos/dist/aos.css";
+import MdiWhatsapp from "~icons/mdi/whatsapp";
 
 const props = defineProps(["navigation"]);
 const toggle = ref(false);
@@ -70,7 +71,7 @@ const isUrl = (...urls) => {
                 class="sub-menu lg:absolute z-50 lg:top-full lg:left-0 lg:min-w-[220px] lg:invisible lg:transition-all lg:bg-white lg:dark:bg-title lg:py-[15px] lg:pr-[30px]"
               >
                 <li
-                  v-for="p in $page.props.navigation.products"
+                  v-for="p in $page.props.navigation.categories"
                   :class="current === '/' ? 'active' : ''"
                 >
                   <Link
@@ -80,6 +81,22 @@ const isUrl = (...urls) => {
                   >
                 </li>
               </ul>
+            </li>
+            <li
+              class="relative"
+              :class="
+                ['public.repairs'].includes(route().current()) ? 'active' : ''
+              "
+            >
+              <Link :href="route('public.repairs')">Book a Repair</Link>
+            </li>
+            <li
+              class="relative"
+              :class="
+                ['public.posts'].includes(route().current()) ? 'active' : ''
+              "
+            >
+              <Link :href="route('public.posts')">Blogs</Link>
             </li>
             <li
               class="relative"
@@ -110,6 +127,11 @@ const isUrl = (...urls) => {
     <FlashMessage />
     <slot />
   </main>
+  <div class="fixed bottom-0 right-0 z-50 p-4">
+    <a href="#" target="_blank">
+      <MdiWhatsapp class="text-4xl text-green-600" />
+    </a>
+  </div>
   <PublicFooter />
 </template>
 

@@ -44,4 +44,9 @@ class Category extends Model
             $query->where('name', 'like', '%' . $search . '%');
         });
     }
+
+    public function media()
+    {
+        return $this->hasOne(CategoryMedia::class);
+    }
 }

@@ -1,11 +1,12 @@
 <script setup>
-import { onMounted, ref } from "vue";
+import { onMounted, reactive, ref } from "vue";
 import LayoutOne from "@/Components/template/layout-one.vue";
 import bg from "@/assets/img/shortcode/breadcumb.jpg";
 import Aos from "aos";
-import { Head, Link } from "@inertiajs/vue3";
+import { Head, Link, router } from "@inertiajs/vue3";
+import { reactivePick, watchThrottled } from "@vueuse/core";
 
-const props = defineProps(["products", "categories"]);
+const props = defineProps(["products", "categories", "filters"]);
 
 onMounted(() => {
   Aos.init();
@@ -13,14 +14,6 @@ onMounted(() => {
 
 const isOpen = ref(false);
 const selectedOption = ref("Navana Furniture");
-
-const options = [
-  "Navana Furniture",
-  "RFL Furniture",
-  "Gazi Furniture",
-  "Plastic Furniture",
-  "Luxury Furniture",
-];
 
 const toggleDropdown = () => {
   isOpen.value = !isOpen.value;
@@ -31,6 +24,21 @@ const handleSelect = (option, event) => {
   selectedOption.value = option;
   isOpen.value = false;
 };
+
+const form = reactive({
+  search: props.filters.search,
+});
+
+watchThrottled(
+  form,
+  () => {
+    router.get(route("public.shop"), form, {
+      preserveState: true,
+      preserveScroll: true,
+    });
+  },
+  { throttle: 500, deep: true }
+);
 </script>
 <template>
   <Head title="Shop" />
@@ -48,7 +56,7 @@ const handleSelect = (option, event) => {
         <ul
           class="flex items-center justify-center gap-[10px] text-base md:text-lg leading-none font-normal text-white mt-3 md:mt-4"
         >
-          <li><router-link to="/">Home</router-link></li>
+          <li><Link :href="route('public.home')">Home</Link></li>
           <li>/</li>
           <li class="text-primary">Shop</li>
         </ul>
@@ -71,14 +79,28 @@ const handleSelect = (option, event) => {
                 v-for="category in categories"
                 :key="category.id"
                 class="btn btn-theme-outline btn-sm shop1-button"
-                :href="`/${category.slug}`"
+                :href="route('public.categoryProducts', category.slug)"
                 :data-text="category.name"
                 ><span>{{ category.name }}</span></Link
               >
             </div>
           </div>
+
           <div class="max-w-[562px] w-full grid sm:grid-cols-2 gap-8 md:gap-12">
-            <div>
+            <div class="w-full">
+              <label
+                class="text-base md:text-lg text-title dark:text-white leading-none mb-2.5 block"
+                >Search</label
+              >
+
+              <input
+                class="w-full h-12 md:h-14 bg-snow dark:bg-dark-secondary border border-[#E3E5E6] text-title dark:text-white focus:border-primary p-4 outline-none duration-300"
+                type="text"
+                v-model="form.search"
+                placeholder="Search"
+              />
+            </div>
+            <!-- <div>
               <h4
                 class="font-medium leading-none text-xl sm:text-2xl mb-5 sm:mb-6"
               >
@@ -102,14 +124,14 @@ const handleSelect = (option, event) => {
                   </li>
                 </ul>
               </div>
-            </div>
+            </div> -->
           </div>
         </div>
 
         <div data-aos="fade-up" data-aos-delay="200">
           <LayoutOne
             :classList="'max-w-[1720px] mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 sm:gap-8 pt-8 md:pt-[50px]'"
-            :productList="products"
+            :productList="products.data"
           />
         </div>
       </div>

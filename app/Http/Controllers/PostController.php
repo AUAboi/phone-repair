@@ -87,6 +87,7 @@ class PostController extends Controller
 
         return Redirect::route('posts.index')->with('success', 'Post deleted successfully.');
     }
+
     public function search(Request $request)
     {
         $filters = $request->all('search');
@@ -98,6 +99,18 @@ class PostController extends Controller
         return Inertia::render('Public/Search', [
             'filters' => $filters,
             'posts' => PostResource::collection($posts)
+        ]);
+    }
+
+    public function public()
+    {
+        $posts =  Post::orderBy('updated_at')
+            ->with(['media', 'media.baseMedia'])
+            ->publishedPosts()
+            ->get();
+
+        return Inertia::render('Public/Blogs', [
+            'posts' => PostResource::collection($posts),
         ]);
     }
 }

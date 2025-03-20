@@ -100,9 +100,13 @@ const footerLink4 = [
               src="/images/red-logo.png"
               alt="logo"
             />
-            <p class="mt-4 text-white-light max-w-[522px] sm:mx-auto">
-              Fonemart website
-            </p>
+            <a
+              target="_blank"
+              href="https://maps.app.goo.gl/yN1kbj5gaxvYVrWx5"
+              class="mt-4 text-white-light max-w-[522px] sm:mx-auto block"
+            >
+              Fonemart, 16 The Arcade, Bognor Regis PO21 1LH, United Kingdom
+            </a>
             <div class="flex items-center sm:justify-center gap-4 mt-6">
               <router-link
                 to="#"

@@ -13,14 +13,10 @@ const form = reactive({
 watchThrottled(
   form,
   () => {
-    router.get(
-      route("post.search"),
-      reactivePick(form, (val) => val != null),
-      {
-        preserveState: true,
-        preserveScroll: true,
-      }
-    );
+    router.get(route("post.search"), form, {
+      preserveState: true,
+      preserveScroll: true,
+    });
   },
   { throttle: 500, deep: true }
 );
@@ -35,7 +31,7 @@ watchThrottled(
       <div class="flex items-center gap-4">
         <input
           v-model="form.search"
-          class="border-gray-300 rounded"
+          class="border-gray-300 rounded border"
           type="text"
         />
       </div>

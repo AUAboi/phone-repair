@@ -5,6 +5,7 @@ import CartIcon from "~icons/mdi/cart-outline";
 import CartList from "./CartList.vue";
 import { Link, usePage } from "@inertiajs/vue3";
 import { onClickOutside } from "@vueuse/core";
+import MdiAccount from "~icons/mdi/account";
 
 const cartList = ref(false);
 
@@ -28,10 +29,18 @@ onClickOutside(cartRef, () => (cartList.value = false), {
 <template>
   <div class="flex items-center gap-4 sm:gap-6">
     <Link
+      v-if="!$page.props.auth.user"
       :href="route('login')"
       class="text-lg leading-none text-title dark:text-white transition-all duration-300 hover:text-primary hidden lg:block"
       >Login</Link
     >
+    <Link
+      v-else
+      :href="route('user.profile')"
+      class="text-lg leading-none text-title dark:text-white transition-all duration-300 hover:text-primary hidden lg:block"
+      ><MdiAccount
+        class="text-title dark:text-white text-[24px] sm:text-[28px]"
+    /></Link>
 
     <button
       class="relative hdr_cart_btn"

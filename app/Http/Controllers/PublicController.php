@@ -21,7 +21,6 @@ class PublicController extends Controller
 {
     public function home()
     {
-
         $posts =  Post::orderBy('updated_at')
             ->with(['media', 'media.baseMedia'])
             ->publishedPosts()
@@ -93,11 +92,19 @@ class PublicController extends Controller
         ]);
     }
 
-    public function shop()
+    public function shop(Request $request)
     {
+        $filters = $request->all('search');
+        $products = Product::orderBy('name')
+            ->with(['category'])
+            ->filter($filters)
+            ->paginate(10)
+            ->withQueryString();
+
         return Inertia::render('Public/Shop/Index', [
             'categories' => CategoryResource::collection(Category::orderBy('name', 'ASC')->get()),
-            'products' => ProductResource::collection(Product::inRandomOrder()->get())
+            'products' => ProductResource::collection($products),
+            'filters' => $filters
         ]);
     }
 
@@ -106,6 +113,13 @@ class PublicController extends Controller
         return Inertia::render('Public/Product/Show', [
             'product' => new ProductResource($product->load('category')),
             'products' => ProductResource::collection(Product::all()->except($product->id))
+        ]);
+    }
+
+    public function categoryProducts(Category $category)
+    {
+        return Inertia::render('Public/CategoryProducts', [
+            'category' => new CategoryResource($category->load('products', 'products.category')),
         ]);
     }
 }

@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Actions\ChargePayment;
 use App\Http\Requests\StoreOrderRequest;
-use Stripe;
 use DateTime;
 use Exception;
 use Inertia\Inertia;
@@ -18,6 +18,8 @@ use App\Mail\OrderDelivered;
 use App\Mail\OrderPlaced;
 use App\Mail\OrderShipped;
 use Illuminate\Support\Facades\Mail;
+use Stripe\Stripe;
+use Stripe\PaymentIntent;
 
 class OrderController extends Controller
 {
@@ -33,8 +35,16 @@ class OrderController extends Controller
         ]);
     }
 
-    public function store(StoreOrderRequest $request)
+    public function store(Request $request, ChargePayment $chargePayment)
     {
+        dd("COMING SOON");
+        $request->validate([
+            'paymentIntentId' => 'required',
+        ]);
+
+        Stripe::setApiKey(env('STRIPE_SECRET'));
+
+
         if (auth()->id()) {
             \Cart::session(auth()->id());
         } else {
@@ -48,11 +58,11 @@ class OrderController extends Controller
                 $product = Product::find($item->id);
                 if (!$product) {
                     \Cart::remove($item->id);
-                    unset($row[$key]);
+                    return redirect()->route('cart.index')->with('error', 'One or more products in your cart are no longer available.');
                 }
             }
 
-            $cartContent = $row->transform(fn ($item) => [
+            $cartContent = $row->transform(fn($item) => [
                 'id' => $item->id,
                 'product_id' => $item->associatedModel->id,
                 'name' => $item->associatedModel->name,
@@ -66,6 +76,7 @@ class OrderController extends Controller
         if (!count($cartContent)) {
             return redirect()->route('cart.index');
         }
+
         try {
             $order = DB::transaction(function () use ($request, $cartContent,) {
                 $order = Order::create([
@@ -99,33 +110,37 @@ class OrderController extends Controller
 
                 \Cart::clear();
 
-
-                if ($order->payment_method == "card") {
-                    Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
-                    Stripe\Charge::create([
-                        "amount" => $order->total * 100,
-                        "currency" => "USD",
-                        "source" => $request->card['token']['id'],
-                        "description" => "This payment is for test purposes",
-                    ]);
-
-                    $order->payment_status = "paid";
-                    $order->save();
-                }
-
-
-
                 Mail::to($order->email)->send(new OrderPlaced($order));
 
                 return $order;
             });
-        } catch (\Stripe\Exception\CardException $e) {
-            return redirect()->route('public.home')->with('error', $e->getError()->message);
         } catch (Exception $e) {
             return redirect()->route('public.home')->with('error', $e->getMessage());
         }
 
-        return redirect()->route('order.show',  $order->order_no)->with('success', 'Order successfull');
+        try {
+            $paymentIntent = PaymentIntent::retrieve($request->paymentIntentId);
+
+            //Make sure return url has payment intent id
+            $paymentIntent->confirm([
+                'payment_method' => $request->paymentMethodId,
+                'return_url' => route('order.complete'),
+            ]);
+
+            if ($paymentIntent->status === 'requires_action' && isset($paymentIntent->next_action->redirect_to_url)) {
+                return Inertia::location($paymentIntent->next_action->redirect_to_url->url); // Redirect to PayPal
+            }
+
+            if ($paymentIntent->status === 'succeeded') {
+                $order->payment_status = "paid";
+                $order->save();
+                return redirect()->route('order.show',  $order->order_no)->with('success', 'Order successfull');
+            }
+        } catch (\Throwable $th) {
+            return back()->with('error', 'Payment failed. Please try again.');
+        }
+
+        return back()->with('error', 'Payment failed. Please try again.');
     }
 
     public function show(Order $order)

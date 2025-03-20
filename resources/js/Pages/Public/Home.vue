@@ -17,7 +17,15 @@ const props = defineProps(["brands", "categories", "posts", "products"]);
   <BannerSlideshow />
   <ProductCategorySection :categories="categories" />
   <DeviceSection :brands="brands" />
-
+  <div class="text-center mb-7 md:mb-12">
+    <Link
+      :href="route('public.repairs')"
+      class="btn btn-outline"
+      data-text="All Brands"
+    >
+      <span>All Brands</span>
+    </Link>
+  </div>
   <ChooseUsSection />
   <ProductsSection :products="products" />
   <div v-if="posts.length">

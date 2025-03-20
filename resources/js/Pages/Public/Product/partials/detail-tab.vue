@@ -17,7 +17,7 @@
               >Description</span
             >
           </li>
-          <li
+          <!-- <li
             @click="activeTab = 2"
             class="py-3 sm:py-5 lg:6 relative before:absolute before:w-full before:h-[1px] before:bg-title before:top-full before:left-0 before:duration-300 dark:before:bg-white before:opacity-0"
             :class="activeTab === 2 ? 'active' : ''"
@@ -43,7 +43,7 @@
             <span to="#" class="duration-300 cursor-pointer hover:text-primary"
               >Shipping</span
             >
-          </li>
+          </li> -->
         </ul>
       </div>
       <div

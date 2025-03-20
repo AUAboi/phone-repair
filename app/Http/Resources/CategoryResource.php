@@ -18,6 +18,7 @@ class CategoryResource extends JsonResource
             'id' => $this->id,
             'name' => $this->name,
             'slug' => $this->slug,
+            'image' => $this->media ? $this->media->baseMedia->getUrl() : null,
             'products' => ProductResource::collection($this->whenLoaded('products'))
         ];
     }
