@@ -104,8 +104,11 @@ async function handleSubmit() {
       </span>
       <span
         class="text-base sm:text-lg text-title dark:text-white leading-none sm:leading-none select-none inline-block transform translate-y-[3px]"
-        >I Agree all terms & Conditions</span
-      >
+        >I Agree all
+        <Link class="underline cursor-pointer" :href="route('public.terms')"
+          >terms & conditions</Link
+        >
+      </span>
     </label>
   </div>
   <div class="mt-4 md:mt-6 flex flex-wrap gap-3">

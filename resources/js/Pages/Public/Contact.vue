@@ -147,24 +147,12 @@ const submit = () => {
                     class="text-base md:text-lg text-title dark:text-white leading-none mb-2.5 block"
                     >Subject</label
                   >
-                  <div
-                    class="nice-select select-active bg-snow dark:bg-dark-secondary mb-2"
-                    :class="isOpen ? 'open' : ''"
-                    @click="toggleDropdown"
-                  >
-                    <span class="current">{{ selectedOption }}</span>
-                    <ul class="list">
-                      <li
-                        v-for="(item, index) in options"
-                        :key="index"
-                        data-value="1"
-                        class="option"
-                        @click="handleSelect(item, $event)"
-                      >
-                        {{ item }}
-                      </li>
-                    </ul>
-                  </div>
+                  <input
+                    class="w-full h-12 mb-2 md:h-14 bg-snow dark:bg-dark-secondary border border-[#E3E5E6] text-title dark:text-white focus:border-primary p-4 outline-none duration-300"
+                    type="text"
+                    v-model="form.subject"
+                    placeholder="Subject"
+                  />
                   <InputError :message="form.errors.subject" />
                 </div>
               </div>

@@ -271,36 +271,7 @@ const props = defineProps([
                   <input
                     class="appearance-none hidden"
                     type="radio"
-                    name="item-type"
-                  />
-                  <span
-                    class="w-4 h-4 rounded-full border border-title dark:border-white flex items-center justify-center duration-300"
-                  >
-                    <svg
-                      class="duration-300 opacity-0"
-                      width="8"
-                      height="8"
-                      viewBox="0 0 10 10"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <rect width="10" height="10" rx="5" fill="#BB976D" />
-                    </svg>
-                  </span>
-                  <span
-                    class="sm:text-lg text-title dark:text-white block sm:leading-none transform translate-y-[3px] select-none"
-                    >Cash On Delivery</span
-                  >
-                </label>
-                <p class="ml-6 text-[15px] leading-none mt-2">
-                  Time ( 07 - 10 ) Days
-                </p>
-              </div>
-              <div>
-                <label class="flex items-center gap-[10px] categoryies-iteem">
-                  <input
-                    class="appearance-none hidden"
-                    type="radio"
+                    checked
                     name="item-type"
                   />
                   <span

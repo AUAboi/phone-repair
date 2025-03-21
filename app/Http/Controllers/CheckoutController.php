@@ -7,6 +7,7 @@ use Inertia\Inertia;
 use App\Models\Product;
 use Stripe\PaymentIntent;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class CheckoutController extends Controller
 {
@@ -24,7 +25,6 @@ class CheckoutController extends Controller
 
         $cartContent = [];
         if ($row->count()) {
-            // remove from cart if item doesnt exist anymore
             foreach ($row as $key => $item) {
                 $product = Product::find($item->id);
                 if (!$product) {
@@ -43,17 +43,43 @@ class CheckoutController extends Controller
             ]);
         }
 
-
         if (!count($cartContent)) {
             return redirect()->route('cart.index');
         }
 
+        // Retrieve cart total
+        $cartTotal = \Cart::getTotal() * 100; // Convert to cents for Stripe
 
-        $paymentIntent = PaymentIntent::create([
-            'amount' => \Cart::getTotal() * 100,
-            'currency' => 'gbp',
-            'payment_method_types' => ['card', 'link', 'paypal', 'klarna'],
-        ]);
+        // Retrieve existing PaymentIntent
+        $paymentIntentId = Session::get('payment_intent_id');
+        $paymentIntent = null;
+
+        if ($paymentIntentId) {
+            try {
+                $paymentIntent = PaymentIntent::retrieve($paymentIntentId);
+
+
+                // If the PaymentIntent exists and is still modifiable, update it
+                if ($paymentIntent->status === 'requires_payment_method' && $paymentIntent->amount !== (int)$cartTotal) {
+                    $paymentIntent->update($paymentIntent->id, ['amount' => $cartTotal]);
+                }
+            } catch (\Exception $e) {
+                // If PaymentIntent retrieval fails, create a new one
+                $paymentIntent = null;
+            }
+        }
+
+        // If PaymentIntent does not exist or cannot be updated, create a new one
+        if (!$paymentIntent || $paymentIntent->status !== 'requires_payment_method') {
+            $paymentIntent = PaymentIntent::create([
+                'amount' => $cartTotal,
+                'currency' => config('constants.currency'),
+                'payment_method_types' => ['card', 'paypal', 'klarna'],
+            ]);
+
+            // Store new PaymentIntent ID
+            Session::put('payment_intent_id', $paymentIntent->id);
+        }
 
         return Inertia::render('Public/Checkout/Index', [
             'clientSecret' => $paymentIntent->client_secret,

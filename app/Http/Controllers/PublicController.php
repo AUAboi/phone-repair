@@ -122,4 +122,9 @@ class PublicController extends Controller
             'category' => new CategoryResource($category->load('products', 'products.category')),
         ]);
     }
+
+    public function terms()
+    {
+        return Inertia::render('Public/Terms');
+    }
 }

@@ -3,6 +3,8 @@ import laravel from "laravel-vite-plugin";
 import vue from "@vitejs/plugin-vue";
 import Icons from "unplugin-icons/vite";
 import ckeditor5 from "@ckeditor/vite-plugin-ckeditor5";
+import { createRequire } from "node:module";
+const require = createRequire(import.meta.url);
 
 export default defineConfig({
   plugins: [

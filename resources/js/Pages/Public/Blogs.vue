@@ -7,7 +7,7 @@ import "swiper/swiper-bundle.css";
 import bg from "@/assets/img/shortcode/breadcumb.jpg";
 
 import Aos from "aos";
-import { Link } from "@inertiajs/vue3";
+import { Head, Link } from "@inertiajs/vue3";
 
 onMounted(() => {
   Aos.init();
@@ -17,6 +17,7 @@ const props = defineProps(["posts"]);
 </script>
 
 <template>
+  <Head title="Blogs" />
   <div>
     <div
       class="flex items-center gap-4 flex-wrap bg-overlay p-14 sm:p-16 before:bg-title before:bg-opacity-70"
@@ -86,9 +87,11 @@ const props = defineProps(["posts"]);
               <h5
                 class="mt-3 font-medium dark:text-white leading-[1.5] text-xl"
               >
-                <router-link to="/blog-details-v1" class="text-underline">{{
-                  item.title
-                }}</router-link>
+                <Link
+                  :href="route('post.show', item.slug)"
+                  class="text-underline"
+                  >{{ item.title }}</Link
+                >
               </h5>
             </div>
           </SwiperSlide>
@@ -140,11 +143,11 @@ const props = defineProps(["posts"]);
               </div>
             </div>
           </div>
-          <div class="text-center mt-7 md:mt-12">
+          <!-- <div class="text-center mt-7 md:mt-12">
             <router-link to="#" class="btn btn-outline" data-text="Load More">
               <span>Load More</span>
             </router-link>
-          </div>
+          </div> -->
         </div>
       </div>
     </div>

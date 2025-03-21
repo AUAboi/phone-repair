@@ -15,16 +15,20 @@ const toggle = ref(false);
 
 onMounted(() => {
   Aos.init();
+  window.scrollTo(0, 0);
+  window.addEventListener("scroll", handleScroll);
 });
 
 const page = usePage();
 
-const isUrl = (...urls) => {
-  let currentUrl = page.url.substring(1);
-  if (urls[0] === "") {
-    return currentUrl === "";
+const scroll = ref(false);
+
+const handleScroll = () => {
+  if (window.scrollY >= 50) {
+    scroll.value = true;
+  } else {
+    scroll.value = false;
   }
-  return urls.filter((url) => currentUrl.startsWith(url)).length;
 };
 </script>
 <template>
@@ -70,14 +74,11 @@ const isUrl = (...urls) => {
               <ul
                 class="sub-menu lg:absolute z-50 lg:top-full lg:left-0 lg:min-w-[220px] lg:invisible lg:transition-all lg:bg-white lg:dark:bg-title lg:py-[15px] lg:pr-[30px]"
               >
-                <li
-                  v-for="p in $page.props.navigation.categories"
-                  :class="current === '/' ? 'active' : ''"
-                >
+                <li v-for="c in $page.props.navigation.categories">
                   <Link
-                    :href="route('public.product.show', p.id)"
+                    :href="route('public.categoryProducts', c.slug)"
                     class="menu-item"
-                    >{{ p.name }}</Link
+                    >{{ c.name }}</Link
                   >
                 </li>
               </ul>
@@ -111,7 +112,7 @@ const isUrl = (...urls) => {
                 ['public.contact'].includes(route().current()) ? 'active' : ''
               "
             >
-              <Link :href="route('public.contact')">Contact</Link>
+              <Link :href="route('public.contact')">Contact Us</Link>
             </li>
             <li class="lg:hidden">
               <Link href="/login">Login</Link>

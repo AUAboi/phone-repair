@@ -11,15 +11,9 @@ const props = defineProps(["brands"]);
         data-aos="fade-up"
         data-aos-delay="100"
       >
-        <div>
-          <img :src="sofa" alt="" class="mx-auto w-14 sm:w-24" />
-        </div>
-        <h3 class="leading-none mt-4 md:mt-6 text-2xl md:text-3xl">Brands</h3>
-        <p class="mt-3">
-          Be the first to experience innovation with our latest arrivals. Stay
-          ahead of the curve and discover what's new in style, technology, and
-          more.
-        </p>
+        <h3 class="leading-none mt-4 md:mt-6 text-2xl md:text-3xl">
+          Book a Repair
+        </h3>
       </div>
       <div data-aos="fade-up" data-aos-delay="100">
         <div

@@ -21,9 +21,9 @@ const props = defineProps(["brands", "categories", "posts", "products"]);
     <Link
       :href="route('public.repairs')"
       class="btn btn-outline"
-      data-text="All Brands"
+      data-text="View All"
     >
-      <span>All Brands</span>
+      <span>View All</span>
     </Link>
   </div>
   <ChooseUsSection />
@@ -32,7 +32,7 @@ const props = defineProps(["brands", "categories", "posts", "products"]);
     <h4 class="text-6xl text-center font-bold">Check out our blogs</h4>
     <Link
       as="p"
-      :href="route('post.search')"
+      :href="route('public.posts')"
       class="text-center mx-auto underline cursor-pointer text-blue-400 text-xl"
       >Check out all</Link
     >
