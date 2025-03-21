@@ -128,7 +128,7 @@ const isUrl = (...urls) => {
     <slot />
   </main>
   <div class="fixed bottom-0 right-0 z-50 p-4">
-    <a href="#" target="_blank">
+    <a href="https://wa.link/w2nt7r" target="_blank">
       <MdiWhatsapp class="text-4xl text-green-600" />
     </a>
   </div>
