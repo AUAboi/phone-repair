@@ -51,7 +51,7 @@ class CheckoutController extends Controller
 
         $paymentIntent = PaymentIntent::create([
             'amount' => \Cart::getTotal() * 100,
-            'currency' => 'eur',
+            'currency' => 'gbp',
             'payment_method_types' => ['card', 'link', 'paypal', 'klarna'],
         ]);
 
