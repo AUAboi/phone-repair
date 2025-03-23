@@ -35,13 +35,8 @@ class OrderController extends Controller
         ]);
     }
 
-    public function store(Request $request, ChargePayment $chargePayment)
+    public function store(StoreOrderRequest $request)
     {
-        dd("COMING SOON");
-        $request->validate([
-            'paymentIntentId' => 'required',
-        ]);
-
         Stripe::setApiKey(env('STRIPE_SECRET'));
 
 
@@ -52,6 +47,8 @@ class OrderController extends Controller
         }
 
         $row = \Cart::getContent();
+
+        $cartContent = [];
 
         if ($row->count()) {
             foreach ($row as $key => $item) {
@@ -74,11 +71,11 @@ class OrderController extends Controller
         }
 
         if (!count($cartContent)) {
-            return redirect()->route('cart.index');
+            return redirect()->route('cart.index')->with('error', 'Your cart is empty.');
         }
 
         try {
-            $order = DB::transaction(function () use ($request, $cartContent,) {
+            $order = DB::transaction(function () use ($request, $cartContent) {
                 $order = Order::create([
                     'user_id' => auth()->id() ?? null,
                     'email' => $request->email,
@@ -88,14 +85,12 @@ class OrderController extends Controller
                     'zip_code' => $request->zip_code,
                     'city' => $request->city,
                     'address' => $request->address,
-                    'payment_method' => $request->payment_method,
                     'total' => \Cart::getTotal(),
                 ]);
 
                 $order->order_no = $this->generateNumber($order);
 
                 $order->save();
-
 
                 foreach ($cartContent as $key => $item) {
                     $order->products()->create(
@@ -121,26 +116,34 @@ class OrderController extends Controller
         try {
             $paymentIntent = PaymentIntent::retrieve($request->paymentIntentId);
 
-            //Make sure return url has payment intent id
+
+            // Update the payment intent with metadata
+            PaymentIntent::update($request->paymentIntentId, [
+                'metadata' => ['order_id' => $order->order_no, 'type' => 'order'],
+            ]);
+
+
+            //Make sure payment intent total matches order total
+            if ($paymentIntent->amount !== (int)$order->total * 100) {
+                return redirect()->route('order.show',  $order->order_no)->with('error', 'Payment failed. Please try again.');
+            }
+
+            // Make sure return url has payment intent id
             $paymentIntent->confirm([
                 'payment_method' => $request->paymentMethodId,
-                'return_url' => route('order.complete'),
+                'return_url' => route('order.show',  $order->order_no),
             ]);
 
             if ($paymentIntent->status === 'requires_action' && isset($paymentIntent->next_action->redirect_to_url)) {
                 return Inertia::location($paymentIntent->next_action->redirect_to_url->url); // Redirect to PayPal
             }
-
-            if ($paymentIntent->status === 'succeeded') {
-                $order->payment_status = "paid";
-                $order->save();
-                return redirect()->route('order.show',  $order->order_no)->with('success', 'Order successfull');
-            }
+        } catch (\Stripe\Exception\ApiErrorException $e) {
+            return redirect()->route('order.show',  $order->order_no)->with('error', 'Stripe error: ' . $e->getMessage());
         } catch (\Throwable $th) {
-            return back()->with('error', 'Payment failed. Please try again.');
+            return redirect()->route('order.show',  $order->order_no)->with('error', 'Payment failed. Please try again.');
         }
 
-        return back()->with('error', 'Payment failed. Please try again.');
+        return redirect()->route('order.show',  $order->order_no);
     }
 
     public function show(Order $order)

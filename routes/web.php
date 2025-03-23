@@ -70,6 +70,9 @@ Route::get('/tracking/appointment/{appointment:appointment_number}', [Appointmen
 Route::get('/tracking/order', [PublicController::class, 'orderTracking'])->name('public.order.tracking');
 Route::get('/tracking/appointment', [PublicController::class, 'appointmentTracking'])->name('public.appointment.tracking');
 
+Route::get('/payment/appointment/{appointment:appointment_number}', [AppointmentController::class, 'paymentPage'])->name('appointment.paymentPage');
+Route::post('/payment/appointment/{appointment:appointment_number}', [AppointmentController::class, 'paymentHandle'])->name('appointment.paymentHandle');
+
 Route::post('/order/place', [OrderController::class, 'store'])->name('order.store');
 
 Route::get('/order/complete', function (Request $request) {
@@ -111,6 +114,8 @@ Route::get('/sym', function () {
     Artisan::call('storage:link');
 });
 
+
+Route::stripeWebhooks('/stripe/webhook')->name('stripe.webhook');
 
 require __DIR__ . '/admin.php';
 require __DIR__ . '/auth.php';

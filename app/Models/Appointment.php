@@ -19,6 +19,8 @@ class Appointment extends Model
         'device_repair_id',
         'device_repair_title',
         'device_repair_price',
+        'payment_status',
+        'payment_method',
         'device_name',
         'first_name',
         'last_name',
@@ -37,15 +39,15 @@ class Appointment extends Model
     protected function phone(): Attribute
     {
         return Attribute::make(
-            get: fn ($value) => phone($value)->formatForCountry(config('constants.phone_number')),
+            get: fn($value) => phone($value)->formatForCountry(config('constants.phone_number')),
         );
     }
 
     protected function total(): Attribute
     {
         return Attribute::make(
-            get: fn ($price) => $price / 100,
-            set: fn ($price) => $price * 100,
+            get: fn($price) => $price / 100,
+            set: fn($price) => $price * 100,
         );
     }
 

@@ -11,12 +11,10 @@ const page = usePage();
     last_name: page.props.auth.user?.last_name,
     phone: page.props.auth.user?.phone,
     email: page.props.auth.user?.email,
-    payment_method: "",
     zip_code: null,
     address: null,
     message: null,
     city: null,
-    card: "",
     paymentIntentId: "",
     paymentMethodId: "",
   });

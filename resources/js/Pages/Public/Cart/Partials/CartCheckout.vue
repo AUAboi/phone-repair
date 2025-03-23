@@ -1,14 +1,22 @@
 <script setup lang="ts">
 import { ref, defineProps, useTemplateRef, onMounted, watchEffect } from "vue";
-import { Link, useForm, usePage } from "@inertiajs/vue3";
+import { Link } from "@inertiajs/vue3";
 import { StripeElements, StripeElement } from "vue-stripe-js";
 import { useCheckoutStore } from "@/store/checkoutStore";
 import { loadStripe, Stripe } from "@stripe/stripe-js";
+import { storeToRefs } from "pinia";
+import useSweetAlert from "@/Composables/useSweetAlert";
 
 const props = defineProps<{
   clientSecret: string;
   stripeKey: string;
 }>();
+
+const { alertError } = useSweetAlert();
+
+const checkoutStore = useCheckoutStore();
+
+const { form } = storeToRefs(checkoutStore);
 
 const stripeInstance = ref<Stripe | null>(null);
 
@@ -24,11 +32,6 @@ const elementsOptions = ref({
 const stripeOptions = ref({});
 const paymentElementOptions = ref({});
 
-const form = useForm({
-  paymentIntentId: "",
-  paymentMethodId: "",
-});
-
 onMounted(async () => {
   stripeInstance.value = await loadStripe(props.stripeKey);
 
@@ -36,7 +39,13 @@ onMounted(async () => {
   stripeLoaded.value = true;
 });
 
+const terms = ref();
+
 async function handleSubmit() {
+  if (!terms.value) {
+    alertError({ title: "Terms and conditions not agreed" });
+    return;
+  }
   if (!elementsComponent.value) return;
 
   const { instance } = elementsComponent.value;
@@ -57,10 +66,10 @@ async function handleSubmit() {
     return;
   }
 
-  form.paymentMethodId = paymentMethod.id;
-  form.paymentIntentId = paymentIntent.id;
+  form.value.paymentMethodId = paymentMethod.id;
+  form.value.paymentIntentId = paymentIntent.id;
 
-  form.post(route("order.store"));
+  form.value.post(route("order.store"));
 }
 </script>
 
@@ -85,7 +94,12 @@ async function handleSubmit() {
 
   <div class="mt-6 sm:mt-8 md:mt-10">
     <label class="flex items-center gap-2 iam-agree">
-      <input class="appearance-none hidden" type="checkbox" name="categories" />
+      <input
+        class="appearance-none hidden"
+        type="checkbox"
+        name="terms"
+        v-model="terms"
+      />
       <span
         class="w-6 h-6 rounded-[5px] border-2 border-title dark:border-white flex items-center justify-center duration-300"
       >
@@ -123,6 +137,7 @@ async function handleSubmit() {
       @click.prevent="handleSubmit"
       class="btn btn-theme-solid"
       data-text="Place to Order"
+      :disabled="form.processing"
     >
       <span>Place to Order</span>
     </button>

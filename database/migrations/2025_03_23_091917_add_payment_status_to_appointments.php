@@ -8,24 +8,22 @@ return new class extends Migration
 {
     /**
      * Run the migrations.
-     *
-     * @return void
      */
-    public function up()
+    public function up(): void
     {
-        Schema::table('orders', function (Blueprint $table) {
+        Schema::table('appointments', function (Blueprint $table) {
+            $table->enum('payment_status', ['pending', 'paid', 'cancelled'])->default('pending');
             $table->string('payment_method')->nullable();
         });
     }
 
     /**
      * Reverse the migrations.
-     *
-     * @return void
      */
-    public function down()
+    public function down(): void
     {
-        Schema::table('orders', function (Blueprint $table) {
+        Schema::table('appointments', function (Blueprint $table) {
+            $table->dropColumn('payment_status');
             $table->dropColumn('payment_method');
         });
     }

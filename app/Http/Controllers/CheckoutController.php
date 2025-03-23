@@ -51,7 +51,7 @@ class CheckoutController extends Controller
         $cartTotal = \Cart::getTotal() * 100; // Convert to cents for Stripe
 
         // Retrieve existing PaymentIntent
-        $paymentIntentId = Session::get('payment_intent_id');
+        $paymentIntentId = Session::get('cart_payment_intent_id');
         $paymentIntent = null;
 
         if ($paymentIntentId) {
@@ -61,7 +61,7 @@ class CheckoutController extends Controller
 
                 // If the PaymentIntent exists and is still modifiable, update it
                 if ($paymentIntent->status === 'requires_payment_method' && $paymentIntent->amount !== (int)$cartTotal) {
-                    $paymentIntent->update($paymentIntent->id, ['amount' => $cartTotal]);
+                    PaymentIntent::update($paymentIntent->id, ['amount' => $cartTotal]);
                 }
             } catch (\Exception $e) {
                 // If PaymentIntent retrieval fails, create a new one
@@ -78,7 +78,7 @@ class CheckoutController extends Controller
             ]);
 
             // Store new PaymentIntent ID
-            Session::put('payment_intent_id', $paymentIntent->id);
+            Session::put('cart_payment_intent_id', $paymentIntent->id);
         }
 
         return Inertia::render('Public/Checkout/Index', [

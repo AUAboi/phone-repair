@@ -40,7 +40,7 @@ const props = defineProps(["products"]);
             class="group"
           >
             <div class="relative overflow-hidden">
-              <Link :href="`/product-details/${item.id}`">
+              <Link :href="route('public.product.show', item.id)">
                 <img
                   class="w-full transform group-hover:scale-110 duration-300"
                   :src="item.image"

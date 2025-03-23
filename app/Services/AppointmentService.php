@@ -15,10 +15,10 @@ use Illuminate\Support\Facades\Mail;
 
 class AppointmentService
 {
-  public function createAppointment(Device $device, array $data, User $user = null)
+  public function createAppointment(Device $device, array $data, ?User $user = null)
   {
 
-    DB::transaction(function () use ($device, $user, $data) {
+    $appointment = DB::transaction(function () use ($device, $user, $data) {
       $time  =  $data['appointment_time']['hours'] . ":" . $data['appointment_time']['minutes'];
       $timestamp = strtotime($time);
 
@@ -50,6 +50,8 @@ class AppointmentService
 
       return $appointment;
     });
+
+    return $appointment;
   }
 
   public function createProductAppointment(Product $product, array $data, User $user = null)

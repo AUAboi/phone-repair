@@ -31,8 +31,6 @@ class StoreOrderRequest extends FormRequest
             'zip_code' => 'required|string',
             'city' => 'required|string',
             'address' => 'required|string',
-            'payment_method' => 'required|in:cod,card',
-            'card.token' => 'required_if:payment_method,card',
         ];
     }
 
@@ -43,8 +41,6 @@ class StoreOrderRequest extends FormRequest
     {
         return [
             'phone.phone' => "Phone number must be a valid Pakistan number",
-            'payment_method.in' => 'Must Either be Cash on Delivery or Card',
-            'card.token.required_if' => 'You must enter card for selected payment method'
         ];
     }
 }

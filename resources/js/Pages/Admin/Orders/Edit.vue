@@ -59,7 +59,7 @@ const update = () => {
             <option value="delivered">Delivered</option>
             <option value="cancelled">Cancelled</option>
           </FormSelect>
-          <div class="flex items-center mb-4 gap-4">
+          <div class="flex items-center mb-4 gap-4 hidden">
             <label for="send-email">Send email?</label>
             <input id="send-email" v-model="form.send_email" type="checkbox" />
           </div>

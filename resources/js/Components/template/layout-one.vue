@@ -13,15 +13,17 @@
         <div
           class="absolute z-10 top-[50%] right-3 transform -translate-y-[40%] opacity-0 duration-300 transition-all group-hover:-translate-y-1/2 group-hover:opacity-100 flex flex-col items-end gap-3"
         >
-          <router-link
-            to="#"
+          <Link
+            method="post"
+            as="button"
+            :href="route('cart.add', { id: item.id })"
             class="bg-white dark:bg-title dark:text-white bg-opacity-80 flex items-center justify-center gap-2 px-4 py-[10px] text-base leading-none text-title rounded-[40px] h-14 overflow-hidden new-product-icon"
           >
             <MdiCartOutline class="dark:text-white text-[24px]" /><span
               class="mt-1"
               >Add to Cart</span
             >
-          </router-link>
+          </Link>
           <Link
             as="button"
             :href="route('public.product.show', item.id)"

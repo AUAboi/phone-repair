@@ -63,10 +63,6 @@ const props = defineProps(["categories"]);
                 class="absolute bottom-7 left-0 px-5 transform w-full flex justify-start"
               >
                 <div class="p-[15px] bg-white dark:bg-title w-auto">
-                  <span
-                    class="md:text-xl text-primary font-medium leading-none"
-                    >{{ item.products.length }}</span
-                  >
                   <h4
                     class="text-xl md:text-2xl mt-[10px] font-semibold leading-[1.5]"
                   >

@@ -25,7 +25,8 @@ class Order extends Model
         'last_name',
         'total',
         'status',
-        'order_status'
+        'order_status',
+        'payment_status',
     ];
 
     /**
@@ -36,11 +37,11 @@ class Order extends Model
         return 'order_no';
     }
 
-    protected function price(): Attribute
+    protected function total(): Attribute
     {
         return Attribute::make(
-            get: fn ($total) => $total / 100,
-            set: fn ($total) => $total * 100,
+            get: fn($total) => $total / 100,
+            set: fn($total) => $total * 100,
         );
     }
 

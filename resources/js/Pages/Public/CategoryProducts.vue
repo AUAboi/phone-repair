@@ -4,7 +4,7 @@ import { onMounted } from "vue";
 import bg from "@/assets/img/shortcode/breadcumb.jpg";
 import Aos from "aos";
 import LayoutOne from "@/Components/template/layout-one.vue";
-import { Link } from "@inertiajs/vue3";
+import { Head, Link } from "@inertiajs/vue3";
 
 const props = defineProps({
   category: {
@@ -18,6 +18,7 @@ onMounted(() => {
 </script>
 
 <template>
+  <Head :title="`${category.name} Products`" />
   <div>
     <div
       class="flex items-center gap-4 flex-wrap bg-overlay p-14 sm:p-16 before:bg-title before:bg-opacity-70"

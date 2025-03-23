@@ -4,6 +4,8 @@ import CartCheckout from "@/Pages/Public/Cart/Partials/CartCheckout.vue";
 import bg from "@/assets/img/shortcode/breadcumb.jpg";
 import { useCheckoutStore } from "@/store/checkoutStore";
 import { storeToRefs } from "pinia";
+import { ref } from "vue";
+import InputError from "@/Components/InputError.vue";
 
 const checkoutStore = useCheckoutStore();
 
@@ -16,6 +18,8 @@ const props = defineProps([
   "clientSecret",
   "stripeKey",
 ]);
+
+const open = ref(false);
 </script>
 
 <template>
@@ -67,13 +71,13 @@ const props = defineProps([
               type="text"
               placeholder="Coupon code"
             />
-            <router-link
+            <span
               to="#"
               class="btn btn-sm-px btn-theme-solid"
               data-text="Apply coupon"
             >
               <span>Apply coupon</span>
-            </router-link>
+            </span>
           </div>
 
           <h4
@@ -93,6 +97,7 @@ const props = defineProps([
                 v-model="form.first_name"
                 placeholder="Enter your first name"
               />
+              <InputError :message="form.errors.first_name" />
             </div>
             <div>
               <label
@@ -105,6 +110,7 @@ const props = defineProps([
                 v-model="form.last_name"
                 placeholder="Enter your last name"
               />
+              <InputError :message="form.errors.last_name" />
             </div>
           </div>
 
@@ -120,6 +126,7 @@ const props = defineProps([
                 v-model="form.email"
                 placeholder="Enter your email address"
               />
+              <InputError :message="form.errors.email" />
             </div>
 
             <div>
@@ -148,6 +155,7 @@ const props = defineProps([
                 placeholder="City"
                 v-model="form.city"
               />
+              <InputError :message="form.errors.city" />
             </div>
 
             <div class="mt-5">
@@ -161,6 +169,7 @@ const props = defineProps([
                 placeholder="1217"
                 v-model="form.zip_code"
               />
+              <InputError :message="form.errors.zip_code" />
             </div>
           </div>
           <div class="mt-5">
@@ -170,10 +179,11 @@ const props = defineProps([
             </label>
             <input
               class="w-full h-12 md:h-14 bg-white dark:bg-dark-secondary border border-[#E3E5E6] text-title dark:text-white focus:border-primary p-4 outline-none duration-300"
-              type="number"
+              type="text"
               v-model="form.address"
               placeholder="Your full address"
             />
+            <InputError :message="form.errors.address" />
           </div>
           <div class="mt-5">
             <label
@@ -187,6 +197,7 @@ const props = defineProps([
               placeholder="Type your message"
               v-model="form.message"
             ></textarea>
+            <InputError :message="form.errors.message" />
           </div>
         </div>
 
@@ -215,7 +226,9 @@ const props = defineProps([
                       {{ item.associatedModel.category }}
                     </h6>
                     <h5 class="font-semibold leading-none mt-2">
-                      <router-link to="#">{{ item.name }}</router-link>
+                      <Link :href="route('public.product.show', item.id)">{{
+                        item.name
+                      }}</Link>
                     </h5>
                   </div>
                 </div>

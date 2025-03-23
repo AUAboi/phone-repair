@@ -111,10 +111,12 @@ onMounted(() => {
         </div>
       </div>
     </div>
+
     <div class="mt-8 text-center">
       <button
         class="btn-action mx-auto md:mx-0 px-9 py-1 flex-grow flex items-center bg-red-600 text-white before:bg-black text-xl font-bold"
         @click.prevent="stepForm.submit"
+        :disabled="stepForm.form.processing"
       >
         Book
         <IconArrowForward />

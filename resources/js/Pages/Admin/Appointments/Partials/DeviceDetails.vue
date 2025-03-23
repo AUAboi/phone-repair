@@ -10,7 +10,7 @@ const props = defineProps({
 
 <template>
   <h2 class="text-lg font-medium text-gray-900 dark:text-gray-100">
-    Booking Details
+    Booking Details - Payment {{ appointment.payment_status }}
   </h2>
 
   <p class="mt-1 text-sm text-gray-600 dark:text-gray-400">
@@ -83,6 +83,14 @@ const props = defineProps({
       </span>
     </div>
 
+    <div class="flex flex-col sm:flex-row justify-between">
+      <span class="text-lg font-medium text-gray-900 dark:text-gray-100"
+        >Payment Method :
+      </span>
+      <span class="mt-1 text-gray-600 dark:text-gray-400">
+        {{ appointment.payment_method ?? "No Paid" }}
+      </span>
+    </div>
     <div class="flex flex-col sm:flex-row justify-between">
       <span class="text-lg font-medium text-gray-900 dark:text-gray-100"
         >Total :

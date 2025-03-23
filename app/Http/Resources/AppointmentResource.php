@@ -35,7 +35,9 @@ class AppointmentResource extends JsonResource
             'device_name' => $this->device_name,
             'user' => new UserResource($this->whenLoaded('user')),
             'device' => new DeviceResource($this->whenLoaded('device')),
-            'device_repair' => $this->whenLoaded('deviceRepair')
+            'device_repair' => $this->whenLoaded('deviceRepair'),
+            'payment_status' => $this->payment_status,
+            'payment_method' => $this->payment_method
         ];
     }
 }
