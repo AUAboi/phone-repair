@@ -129,13 +129,14 @@ async function handleSubmit() {
     <Link
       :href="route('cart.index')"
       as="button"
-      class="btn btn-outline"
+      class="btn btn-outline disabled:opacity-40 disabled:pointer-events-none"
       data-text="Back to Cart"
+      :disabled="form.processing"
       ><span>Back to Cart</span></Link
     >
     <button
       @click.prevent="handleSubmit"
-      class="btn btn-theme-solid"
+      class="btn btn-theme-solid disabled:opacity-40 disabled:pointer-events-none"
       data-text="Place to Order"
       :disabled="form.processing"
     >
