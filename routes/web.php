@@ -120,8 +120,7 @@ Route::get('/sym', function () {
     Artisan::call('storage:link');
 });
 
-
-Route::stripeWebhooks('/stripe/webhook')->name('stripe.webhook');
+Route::post('/stripe/webhook', '\Spatie\StripeWebhooks\StripeWebhooksController')->name('stripe.webhook');
 
 require __DIR__ . '/admin.php';
 require __DIR__ . '/auth.php';
