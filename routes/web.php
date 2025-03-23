@@ -107,7 +107,7 @@ Route::middleware(['auth'])->group(function () {
 });
 
 Route::get('/app/migrate', function () {
-    Artisan::call('migrate:fresh --seed --force');
+    Artisan::call('migrate:fresh', ['--force' => true, '--seed' => true]);
     return 'Database migrated and seeded successfully!';
 });
 
