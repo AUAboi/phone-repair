@@ -107,8 +107,14 @@ Route::middleware(['auth'])->group(function () {
 });
 
 Route::get('/app/migrate', function () {
-    Artisan::call('migrate');
+    if (auth()->user()->role !== 'admin') {
+        abort(403, 'Unauthorized action.');
+    }
+
+    Artisan::call('migrate:fresh --seed --force');
+    return 'Database migrated and seeded successfully!';
 });
+
 
 Route::get('/sym', function () {
     Artisan::call('storage:link');
