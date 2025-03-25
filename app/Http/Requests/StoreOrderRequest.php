@@ -27,7 +27,7 @@ class StoreOrderRequest extends FormRequest
             'first_name' => 'required|string|max:255',
             'last_name' => 'required|string|max:255',
             'email' => 'required|email',
-            'phone' => 'required|phone:UK',
+            'phone' => 'required|phone:' . config('constants.phone_number'),
             'zip_code' => 'required|string',
             'city' => 'required|string',
             'address' => 'required|string',
@@ -40,7 +40,7 @@ class StoreOrderRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'phone.phone' => "Phone number must be a valid Pakistan number",
+            'phone.phone' => "Phone number must be valid.",
         ];
     }
 }

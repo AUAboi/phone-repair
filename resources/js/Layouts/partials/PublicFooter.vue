@@ -105,7 +105,7 @@ const footerLink4 = [
           >
             <img
               class="sm:mx-auto w-[150px] sm:w-auto max-w-[250px]"
-              src="/images/red-logo.png"
+              src="/images/logo.png"
               alt="logo"
             />
             <a

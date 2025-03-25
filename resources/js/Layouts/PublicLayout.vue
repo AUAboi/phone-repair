@@ -42,7 +42,7 @@ const handleScroll = () => {
       >
         <Link :href="route('public.home')" class="cursor-pointer block">
           <img
-            src="/images/red-logo.png"
+            src="/images/logo.png"
             alt=""
             class="block w-[120px] sm:w-[200px]"
           />
