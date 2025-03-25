@@ -24,7 +24,7 @@ import { features } from "@/data/data";
               <img :src="like" class="w-14 sm:w-24" alt="" />
             </div>
             <h3 class="leading-none mt-4 md:mt-6 text-2xl md:text-3xl">
-              Why you Choose Us
+              Why Choose Us
             </h3>
             <p class="mt-3">
               Choose us for unparalleled quality, exceptional service, and a

@@ -141,7 +141,7 @@ onMounted(() => {
           <img :src="like" class="mx-auto size-16" alt="" />
         </div>
         <h3 class="font-medium leading-none mt-4 md:mt-6 text-2xl md:text-3xl">
-          Why You Choose Us
+          Why Choose Us
         </h3>
         <p class="mt-3">
           Choose us for exceptional quality, We prioritize your satisfaction by

@@ -8,8 +8,8 @@ export const features = [
   {
     id: 1,
     image: fea1,
-    title: "Free Shipping",
-    desc: "Enjoy free shipping on all orders, making your shopping experience even more convenient. Get your favorite products delivered.",
+    title: " Free Diagnostics",
+    desc: "Discover what's wrong without spending a penny! Our expert team provides a detailed analysis to get you back on track quickly and efficiently.",
   },
   {
     id: 2,
