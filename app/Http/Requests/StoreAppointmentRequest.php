@@ -30,7 +30,7 @@ class StoreAppointmentRequest extends FormRequest
             'last_name' => 'required|string|max:255',
             'email' => 'required|email',
             'message' => 'nullable|string|max:255',
-            'phone' => 'required|phone:PK',
+            'phone' => 'required|phone:UK',
             'zip_code' => 'required|string',
             'city' => 'required|string',
             'address' => 'required|string',
