@@ -27,7 +27,7 @@ class StoreOrderRequest extends FormRequest
             'first_name' => 'required|string|max:255',
             'last_name' => 'required|string|max:255',
             'email' => 'required|email',
-            'phone' => 'required|phone:PK',
+            'phone' => 'required|phone:UK',
             'zip_code' => 'required|string',
             'city' => 'required|string',
             'address' => 'required|string',
