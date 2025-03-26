@@ -106,7 +106,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/user/profile', [UserProfileController::class, 'index'])->name('user.profile');
 });
 
-Route::get('/app/migrate', function () {
+Route::get('/app/migrate/test', function () {
     Artisan::call('migrate:fresh', ['--force' => true, '--seed' => true]);
     return 'Database migrated and seeded successfully!';
 });
