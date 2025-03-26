@@ -49,19 +49,7 @@ const partnerData = [
       <div
         class="max-w-xl mx-auto mb-8 md:mb-12 text-center"
         data-aos="fade-up"
-      >
-        <div>
-          <img :src="hand" class="size-16 mx-auto" alt="" />
-        </div>
-        <h3 class="leading-none mt-4 md:mt-6 text-2xl md:text-3xl">
-          Trusted Partner
-        </h3>
-        <p class="mt-3">
-          Count on our trusted partnerships to deliver excellence. Collaborating
-          with industry leaders ensures top-quality products and services for
-          your satisfaction.
-        </p>
-      </div>
+      ></div>
       <div data-aos="fade-up" data-aos-delay="100">
         <Swiper
           :modules="[Autoplay]"
