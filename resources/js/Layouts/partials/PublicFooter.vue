@@ -115,6 +115,12 @@ const footerLink4 = [
             >
               Fonemart, 16 The Arcade, Bognor Regis PO21 1LH, United Kingdom
             </a>
+            <p class="text-white">
+              Contact at:
+              <a href="mailto:sales@fonemartonline.com"
+                >sales@fonemartonline.com</a
+              >
+            </p>
             <div class="flex items-center sm:justify-center gap-4 mt-6">
               <a
                 href="#"

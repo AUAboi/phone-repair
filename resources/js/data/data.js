@@ -8,7 +8,7 @@ export const features = [
   {
     id: 1,
     image: fea1,
-    title: " Free Diagnostics",
+    title: "Free Diagnostics",
     desc: "Discover what's wrong without spending a penny! Our expert team provides a detailed analysis to get you back on track quickly and efficiently.",
   },
   {

@@ -37,7 +37,7 @@ createInertiaApp({
   },
   progress: {
     showSpinner: true,
-    color: "#dc2626",
+    color: "#bb976d",
   },
   setup({ el, App, props, plugin }) {
     return createApp({ render: () => h(App, props) })
