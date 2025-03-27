@@ -92,7 +92,10 @@ const open = ref(false);
                 >First Name</label
               >
               <input
-                class="w-full h-12 md:h-14 bg-white dark:bg-dark-secondary border border-[#E3E5E6] text-title dark:text-white focus:border-primary p-4 outline-none duration-300"
+                class="w-full h-12 md:h-14 bg-white dark:bg-dark-secondary border text-title dark:text-white focus:border-primary p-4 outline-none duration-300"
+                :class="
+                  form.errors.first_name ? 'border-red-500' : 'border-[#E3E5E6]'
+                "
                 type="text"
                 v-model="form.first_name"
                 placeholder="Enter your first name"
@@ -105,9 +108,12 @@ const open = ref(false);
                 >Last Name</label
               >
               <input
-                class="w-full h-12 md:h-14 bg-white dark:bg-dark-secondary border border-[#E3E5E6] text-title dark:text-white focus:border-primary p-4 outline-none duration-300"
+                class="w-full h-12 md:h-14 bg-white dark:bg-dark-secondary border text-title dark:text-white focus:border-primary p-4 outline-none duration-300"
                 type="text"
                 v-model="form.last_name"
+                :class="
+                  form.errors.last_name ? 'border-red-500' : 'border-[#E3E5E6]'
+                "
                 placeholder="Enter your last name"
               />
               <InputError :message="form.errors.last_name" />
@@ -121,9 +127,12 @@ const open = ref(false);
                 >Email</label
               >
               <input
-                class="w-full h-12 md:h-14 bg-white dark:bg-dark-secondary border border-[#E3E5E6] text-title dark:text-white focus:border-primary p-4 outline-none duration-300"
+                class="w-full h-12 md:h-14 bg-white dark:bg-dark-secondary border text-title dark:text-white focus:border-primary p-4 outline-none duration-300"
                 type="text"
                 v-model="form.email"
+                :class="
+                  form.errors.email ? 'border-red-500' : 'border-[#E3E5E6]'
+                "
                 placeholder="Enter your email address"
               />
               <InputError :message="form.errors.email" />
@@ -135,8 +144,11 @@ const open = ref(false);
                 >Phone No.</label
               >
               <input
-                class="w-full h-12 md:h-14 bg-white dark:bg-dark-secondary border border-[#E3E5E6] text-title dark:text-white focus:border-primary p-4 outline-none duration-300"
+                class="w-full h-12 md:h-14 bg-white dark:bg-dark-secondary border text-title dark:text-white focus:border-primary p-4 outline-none duration-300"
                 type="number"
+                :class="
+                  form.errors.phone ? 'border-red-500' : 'border-[#E3E5E6]'
+                "
                 placeholder="Type your phone number"
                 v-model="form.phone"
               />
@@ -150,10 +162,13 @@ const open = ref(false);
                 >City</label
               >
               <input
-                class="w-full h-12 md:h-14 bg-white dark:bg-dark-secondary border border-[#E3E5E6] text-title dark:text-white focus:border-primary p-4 outline-none duration-300"
+                class="w-full h-12 md:h-14 bg-white dark:bg-dark-secondary border text-title dark:text-white focus:border-primary p-4 outline-none duration-300"
                 type="text"
                 placeholder="City"
                 v-model="form.city"
+                :class="
+                  form.errors.city ? 'border-red-500' : 'border-[#E3E5E6]'
+                "
               />
               <InputError :message="form.errors.city" />
             </div>
@@ -164,10 +179,13 @@ const open = ref(false);
                 >Post Code</label
               >
               <input
-                class="w-full h-12 md:h-14 bg-white dark:bg-dark-secondary border border-[#E3E5E6] text-title dark:text-white focus:border-primary p-4 outline-none duration-300"
+                class="w-full h-12 md:h-14 bg-white dark:bg-dark-secondary border text-title dark:text-white focus:border-primary p-4 outline-none duration-300"
                 type="text"
                 placeholder="1217"
                 v-model="form.zip_code"
+                :class="
+                  form.errors.zip_code ? 'border-red-500' : 'border-[#E3E5E6]'
+                "
               />
               <InputError :message="form.errors.zip_code" />
             </div>
@@ -178,10 +196,13 @@ const open = ref(false);
               >Address
             </label>
             <input
-              class="w-full h-12 md:h-14 bg-white dark:bg-dark-secondary border border-[#E3E5E6] text-title dark:text-white focus:border-primary p-4 outline-none duration-300"
+              class="w-full h-12 md:h-14 bg-white dark:bg-dark-secondary border text-title dark:text-white focus:border-primary p-4 outline-none duration-300"
               type="text"
               v-model="form.address"
               placeholder="Your full address"
+              :class="
+                form.errors.address ? 'border-red-500' : 'border-[#E3E5E6]'
+              "
             />
             <InputError :message="form.errors.address" />
           </div>
@@ -192,10 +213,13 @@ const open = ref(false);
               Additional Text
             </label>
             <textarea
-              class="w-full h-[120px] bg-white dark:bg-dark-secondary border border-[#E3E5E6] text-title dark:text-white focus:border-primary p-4 outline-none duration-300"
+              class="w-full h-[120px] bg-white dark:bg-dark-secondary border text-title dark:text-white focus:border-primary p-4 outline-none duration-300"
               name="Message"
               placeholder="Type your message"
               v-model="form.message"
+              :class="
+                form.errors.message ? 'border-red-500' : 'border-[#E3E5E6]'
+              "
             ></textarea>
             <InputError :message="form.errors.message" />
           </div>

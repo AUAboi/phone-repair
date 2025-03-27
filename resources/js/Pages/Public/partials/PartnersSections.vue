@@ -4,14 +4,14 @@ import { Swiper, SwiperSlide } from "swiper/vue";
 import { Autoplay } from "swiper/modules";
 import "swiper/swiper-bundle.css";
 import partner1 from "@/assets/img/brands/Apple-Logo.png";
-import partner2 from "@/assets/img/brands/Samsung_Logo.png";
+import partner2 from "@/assets/img/brands/Samsung_logo.png";
 import partner3 from "@/assets/img/brands/Motorola-Symbol.png";
 import partner4 from "@/assets/img/brands/LG_symbol.svg.png";
 import partner5 from "@/assets/img/brands/Asus-Logo-1995.png";
 import partner6 from "@/assets/img/brands/Dell_Logo.svg.png";
 import partner8 from "@/assets/img/brands/Xiaomi_logo_(2021-).svg.png";
 import partner9 from "@/assets/img/brands/nokia-refreshed-logo-1_1.jpg";
-import partner10 from "@/assets/img/brands/Huawei-Logo.png";
+import partner10 from "@/assets/img/brands/Huawei-logo.png";
 
 const partnerData = [
   {

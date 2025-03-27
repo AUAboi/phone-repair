@@ -30,10 +30,17 @@ onClickOutside(cartRef, () => (cartList.value = false), {
   <div class="flex items-center gap-4 sm:gap-6">
     <Link
       v-if="!$page.props.auth.user"
+      :href="route('register')"
+      class="text-lg leading-none text-title dark:text-white transition-all duration-300 hover:text-primary hidden lg:block"
+      >Register</Link
+    >
+    <Link
+      v-if="!$page.props.auth.user"
       :href="route('login')"
       class="text-lg leading-none text-title dark:text-white transition-all duration-300 hover:text-primary hidden lg:block"
       >Login</Link
     >
+
     <Link
       v-else
       :href="route('user.profile')"

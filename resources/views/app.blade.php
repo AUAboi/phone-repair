@@ -18,6 +18,7 @@
 
 <body class=" antialiased">
     @inertia
+    @include('cookie-consent::index')
 </body>
 
 </html>
