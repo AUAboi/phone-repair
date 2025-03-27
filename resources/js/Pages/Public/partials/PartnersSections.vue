@@ -4,7 +4,7 @@ import { Swiper, SwiperSlide } from "swiper/vue";
 import { Autoplay } from "swiper/modules";
 import "swiper/swiper-bundle.css";
 import partner1 from "@/assets/img/brands/Apple-Logo.png";
-import partner2 from "@/assets/img/brands/Samsung_logo.png";
+import partner2 from "@/assets/img/brands/Samsung_Logo.png";
 import partner3 from "@/assets/img/brands/Motorola-Symbol.png";
 import partner4 from "@/assets/img/brands/LG_symbol.svg.png";
 import partner5 from "@/assets/img/brands/Asus-Logo-1995.png";
