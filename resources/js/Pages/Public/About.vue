@@ -105,25 +105,27 @@ onMounted(() => {
             <h3
               class="font-medium leading-none mt-4 md:mt-6 text-2xl md:text-3xl"
             >
-              Our Story Journey
+              About Us
             </h3>
             <p class="mt-3 text-base sm:text-lg">
-              At FurnXar, our story is one of passion, craftsmanship, and a
-              relentless pursuit of excellence. It all began with a vision to
-              redefine the way people experience furniture – not just as
-              functional pieces, but as expressions of personal style and
-              comfort. Driven by a love for design and a commitment to quality,
-              we embarked on a journey to create furniture that transcends
-              trends and stands the test of time. Each piece in our collection
-              tells a story of meticulous attention to detail, from the
-              selection of premium materials to the precision of craftsmanship.
+              Since our establishment in 2015, we have been the trusted mobile
+              phone shop in town, offering a wide range of repair services for
+              mobile phones, tablets, iPads, and laptops. Our team excels in
+              data recovery and specializes in mobile phone back glass
+              replacements using the latest laser technology—an exclusive
+              service in our area.
             </p>
             <p class="mt-3 text-base sm:text-lg">
-              Over the years, our dedication to innovation and customer
-              satisfaction has fueled our growth and earned us a reputation for
-              excellence. From humble beginnings, we've grown into a trusted
-              name in the industry, known for delivering furniture that exceeds
-              expectations.
+              We also offer expert laptop and computer repairs, restorations,
+              and installations to ensure your devices function seamlessly. In
+              addition to repairs, we sell both new and pre-owned mobile phones,
+              tablets, iPads, and laptops—all backed with a guarantee for your
+              peace of mind.
+            </p>
+            <p class="mt-3 text-base sm:text-lg">
+              Looking to sell your device? We buy mobile phones and laptops as
+              well, providing reliable and hassle-free transactions. Visit us
+              for unparalleled service and expertise.
             </p>
           </div>
         </div>
