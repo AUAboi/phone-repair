@@ -8,6 +8,7 @@ import ProductCategorySection from "./partials/ProductCategorySection.vue";
 import DeviceSection from "./partials/DeviceSection.vue";
 import ChooseUsSection from "./partials/ChooseUsSection.vue";
 import PartnersSections from "./partials/PartnersSections.vue";
+import GAutoComplete from "@/Components/GAutoComplete.vue";
 
 const props = defineProps(["brands", "categories", "posts", "products"]);
 </script>

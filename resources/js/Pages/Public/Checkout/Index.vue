@@ -6,6 +6,7 @@ import { useCheckoutStore } from "@/store/checkoutStore";
 import { storeToRefs } from "pinia";
 import { ref } from "vue";
 import InputError from "@/Components/InputError.vue";
+import GAutoComplete from "@/Components/GAutoComplete.vue";
 
 const checkoutStore = useCheckoutStore();
 
@@ -190,6 +191,8 @@ const open = ref(false);
               <InputError :message="form.errors.zip_code" />
             </div>
           </div>
+          <GAutoComplete />
+
           <div class="mt-5">
             <label
               class="text-base md:text-lg text-title dark:text-white leading-none mb-2 sm:mb-3 block"
