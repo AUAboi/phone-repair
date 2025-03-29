@@ -36,8 +36,14 @@ onMounted(async () => {
 </script>
 
 <template>
-  <div>
-    <label>Address:</label>
-    <div ref="placeAutocompleteRef"></div>
+  <div class="mt-5">
+    <label
+      class="text-base md:text-lg text-title dark:text-white leading-none mb-2 sm:mb-3 block"
+    >
+      Address
+    </label>
+
+    <!-- Wrapper where we will append the Google Places Autocomplete -->
+    <div ref="placeAutocompleteRef" class="relative"></div>
   </div>
 </template>
