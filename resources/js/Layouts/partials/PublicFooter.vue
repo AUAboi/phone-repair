@@ -79,26 +79,7 @@ const footerLink4 = [
         >
           <div
             class="lg:max-w-[366px] sm:w-[45%] lg:w-full flex items-start justify-between gap-10 footer-inner-wrapper"
-          >
-            <div>
-              <h4
-                class="text-white leading-none mb-5 md:mb-6 text-xl md:text-2xl"
-              >
-                Sitemap
-              </h4>
-              <ul class="text-white leading-none flex flex-col gap-4">
-                <li
-                  v-for="(item, index) in footerLink1"
-                  :key="index"
-                  class="duration-100 hover:text-primary inline-block group"
-                >
-                  <Link :href="item.link" class="text-underline-primary">{{
-                    item.name
-                  }}</Link>
-                </li>
-              </ul>
-            </div>
-          </div>
+          ></div>
 
           <div
             class="lg:max-w-[522px] w-full sm:text-center -order-1 lg:order-none"
@@ -215,15 +196,15 @@ const footerLink4 = [
               <h4
                 class="text-white leading-none mb-5 md:mb-6 text-xl md:text-2xl"
               >
-                Shop
+                Sitemap
               </h4>
               <ul class="text-white leading-none flex flex-col gap-4">
                 <li
-                  v-for="(item, index) in footerLink3"
+                  v-for="(item, index) in footerLink1"
                   :key="index"
                   class="duration-100 hover:text-primary inline-block group"
                 >
-                  <Link class="text-underline-primary" :href="item.link">{{
+                  <Link :href="item.link" class="text-underline-primary">{{
                     item.name
                   }}</Link>
                 </li>
