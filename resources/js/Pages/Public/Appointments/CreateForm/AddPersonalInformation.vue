@@ -4,6 +4,7 @@ import IconArrowForward from "~icons/mdi/arrow-right";
 import StepFormInput from "@/Components/StepFormInput.vue";
 import { onMounted } from "vue";
 import { usePage } from "@inertiajs/vue3";
+import GAutoComplete from "@/Components/GAutoComplete.vue";
 
 const stepForm = useStepFormStore();
 
@@ -84,8 +85,10 @@ onMounted(() => {
       >
         <div class="p-2">
           <div class="relative">
+            <GAutoComplete v-model="stepForm.form.address" />
             <StepFormInput
               label="Address"
+              class="mt-2"
               v-model="stepForm.form.address"
               :error="stepForm.form.errors.address"
             />
