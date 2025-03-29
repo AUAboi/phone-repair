@@ -191,13 +191,14 @@ const open = ref(false);
               <InputError :message="form.errors.zip_code" />
             </div>
           </div>
-          <GAutoComplete />
 
           <div class="mt-5">
             <label
               class="text-base md:text-lg text-title dark:text-white leading-none mb-2 sm:mb-3 block"
               >Address
             </label>
+            <GAutoComplete v-model="form.address" />
+
             <input
               class="w-full h-12 md:h-14 bg-white dark:bg-dark-secondary border text-title dark:text-white focus:border-primary p-4 outline-none duration-300"
               type="text"
