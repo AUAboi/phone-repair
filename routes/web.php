@@ -116,6 +116,18 @@ Route::get('/sym', function () {
     Artisan::call('storage:link');
 });
 
+Route::get('/maintenance-on', function () {
+    Artisan::call('down', [
+        '--secret' => 'my-secret-key' // Optional: Allows access with a secret URL
+    ]);
+    return 'Application is now in maintenance mode!';
+});
+
+Route::get('/maintenance-off', function () {
+    Artisan::call('up');
+    return 'Application is now live!';
+});
+
 Route::post('/stripe/webhook', '\Spatie\StripeWebhooks\StripeWebhooksController')->name('stripe.webhook');
 
 require __DIR__ . '/admin.php';
