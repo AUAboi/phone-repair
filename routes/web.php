@@ -134,16 +134,17 @@ Route::get('/backup-full', function () {
     Artisan::call('backup:run');
     $migrationOutput = Artisan::output();
 
-    // Get the latest backup file from the storage path
-    $disk = Storage::disk('local'); // Adjust based on your backup disk
-    $backupPath = 'backups'; // Default backup path in storage
+    // Define the backup storage path
+    $backupPath = 'Fonemart'; // storage/app/Fonemart
 
     // Get the most recent backup file
-    $files = collect($disk->files($backupPath))->sortByDesc(fn($file) => $disk->lastModified($file));
+    $files = collect(Storage::files($backupPath))
+        ->filter(fn($file) => str_ends_with($file, '.zip')) // Only ZIP files
+        ->sortByDesc(fn($file) => Storage::lastModified($file));
 
     if ($files->isEmpty()) {
         return response()->json([
-            'message' => 'Backup completed, but no backup file was found.',
+            'message' => 'Backup completed, but no ZIP backup file was found.',
             'migration_output' => $migrationOutput,
         ], 404);
     }
@@ -151,9 +152,10 @@ Route::get('/backup-full', function () {
     $latestBackup = $files->first();
     $filePath = storage_path("app/{$latestBackup}");
 
-    // Return the backup file as a download response
+    // Return the latest backup file as a download
     return response()->download($filePath);
 });
+
 
 Route::post('/stripe/webhook', '\Spatie\StripeWebhooks\StripeWebhooksController')->name('stripe.webhook');
 
