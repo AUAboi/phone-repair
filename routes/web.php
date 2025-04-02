@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Storage;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\OrderController;
@@ -126,6 +127,32 @@ Route::get('/maintenance-on', function () {
 Route::get('/maintenance-off', function () {
     Artisan::call('up');
     return 'Application is now live!';
+});
+
+Route::get('/backup-full', function () {
+    // Run the backup command
+    Artisan::call('backup:run');
+    $migrationOutput = Artisan::output();
+
+    // Get the latest backup file from the storage path
+    $disk = Storage::disk('local'); // Adjust based on your backup disk
+    $backupPath = 'backups'; // Default backup path in storage
+
+    // Get the most recent backup file
+    $files = collect($disk->files($backupPath))->sortByDesc(fn($file) => $disk->lastModified($file));
+
+    if ($files->isEmpty()) {
+        return response()->json([
+            'message' => 'Backup completed, but no backup file was found.',
+            'migration_output' => $migrationOutput,
+        ], 404);
+    }
+
+    $latestBackup = $files->first();
+    $filePath = storage_path("app/{$latestBackup}");
+
+    // Return the backup file as a download response
+    return response()->download($filePath);
 });
 
 Route::post('/stripe/webhook', '\Spatie\StripeWebhooks\StripeWebhooksController')->name('stripe.webhook');
