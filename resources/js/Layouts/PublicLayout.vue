@@ -115,7 +115,10 @@ const handleScroll = () => {
               <Link :href="route('public.contact')">Contact Us</Link>
             </li>
             <li class="lg:hidden">
-              <Link href="/login">Login</Link>
+              <Link :href="route('login')">Login</Link>
+            </li>
+            <li class="lg:hidden">
+              <Link :href="route('register')">Register</Link>
             </li>
           </ul>
         </div>

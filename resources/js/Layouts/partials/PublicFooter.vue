@@ -78,7 +78,7 @@ const footerLink4 = [
           class="max-w-[1722px] mx-auto flex items-start justify-between gap-10 s-pb-100 flex-wrap lg:flex-nowrap footer-wrapper"
         >
           <div
-            class="lg:max-w-[366px] sm:w-[45%] lg:w-full flex items-start justify-between gap-10 footer-inner-wrapper"
+            class="lg:max-w-[366px] sm:w-[45%] lg:w-full md:flex items-start justify-between gap-10 footer-inner-wrapper hidden"
           ></div>
 
           <div
