@@ -1,5 +1,5 @@
 <script setup>
-import chair from "@/assets/img/svg/chair.svg";
+import chair from "@/assets/img/svg/mobileee.svg";
 import { Swiper, SwiperSlide } from "swiper/vue";
 import { Autoplay, Pagination, Navigation } from "swiper/modules";
 import "swiper/swiper-bundle.css";
@@ -16,7 +16,7 @@ const props = defineProps(["categories"]);
         data-aos="fade-up"
       >
         <div>
-          <img :src="chair" alt="" class="mx-auto w-14 sm:w-24" />
+          <img :src="chair" alt="" class="mx-auto w-10 sm:w-14" />
         </div>
         <h3 class="leading-none mt-4 md:mt-6 text-2xl md:text-3xl">
           Product Category

@@ -43,10 +43,7 @@ const footerLink4 = [
 ];
 </script>
 <template>
-  <div
-    class="relative bg-overlay before:bg-title before:bg-opacity-95"
-    :style="{ backgroundImage: 'url(' + bg + ')' }"
-  >
+  <div class="relative bg-overlay before:bg-title before:bg-opacity-95">
     <div class="s-pt-100">
       <div class="container-fluid">
         <div

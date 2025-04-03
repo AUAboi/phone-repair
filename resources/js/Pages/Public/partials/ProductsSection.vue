@@ -1,5 +1,5 @@
 <script setup>
-import bed from "@/assets/img/svg/bed.svg";
+import bed from "@/assets/img/svg/repair.svg";
 import MdiStar from "~icons/mdi/star";
 import MdiEyeOutline from "~icons/mdi/eye-outline";
 import product1 from "@/assets/img/home-v1/ftur-pdct-01.jpg";
@@ -17,7 +17,7 @@ const props = defineProps(["products"]);
         data-aos="fade-up"
       >
         <div>
-          <img :src="bed" class="mx-auto w-14 sm:w-24" alt="" />
+          <img :src="bed" class="mx-auto w-10 sm:w-14" alt="" />
         </div>
         <h3 class="leading-none mt-4 md:mt-6 text-2xl md:text-3xl">
           Featured Products
