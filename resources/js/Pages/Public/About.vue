@@ -3,8 +3,8 @@ import { onMounted, ref } from "vue";
 
 import PartnersSections from "./partials/PartnersSections.vue";
 
-import bg from "@/assets/img/shortcode/breadcumb.jpg";
-import bg2 from "@/assets/img/about/video-bg.jpg";
+import bg from "@/assets/img/banner/header 4.jpg";
+import bg2 from "@/assets/img/sddefault.jpg";
 import like from "@/assets/img/svg/like.svg";
 import hand from "@/assets/img/svg/hand.svg";
 import banner1 from "@/assets/img/about/about-banner-01.jpg";
@@ -14,6 +14,7 @@ import { features } from "@/data/data";
 import repair from "@/assets/img/svg/repair.svg";
 import Aos from "aos";
 import { Head, Link } from "@inertiajs/vue3";
+import CloseCircleOutline from "~icons/mdi/close";
 
 const activeTab = ref(1);
 const open = ref(false);
@@ -175,6 +176,54 @@ onMounted(() => {
     </div>
   </div>
 
+  <div class="container-fluid" data-aos="fade-up">
+    <div
+      class="bg-overlay before:bg-title before:bg-opacity-20 h-64 sm:h-96 lg:h-[650px] flex items-center justify-center max-w-[1720px] mx-auto"
+      :style="{ backgroundImage: 'url(' + bg2 + ')' }"
+    >
+      <span
+        @click="open = !open"
+        class="popup-video w-12 sm:w-[70px] h-12 sm:h-[70px] rounded-full bg-white dark:bg-title flex items-center justify-center cursor-pointer"
+      >
+        <svg
+          class="fill-current text-title dark:text-white"
+          width="15"
+          height="17"
+          viewBox="0 0 15 17"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M2.58357 0.369445C1.15676 -0.497057 0 0.212792 0 1.95367V14.8006C0 16.5432 1.15676 17.2521 2.58357 16.3864L13.1895 9.94678C14.6168 9.07997 14.6168 7.67561 13.1895 6.80901L2.58357 0.369445Z"
+          />
+        </svg>
+      </span>
+    </div>
+  </div>
+
+  <div
+    v-if="open"
+    class="fixed top-0 left-0 bg-black bg-opacity-50 w-full h-full z-[99999]"
+  >
+    <div class="flex items-center justify-center h-full">
+      <div
+        class="relative w-[300px] h-[200px] sm:w-[600px] sm:h-[450px] md:w-[750px] md:h-[500px]"
+      >
+        <iframe
+          width="100%"
+          height="100%"
+          src="https://www.youtube.com/embed/m5JWSi51_Lw?si=H3CTtELuXNS0ri4g"
+        >
+        </iframe>
+        <div
+          @click="open = !open"
+          class="absolute top-[-10px] right-[-10px] cursor-pointer w-8 h-8 bg-primary bg-opacity-70 text-center flex justify-center"
+        >
+          <CloseCircleOutline class="text-white text-[20px] mt-1" />
+        </div>
+      </div>
+    </div>
+  </div>
   <div class="s-py-100">
     <PartnersSections />
   </div>

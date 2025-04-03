@@ -50,7 +50,7 @@ const footerLink4 = [
     <div class="s-pt-100">
       <div class="container-fluid">
         <div
-          class="mx-auto flex items-end justify-between gap-3 lg:gap-8 flex-col lg:flex-row s-pb-100"
+          class="mx-auto flex justify-between gap-3 lg:gap-8 flex-col lg:flex-row s-pb-100"
         >
           <div class="md:max-w-[473px] w-full">
             <h2 class="font-bold leading-none text-white">Newsletter</h2>

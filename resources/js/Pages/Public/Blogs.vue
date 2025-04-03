@@ -4,7 +4,7 @@ import { Swiper, SwiperSlide } from "swiper/vue";
 import { Autoplay } from "swiper/modules";
 import "swiper/swiper-bundle.css";
 
-import bg from "@/assets/img/shortcode/breadcumb.jpg";
+import bg from "@/assets/img/banner/header 3.jpg";
 
 import Aos from "aos";
 import { Head, Link } from "@inertiajs/vue3";

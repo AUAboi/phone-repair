@@ -17,7 +17,7 @@ const props = defineProps(["products"]);
         data-aos="fade-up"
       >
         <div>
-          <img :src="bed" class="mx-auto w-10 sm:w-14" alt="" />
+          <img :src="bed" class="mx-auto w-10 max-h-[64px] sm:w-14" alt="" />
         </div>
         <h3 class="leading-none mt-4 md:mt-6 text-2xl md:text-3xl">
           Featured Products

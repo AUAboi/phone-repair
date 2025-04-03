@@ -1,7 +1,7 @@
 <script setup>
 import { Head, Link } from "@inertiajs/vue3";
 import DeviceSection from "./partials/DeviceSection.vue";
-import bg from "@/assets/img/shortcode/breadcumb.jpg";
+import bg from "@/assets/img/banner/header 2.jpg";
 
 const props = defineProps(["brands", "devices"]);
 </script>

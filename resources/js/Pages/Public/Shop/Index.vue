@@ -1,7 +1,7 @@
 <script setup>
 import { onMounted, reactive, ref } from "vue";
 import LayoutOne from "@/Components/template/layout-one.vue";
-import bg from "@/assets/img/shortcode/breadcumb.jpg";
+import bg from "@/assets/img/banner/header 1.jpg";
 import Aos from "aos";
 import { Head, Link, router } from "@inertiajs/vue3";
 import { reactivePick, watchThrottled } from "@vueuse/core";
