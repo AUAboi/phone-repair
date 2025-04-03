@@ -67,7 +67,7 @@ const footerLink4 = [
               placeholder="Enter your email address"
             />
             <button
-              class="w-full h-12 bg-primary text-white flex items-center justify-center text-base md:text-lg font-medium p-3 mt-3 sm:mt-0 sm:w-32 sm:h-auto sm:flex-none"
+              class="w-full h-12 md:h-14 bg-primary text-white flex items-center justify-center text-base md:text-lg font-medium p-3 mt-3 sm:mt-0 sm:w-32 sm:flex-none"
             >
               Subscribe
             </button>
