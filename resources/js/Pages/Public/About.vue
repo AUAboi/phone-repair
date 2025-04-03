@@ -13,7 +13,7 @@ import banner3 from "@/assets/img/about/about-banner-03.jpg";
 import { features } from "@/data/data";
 import repair from "@/assets/img/svg/repair.svg";
 import Aos from "aos";
-import { Head } from "@inertiajs/vue3";
+import { Head, Link } from "@inertiajs/vue3";
 
 const activeTab = ref(1);
 const open = ref(false);
@@ -25,6 +25,25 @@ onMounted(() => {
 
 <template>
   <Head title="About Us" />
+  <div
+    class="flex items-center gap-4 flex-wrap bg-overlay p-14 sm:p-16 before:bg-title before:bg-opacity-70"
+    :style="{ backgroundImage: 'url(' + bg + ')' }"
+  >
+    <div class="text-center w-full">
+      <h2
+        class="text-white text-8 md:text-[40px] font-normal leading-none text-center"
+      >
+        About Us
+      </h2>
+      <ul
+        class="flex items-center justify-center gap-[10px] text-base md:text-lg leading-none font-normal text-white mt-3 md:mt-4"
+      >
+        <li><Link :href="route('public.home')">Home</Link></li>
+        <li>/</li>
+        <li class="text-primary">About</li>
+      </ul>
+    </div>
+  </div>
   <div class="s-pb-100 pt-12 md:pt-16" data-aos="fade-up">
     <div class="container-fluid">
       <div
@@ -77,8 +96,8 @@ onMounted(() => {
           class="flex items-center py-8 sm:py-12 px-5 sm:px-12 md:px-8 lg:pr-12 lg:pl-16 2xl:pl-[160px] bg-[#F8F8F9] dark:bg-dark-secondary"
         >
           <div class="lg:max-w-[600px]">
-            <div>
-              <img :src="repair" alt="" />
+            <div class="max-w-72">
+              <img src="/images/logo-min.png" alt="" />
             </div>
             <h3
               class="font-medium leading-none mt-4 md:mt-6 text-2xl md:text-3xl"

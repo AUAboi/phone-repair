@@ -43,11 +43,14 @@ const footerLink4 = [
 ];
 </script>
 <template>
-  <div class="relative bg-overlay before:bg-title before:bg-opacity-95">
+  <div
+    class="relative bg-overlay before:bg-title before:bg-opacity-95"
+    :style="{ backgroundImage: 'url(' + bg + ')' }"
+  >
     <div class="s-pt-100">
       <div class="container-fluid">
         <div
-          class="max-w-lg lg:max-w-[1052px] mx-auto flex items-end justify-between gap-3 lg:gap-8 flex-col lg:flex-row s-pb-100"
+          class="mx-auto flex items-end justify-between gap-3 lg:gap-8 flex-col lg:flex-row s-pb-100"
         >
           <div class="md:max-w-[473px] w-full">
             <h2 class="font-bold leading-none text-white">Newsletter</h2>
@@ -74,22 +77,16 @@ const footerLink4 = [
         <div
           class="max-w-[1722px] mx-auto flex items-start justify-between gap-10 s-pb-100 flex-wrap lg:flex-nowrap footer-wrapper"
         >
-          <div
-            class="lg:max-w-[366px] sm:w-[45%] lg:w-full md:flex items-start justify-between gap-10 footer-inner-wrapper hidden"
-          ></div>
-
-          <div
-            class="lg:max-w-[522px] w-full sm:text-center -order-1 lg:order-none"
-          >
+          <div class="lg:max-w-[522px] w-full -order-1 lg:order-none">
             <img
-              class="sm:mx-auto w-[150px] sm:w-auto max-w-[250px]"
+              class="w-[150px] sm:w-auto max-w-[250px]"
               src="/images/logo-footer-min.png"
               alt="logo"
             />
             <a
               target="_blank"
               href="https://maps.app.goo.gl/yN1kbj5gaxvYVrWx5"
-              class="mt-4 text-white-light max-w-[522px] sm:mx-auto block"
+              class="mt-4 text-white-light max-w-[522px] block"
             >
               16 The Arcade, Bognor Regis PO21 1LH, United Kingdom
             </a>
@@ -99,7 +96,7 @@ const footerLink4 = [
                 >sales@fonemartonline.com</a
               >
             </p>
-            <div class="flex items-center sm:justify-center gap-4 mt-6">
+            <div class="flex items-center gap-4 mt-6">
               <a
                 href="#"
                 class="w-10 h-10 rounded-full border border-white border-opacity-50 flex items-center justify-center group hover:border-primary duration-300"
