@@ -1,5 +1,6 @@
 <script setup>
 import { Link } from "@inertiajs/vue3";
+import repair from "@/assets/img/svg/repair.svg";
 
 const props = defineProps(["brands"]);
 </script>
@@ -11,6 +12,9 @@ const props = defineProps(["brands"]);
         data-aos="fade-up"
         data-aos-delay="100"
       >
+        <div>
+          <img :src="repair" class="mx-auto w-10 sm:w-14" alt="" />
+        </div>
         <h3 class="leading-none mt-4 md:mt-6 text-2xl md:text-3xl">
           Book a Repair
         </h3>

@@ -1,5 +1,5 @@
 <script setup>
-import bed from "@/assets/img/svg/repair.svg";
+import bed from "@/assets/img/svg/featured.svg";
 import MdiStar from "~icons/mdi/star";
 import MdiEyeOutline from "~icons/mdi/eye-outline";
 import product1 from "@/assets/img/home-v1/ftur-pdct-01.jpg";
