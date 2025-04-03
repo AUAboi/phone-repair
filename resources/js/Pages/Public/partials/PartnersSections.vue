@@ -70,7 +70,11 @@ const partnerData = [
             class="flex items-center justify-center w-full"
             aria-label="partner logo"
           >
-            <img :src="item.image" class="block" alt="" />
+            <img
+              :src="item.image"
+              class="block max-w-[190px] max-h-[110px] mx-auto"
+              alt=""
+            />
           </swiper-slide>
         </Swiper>
       </div>

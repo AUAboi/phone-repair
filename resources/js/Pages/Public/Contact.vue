@@ -1,12 +1,12 @@
 <script setup>
 import bg from "@/assets/img/shortcode/breadcumb.jpg";
 
-import bg2 from "@/assets/img/thumb/contact-thumb.jpg";
+import bg2 from "@/assets/img/ttttt.jpg";
 import { onMounted, ref } from "vue";
 import Aos from "aos";
 import { Head, Link, useForm } from "@inertiajs/vue3";
 import InputError from "@/Components/InputError.vue";
-import mobile from "@/assets/img/svg/mobileee.svg";
+import mobile from "@/assets/img/svg/contact.svg";
 
 onMounted(() => {
   Aos.init();
@@ -79,7 +79,7 @@ const submit = () => {
         </div>
         <div class="max-w-[725px] w-full mx-auto lg:mx-0">
           <div data-aos="fade-up">
-            <div>
+            <div class="max-w-14">
               <img :src="mobile" alt="" />
             </div>
             <h3 class="leading-none font-medium mt-3 md:mt-6 text-2xl">
