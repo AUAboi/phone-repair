@@ -8,7 +8,7 @@ import { features } from "@/data/data";
 
 <template>
   <div
-    class="s-py-100 bg-overlay dark:before:bg-title dark:before:bg-opacity-80"
+    class="s-py-100 bg-overlay dark:before:bg-title dark:before:bg-opacity-80 before:bg-white before:bg-opacity-75"
     :style="{ backgroundImage: 'url(' + bg + ')' }"
   >
     <img

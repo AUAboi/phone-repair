@@ -16,7 +16,7 @@ const props = defineProps(["brands"]);
           <img :src="repair" class="mx-auto w-10 sm:w-14" alt="" />
         </div>
         <h3 class="leading-none mt-4 md:mt-6 text-2xl md:text-3xl">
-          Book a Repair
+          Book a repair
         </h3>
       </div>
       <div data-aos="fade-up" data-aos-delay="100">

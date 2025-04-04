@@ -8,44 +8,46 @@ const year = ref(new Date().getFullYear());
 
 const footerLink1 = [
   {
-    name: "About",
-    link: route("public.about"),
+    name: "Home",
+    link: route("public.home"),
+  },
+  {
+    name: "Shop",
+    link: route("public.shop"),
+  },
+  {
+    name: "Book a repair",
+    link: route("public.repairs"),
   },
   {
     name: "Blog",
     link: route("public.posts"),
   },
   {
+    name: "About Us",
+    link: route("public.about"),
+  },
+];
+
+const footerLink4 = [
+  {
+    name: "Contact Us",
+    link: route("public.contact"),
+  },
+  {
     name: "Terms & Conditions",
     link: route("public.terms"),
   },
-];
-const footerLink2 = [];
-const footerLink3 = [
   {
-    name: "Shop",
-    link: route("public.shop"),
-  },
-  {
-    name: "Cart",
-    link: route("cart.index"),
-  },
-  {
-    name: "Checkout",
-    link: route("checkout.index"),
-  },
-];
-const footerLink4 = [
-  {
-    name: "Contact",
-    link: route("public.contact"),
+    name: "Refund policy",
+    link: "#",
   },
 ];
 </script>
 <template>
   <div
-    class="relative bg-overlay before:bg-title before:bg-opacity-95"
     :style="{ backgroundImage: 'url(' + bg + ')' }"
+    class="relative bg-overlay before:bg-title before:bg-opacity-95"
   >
     <div class="s-pt-100">
       <div class="container-fluid">
@@ -77,26 +79,55 @@ const footerLink4 = [
         <div
           class="max-w-[1722px] mx-auto flex items-start justify-between gap-10 s-pb-100 flex-wrap lg:flex-nowrap footer-wrapper"
         >
-          <div class="lg:max-w-[522px] w-full -order-1 lg:order-none">
+          <div
+            class="lg:max-w-[366px] sm:w-[45%] lg:w-full md:flex items-start justify-between gap-10 footer-inner-wrapper hidden"
+          >
+            <div>
+              <h4
+                class="text-white leading-none mb-5 md:mb-6 text-xl md:text-2xl"
+              >
+                Sitemap
+              </h4>
+              <ul class="text-white leading-none flex flex-col gap-4">
+                <li
+                  v-for="(item, index) in footerLink1"
+                  :key="index"
+                  class="duration-100 hover:text-primary inline-block group"
+                >
+                  <Link :href="item.link" class="text-underline-primary">{{
+                    item.name
+                  }}</Link>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <div
+            class="lg:max-w-[522px] w-full sm:text-center -order-1 lg:order-none"
+          >
             <img
-              class="w-[150px] sm:w-auto max-w-[250px]"
+              class="sm:mx-auto w-[150px] sm:w-auto max-w-[250px]"
               src="/images/logo-footer-min.png"
               alt="logo"
             />
             <a
               target="_blank"
               href="https://maps.app.goo.gl/yN1kbj5gaxvYVrWx5"
-              class="mt-4 text-white-light max-w-[522px] block"
+              class="mt-4 text-white-light max-w-[522px] sm:mx-auto block"
             >
               16 The Arcade, Bognor Regis PO21 1LH, United Kingdom
             </a>
-            <p class="text-white">
+            <p class="text-white mt-2">
               E-mail:
               <a href="mailto:sales@fonemartonline.com"
                 >sales@fonemartonline.com</a
               >
             </p>
-            <div class="flex items-center gap-4 mt-6">
+            <p class="text-white">
+              Phone:
+              <a href="tel:01243 862501">01243 862501</a>
+            </p>
+            <div class="flex items-center sm:justify-center gap-4 mt-6">
               <a
                 href="#"
                 class="w-10 h-10 rounded-full border border-white border-opacity-50 flex items-center justify-center group hover:border-primary duration-300"
@@ -186,24 +217,6 @@ const footerLink4 = [
           <div
             class="lg:max-w-[460px] sm:w-[45%] lg:w-full flex items-start justify-between gap-10 footer-inner-wrapper"
           >
-            <div>
-              <h4
-                class="text-white leading-none mb-5 md:mb-6 text-xl md:text-2xl"
-              >
-                Sitemap
-              </h4>
-              <ul class="text-white leading-none flex flex-col gap-4">
-                <li
-                  v-for="(item, index) in footerLink1"
-                  :key="index"
-                  class="duration-100 hover:text-primary inline-block group"
-                >
-                  <Link :href="item.link" class="text-underline-primary">{{
-                    item.name
-                  }}</Link>
-                </li>
-              </ul>
-            </div>
             <div>
               <h4
                 class="text-white leading-none mb-5 md:mb-6 text-xl md:text-2xl"

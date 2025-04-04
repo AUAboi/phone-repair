@@ -89,7 +89,7 @@ const handleScroll = () => {
                 ['public.repairs'].includes(route().current()) ? 'active' : ''
               "
             >
-              <Link :href="route('public.repairs')">Book a Repair</Link>
+              <Link :href="route('public.repairs')">Book a repair</Link>
             </li>
             <li
               class="relative"
