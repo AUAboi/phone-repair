@@ -1,5 +1,5 @@
 <script setup>
-import { computed, ref } from "vue";
+import { computed, ref, watch } from "vue";
 
 import CartIcon from "~icons/mdi/cart-outline";
 import CartList from "./CartList.vue";
@@ -13,7 +13,9 @@ const props = defineProps(["toggle"]);
 
 const emit = defineEmits(["toggle-change"]);
 
-const cart = computed(() => usePage().props.cart);
+const page = usePage();
+
+const cart = computed(() => page.props.cart);
 
 function handleToggle() {
   emit("toggle-change", !props.toggle);
@@ -25,6 +27,13 @@ const cartButtonRef = ref(null);
 onClickOutside(cartRef, () => (cartList.value = false), {
   ignore: [cartButtonRef],
 });
+
+watch(
+  () => page.url,
+  () => {
+    cartList.value = false;
+  }
+);
 </script>
 <template>
   <div class="flex items-center gap-4 sm:gap-6">

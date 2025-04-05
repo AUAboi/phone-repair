@@ -80,39 +80,6 @@ onMounted(() => {
           </div>
         </div>
       </div>
-      <div
-        class="flex flex-col bg-white shadow-lg rounded-md px-4 py-2 max-w-fit md:max-w-none mx-auto"
-      >
-        <div class="p-2">
-          <div class="relative">
-            <GAutoComplete v-model="stepForm.form.address" />
-            <StepFormInput
-              label="Address"
-              class="mt-2"
-              v-model="stepForm.form.address"
-              :error="stepForm.form.errors.address"
-            />
-          </div>
-        </div>
-        <div class="p-2">
-          <div class="relative">
-            <StepFormInput
-              label="City"
-              v-model="stepForm.form.city"
-              :error="stepForm.form.errors.city"
-            />
-          </div>
-        </div>
-        <div class="p-2">
-          <div class="relative">
-            <StepFormInput
-              label="Post Code"
-              v-model="stepForm.form.zip_code"
-              :error="stepForm.form.errors.zip_code"
-            />
-          </div>
-        </div>
-      </div>
     </div>
 
     <div class="mt-8 text-center">

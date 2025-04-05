@@ -88,7 +88,7 @@ const props = defineProps({
         >Payment Method :
       </span>
       <span class="mt-1 text-gray-600 dark:text-gray-400">
-        {{ appointment.payment_method ?? "No Paid" }}
+        {{ appointment.payment_method ?? "Not Paid" }}
       </span>
     </div>
     <div class="flex flex-col sm:flex-row justify-between">

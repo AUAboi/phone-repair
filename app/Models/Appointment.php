@@ -36,12 +36,23 @@ class Appointment extends Model
         'status'
     ];
 
+    /**
+     * The attributes that should be cast.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'phone' => E164PhoneNumberCast::class . ":GB",
+    ];
+
+
     protected function phone(): Attribute
     {
         return Attribute::make(
             get: fn($value) => phone($value)->formatForCountry(config('constants.phone_number')),
         );
     }
+
 
     protected function total(): Attribute
     {
@@ -62,14 +73,6 @@ class Appointment extends Model
         return money($this->total, config('constants.currency'), true)->formatWithoutZeroes();
     }
 
-    /**
-     * The attributes that should be cast.
-     *
-     * @var array
-     */
-    protected $casts = [
-        'phone' => E164PhoneNumberCast::class . ':PK',
-    ];
 
     public function user()
     {

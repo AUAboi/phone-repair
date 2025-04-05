@@ -35,16 +35,8 @@ const open = ref(false);
       >
         Checkout
       </h2>
-      <ul
-        class="flex items-center justify-center gap-[10px] text-base md:text-lg leading-none font-normal text-white mt-3 md:mt-4 flex-wrap"
-      >
-        <li><Link :href="route('public.home')">Home</Link></li>
-        <li>/</li>
-        <li class="text-primary">Checkout</li>
-      </ul>
     </div>
   </div>
-
   <div class="s-py-100">
     <div class="container">
       <div
@@ -153,9 +145,27 @@ const open = ref(false);
                 placeholder="Type your phone number"
                 v-model="form.phone"
               />
+              <InputError :message="form.errors.phone" />
             </div>
           </div>
+          <div class="mt-5">
+            <label
+              class="text-base md:text-lg text-title dark:text-white leading-none mb-2 sm:mb-3 block"
+              >Address
+            </label>
+            <GAutoComplete />
 
+            <input
+              class="w-full h-12 md:h-14 bg-white dark:bg-dark-secondary border text-title dark:text-white focus:border-primary p-4 outline-none duration-300"
+              type="text"
+              v-model="form.address"
+              placeholder="Your full address"
+              :class="
+                form.errors.address ? 'border-red-500' : 'border-[#E3E5E6]'
+              "
+            />
+            <InputError :message="form.errors.address" />
+          </div>
           <div class="grid md:grid-cols-2 gap-5 md:gap-6">
             <div class="mt-5">
               <label
@@ -192,24 +202,6 @@ const open = ref(false);
             </div>
           </div>
 
-          <div class="mt-5">
-            <label
-              class="text-base md:text-lg text-title dark:text-white leading-none mb-2 sm:mb-3 block"
-              >Address
-            </label>
-            <GAutoComplete v-model="form.address" />
-
-            <input
-              class="w-full h-12 md:h-14 bg-white dark:bg-dark-secondary border text-title dark:text-white focus:border-primary p-4 outline-none duration-300"
-              type="text"
-              v-model="form.address"
-              placeholder="Your full address"
-              :class="
-                form.errors.address ? 'border-red-500' : 'border-[#E3E5E6]'
-              "
-            />
-            <InputError :message="form.errors.address" />
-          </div>
           <div class="mt-5">
             <label
               class="text-base md:text-lg text-title dark:text-white leading-none mb-2 sm:mb-3 block"
@@ -343,7 +335,6 @@ const open = ref(false);
               <CartCheckout
                 :client-secret="clientSecret"
                 :stripe-key="stripeKey"
-                :form="form"
               />
             </div>
           </div>

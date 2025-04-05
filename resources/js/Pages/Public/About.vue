@@ -7,7 +7,7 @@ import bg from "@/assets/img/banner/header 4.jpg";
 import bg2 from "@/assets/img/sddefault.jpg";
 import like from "@/assets/img/svg/like.svg";
 import hand from "@/assets/img/svg/hand.svg";
-import banner1 from "@/assets/img/about/about-banner-01.jpg";
+import banner1 from "@/assets/img/about/about.jpg";
 import banner2 from "@/assets/img/about/about-banner-02.jpg";
 import banner3 from "@/assets/img/about/about-banner-03.jpg";
 import { features } from "@/data/data";
@@ -36,13 +36,6 @@ onMounted(() => {
       >
         About Us
       </h2>
-      <ul
-        class="flex items-center justify-center gap-[10px] text-base md:text-lg leading-none font-normal text-white mt-3 md:mt-4"
-      >
-        <li><Link :href="route('public.home')">Home</Link></li>
-        <li>/</li>
-        <li class="text-primary">About</li>
-      </ul>
     </div>
   </div>
   <div class="s-pb-100 pt-12 md:pt-16" data-aos="fade-up">
@@ -57,47 +50,13 @@ onMounted(() => {
             <div v-if="activeTab === 1">
               <img class="object-cover w-full" :src="banner1" alt="about" />
             </div>
-            <div v-if="activeTab === 2">
-              <img class="object-cover w-full" :src="banner2" alt="about" />
-            </div>
-            <div v-if="activeTab === 3">
-              <img class="object-cover w-full" :src="banner3" alt="about" />
-            </div>
-          </div>
-          <div
-            class="absolute xl:bottom-[50%] bottom-0 left-[50%] xl:right-0 translate-x-[-50%] 2xl:translate-x-[83%] xl:translate-x-[73%] translate-y-[115%] xl:translate-y-[50%] z-[9999] xl:inline-block flex gap-1"
-          >
-            <div @click="activeTab = 1">
-              <img
-                class="object-cover h-[70px] w-[70px] md:h-[140px] md:w-[140px] lg:h-[140px] lg:w-[140px]"
-                :class="activeTab === 1 ? 'border-[#bb976d] border-4' : ''"
-                :src="banner1"
-                alt="about"
-              />
-            </div>
-            <div @click="activeTab = 2">
-              <img
-                class="object-cover h-[70px] w-[70px] md:h-[140px] md:w-[140px] lg:h-[140px] lg:w-[140px] xl:my-2 my-0"
-                :class="activeTab === 2 ? 'border-[#bb976d] border-4' : ''"
-                :src="banner2"
-                alt="about"
-              />
-            </div>
-            <div @click="activeTab = 3">
-              <img
-                class="object-cover h-[70px] w-[70px] md:h-[140px] md:w-[140px] lg:h-[140px] lg:w-[140px]"
-                :class="activeTab === 3 ? 'border-[#bb976d] border-4' : ''"
-                :src="banner3"
-                alt="about"
-              />
-            </div>
           </div>
         </div>
         <div
           class="flex items-center py-8 sm:py-12 px-5 sm:px-12 md:px-8 lg:pr-12 lg:pl-16 2xl:pl-[160px] bg-[#F8F8F9] dark:bg-dark-secondary"
         >
           <div class="lg:max-w-[600px]">
-            <div class="max-w-72">
+            <div class="max-w-48 mb-4">
               <img src="/images/logo-min.png" alt="" />
             </div>
             <h3

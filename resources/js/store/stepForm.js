@@ -1,11 +1,10 @@
-import useSweetAlert from "@/Composables/useSweetAlert"
-import { useForm } from "@inertiajs/vue3"
-import { defineStore } from "pinia"
-import { computed, ref } from "vue"
+import useSweetAlert from "@/Composables/useSweetAlert";
+import { useForm } from "@inertiajs/vue3";
+import { defineStore } from "pinia";
+import { computed, ref } from "vue";
 
-export const useStepFormStore = defineStore('stepForm', () => {
-  const { alertError } = useSweetAlert()
-
+export const useStepFormStore = defineStore("stepForm", () => {
+  const { alertError } = useSweetAlert();
 
   const form = useForm({
     repair_type: null,
@@ -15,83 +14,91 @@ export const useStepFormStore = defineStore('stepForm', () => {
     first_name: null,
     last_name: null,
     email: null,
-    city: null,
+    city: "null",
     phone: null,
-    zip_code: null,
-    address: null,
-    message: null
-  })
+    zip_code: "null",
+    address: "null",
+    message: "null",
+  });
 
-  const transition = ref("next")
+  const transition = ref("next");
 
-  const device = ref()
+  const device = ref();
 
-  const currentStep = ref(1)
+  const currentStep = ref(1);
 
   const stepForward = () => {
     if (currentStep.value < 3) {
-      transition.value = "next"
-      currentStep.value++
+      transition.value = "next";
+      currentStep.value++;
     }
-  }
+  };
 
   const stepBackward = () => {
     if (currentStep.value >= 1) {
-      transition.value = "previous"
-      currentStep.value--
+      transition.value = "previous";
+      currentStep.value--;
     }
-  }
+  };
 
   const setStep = (step) => {
     if (!canGoToStep(step)) {
       alertError({
         title: "Missing fields",
-        text: "You need to select previous options before moving to next"
+        text: "You need to select previous options before moving to next",
       });
-      return
+      return;
     }
     if (step < currentStep.value) {
-      transition.value = "previous"
-      currentStep.value = step
-    }
-    else if (step > currentStep.value) {
-      transition.value = "next"
+      transition.value = "previous";
+      currentStep.value = step;
+    } else if (step > currentStep.value) {
+      transition.value = "next";
 
-      currentStep.value = step
+      currentStep.value = step;
     }
-  }
+  };
 
   const canGoToStep = (step) => {
     if (step >= 2) {
-      if (!form.device_repair_id) return false
+      if (!form.device_repair_id) return false;
     }
     if (step >= 3) {
-      if (!form.appointment_date || !form.appointment_time) return false
+      if (!form.appointment_date || !form.appointment_time) return false;
     }
 
-    return true
-  }
-
+    return true;
+  };
 
   const submit = () => {
-    form.post(route('public.appointments.store', device.value.slug), {
+    form.post(route("public.appointments.store", device.value.slug), {
       onSuccess: () => $reset(),
-    })
-  }
+    });
+  };
 
   const errors = computed(() => {
-    let err = []
+    let err = [];
     Object.keys(form.errors).forEach((key) => {
-      err.push(form.errors[key])
-    })
-    return err
-  })
-
+      err.push(form.errors[key]);
+    });
+    return err;
+  });
 
   function $reset() {
-    form.reset()
-    currentStep.value = 1
+    form.reset();
+    currentStep.value = 1;
   }
 
-  return { form, device, currentStep, transition, errors, stepForward, stepBackward, setStep, canGoToStep, submit }
-})
+  return {
+    form,
+    device,
+    currentStep,
+    transition,
+    errors,
+    stepForward,
+    stepBackward,
+    setStep,
+    canGoToStep,
+    submit,
+  };
+});

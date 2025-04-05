@@ -1,11 +1,16 @@
 <script setup>
 import { ref, onMounted } from "vue";
 import { Loader } from "@googlemaps/js-api-loader";
+import { storeToRefs } from "pinia";
+import { useCheckoutStore } from "@/store/checkoutStore";
 
-const address = ref("");
+const address = ref({
+  formattedAddress: "",
+  city: "",
+  postcode: "",
+});
+
 const placeAutocompleteRef = ref(null);
-
-const props = defineProps([]);
 
 const loader = new Loader({
   apiKey: "AIzaSyBsrH5zLtvBNimarHhgttJqvAiG8XhARaI",
@@ -13,6 +18,10 @@ const loader = new Loader({
   version: "beta",
   params: { v: "alpha" },
 });
+
+const checkoutStore = useCheckoutStore();
+
+const { form } = storeToRefs(checkoutStore);
 
 onMounted(async () => {
   await loader.importLibrary("places");
@@ -23,31 +32,35 @@ onMounted(async () => {
 
   placeAutocompleteRef.value.appendChild(placeAutocomplete);
 
-  placeAutocomplete.addEventListener("gmp-placeselect", async ({ place }) => {
+  placeAutocomplete.addEventListener("gmp-select", async (event) => {
+    const place = await event.placePrediction.toPlace();
+
     await place.fetchFields({
-      fields: ["displayName", "formattedAddress"],
+      fields: ["displayName", "formattedAddress", "addressComponents"],
     });
 
-    address.value = place.formattedAddress;
+    const city = place.addressComponents.find((component) =>
+      component.types.includes("postal_town")
+    )?.longText;
 
-    emit("update:modelValue", address.value);
+    const postcode = place.addressComponents.find((component) =>
+      component.types.includes("postal_code")
+    )?.longText;
+
+    address.value = {
+      formattedAddress: place.formattedAddress,
+      city: city || "",
+      postcode: postcode || "",
+    };
+
+    form.value.address = address.value.formattedAddress;
+    form.value.city = address.value.city;
+    form.value.zip_code = address.value.postcode;
   });
 });
-
-const emit = defineEmits(["update:modelValue"]);
 </script>
 
 <template>
-  <p>Find</p>
+  <p>Find:</p>
   <div ref="placeAutocompleteRef" class="relative"></div>
 </template>
-<style>
-.widget-container {
-  font-size: 16px;
-  padding: 12px;
-  border-radius: 8px;
-  border: 2px solid #4caf50; /* Green border */
-  background-color: #f9f9f9;
-  color: #333;
-}
-</style>

@@ -72,7 +72,7 @@ const partnerData = [
           >
             <img
               :src="item.image"
-              class="block max-w-[190px] max-h-[110px] mx-auto"
+              class="block max-w-[190px] max-h-[110px] mx-auto grayscale"
               alt=""
             />
           </swiper-slide>

@@ -53,13 +53,6 @@ watchThrottled(
         >
           Shop
         </h2>
-        <ul
-          class="flex items-center justify-center gap-[10px] text-base md:text-lg leading-none font-normal text-white mt-3 md:mt-4"
-        >
-          <li><Link :href="route('public.home')">Home</Link></li>
-          <li>/</li>
-          <li class="text-primary">Shop</li>
-        </ul>
       </div>
     </div>
 

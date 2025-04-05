@@ -35,8 +35,6 @@ onMounted(() => {
       <ul
         class="flex items-center justify-center gap-[10px] text-base md:text-lg leading-none font-normal text-white mt-3 md:mt-4"
       >
-        <li><Link :href="route('public.home')">Home</Link></li>
-        <li>/</li>
         <li class="text-primary">Cart</li>
       </ul>
     </div>
@@ -212,7 +210,7 @@ onMounted(() => {
             </Link>
             <Link
               :href="route('checkout.index')"
-              class="btn btn-sm btn-theme-solid !text-white hover:!text-primary before:!z-[-1]"
+              class="btn btn-sm btn-theme-solid hover:!text-primary before:!z-[-1]"
             >
               Checkout
             </Link>

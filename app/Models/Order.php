@@ -7,6 +7,7 @@ use App\Models\OrderProduct;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Propaganistas\LaravelPhone\Casts\E164PhoneNumberCast;
 
 class Order extends Model
 {
@@ -28,6 +29,14 @@ class Order extends Model
         'order_status',
         'payment_status',
     ];
+    /**
+     * The attributes that should be cast.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'phone' => E164PhoneNumberCast::class . ":GB",
+    ];
 
     /**
      * Get the route key for the model.
@@ -35,6 +44,13 @@ class Order extends Model
     public function getRouteKeyName(): string
     {
         return 'order_no';
+    }
+
+    protected function phone(): Attribute
+    {
+        return Attribute::make(
+            get: fn($value) => phone($value)->formatForCountry(config('constants.phone_number')),
+        );
     }
 
     protected function total(): Attribute
