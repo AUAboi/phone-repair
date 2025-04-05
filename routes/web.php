@@ -92,6 +92,8 @@ Route::get('/order/complete', function (Request $request) {
     return redirect()->route('public.home')->with('error', 'Payment failed or pending.');
 })->name('order.complete');
 
+Route::get('/payment/order/{order:order_no}', [OrderController::class, 'paymentPage'])->name('order.paymentPage');
+Route::post('/payment/order/{order:order_no}', [OrderController::class, 'paymentHandle'])->name('order.paymentHandle');
 
 Route::post('/contact/send', [ContactController::class, 'send'])->name('contact.send');
 

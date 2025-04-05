@@ -2,24 +2,25 @@
 
 namespace App\Http\Controllers;
 
-use App\Actions\ChargePayment;
-use App\Http\Requests\StoreOrderRequest;
 use DateTime;
 use Exception;
+use Stripe\Stripe;
 use Inertia\Inertia;
 use App\Models\Order;
-
 use App\Models\Product;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use App\Http\Resources\OrderResource;
+
+use App\Mail\OrderPlaced;
+use Stripe\PaymentIntent;
+use App\Mail\OrderShipped;
 use App\Mail\OrderCancelled;
 use App\Mail\OrderDelivered;
-use App\Mail\OrderPlaced;
-use App\Mail\OrderShipped;
+use Illuminate\Http\Request;
+use App\Actions\ChargePayment;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
-use Stripe\Stripe;
-use Stripe\PaymentIntent;
+use App\Http\Resources\OrderResource;
+use Illuminate\Support\Facades\Session;
+use App\Http\Requests\StoreOrderRequest;
 
 class OrderController extends Controller
 {
@@ -191,5 +192,97 @@ class OrderController extends Controller
     {
         $dt = new DateTime;
         return 'OD' . $dt->format('Ymd') .  $order->id;
+    }
+
+    public function paymentPage(Order $order)
+    {
+        if ($order->payment_status === 'paid') {
+            return redirect()->back()->with('error', 'Paid already');
+        }
+
+        Stripe::setApiKey(env('STRIPE_SECRET'));
+
+        $paymentIntentId = Session::get('order_payment_intent_id');
+        $paymentIntent = null;
+
+        if ($paymentIntentId) {
+            try {
+                $paymentIntent = PaymentIntent::retrieve($paymentIntentId);
+
+
+                // If the PaymentIntent exists and is still modifiable, update it
+                if ($paymentIntent->status === 'requires_payment_method' && $paymentIntent->amount !== (int)$order->total * 100) {
+                    PaymentIntent::update($paymentIntent->id, ['amount' => $order->total * 100]);
+                }
+            } catch (\Exception $e) {
+                // If PaymentIntent retrieval fails, create a new one
+                $paymentIntent = null;
+            }
+        }
+
+        // If PaymentIntent does not exist or cannot be updated, create a new one
+        if (!$paymentIntent || $paymentIntent->status !== 'requires_payment_method') {
+            $paymentIntent = PaymentIntent::create([
+                'amount' => $order->total * 100,
+                'currency' => config('constants.currency'),
+                'payment_method_types' => ['card', 'paypal', 'klarna'],
+            ]);
+
+            // Store new PaymentIntent ID
+            Session::put('order_payment_intent_id', $paymentIntent->id);
+        }
+
+        return Inertia::render('Public/Orders/Payment', [
+            'order' => new OrderResource($order),
+            'clientSecret' => $paymentIntent->client_secret,
+            'stripeKey' => env('VITE_STRIPE_PUBLIC_KEY'),
+            'paymentIntentId' => $paymentIntent->id
+        ]);
+    }
+
+    public function paymentHandle(Request $request, Order $order)
+    {
+        if ($order->payment_status === 'paid') {
+            return redirect()->back()->with('error', 'Paid already');
+        }
+
+        $request->validate([
+            'paymentIntentId' => 'required',
+            'paymentMethodId' => 'required'
+        ]);
+
+        Stripe::setApiKey(env('STRIPE_SECRET'));
+
+        try {
+            $paymentIntent = PaymentIntent::retrieve($request->paymentIntentId);
+
+
+            // Update the payment intent with metadata
+            PaymentIntent::update($request->paymentIntentId, [
+                'metadata' => ['order_id' => $order->order_no, 'type' => 'order'],
+            ]);
+
+
+            //Make sure payment intent total matches order total
+            if ($paymentIntent->amount !== (int)$order->total * 100) {
+                return redirect()->route('order.show',  $order->order_no)->with('error', 'Payment failed. Please try again.');
+            }
+
+            // Make sure return url has payment intent id
+            $paymentIntent->confirm([
+                'payment_method' => $request->paymentMethodId,
+                'return_url' => route('order.show',  $order->order_no),
+            ]);
+
+            if ($paymentIntent->status === 'requires_action' && isset($paymentIntent->next_action->redirect_to_url)) {
+                return Inertia::location($paymentIntent->next_action->redirect_to_url->url); // Redirect to PayPal
+            }
+        } catch (\Stripe\Exception\ApiErrorException $e) {
+            return redirect()->route('order.show',  $order->order_no)->with('error', 'Stripe error: ' . $e->getMessage());
+        } catch (\Throwable $th) {
+            return redirect()->route('order.show',  $order->order_no)->with('error', 'Payment failed. Please try again.');
+        }
+
+        return redirect()->route('order.show', $order->order_no);
     }
 }

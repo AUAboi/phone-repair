@@ -10,7 +10,7 @@ const props = defineProps<{
   clientSecret: string;
   stripeKey: string;
   paymentIntentId: string;
-  appointment: any;
+  order: any;
 }>();
 
 const { alertError } = useSweetAlert();
@@ -67,20 +67,16 @@ async function handleSubmit() {
   form.paymentMethodId = paymentMethod.id;
   form.paymentIntentId = props.paymentIntentId;
 
-  form.post(
-    route("appointment.paymentHandle", props.appointment.appointment_number)
-  );
+  form.post(route("order.paymentHandle", props.order.order_no));
 }
 </script>
 
 <template>
-  <Head :title="`Pay for #${appointment.appointment_number}`" />
+  <Head :title="`Pay for #${order.order_no}`" />
   <div class="container py-6">
     <div class="py-10">
-      <h2 class="text-4xl">
-        Paying for Appointment # {{ appointment.appointment_number }}
-      </h2>
-      <p class="text-xl mt-6">Total: {{ appointment.total }}</p>
+      <h2 class="text-4xl">Paying for Order # {{ order.order_no }}</h2>
+      <p class="text-xl mt-6">Total: {{ order.total }}</p>
     </div>
     <form v-if="stripeLoaded && clientSecret">
       <StripeElements
@@ -135,7 +131,7 @@ async function handleSubmit() {
     </div>
     <div class="mt-4 md:mt-6 flex flex-wrap gap-3">
       <Link
-        :href="route('appointment.show', appointment.appointment_number)"
+        :href="route('order.show', order.order_no)"
         as="button"
         class="btn btn-outline"
         data-text="Back"
