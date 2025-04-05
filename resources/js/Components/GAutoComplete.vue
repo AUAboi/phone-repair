@@ -11,28 +11,23 @@ const loader = new Loader({
   apiKey: "AIzaSyBsrH5zLtvBNimarHhgttJqvAiG8XhARaI",
   libraries: ["places"],
   version: "beta",
-  params: { v: "alpha" }, // Specify alpha channel
+  params: { v: "alpha" },
 });
 
 onMounted(async () => {
   await loader.importLibrary("places");
 
-  //@ts-ignore
   const placeAutocomplete = new google.maps.places.PlaceAutocompleteElement({
-    componentRestrictions: { country: ["uk"] },
+    includedRegionCodes: ["GB"],
   });
 
-  // Append the element inside the input wrapper
   placeAutocompleteRef.value.appendChild(placeAutocomplete);
 
-  // Listen for place selection
-  //@ts-ignore
   placeAutocomplete.addEventListener("gmp-placeselect", async ({ place }) => {
     await place.fetchFields({
       fields: ["displayName", "formattedAddress"],
     });
 
-    // Update the selected address
     address.value = place.formattedAddress;
 
     emit("update:modelValue", address.value);

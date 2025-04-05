@@ -28,7 +28,7 @@ class ContactController extends Controller
         ];
 
         try {
-            Mail::to("auawdigital@gmail.com")->send(new ContactForm($contact));
+            Mail::to("sales@fonemartonline.com")->send(new ContactForm($contact));
         } catch (Exception $e) {
             return redirect()->back()->with('error', $e->getMessage());
         }

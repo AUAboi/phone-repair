@@ -59,7 +59,6 @@ class HandleInertiaRequests extends Middleware
             ],
             'logo' => 'logo-min-resized.png',
             'navigation' => [
-                'devices' => DeviceResource::collection(Device::all()),
                 'categories' => CategoryResource::collection(Category::all())
             ],
             'ziggy' => function () use ($request) {
