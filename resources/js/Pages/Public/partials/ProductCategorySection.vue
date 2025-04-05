@@ -9,7 +9,7 @@ import { Link } from "@inertiajs/vue3";
 const props = defineProps(["categories"]);
 </script>
 <template>
-  <div class="s-py-100-50 overflow-hidden">
+  <div class="s-py-100-50 overflow-hidden bg-gray-50">
     <div class="container-fluid">
       <div
         class="max-w-xl mx-auto mb-8 md:mb-12 text-center"
