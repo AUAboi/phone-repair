@@ -1,11 +1,9 @@
 <script setup>
-import ApplicationLogo from "@/Components/ApplicationLogo.vue";
 import FlashMessage from "@/Components/FlashMessage.vue";
 import { Link, usePage } from "@inertiajs/vue3";
 import PublicFooter from "./partials/PublicFooter.vue";
 import PublicNavigation from "./partials/PublicNavigation.vue";
-import { onMounted, ref } from "vue";
-import { useLogoStore } from "@/store/logoStore";
+import { onMounted, ref, watch } from "vue";
 import Aos from "aos";
 import "aos/dist/aos.css";
 import MdiWhatsapp from "~icons/mdi/whatsapp";
@@ -30,6 +28,13 @@ const handleScroll = () => {
     scroll.value = false;
   }
 };
+
+watch(
+  () => page.url,
+  () => {
+    toggle.value = false;
+  }
+);
 </script>
 <template>
   <div
@@ -114,10 +119,10 @@ const handleScroll = () => {
             >
               <Link :href="route('public.contact')">Contact Us</Link>
             </li>
-            <li class="lg:hidden">
+            <li v-if="!page.props.auth.user" class="lg:hidden">
               <Link :href="route('login')">Login</Link>
             </li>
-            <li class="lg:hidden">
+            <li v-if="!page.props.auth.user" class="lg:hidden">
               <Link :href="route('register')">Register</Link>
             </li>
           </ul>
