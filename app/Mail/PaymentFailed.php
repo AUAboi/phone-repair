@@ -10,7 +10,7 @@ use Illuminate\Queue\SerializesModels;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
-class PaymentSuccessful extends Mailable
+class PaymentFailed extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -28,7 +28,7 @@ class PaymentSuccessful extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Payment Successful',
+            subject: 'Payment Failed',
         );
     }
 
@@ -38,7 +38,7 @@ class PaymentSuccessful extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'mailable.payment_successful',
+            view: 'mailable.payment-failed',
         );
     }
 

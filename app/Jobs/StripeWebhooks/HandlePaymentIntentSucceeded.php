@@ -2,10 +2,12 @@
 
 namespace App\Jobs\StripeWebhooks;
 
+use App\Mail\PaymentSuccessful;
 use Stripe\Stripe;
 use App\Models\Order;
 use App\Models\Appointment;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Foundation\Queue\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -38,6 +40,8 @@ class HandlePaymentIntentSucceeded implements ShouldQueue
 
         $type = $this->webhookCall->payload['data']['object']['metadata']['type'] ?? null;
 
+
+
         if (!$type) {
             Log::error('Type is missing from webhook metadata.');
             return;
@@ -69,6 +73,11 @@ class HandlePaymentIntentSucceeded implements ShouldQueue
             Log::error("{$type} not found for ID: $id");
             return;
         }
+
+        if ($type === 'order') {
+            Mail::to($record->email)->send(new PaymentSuccessful($record));
+        }
+
 
         Log::info("Processing payment for {$type} ID: $id");
 
