@@ -2,17 +2,18 @@
 
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Artisan;
+use App\Http\Controllers\PostController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\BrandController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\DeviceController;
 use App\Http\Controllers\RepairController;
-use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\AppointmentController;
-use App\Http\Controllers\CategoryController;
-use App\Http\Controllers\DeviceRepairController;
-use App\Http\Controllers\OrderController;
-use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\AppointmentController;
+use App\Http\Controllers\DeviceRepairController;
 
 Route::middleware(['auth', 'admin'])->prefix('/admin')->group(function () {
   // Route::get('/dashboard', function () {
@@ -81,4 +82,14 @@ Route::middleware(['auth', 'admin'])->prefix('/admin')->group(function () {
 
   Route::post('/posts/create', [PostController::class, 'store'])->name('posts.store');
   Route::delete('/posts/{post:slug}/delete', [PostController::class, 'destroy'])->name('posts.destroy');
+
+  Route::get('/optimize', function () {
+    Artisan::call('optimize');
+    return redirect()->back()->with('success', 'Cached successfully!');
+  })->name('optimize');
+
+  Route::get('/clear-cache', function () {
+    Artisan::call('optimize:clear');
+    return redirect()->back()->with('success', 'Cache cleared successfully!');
+  })->name('clear.cache');
 });
