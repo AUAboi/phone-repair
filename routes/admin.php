@@ -85,11 +85,11 @@ Route::middleware(['auth', 'admin'])->prefix('/admin')->group(function () {
 
   Route::get('/optimize', function () {
     Artisan::call('optimize');
-    return redirect()->back()->with('success', 'Cached successfully!');
+    return 'Cached!';
   })->name('optimize');
 
   Route::get('/clear-cache', function () {
     Artisan::call('optimize:clear');
-    return redirect()->back()->with('success', 'Cache cleared successfully!');
+    return 'Cache cleared!';
   })->name('clear.cache');
 });
