@@ -121,6 +121,7 @@ Route::get('/sym', function () {
 
 Route::get('/maintenance-on', function () {
     Artisan::call('down', [
+        '--message' => 'The site has been taken down to due to non payment',
         '--secret' => 'my-secret-key' // Optional: Allows access with a secret URL
     ]);
     return 'Application is now in maintenance mode!';
